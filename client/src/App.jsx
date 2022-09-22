@@ -1,14 +1,21 @@
 import "./App.css";
-import PlaceRegistration from "./pages/PlaceRegistration";
-import Login from "./pages/Login";
-
-import styled from "styled-components";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Nav from "./components/header/Nav";
+import Listpage from "./pages/Listpage";
+import Main from "./pages/Main";
+import Mypage from "./pages/Mypage";
 
 function App() {
   return (
     <div className="App">
-      {/* <PlaceRegistration /> */}
-      <Login />
+      <BrowserRouter>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/list" element={<Listpage />} />
+          <Route path="/mypage" element={<Mypage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
