@@ -1,10 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import PlaceCard_Type1 from "../components/cards/PlaceCard_Type1";
+import PlaceCard1 from "../components/cards/PlaceCard1";
 import Category from "../components/Category";
 import Footer from "../components/Footer";
+import { useGetPlace } from "../hooks/useAPI";
 
 const Listpage = () => {
+  const { data, isLoading, isError } = useGetPlace();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>ERR...</div>;
+
+  console.log("data", data)
+  
   return (
     <>
       <ListPage>
@@ -12,18 +20,9 @@ const Listpage = () => {
           <Title>우리 반려견과 함께할 장소는?</Title>
           <Category />
           <CardGroup>
-            <PlaceCard_Type1 />
-            <PlaceCard_Type1 />
-            <PlaceCard_Type1 />
-            <PlaceCard_Type1 />
-            <PlaceCard_Type1 />
-            <PlaceCard_Type1 />
-            <PlaceCard_Type1 />
-            <PlaceCard_Type1 />
-            <PlaceCard_Type1 />
-            <PlaceCard_Type1 />
-            <PlaceCard_Type1 />
-            <PlaceCard_Type1 />
+            {data.map((place) => (
+              <PlaceCard1 data={place} key={place.placeId}/>
+            ))}
           </CardGroup>
         </Inner>
         <Footer />

@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import PlaceCard_Type2 from "./PlaceCard_Type2";
+import PlaceCard2 from "./PlaceCard2";
 import { ReactComponent as UpButton } from "../../assets/UpButton.svg";
 import { ReactComponent as DownButton } from "../../assets/DownButton.svg";
 
 const TOTAL_SLIDES = 2; // 화면 너머로 보이는 슬라이드 수
 
-const CardGroup_Type2 = ({ title }) => {
+const PlaceCardGroup2 = ({ title }) => {
   const [currentCard, setCurrentCard] = useState(0);
   const cardRef = useRef(null);
 
@@ -36,12 +36,12 @@ const CardGroup_Type2 = ({ title }) => {
       <h2>{title}</h2>
       <Container>
         <Cards ref={cardRef}>
-          <PlaceCard_Type2 />
-          <PlaceCard_Type2 />
-          <PlaceCard_Type2 />
-          <PlaceCard_Type2 />
-          <PlaceCard_Type2 />
-          <PlaceCard_Type2 />
+          <PlaceCard2 />
+          <PlaceCard2 />
+          <PlaceCard2 />
+          <PlaceCard2 />
+          <PlaceCard2 />
+          <PlaceCard2 />
         </Cards>
       </Container>
       <Buttons>
@@ -103,4 +103,4 @@ const Button = styled.div`
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.17);
 `;
 
-export default CardGroup_Type2;
+export default PlaceCardGroup2;

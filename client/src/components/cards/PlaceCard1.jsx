@@ -2,49 +2,45 @@ import React from "react";
 import styled from "styled-components";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import { ReactComponent as BookMark } from "../../assets/BookMark.svg";
+import { ReactComponent as BookMarkEmpty } from "../../assets/BookMarkEmpty.svg";
 
-const PlaceCard_Type2 = () => {
-  const tags = ["소형견", "소형견", "소형견"];
+const PlaceCard1 = ({ data }) => {
   return (
     <Card>
       <PlaceImg></PlaceImg>
 
-      <div>
-        <PlaceInfo>
-          <Info>
-            <InfoTop>
-              <PlaceName>로얄 테라스 가든로얄 테라스 가든</PlaceName>
-              <Score>
-                <Star />
-                <p>4.3</p>
-              </Score>
-            </InfoTop>
-            <Address>서울 송파구 올림픽로 300</Address>
-          </Info>
-          <BookMark />
-        </PlaceInfo>
-        <Tags>
-          {tags.map((tag, idx) => (
-            <Tag key={idx}># {tag}</Tag>
-          ))}
-        </Tags>
-      </div>
+      <PlaceInfo>
+        <Info>
+          <InfoTop>
+            <PlaceName>{data.placeName}</PlaceName>
+            <Score>
+              <Star />
+              <p>{data.score}</p>
+            </Score>
+          </InfoTop>
+          <Address>{data.address}</Address>
+        </Info>
+        {data.bookmark ? <BookMark /> : <BookMarkEmpty />}
+      </PlaceInfo>
+      <Tags>
+        {data.tags.map((tag, idx) => (
+          <Tag key={idx}># {tag}</Tag>
+        ))}
+      </Tags>
     </Card>
   );
 };
 
 const Card = styled.div`
-  display: flex;
-  height: 182.5px;
-  margin-bottom: 24px;
   border: 1px solid #d7e2eb;
   border-radius: 15px;
   color: #333;
 `;
 
 const PlaceImg = styled.div`
-  border-radius: 15px 0 0 15px;
-  width: 270px;
+  border-radius: 15px 15px 0 0;
+  width: 100%;
+  height: 165px;
   background-color: #cecece;
 `;
 
@@ -52,17 +48,17 @@ const PlaceInfo = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding: 22px;
+  display: flex;
+  padding: 1.5vw;
   width: 100%;
+  justify-content: space-between;
   position: relative;
   svg:nth-child(2) {
     position: absolute;
-    right: 0;
-    top: 22px;
+    right: 2vw;
   }
 `;
-const Info = styled.div`
-`;
+const Info = styled.div``;
 
 const InfoTop = styled.div`
   display: flex;
@@ -74,7 +70,7 @@ const InfoTop = styled.div`
 const PlaceName = styled.div`
   font-size: 16px;
   font-weight: 600;
-  max-width: 140px;
+  width: 60%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -105,7 +101,6 @@ const Address = styled.div`
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-content: flex-end;
   padding: 0 22px;
   gap: 8px;
   margin-bottom: 22px;
@@ -119,4 +114,4 @@ const Tag = styled.div`
   font-size: 12px;
 `;
 
-export default PlaceCard_Type2;
+export default PlaceCard1;

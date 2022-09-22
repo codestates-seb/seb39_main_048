@@ -1,0 +1,192 @@
+{
+  "bookmark": [
+    {
+      "placeId": 1,
+      "placeName": "1) 내가 등록한 장소",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"],
+      "bookmark": true
+    },
+    {
+      "placeId": 2,
+      "placeName": "2) 내가 등록한 장소",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "중형견", "송파구-강동구"],
+      "bookmark": true
+    },
+    {
+      "placeId": 3,
+      "placeName": "3) 내가 등록한 장소",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"],
+      "bookmark": true
+    },
+    {
+      "placeId": 4,
+      "placeName": "4) 안녕하세요 테스트",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"],
+      "bookmark": true
+    },
+    {
+      "placeId": 5,
+      "placeName": "5) 안녕하세요 테스트",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"],
+      "bookmark": true
+    },
+    {
+      "placeId": 6,
+      "placeName": "6) 내가 등록한 장소",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"],
+      "bookmark": true
+    },
+    {
+      "placeId": 7,
+      "placeName": "7)  내가 등록한 장소",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"],
+      "bookmark": true
+    }
+  ],
+
+  "myplace": [
+    {
+      "placeId": 1,
+      "placeName": "1) 내가 등록한 장소",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"]
+    },
+    {
+      "placeId": 2,
+      "placeName": "2) 내가 등록한 장소",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "중형견", "송파구-강동구"]
+    },
+    {
+      "placeId": 3,
+      "placeName": "3) 내가 등록한 장소",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"]
+    },
+    {
+      "placeId": 4,
+      "placeName": "4) 안녕하세요 테스트",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"]
+    },
+    {
+      "placeId": 5,
+      "placeName": "5) 안녕하세요 테스트",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"]
+    },
+    {
+      "placeId": 6,
+      "placeName": "6) 내가 등록한 장소",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"]
+    },
+    {
+      "placeId": 7,
+      "placeName": "7)  내가 등록한 장소",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"]
+    }
+  ],
+
+  "place": [
+    {
+      "placeId": 1,
+      "placeName": "1) 안녕하세요 테스트",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"],
+      "bookmark": false
+    },
+    {
+      "placeId": 2,
+      "placeName": "2) 안녕하세요 테스트",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "중형견", "송파구-강동구"],
+      "bookmark": true
+    },
+    {
+      "placeId": 3,
+      "placeName": "3) 안녕하세요 테스트",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"],
+      "bookmark": true
+    },
+    {
+      "placeId": 4,
+      "placeName": "4) 안녕하세요 테스트",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"],
+      "bookmark": false
+    },
+    {
+      "placeId": 5,
+      "placeName": "5) 안녕하세요 테스트",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"],
+      "bookmark": true
+    },
+    {
+      "placeId": 6,
+      "placeName": "6) 안녕하세요 테스트",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"],
+      "bookmark": false
+    },
+    {
+      "placeId": 7,
+      "placeName": "7) 안녕하세요 테스트",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": ["소형견", "송파구-강동구"],
+      "bookmark": true
+    }
+  ]
+}

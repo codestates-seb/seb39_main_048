@@ -33,7 +33,10 @@ const Nav = () => {
       </NavBar>
       {isOpen && isLogin ? (
         <MenuGroup>
+          <Link to="/mypage">
           <div className="item border">마이페이지</div>
+          </Link>
+          
           <div className="menu">장소 탐색</div>
           <div className="item place">지도로 찾기</div>
           <Link to="/list">

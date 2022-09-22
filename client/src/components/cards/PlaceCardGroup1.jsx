@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
-import PlaceCard_Type1 from "./PlaceCard_Type1";
+import PlaceCard1 from "./PlaceCard1";
 import { ReactComponent as RightButton } from "../../assets/RightButton.svg";
 import { ReactComponent as LeftButton } from "../../assets/LeftButton.svg";
 
 const TOTAL_SLIDES = 3; // 화면 너머로 보이는 슬라이드 수
 
-const CardGroup_Type1 = ({ title }) => {
+const PlaceCardGroup1 = ({ title }) => {
   const [currentCard, setCurrentCard] = useState(0);
   const cardRef = useRef(null);
 
@@ -36,13 +36,13 @@ const CardGroup_Type1 = ({ title }) => {
       <h2>{title}</h2>
       <Container>
         <Cards ref={cardRef}>
-          <PlaceCard_Type1 />
-          <PlaceCard_Type1 />
-          <PlaceCard_Type1 />
-          <PlaceCard_Type1 />
-          <PlaceCard_Type1 />
-          <PlaceCard_Type1 />
-          <PlaceCard_Type1 />
+          {/* <PlaceCard1 />
+          <PlaceCard1 />
+          <PlaceCard1 />
+          <PlaceCard1 />
+          <PlaceCard1 />
+          <PlaceCard1 />
+          <PlaceCard1 /> */}
         </Cards>
       </Container>
       <Buttons>
@@ -74,8 +74,8 @@ const Container = styled.div`
 `;
 
 const Cards = styled.div`
-  width: 160vw;
-  gap: 24px;
+  width: 162vw;
+  gap: 32px;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
 `;
@@ -101,4 +101,4 @@ const Button = styled.div`
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.17);
 `;
 
-export default CardGroup_Type1;
+export default PlaceCardGroup1;
