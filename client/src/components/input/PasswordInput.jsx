@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
-const PasswordInput = () => {
+const PasswordInput = ({ title, placeholder }) => {
   return (
     <Password>
       <label>
-        <p>비밀번호</p>
+        <p>{title}</p>
         <input
           type="password"
           maxlength="14"
           minlength="8"
-          placeholder="비밀번호를 입력해 주세요"
+          placeholder={placeholder}
         ></input>
       </label>
     </Password>
