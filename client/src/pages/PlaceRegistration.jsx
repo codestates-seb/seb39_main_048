@@ -131,6 +131,7 @@ const PlaceRegistration = () => {
 
 const Page = styled.div`
   padding: 0 10%;
+  padding-top: 70px;
 
   .TopComment {
     color: #333333;
@@ -140,6 +141,7 @@ const Page = styled.div`
     width: 100%;
     height: 100px;
     padding: 40px;
+    margin-top: 150px;
   }
 `;
 
@@ -463,7 +465,7 @@ const RegistrationBtn = styled.div`
   }
 
   .Cancel {
-    background-color: #f5f5f5;
+    background-color: #d9d9d9;
   }
   .Registration {
     background-color: #ffb653;

@@ -38,7 +38,7 @@ const SNSBtnContainer = styled.div`
     justify-content: center;
     align-items: center;
     width: 500px;
-    margin-bottom: 12px;
+    margin-bottom: 6px;
 
     .Or {
       font-size: 12px;
@@ -56,6 +56,7 @@ const SNSBtnContainer = styled.div`
   p {
     display: flex;
     justify-content: center;
+    align-items: center;
     font-size: 12px;
     color: #333333;
   }
