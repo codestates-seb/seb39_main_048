@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import PlaceCard1 from "../cards/PlaceCard1";
-import useMypag from "../../store/Store";
+import useMenu from "../../store/Store";
 import { useGetBookMark } from "../../hooks/useAPI";
 
 const MyBookMark = () => {
-  const { menu } = useMypag();
+  const { menu } = useMenu();
   const { data, isLoading, isError } = useGetBookMark();
 
   if (isLoading) return <div>Loading...</div>;

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const IdInput = ({ placeholder }) => {
+
   return (
     <Id>
       <label>

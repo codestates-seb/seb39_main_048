@@ -5,6 +5,7 @@ const PasswordInput = ({ title, placeholder }) => {
     <Password>
       <label>
         <p>{title}</p>
+
         <input
           type="password"
           maxlength="14"

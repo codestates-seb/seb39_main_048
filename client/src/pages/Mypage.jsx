@@ -4,10 +4,10 @@ import Sidbar from "../components/mypage/Sidebar";
 import MySummary from "../components/mypage/MySummary";
 import Footer from "../components/Footer";
 import MyBookMark from "../components/mypage/MyBookMark";
-import useMypag from "../store/Store";
+import useMenu from "../store/Store";
 
 const Mypage = () => {
-  const { menu } = useMypag();
+  const { menu } = useMenu();
 
   return (
     <>

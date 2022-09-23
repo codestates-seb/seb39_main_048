@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import User from "../../assets/User.png";
 import { ReactComponent as Location } from "../../assets/Location.svg";
-import useMypag from "../../store/Store";
+import useMenu from "../../store/Store";
 
 const Sidbar = () => {
-  const { setMenu } = useMypag();
+  const { setMenu } = useMenu();
   const myMenus = [
     "마이페이지",
     "북마크",

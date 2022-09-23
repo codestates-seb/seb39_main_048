@@ -8,6 +8,8 @@ import Mypage from "./pages/Mypage";
 import Login from "./pages/Login";
 import PlaceRegistration from "./pages/PlaceRegistration";
 import Signup from "./pages/Signup";
+import Detailpage from "./pages/Detailpage";
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/regist" element={<PlaceRegistration />} />
+          <Route path="/detail" element={<Detailpage />} />
         </Routes>
       </BrowserRouter>
     </div>

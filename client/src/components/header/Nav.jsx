@@ -4,31 +4,27 @@ import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { ReactComponent as Avatar } from "../../assets/Avatar.svg";
 import { ReactComponent as Hamberger } from "../../assets/Hamberger.svg";
+import useDetectClose from "../../hooks/useDetectClose";
 
 const Nav = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, menuRef, handleOpen] = useDetectClose(false);
 
-  const handleOpen = () => {
-    console.log("here");
-    setIsOpen(!isOpen);
-  };
   return (
     <>
       <NavBar>
         <Inner>
           <Link to="/">
-            {" "}
             <img src={Logo}></img>
           </Link>
 
           {isLogin ? (
-            <MenuIcons onClick={handleOpen}>
+            <MenuIcons onClick={handleOpen} ref={menuRef}>
               <Avatar />
               <Hamberger />
             </MenuIcons>
           ) : (
-            <MenuIcons onClick={handleOpen}>
+            <MenuIcons onClick={handleOpen} ref={menuRef}>
               <Hamberger />
             </MenuIcons>
           )}
@@ -41,7 +37,7 @@ const Nav = () => {
           </Link>
 
           <div className="menu">장소 탐색</div>
-          <Link to="/map">
+          <Link to="/detail">
             <div className="item place">지도로 찾기</div>
           </Link>
           <Link to="/list">
@@ -56,16 +52,16 @@ const Nav = () => {
         ""
       )}
       {!isLogin && isOpen ? (
-        <MenuGroup>
+        <MenuGroup >
           <Link to="/login">
             <div className="item first">로그인</div>
           </Link>
-          <Link to="/signup">
-            <div className="item border">회원가입</div>
-          </Link>
+          <div className="item border">회원가입</div>
           <div className="menu">장소 탐색</div>
           <div className="item place">지도로 찾기</div>
-          <div className="item">목록으로 찾기</div>
+          <Link to="/list">
+            <div className="item">목록으로 찾기</div>
+          </Link>
         </MenuGroup>
       ) : (
         ""
@@ -122,6 +118,7 @@ const MenuGroup = styled.div`
   color: #333;
   font-size: 15px;
   z-index: 400;
+  transition: all 0.3S;
 
   div {
     cursor: pointer;
