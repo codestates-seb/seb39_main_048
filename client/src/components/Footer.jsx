@@ -61,13 +61,13 @@ const FooterContainer = styled.div`
     gap: 24px;
 
     img {
-      width: 234px;
-      height: 100px;
+      width: 200px;
+      height: 85px;
       margin-top: 40px;
     }
     span {
       color: #ffffff;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
       margin-bottom: 40px;
     }
@@ -84,13 +84,13 @@ const FooterContainer = styled.div`
     .Copycomment {
       padding-top: 40px;
       p {
-        font-size: 18px;
+        font-size: 14px;
         font-weight: 300;
       }
     }
 
     span {
-      font-size: 14px;
+      font-size: 10px;
       font-weight: 300;
       margin-bottom: 40px;
     }
@@ -112,14 +112,14 @@ const FooterContainer = styled.div`
     gap: 6px;
 
     .MenuTop {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
       padding-bottom: 14px;
       margin-top: 48px;
     }
 
     p {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 300;
     }
   }
@@ -140,14 +140,14 @@ const FooterContainer = styled.div`
     gap: 10px;
 
     .ContactTop {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
       margin-top: 48px;
       padding-bottom: 10px;
     }
 
     p {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 300;
     }
   }

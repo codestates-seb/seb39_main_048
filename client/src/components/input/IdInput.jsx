@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { ReactComponent as Person } from "../../assets/Person.svg";
 
-const IdInput = () => {
+const IdInput = ({ placeholder }) => {
+
   return (
     <Id>
       <label>
@@ -10,7 +10,7 @@ const IdInput = () => {
           type="text"
           maxlength="12"
           minlength="6"
-          placeholder="아이디를 입력해 주세요"
+          placeholder={placeholder}
         ></input>
       </label>
     </Id>
