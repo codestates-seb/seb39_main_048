@@ -18,7 +18,7 @@ export const useGetPlace = () => {
   };
 };
 
-//----------마이페이지 데이터--------------------
+// --------------------마이페이지 데이터--------------------
 
 export const useGetMyPlace = () => {
   const fetcher = async () => {
@@ -51,3 +51,19 @@ export const useGetBookMark = () => {
   };
 };
 
+// --------------------검색 데이터--------------------
+
+export const useGetSearch = () => {
+  const fetcher = async () => {
+    const res = await axios.get(`${BASE_URL}/search`);
+    console.log("useGetSearch");
+    return res.data;
+  };
+  const { data, error } = useSWR(`/search`, fetcher);
+
+  return {
+    data: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+};
