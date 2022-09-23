@@ -4,28 +4,27 @@ import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { ReactComponent as Avatar } from "../../assets/Avatar.svg";
 import { ReactComponent as Hamberger } from "../../assets/Hamberger.svg";
+import useDetectClose from "../../hooks/useDetectClose";
 
 const Nav = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, menuRef, handleOpen] = useDetectClose(false);
 
-  const handleOpen = () => {
-    console.log("here");
-    setIsOpen(!isOpen);
-  };
   return (
     <>
       <NavBar>
         <Inner>
-        <Link to="/"> <img src={Logo}></img></Link>
-         
+          <Link to="/">
+            <img src={Logo}></img>
+          </Link>
+
           {isLogin ? (
-            <MenuIcons onClick={handleOpen}>
+            <MenuIcons onClick={handleOpen} ref={menuRef}>
               <Avatar />
               <Hamberger />
             </MenuIcons>
           ) : (
-            <MenuIcons onClick={handleOpen}>
+            <MenuIcons onClick={handleOpen} ref={menuRef}>
               <Hamberger />
             </MenuIcons>
           )}
@@ -34,28 +33,35 @@ const Nav = () => {
       {isOpen && isLogin ? (
         <MenuGroup>
           <Link to="/mypage">
-          <div className="item border">마이페이지</div>
+            <div className="item border">마이페이지</div>
           </Link>
-          
+
           <div className="menu">장소 탐색</div>
-          <div className="item place">지도로 찾기</div>
+          <Link to="/detail">
+            <div className="item place">지도로 찾기</div>
+          </Link>
           <Link to="/list">
             <div className="item border">목록으로 찾기</div>
           </Link>
-
-          <div className="item border">장소 등록하기</div>
+          <Link to="/regist">
+            <div className="item border">장소 등록하기</div>
+          </Link>
           <div className="item">로그아웃</div>
         </MenuGroup>
       ) : (
         ""
       )}
       {!isLogin && isOpen ? (
-        <MenuGroup>
-          <div className="item first">로그인</div>
+        <MenuGroup >
+          <Link to="/login">
+            <div className="item first">로그인</div>
+          </Link>
           <div className="item border">회원가입</div>
           <div className="menu">장소 탐색</div>
           <div className="item place">지도로 찾기</div>
-          <div className="item">목록으로 찾기</div>
+          <Link to="/list">
+            <div className="item">목록으로 찾기</div>
+          </Link>
         </MenuGroup>
       ) : (
         ""
@@ -112,6 +118,7 @@ const MenuGroup = styled.div`
   color: #333;
   font-size: 15px;
   z-index: 400;
+  transition: all 0.3S;
 
   div {
     cursor: pointer;

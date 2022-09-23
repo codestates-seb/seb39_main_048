@@ -140,7 +140,6 @@ const Page = styled.div`
     width: 100%;
     height: 100px;
     padding: 40px;
-    margin-top: 150px;
   }
 `;
 

@@ -3,30 +3,60 @@ import styled from "styled-components";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import { ReactComponent as BookMark } from "../../assets/BookMark.svg";
 import { ReactComponent as BookMarkEmpty } from "../../assets/BookMarkEmpty.svg";
+import useMenu from "../../store/Store";
 
 const PlaceCard1 = ({ data }) => {
+  const { menu } = useMenu();
+
   return (
     <Card>
-      <PlaceImg></PlaceImg>
+      {menu === "내가 등록한 장소" ? (
+        <>
+          <PlaceImg></PlaceImg>
 
-      <PlaceInfo>
-        <Info>
-          <InfoTop>
-            <PlaceName>{data.placeName}</PlaceName>
-            <Score>
-              <Star />
-              <p>{data.score}</p>
-            </Score>
-          </InfoTop>
-          <Address>{data.address}</Address>
-        </Info>
-        {data.bookmark ? <BookMark /> : <BookMarkEmpty />}
-      </PlaceInfo>
-      <Tags>
-        {data.tags.map((tag, idx) => (
-          <Tag key={idx}># {tag}</Tag>
-        ))}
-      </Tags>
+          <PlaceInfo>
+            <Info>
+              <InfoTop>
+                <PlaceName>{data.placeName}</PlaceName>
+                <Score>
+                  <Star />
+                  <p>{data.score}</p>
+                </Score>
+              </InfoTop>
+              <Address>{data.address}</Address>
+            </Info>
+          </PlaceInfo>
+          <Tags>
+            {data.tags.map((tag, idx) => (
+              <Tag key={idx}># {tag}</Tag>
+            ))}
+          </Tags>
+        </>
+      ) : (
+        <>
+          <PlaceImg></PlaceImg>
+
+          <PlaceInfo>
+            <Info>
+              <InfoTop>
+                <PlaceName>{data.placeName}</PlaceName>
+                <Score>
+                  <Star />
+                  <p>{data.score}</p>
+                </Score>
+              </InfoTop>
+              <Address>{data.address}</Address>
+            </Info>
+
+            {data.bookmark ? <BookMark /> : <BookMarkEmpty />}
+          </PlaceInfo>
+          <Tags>
+            {data.tags.map((tag, idx) => (
+              <Tag key={idx}># {tag}</Tag>
+            ))}
+          </Tags>
+        </>
+      )}
     </Card>
   );
 };
@@ -70,7 +100,7 @@ const InfoTop = styled.div`
 const PlaceName = styled.div`
   font-size: 16px;
   font-weight: 600;
-  width: 60%;
+  width: 10vw;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

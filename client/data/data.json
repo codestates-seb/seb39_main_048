@@ -2,7 +2,7 @@
   "bookmark": [
     {
       "placeId": 1,
-      "placeName": "1) 내가 등록한 장소",
+      "placeName": "1) 내가 등록한 장소 내가 등록한 장소 내가 등록한 장소",
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
@@ -68,7 +68,7 @@
   "myplace": [
     {
       "placeId": 1,
-      "placeName": "1) 내가 등록한 장소",
+      "placeName": "1) 내가 등록한 장소내가 등록한 장소",
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
@@ -188,5 +188,6 @@
       "tags": ["소형견", "송파구-강동구"],
       "bookmark": true
     }
-  ]
+  ],
+  "search" : ["챱챱 케이크", "안녕하세요", "반가워요", "검색기능", "이렇게 해도 검색되나요?"]
 }

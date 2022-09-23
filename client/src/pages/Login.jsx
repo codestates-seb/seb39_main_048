@@ -7,6 +7,7 @@ import SNSLoginContainer from "../components/SNSLoginContainer";
 
 const Login = () => {
   return (
+    <LoginGroup>
     <LoginContainer>
       <img src={LogoColor}></img>
       <div className="LoginTop">
@@ -26,8 +27,13 @@ const Login = () => {
         <div onClick={() => alert("응~ 아직~ 구현 안 함~")}>회원가입</div>
       </div>
     </LoginContainer>
+    </LoginGroup>
   );
 };
+
+const LoginGroup = styled.div`
+  padding: 144px 0;
+`
 
 const LoginContainer = styled.div`
   display: flex;
@@ -36,7 +42,7 @@ const LoginContainer = styled.div`
   flex-direction: column;
   border: 1px solid #d7e2eb;
   border-radius: 50px;
-  height: 880px;
+  /* height: 880px; */
   width: 600px;
   margin: auto;
   margin-top: 100px;
