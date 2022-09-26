@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PlaceCardGroup1 from "../components/cards/PlaceCardGroup1";
 import PlaceCardGroup2 from "../components/cards/PlaceCardGroup2";
-import Category from "../components/filters/Category";
-import FilterGroup from "../components/filters/FilterGroup";
+import Category from "../components/Category";
 import Footer from "../components/Footer";
 import { useGetRecommend } from "../hooks/useAPI";
 
@@ -16,9 +15,17 @@ const Main = () => {
 
   return (
     <>
-      <MainTitle></MainTitle>
       <MainPage>
-        <PlaceCardGroup1 title={"추천장소 확인해봐요! 👀"} data={data} />
+        <div className="center">
+          <Category />
+        </div>
+        <PlaceCardGroup1 title={"이런 식당은 어때요? 🍽"} data={data} />
+        <PlaceCardGroup1 title={"이런 카페는 어때요? ☕️"} data={data} />
+        <PlaceCardGroup1 title={"이런 숙소는 어때요? 🏡 "} data={data} />
+        <Type2>
+          <PlaceCardGroup2 title={"병원 고민중이신가요? 🏥 "} data={data} />
+          <PlaceCardGroup2 title={"다양한 장소 추천드려요 🏕 "} data={data} />
+        </Type2>
       </MainPage>
       <Footer />
     </>
@@ -26,7 +33,7 @@ const Main = () => {
 };
 
 const MainPage = styled.div`
-  padding-top: 50px;
+  padding-top: 152px;
   max-width: 1280px;
   width: 80vw;
   margin: 0 auto;
@@ -37,13 +44,10 @@ const MainPage = styled.div`
   }
 `;
 
-const MainTitle = styled.div`
-  padding-top: 152px;
-  font-size: 80px;
-  height: 55vh;
-  font-weight: 900;
-  background-color: #eee;
-  text-align: center;
+const Type2 = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 32px;
 `;
 
 export default Main;
