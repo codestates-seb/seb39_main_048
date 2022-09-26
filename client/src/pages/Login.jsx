@@ -1,11 +1,22 @@
+import { Link } from "react-router-dom";
 import LogoColor from "../assets/LogoColor.png";
-
 import styled from "styled-components";
 import IdInput from "../components/input/IdInput";
 import PasswordInput from "../components/input/PasswordInput";
 import SNSLoginContainer from "../components/SNSLoginContainer";
 
 const Login = () => {
+  const onLogin = ({ userId, password }) => {
+    if (userId === "russ" && password === "whynot0") {
+      return {
+        access_token: "jx84e3kjew1njej3al2q9w",
+        refresh_token: "g2rjfd7452bjfgn;a&*(jkehj",
+      };
+    } else {
+      return undefined;
+    }
+  };
+
   return (
     <LoginPage>
       <div className="Container">
@@ -24,12 +35,16 @@ const Login = () => {
           />
         </div>
         <div className="LoginBtns">
-          <button id="LoginBtn">로그인</button>
+          <button id="LoginBtn" onClick={onLogin}>
+            로그인
+          </button>
           <SNSLoginContainer />
         </div>
         <div className="Lastcomment">
           <p>아직 저희와 가족이 아니신가요?</p>
-          <div onClick={() => alert("응~ 아직~ 구현 안 함~")}>회원가입</div>
+          <Link to="/signup">
+            <div>회원가입</div>
+          </Link>
         </div>
       </div>
     </LoginPage>
@@ -101,6 +116,7 @@ const LoginPage = styled.div`
         height: 48px;
         width: 500px;
         margin-top: 24px;
+        cursor: pointer;
       }
     }
 

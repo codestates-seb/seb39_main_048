@@ -52,11 +52,13 @@ const Nav = () => {
         ""
       )}
       {!isLogin && isOpen ? (
-        <MenuGroup >
+        <MenuGroup>
           <Link to="/login">
             <div className="item first">로그인</div>
           </Link>
-          <div className="item border">회원가입</div>
+          <Link to="/signup">
+            <div className="item border">회원가입</div>
+          </Link>
           <div className="menu">장소 탐색</div>
           <div className="item place">지도로 찾기</div>
           <Link to="/list">
@@ -118,7 +120,7 @@ const MenuGroup = styled.div`
   color: #333;
   font-size: 15px;
   z-index: 400;
-  transition: all 0.3S;
+  transition: all 0.3s;
 
   div {
     cursor: pointer;
