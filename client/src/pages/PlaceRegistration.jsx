@@ -265,6 +265,7 @@ const ImageDetail = styled.div`
         background-color: #ffb653;
         padding: 10px 20px;
         font-size: 12px;
+        cursor: pointer;
       }
     }
     .ImgPlus {
@@ -443,6 +444,7 @@ const LocationInput = styled.div`
       border-radius: 10px;
       height: 100%;
       width: 20%;
+      cursor: pointer;
     }
   }
 `;
@@ -462,6 +464,7 @@ const RegistrationBtn = styled.div`
     border-radius: 10px;
     height: 100%;
     padding: 10px;
+    cursor: pointer;
   }
 
   .Cancel {

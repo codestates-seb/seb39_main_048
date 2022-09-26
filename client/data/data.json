@@ -86,7 +86,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     },
     {
@@ -95,7 +98,11 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "중형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "중형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     },
     {
@@ -104,7 +111,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     },
     {
@@ -113,7 +123,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     },
     {
@@ -122,7 +135,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     },
     {
@@ -131,7 +147,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     },
     {
@@ -140,11 +159,13 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     }
   ],
-
   "myplace": [
     {
       "placeId": 1,
@@ -152,7 +173,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"]
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ]
     },
     {
       "placeId": 2,
@@ -160,7 +184,11 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "중형견", "송파구-강동구"]
+      "tags": [
+        "소형견",
+        "중형견",
+        "송파구-강동구"
+      ]
     },
     {
       "placeId": 3,
@@ -168,7 +196,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"]
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ]
     },
     {
       "placeId": 4,
@@ -176,7 +207,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"]
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ]
     },
     {
       "placeId": 5,
@@ -184,7 +218,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"]
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ]
     },
     {
       "placeId": 6,
@@ -192,7 +229,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"]
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ]
     },
     {
       "placeId": 7,
@@ -200,10 +240,12 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"]
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ]
     }
   ],
-
   "place": [
     {
       "placeId": 1,
@@ -211,7 +253,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": false
     },
     {
@@ -220,7 +265,11 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "중형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "중형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     },
     {
@@ -229,7 +278,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     },
     {
@@ -238,7 +290,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": false
     },
     {
@@ -247,7 +302,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     },
     {
@@ -256,7 +314,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": false
     },
     {
@@ -265,7 +326,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     }
   ],
@@ -275,5 +339,142 @@
     "반가워요",
     "검색기능",
     "이렇게 해도 검색되나요?"
+  ],
+  "user": [
+    {
+      "userId": "qqqqqq",
+      "name": "qqqqqq",
+      "password": "qqqqqqqq"
+    },
+    {
+      "userId": "wwwwww",
+      "name": "wwwwww",
+      "password": "wwwwwwww"
+    },
+    {
+      "userId": "eeeeee",
+      "name": "eeeeee",
+      "password": "eeeeeeee"
+    },
+    {
+      "userId": "aaaaaa",
+      "name": "aaaaaa",
+      "password": "aaaaaaaa"
+    },
+    {
+      "userId": "bbbbbb",
+      "name": "bbbbbb",
+      "password": "bbbbbbbb"
+    },
+    {
+      "userId": "cccccc",
+      "name": "cccccc",
+      "password": "cccccccc"
+    },
+    {
+      "userId": "dddddd",
+      "name": "dddddd",
+      "password": "dddddddd"
+    },
+    {
+      "userId": "ffffff",
+      "name": "ffffff",
+      "password": "ffffffff"
+    },
+    {
+      "userId": "zzzzzz",
+      "name": "zzzzzz",
+      "password": "zzzzzzzz"
+    },
+    {
+      "userId": "xxxxxx",
+      "name": "xxxxxx",
+      "password": "xxxxxxxx"
+    },
+    {
+      "id": "mmmmmm",
+      "password": "mmmmmmmm",
+      "name": "mmmmmm"
+    },
+    {
+      "id": "qqqqqq",
+      "password": "qqqqqqqq",
+      "name": "qqqqqq"
+    },
+    {
+      "id": "kikiki",
+      "password": "kiwikiwi1",
+      "name": "kiki"
+    },
+    {
+      "id": "zxczxczxc",
+      "password": "qwerty1231",
+      "name": "asds"
+    },
+    {
+      "id": "qweqwez",
+      "password": "qqqqqqqqq",
+      "name": "qq"
+    },
+    {
+      "id": "qweqweqwe",
+      "password": "qwert123",
+      "name": "asdasd"
+    },
+    {
+      "id": "qweqwe",
+      "password": "zzzzzzzzzzzz",
+      "name": "qweqwe"
+    },
+    {
+      "id": "zzzzzzz",
+      "password": "asdasdsa",
+      "name": "zzasda"
+    },
+    {
+      "id": "rtdsgfg",
+      "password": "qqqqqqqq",
+      "name": "zxcxzc"
+    },
+    {
+      "id": "e_ic0Ax",
+      "password": "asdassdasd",
+      "name": ""
+    },
+    {
+      "id": "bXozR8z",
+      "password": "xxxxxxxx",
+      "name": ""
+    },
+    {
+      "id": "qasdesd",
+      "password": "qwerty123",
+      "name": "qwes"
+    },
+    {
+      "id": "sadass",
+      "password": "qweqweq1ssss",
+      "name": "xczczx"
+    },
+    {
+      "id": "sadsad",
+      "password": "zzzzzzzzz",
+      "name": "dsd"
+    },
+    {
+      "id": "adsada",
+      "password": "zxcxzfafa",
+      "name": "123231"
+    },
+    {
+      "id": "sadasd",
+      "password": "cccccccc",
+      "name": "xzc1e4"
+    },
+    {
+      "id": "czxcxzczxc",
+      "password": "zxcxzczxczxczx",
+      "name": "asdasd"
+    }
   ]
 }
