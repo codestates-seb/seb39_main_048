@@ -1,21 +1,9 @@
 import styled from "styled-components";
+import { Keywords } from "../../constant";
 
 const KeywordActive = () => {};
 
 const KeywordSelectBtn = () => {
-  const Keywords = [
-    "주차장",
-    "무선인터넷",
-    "예약가능",
-    "실외만 가능",
-    "배변봉투",
-    "압마개 필수",
-    "리드줄 착용",
-    "중성화 필수",
-    "호텔링",
-    "데이케어",
-  ];
-
   return (
     <KeywordBtn>
       <div className="KeywordContainer">

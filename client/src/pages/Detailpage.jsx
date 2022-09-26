@@ -81,8 +81,10 @@ const Detailpage = () => {
 };
 
 const Detail = styled.div`
-  width: 100%;
-  padding: 144px 10% 0 10%;
+  width: 80vw;
+  padding-top: 144px;
+  max-width: 1280px;
+  margin: 0 auto;
 
   .detailTop {
     display: flex;

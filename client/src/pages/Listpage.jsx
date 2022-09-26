@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PlaceCard1 from "../components/cards/PlaceCard1";
-import Category from "../components/Category";
+import FilterGroup from "../components/filters/FilterGroup";
 import Footer from "../components/Footer";
 import { useGetPlace } from "../hooks/useAPI";
 
@@ -10,16 +10,16 @@ const Listpage = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>ERR...</div>;
-  
+
   return (
     <>
       <ListPage>
         <Inner>
           <Title>우리 반려견과 함께할 장소는?</Title>
-          <Category />
+          <FilterGroup />
           <CardGroup>
             {data.map((place) => (
-              <PlaceCard1 data={place} key={place.placeId}/>
+              <PlaceCard1 data={place} key={place.placeId} />
             ))}
           </CardGroup>
         </Inner>
@@ -29,11 +29,13 @@ const Listpage = () => {
   );
 };
 const ListPage = styled.div`
-  padding-top: 152px;
+  padding-top: 144px;
 `;
 
 const Inner = styled.div`
-  padding: 0 10%;
+  max-width: 1280px;
+  width: 80vw;
+  margin: 0 auto;
 
   div:nth-child(2) {
     justify-content: start;
@@ -50,7 +52,7 @@ const CardGroup = styled.div`
   margin-top: 64px;
   gap: 32px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 `;
 
 export default Listpage;

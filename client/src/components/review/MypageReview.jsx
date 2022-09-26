@@ -2,20 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
+import { BREAK_POINT_PHONE } from "../../constant";
 
-const Review = () => {
+const MypageReview = () => {
   return (
     <ReviewItem>
       <ReviewLeft>
         <div className="topSection">
           <div className="user_buttons">
-            <div className="user">
-              <UserImg></UserImg>
-              <div className="userInfo">
-                <UserName>kanghyew0n</UserName>
-                <PostDate>2022.09.29</PostDate>
-              </div>
-            </div>
+            <PlaceName>챱챱 케이크 〉</PlaceName>
             <div className="buttons">
               <div className="button">수정</div>
               <div className="button">삭제</div>
@@ -25,13 +20,13 @@ const Review = () => {
             <Star /> <Star /> <Star /> <Star /> <Star />
           </Score>
         </div>
+        <PostDate>2022.09.29</PostDate>
         <p className="reviewContent">
           케이크 정말 맛있어요~~ 주문해서 바로 픽업했고 디자인도 너무 예쁜데
           맛도 너무 좋아요~전에 홍대 터*힙 여기서 사고 선제작후 냉동보관했다가
           다시 녹여서 주는거 알고 정말 너무 실망해서 여기도 혹시나 하는 맘에
-          샀는데 당일 제작 당일 픽업했습니다.. 맛에 또 한번 놀랐구요. 다음
-          기념일도 여기로 주문하려고 합니다~ 마케팅만 번지르르하게 하는
-          다른데보다는 훨씬 나은거 같네요!!
+          샀는데 당일 제작 당일 픽업했습니다.. 맛에 또 한번 놀랐구요.
+          업했습니다.. 맛에 또 한번 놀랐구요.
         </p>
       </ReviewLeft>
       <ReviewRight></ReviewRight>
@@ -45,84 +40,102 @@ const ReviewItem = styled.div`
   justify-content: space-between;
   padding: 20px;
   gap: 32px;
-  border-bottom: 1px solid #d7e2eb;
+  border-top: 1px solid #d7e2eb;
+  transition: all 0.3s;
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+    padding: 20px 0;
+  }
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    gap: 10px;
+    }
 `;
 
 const ReviewLeft = styled.div`
   width: 100%;
+  transition: all 0.3s;
+
   .topSection,
   .user_buttons,
-  .buttons,
   .user {
     display: flex;
     align-items: center;
     gap: 20px;
+    @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+       gap: 0;
+    }
+  }
+  .buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+       gap: 5;
+       margin-top: 5px;
+    }
   }
 
   .topSection {
     width: 100%;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 6px;
   }
 
   .button {
-    font-size: 14px;
+    font-size: 12px;
     color: #666;
     cursor: pointer;
-    transition: all 0.3s;
-    @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
-    font-size: 12px;
-  }
   }
   .reviewContent {
-    font-size: 16px;
-    color: #333;
-    line-height: 150%;
-    transition: all 0.3s;
-    
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     text-align: left;
-    line-height: 1.6em;
-    height: 5em;
-    
-    @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
-      font-size: 14px;
+    line-height: 1em;
+    height: 3em;
+
+    font-size: 14px;
+    color: #333;
+    line-height: 150%;
+    transition: all 0.3s;
+    @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+      font-size: 12px;
     }
   }
+
+    @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+      .user_buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+
+      }
+
+    }
 `;
 
 const ReviewRight = styled.div`
   background-color: #f5f5f5;
   border-radius: 10px;
-  width: 220px;
-  height: 120px;
+  width: 200px;
+  height: 100px;
 `;
 
-const UserImg = styled.div`
-  width: 48px;
-  height: 48px;
-  border-radius: 50px;
-  background-color: #f5f5f5;
-`;
-
-const UserName = styled.div`
-  font-size: 18px;
-  color: #333;
+const PlaceName = styled.div`
   font-weight: 600;
-  margin-bottom: 6px;
-  transition: all 0.3s;
-  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
-    font-size: 16px;
-  }
+  font-size: 15px;
+  color: #4da772;
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    font-weight: 600;
+  font-size: 13px;
+    }
 `;
 
 const PostDate = styled.div`
   font-size: 12px;
   color: #999;
+  margin-bottom: 10px;
 `;
 
 const Score = styled.div``;
 
-export default Review;
+export default MypageReview;

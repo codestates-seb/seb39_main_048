@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import HashTag from "../tags/HashTag";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import { ReactComponent as BookMark } from "../../assets/BookMark.svg";
 
-const PlaceCard2 = () => {
+const PlaceCard2 = ({data}) => {
   const tags = ["소형견", "소형견", "소형견"];
   return (
     <Card>
@@ -13,19 +14,19 @@ const PlaceCard2 = () => {
         <PlaceInfo>
           <Info>
             <InfoTop>
-              <PlaceName>로얄 테라스 가든로얄 테라스 가든</PlaceName>
+              <PlaceName>{data.placeName}</PlaceName>
               <Score>
                 <Star />
-                <p>4.3</p>
+                <p>{data.score}</p>
               </Score>
             </InfoTop>
-            <Address>서울 송파구 올림픽로 300</Address>
+            <Address>{data.address}</Address>
           </Info>
           <BookMark />
         </PlaceInfo>
         <Tags>
           {tags.map((tag, idx) => (
-            <Tag key={idx}># {tag}</Tag>
+           <HashTag key={idx} text={tag}/>
           ))}
         </Tags>
       </div>
@@ -109,14 +110,6 @@ const Tags = styled.div`
   padding: 0 22px;
   gap: 8px;
   margin-bottom: 22px;
-`;
-
-const Tag = styled.div`
-  padding: 5px 10px;
-  color: #999;
-  border: 1px solid #999;
-  border-radius: 50px;
-  font-size: 12px;
-`;
+`; 
 
 export default PlaceCard2;

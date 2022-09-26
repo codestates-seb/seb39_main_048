@@ -4,10 +4,10 @@ import PlaceCard2 from "./PlaceCard2";
 import { ReactComponent as UpButton } from "../../assets/UpButton.svg";
 import { ReactComponent as DownButton } from "../../assets/DownButton.svg";
 
-const TOTAL_SLIDES = 2; // 화면 너머로 보이는 슬라이드 수
 
-const PlaceCardGroup2 = ({ title }) => {
+const PlaceCardGroup2 = ({ title, data }) => {
   const [currentCard, setCurrentCard] = useState(0);
+  const TOTAL_SLIDES = (data.length - 2) /2; // 화면 너머로 보이는 슬라이드 수
   const cardRef = useRef(null);
 
   const handleNext = () => {
@@ -36,12 +36,9 @@ const PlaceCardGroup2 = ({ title }) => {
       <h2>{title}</h2>
       <Container>
         <Cards ref={cardRef}>
-          <PlaceCard2 />
-          <PlaceCard2 />
-          <PlaceCard2 />
-          <PlaceCard2 />
-          <PlaceCard2 />
-          <PlaceCard2 />
+          {data.map((data, idx)=> (
+            <PlaceCard2 data={data} key={idx}/>
+          ))}
         </Cards>
       </Container>
       <Buttons>
@@ -59,7 +56,6 @@ const PlaceCardGroup2 = ({ title }) => {
 const Group = styled.div`
   position: relative;
   width: 40vw;
-  max-width: 1280px;
   margin: 0 auto;
   margin-top: 64px;
   color: #333;
@@ -70,13 +66,11 @@ const Group = styled.div`
 `;
 
 const Container = styled.div`
-  width: 40vw;
   height: 389px;
   overflow-y: hidden;
 `;
 
 const Cards = styled.div`
-  height: 200vh;
 `;
 
 const Buttons = styled.div`
