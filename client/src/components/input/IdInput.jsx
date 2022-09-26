@@ -1,6 +1,33 @@
+import { useState } from "react";
 import styled from "styled-components";
+import useSignup from "../../store/SignupStore";
 
 const IdInput = ({ placeholder }) => {
+  // const [userId, setUserId] = useState("");
+  const [idMessage, setIdMessage] = useState("");
+  // const [isId, setIsId] = useState(false);
+
+  const { setUserId, setIsId, isId, userId } = useSignup();
+
+  console.log(isId);
+  console.log(userId);
+
+  const handleIdValid = (e) => {
+    // 영문 6~12자
+    const IdRegex = /^[a-z|A-Z]{6,12}$/;
+
+    console.log(IdRegex.test(e.target.value));
+
+    if (e.target.value.length <= 5) {
+      setIdMessage(`6~12자 영문 아이디를 적어주세요.`);
+    } else if (!IdRegex.test(e.target.value)) {
+      setIdMessage(`${e.target.value} 아이디가 올바르지 않습니다.`);
+    } else {
+      setIdMessage(``);
+      setUserId(e.target.value);
+      setIsId(true);
+    }
+  };
 
   return (
     <Id>
@@ -11,7 +38,9 @@ const IdInput = ({ placeholder }) => {
           maxlength="12"
           minlength="6"
           placeholder={placeholder}
+          onChange={handleIdValid}
         ></input>
+        <div className="ValidCheck">{idMessage}</div>
       </label>
     </Id>
   );
@@ -38,6 +67,13 @@ const Id = styled.div`
     text-align: left;
     text-indent: 52px;
     font-size: 16px;
+  }
+
+  .ValidCheck {
+    font-size: 11px;
+    color: #4da771;
+    margin-top: 4px;
+    white-space: normal;
   }
 `;
 
