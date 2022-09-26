@@ -8,11 +8,11 @@ const HashTag = ({text}) => {
 }
 
 const Tag = styled.div`
-  padding: 8px 12px;
-  font-size: 12px;
+  padding: 5px 10px;
+  font-size: 11px;
   background-color: #fff;
   color: #999;
-  border: 1px solid #999;
+  border: 1px solid #aaa;
   border-radius: 50px;
 `
 

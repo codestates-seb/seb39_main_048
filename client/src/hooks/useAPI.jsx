@@ -35,14 +35,15 @@ export const useGetMyPlace = () => {
   };
 };
 
+// useGetBookMark('/test')
 
-export const useGetBookMark = () => {
-  const fetcher = async () => {
-    const res = await axios.get(`${BASE_URL}/bookmark`);
-    console.log("useGetBookMark");
+export const useGetBookMark = (url) => {
+  const fetcher = async (innerURL) => {
+    const res = await axios.get(`${BASE_URL}${innerURL}`);
+    console.log("url", url);
     return res.data;
   };
-  const { data, error } = useSWR(`/bookmark`, fetcher);
+  const { data, error } = useSWR(`${url}`, fetcher);
 
   return {
     data: data,
@@ -67,3 +68,22 @@ export const useGetSearch = () => {
     isError: error,
   };
 };
+
+// --------------------메인 추천 데이터--------------------
+
+export const useGetRecommend = () => {
+  const fetcher = async () => {
+    const res = await axios.get(`${BASE_URL}/recommend`);
+    console.log("useGetRecommand");
+    return res.data;
+  };
+  const { data, error } = useSWR(`/recommend`, fetcher);
+
+  return {
+    data: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+};
+
+

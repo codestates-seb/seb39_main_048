@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import PlaceCard1 from "../cards/PlaceCard1";
+import { BREAK_POINT_TABLET } from "../../constant";
 
 const MySummary = () => {
-
-
   return (
     <Summary>
       <Bookmark>
@@ -54,6 +53,14 @@ const Summary = styled.div`
   span {
     font-size: 14px;
     color: #666;
+  }
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+    padding-top: 20px;
+    margin-bottom: 48px;
+    h2 {
+      font-size: 16px;
+      font-weight: 600;
+    }
   }
 `;
 

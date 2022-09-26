@@ -1,147 +1,142 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import { ReactComponent as BookMark } from "../../assets/BookMark.svg";
-import { ReactComponent as BookMarkEmpty } from "../../assets/BookMarkEmpty.svg";
-import useMenu from "../../store/Store";
+import { ReactComponent as Dots } from "../../assets/Dots.svg";
+import useDetectClose from "../../hooks/useDetectClose";
+import HashTag from "../tags/HashTag";
+import useMenu from "../../store/MenuStore";
 
-const PlaceCard1 = ({ data }) => {
+const PlaceCard1 = ({data}) => {
   const { menu } = useMenu();
+  const [isOpen, ref, handleOpen] = useDetectClose(false);
 
   return (
     <Card>
-      {menu === "내가 등록한 장소" ? (
-        <>
-          <PlaceImg></PlaceImg>
-
-          <PlaceInfo>
-            <Info>
-              <InfoTop>
-                <PlaceName>{data.placeName}</PlaceName>
-                <Score>
-                  <Star />
-                  <p>{data.score}</p>
-                </Score>
-              </InfoTop>
-              <Address>{data.address}</Address>
-            </Info>
-          </PlaceInfo>
-          <Tags>
-            {data.tags.map((tag, idx) => (
-              <Tag key={idx}># {tag}</Tag>
-            ))}
-          </Tags>
-        </>
-      ) : (
-        <>
-          <PlaceImg></PlaceImg>
-
-          <PlaceInfo>
-            <Info>
-              <InfoTop>
-                <PlaceName>{data.placeName}</PlaceName>
-                <Score>
-                  <Star />
-                  <p>{data.score}</p>
-                </Score>
-              </InfoTop>
-              <Address>{data.address}</Address>
-            </Info>
-
-            {data.bookmark ? <BookMark /> : <BookMarkEmpty />}
-          </PlaceInfo>
-          <Tags>
-            {data.tags.map((tag, idx) => (
-              <Tag key={idx}># {tag}</Tag>
-            ))}
-          </Tags>
-        </>
-      )}
+      <PlaceImg></PlaceImg>
+      <PlaceInfo>
+        <Infos>
+          <Title>
+            <PlaceName>{data.placeName}</PlaceName>
+            <Score>
+              <Star />
+              4.6
+            </Score>
+          </Title>
+          <BookMarkArea>
+            {menu === "내가 등록한 장소" ? (
+              <div onClick={handleOpen} ref={ref}>
+                <Dots />
+              </div>
+            ) : (
+              <BookMark />
+            )}
+            {isOpen ? (
+              <Buttons>
+                <Button>수정</Button>
+                <Button>삭제</Button>
+              </Buttons>
+            ) : (
+              ""
+            )}
+          </BookMarkArea>
+        </Infos>
+        <Address>서울 송파구 올림픽로 300 안녕하세요dhdh</Address>
+        <Tags>
+          <HashTag text={"중형견"} />
+          <HashTag text={"종로구-어쩌구"} />
+        </Tags>
+      </PlaceInfo>
     </Card>
   );
 };
 
 const Card = styled.div`
   border: 1px solid #d7e2eb;
-  border-radius: 15px;
-  color: #333;
+  border-radius: 10px;
+  height: 282px;
+  position: relative;
 `;
 
 const PlaceImg = styled.div`
-  border-radius: 15px 15px 0 0;
-  width: 100%;
-  height: 165px;
-  background-color: #cecece;
+  background-color: #f5f5f5;
+  height: 150px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 `;
 
 const PlaceInfo = styled.div`
+  padding: 20px 20px 25px 20px;
+`;
+
+const Infos = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 6px;
+`;
+const Address = styled.div`
+  font-size: 14px;
+  color: #333;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  display: flex;
-  padding: 1.5vw;
-  width: 100%;
-  justify-content: space-between;
-  position: relative;
-  svg:nth-child(2) {
-    position: absolute;
-    right: 2vw;
-  }
+  max-width: 200px;
+  margin-bottom: 12px;
 `;
-const Info = styled.div``;
-
-const InfoTop = styled.div`
+const Tags = styled.div`
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 6px;
+`;
+
+const Title = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
 `;
 
 const PlaceName = styled.div`
-  font-size: 16px;
   font-weight: 600;
-  width: 10vw;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  max-width: 150px;
 `;
 
 const Score = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
-  line-height: 1.5;
-  p {
-    font-size: 14px;
-    color: #999;
-  }
+  font-size: 14px;
+  color: #999;
+  gap: 3px;
   svg {
     margin-top: -3px;
   }
 `;
 
-const Address = styled.div`
+const BookMarkArea = styled.div`
+  position: relative;
+  svg {
+    cursor: pointer;
+  }
+`;
+
+const Buttons = styled.div`
+  position: absolute;
+  width: 50px;
+  background-color: #fff;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  text-align: center;
+  right: 0;
+`;
+
+const Button = styled.div`
   font-size: 14px;
-  width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-
-const Tags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 22px;
-  gap: 8px;
-  margin-bottom: 22px;
-`;
-
-const Tag = styled.div`
-  padding: 5px 10px;
-  color: #999;
-  border: 1px solid #999;
-  border-radius: 50px;
-  font-size: 12px;
+  padding: 10px;
+  cursor: pointer;
 `;
 
 export default PlaceCard1;
