@@ -1,13 +1,13 @@
-import request from "./core";
+import axiosInstance from "./core/axiosConfig";
 
 // get 요청
-const getUserInfo = (aUserId) => {
-  return request({ url: `/getUserInfo/${aUserId}` });
+const getUser = (userId) => {
+  return axiosInstance({ url: `/user/${userId}`, method: "get" });
 };
 
 // post 요청
-const saveUserInfo = () => {
-  request({
+const postUser = () => {
+  axiosInstance({
     method: "post",
     url: "/user/12345",
     data: {
@@ -17,4 +17,4 @@ const saveUserInfo = () => {
   });
 };
 
-export default { getUserInfo, saveUserInfo };
+export default { getUser, postUser };

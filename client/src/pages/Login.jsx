@@ -63,8 +63,8 @@ const Login = () => {
               <p>아이디</p>
               <input
                 type="text"
-                maxlength="12"
-                minlength="6"
+                maxLength="12"
+                minLength="6"
                 placeholder="아이디를 입력해 주세요"
                 onChange={(e) => setUserId(e.target.value)}
               ></input>
@@ -75,8 +75,8 @@ const Login = () => {
               <p>비밀번호</p>
               <input
                 type="password"
-                maxlength="14"
-                minlength="8"
+                maxLength="14"
+                minLength="8"
                 placeholder="영문 소문자, 숫자 포함 8자 이상 14자 이하"
                 onChange={(e) => setPassword(e.target.value)}
               ></input>
