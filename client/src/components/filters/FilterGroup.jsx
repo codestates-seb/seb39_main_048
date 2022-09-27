@@ -8,7 +8,12 @@ import { BREAK_POINT_TABLET } from "../../constant";
 
 const FilterGroup = () => {
   const { filterData, setFilterData } = useFilters();
-  console.log(filterData);
+
+  const handleRemove = (e) => {
+    const idx = e.target.id;
+    const removeFilter = filterData.filter((data) => data !== filterData[idx]);
+    setFilterData(removeFilter);
+  };
 
   return (
     <>
@@ -19,7 +24,12 @@ const FilterGroup = () => {
       </Group>
       <FilterItems>
         {filterData.map((item, idx) => (
-          <FilterItem key={idx}>{item}</FilterItem>
+          <FilterItem key={idx}>
+            {item}
+            <span onClick={handleRemove} id={idx}>
+              ✕
+            </span>
+          </FilterItem>
         ))}
       </FilterItems>
     </>
@@ -45,12 +55,18 @@ const FilterItems = styled.div`
 `;
 
 const FilterItem = styled.div`
-  margin: 16px 0;
+  margin: 16px 0 0 0;
   color: #4da772;
   border: 1px solid #4da772;
   background-color: #fff;
-  padding: 5px 15px;
+  padding: 10px 14px;
   border-radius: 50px;
+  font-size: 14px;
+  span {
+    margin-left: 8px;
+    font-size: 12px;
+    cursor: pointer;
+  }
 `;
 
 export default FilterGroup;

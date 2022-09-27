@@ -5,6 +5,7 @@ import useDetectClose from "../../hooks/useDetectClose";
 import { useGetSearch } from "../../hooks/useAPI";
 import { ReactComponent as SearchIcon } from "../../assets/SearchIcon.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
+import { useState } from "react";
 
 const Search = () => {
   const [isOpen, searchRef, handleOpen] = useDetectClose(false);
@@ -24,6 +25,7 @@ const Search = () => {
 
     if (targetData.length === 0) return setSearchData("");
     setSearchData(filterData);
+    console.log(searchData.length);
   };
 
   const handleAutoClick = (e) => {
@@ -38,7 +40,9 @@ const Search = () => {
         onClick={handleOpen}
         ref={searchRef}
       />
-      <SearchIcon />
+      <SearchIcon
+        display={searchData.length === 0 ? "none" : ""}
+      />
       {isOpen ? (
         <SearchDatas>
           {searchData &&
@@ -90,16 +94,20 @@ const SearchGroup = styled.div`
 
 const SearchDatas = styled.ul`
   position: absolute;
+  display: ${(props) => props.display || "block"};
   text-align: start;
   z-index: 100;
   top: 55px;
   left: 0;
-  border-radius: 20px;
   width: 312px;
   max-height: 200px;
   background-color: #fff;
-  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #e1e2e3;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 15%);
+  font-size: 14px;
   li {
     cursor: pointer;
     padding: 10px 25px;

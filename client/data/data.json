@@ -6,7 +6,10 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     },
     {
@@ -15,7 +18,11 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "중형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "중형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     },
     {
@@ -24,60 +31,156 @@
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
-    }
-    ,
+    },
     {
       "placeId": 4,
       "placeName": "4) recomand",
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
-    }
-    ,
+    },
     {
       "placeId": 5,
       "placeName": "5) recomand",
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
-      "bookmark": true
-    }
-    ,
-    {
-      "placeId": 6,
-      "placeName": "6) recomand",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
-      "bookmark": true
-    }
-    ,
-    {
-      "placeId": 7,
-      "placeName": "7) recomand",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
-      "bookmark": true
-    }
-    ,
-    {
-      "placeId": 8,
-      "placeName": "8) recomand",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
-      "tags": ["소형견", "송파구-강동구"],
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
       "bookmark": true
     }
   ],
+
+  "restaurant": [
+    {
+      "placeId": 1,
+      "placeName": "1) 식당",
+      "address": "주소입니다 707번길",
+      "category": "식당",
+      "score": 4.5,
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
+      "bookmark": true
+    },
+    {
+      "placeId": 2,
+      "placeName": "2) 식당",
+      "address": "주소입니다 707번길",
+      "category": "식당",
+      "score": 4.5,
+      "tags": [
+        "소형견",
+        "중형견",
+        "송파구-강동구"
+      ],
+      "bookmark": true
+    },
+    {
+      "placeId": 3,
+      "placeName": "3) 식당",
+      "address": "주소입니다 707번길",
+      "category": "식당",
+      "score": 4.5,
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
+      "bookmark": true
+    }
+  ],
+  "cafe": [
+    {
+      "placeId": 1,
+      "placeName": "1) 카페",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
+      "bookmark": true
+    },
+    {
+      "placeId": 2,
+      "placeName": "2) 카페",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": [
+        "소형견",
+        "중형견",
+        "송파구-강동구"
+      ],
+      "bookmark": true
+    },
+    {
+      "placeId": 3,
+      "placeName": "3) 카페",
+      "address": "주소입니다 707번길",
+      "category": "카페",
+      "score": 4.5,
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
+      "bookmark": true
+    }
+  ],
+  "stay": [
+    {
+      "placeId": 1,
+      "placeName": "1) 숙소",
+      "address": "주소입니다 707번길",
+      "category": "숙소",
+      "score": 4.5,
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
+      "bookmark": true
+    },
+    {
+      "placeId": 2,
+      "placeName": "2) 숙소",
+      "address": "주소입니다 707번길",
+      "category": "숙소",
+      "score": 4.5,
+      "tags": [
+        "소형견",
+        "중형견",
+        "송파구-강동구"
+      ],
+      "bookmark": true
+    },
+    {
+      "placeId": 3,
+      "placeName": "3) 숙소",
+      "address": "주소입니다 707번길",
+      "category": "숙소",
+      "score": 4.5,
+      "tags": [
+        "소형견",
+        "송파구-강동구"
+      ],
+      "bookmark": true
+    }
+  ],
+
   
   "bookmark": [
     {
@@ -132,30 +235,6 @@
     {
       "placeId": 5,
       "placeName": "5) 안녕하세요 테스트",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
-      "tags": [
-        "소형견",
-        "송파구-강동구"
-      ],
-      "bookmark": true
-    },
-    {
-      "placeId": 6,
-      "placeName": "6) 내가 등록한 장소",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
-      "tags": [
-        "소형견",
-        "송파구-강동구"
-      ],
-      "bookmark": true
-    },
-    {
-      "placeId": 7,
-      "placeName": "7)  내가 등록한 장소",
       "address": "주소입니다 707번길",
       "category": "카페",
       "score": 4.5,
@@ -222,28 +301,6 @@
         "소형견",
         "송파구-강동구"
       ]
-    },
-    {
-      "placeId": 6,
-      "placeName": "6) 내가 등록한 장소",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
-      "tags": [
-        "소형견",
-        "송파구-강동구"
-      ]
-    },
-    {
-      "placeId": 7,
-      "placeName": "7)  내가 등록한 장소",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
-      "tags": [
-        "소형견",
-        "송파구-강동구"
-      ]
     }
   ],
   "place": [
@@ -295,42 +352,6 @@
         "송파구-강동구"
       ],
       "bookmark": false
-    },
-    {
-      "placeId": 5,
-      "placeName": "5) 안녕하세요 테스트",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
-      "tags": [
-        "소형견",
-        "송파구-강동구"
-      ],
-      "bookmark": true
-    },
-    {
-      "placeId": 6,
-      "placeName": "6) 안녕하세요 테스트",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
-      "tags": [
-        "소형견",
-        "송파구-강동구"
-      ],
-      "bookmark": false
-    },
-    {
-      "placeId": 7,
-      "placeName": "7) 안녕하세요 테스트",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
-      "tags": [
-        "소형견",
-        "송파구-강동구"
-      ],
-      "bookmark": true
     }
   ],
   "search": [
@@ -475,6 +496,26 @@
       "id": "czxcxzczxc",
       "password": "zxcxzczxczxczx",
       "name": "asdasd"
+    },
+    {
+      "id": "rrrrrr",
+      "password": "rrrrrrrr",
+      "name": "rrrrrr"
+    },
+    {
+      "id": "tttttt",
+      "password": "yyyyyyyy",
+      "name": "yyyyyy"
+    },
+    {
+      "id": "uuuuuu",
+      "password": "uuuuuuuu",
+      "name": "uuuu"
+    },
+    {
+      "id": "wwwwww",
+      "password": "rrrrrrrr",
+      "name": "wwwwww"
     }
   ]
 }
