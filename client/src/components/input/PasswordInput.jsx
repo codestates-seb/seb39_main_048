@@ -2,26 +2,10 @@ import { useState } from "react";
 import useSignup from "../../store/SignupStore";
 import styled from "styled-components";
 
-const PasswordInput = ({ title, placeholder, id }) => {
-  // const [password, setPassword] = useState("");
+const PasswordInput = ({ title, placeholder }) => {
   const [passwordMessage, setPasswordMessage] = useState("");
-  // const [isPassword, setIsPassword] = useState(false);
-  // const [passwordCheck, setPasswordCheck] = useState("");
-  // const [passwordCheckMsg, setPasswordCheckMsg] = useState("");
-  // const [isPasswordCheck, setIsPasswordCheck] = useState(false);
 
-  const {
-    password,
-    isPassword,
-    setPassword,
-    setIsPassword,
-    passwordCheck,
-    setPasswordCheck,
-    passwordCheckMsg,
-    setPasswordCheckMsg,
-    isPasswordCheck,
-    setIsPasswordCheck,
-  } = useSignup();
+  const { password, isPassword, setPassword, setIsPassword } = useSignup();
 
   const handlePasswordValid = (e) => {
     // 8~14자 이하 영문 소문자, 숫자 조합
@@ -35,9 +19,6 @@ const PasswordInput = ({ title, placeholder, id }) => {
       setPasswordMessage(``);
       setPassword(e.target.value);
       setIsPassword(true);
-      setPasswordCheck("");
-      setPasswordCheckMsg("");
-      setIsPasswordCheck(true);
     }
   };
 
@@ -47,17 +28,13 @@ const PasswordInput = ({ title, placeholder, id }) => {
         <p>{title}</p>
 
         <input
-          id={id}
           type="password"
           maxlength="14"
           minlength="8"
           placeholder={placeholder}
           onChange={handlePasswordValid}
         ></input>
-        <div className="ValidCheck">
-          {passwordMessage}
-          {/* {passwordCheckMsg} */}
-        </div>
+        <div className="ValidCheck">{passwordMessage}</div>
       </label>
     </Password>
   );
