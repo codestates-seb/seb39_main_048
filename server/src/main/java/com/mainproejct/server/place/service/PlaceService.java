@@ -1,11 +1,13 @@
 package com.mainproejct.server.place.service;
 
+import com.mainproejct.server.place.controller.PlaceSpecs;
 import com.mainproejct.server.place.entity.Place;
 import com.mainproejct.server.place.repository.PlaceRepository;
 import com.mainproejct.server.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +28,6 @@ public class PlaceService {
     **/
     public Place createPlace(Place place){
         Place savedPlace = placeRepository.save(place);
-
-
         return savedPlace;
     }
 
@@ -55,6 +55,10 @@ public class PlaceService {
                 .ifPresent(address -> findPlace.setAddress(address));
         Optional.ofNullable(place.getPlaceImage())
                 .ifPresent(placeImage -> findPlace.setPlaceImage(placeImage));
+        Optional.ofNullable(place.getScoreAvg())
+                .ifPresent(scoreAvg -> findPlace.setScoreAvg(scoreAvg));
+        Optional.ofNullable(place.getReplyList())
+                .ifPresent(replyList -> findPlace.setReplyList(replyList));
 
         return placeRepository.save(findPlace);
 
@@ -63,13 +67,30 @@ public class PlaceService {
 
     /**
      * get / category
-    * findPlaceByCategory 구현
+    * findPlaceByCategory 구현 완료
     **/
     public List<Place> findPlaceByCategory(String category){
-
         return placeRepository.findTop8ByCategoryOrderByScoreAvg(category);
     }
+    public Place findPlace(Long placeId) {
+        return findVerifiedPlace(placeId);
+    }
+    public Page<Place> findPlaces(int page, int size) {
+        return placeRepository.findAll(PageRequest.of(page, size,
+                Sort.by("scoreAvg").descending()));
+    }
 
+
+    public List<Place> findPlaceByCategoryWithSpecs( String category){
+        Specification<Place> spec = Specification.where(PlaceSpecs.categoryPl(category));
+//        if (category != null) {
+//
+//        }
+
+//        Page<Place> pageSpec = placeRepository.findAll(spec);
+//        List<Place> pageSpecList = pageSpec.getContent();
+        return   placeRepository.findAll(spec);
+    }
 
     /**
      * Delete
@@ -80,10 +101,6 @@ public class PlaceService {
         placeRepository.delete(findPlace);
     }
 
-    public Page<Place> findPlaces(int page, int size) {
-        return placeRepository.findAll(PageRequest.of(page, size,
-                Sort.by("scoreAvg").descending()));
-    }
 
     private Place findVerifiedPlace(Long placeId) {
 

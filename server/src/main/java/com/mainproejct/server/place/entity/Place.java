@@ -1,11 +1,15 @@
 package com.mainproejct.server.place.entity;
 
+import com.mainproejct.server.reply.entity.Reply;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -25,13 +29,27 @@ public class Place {
     String number;
     String description;
     String address;
-    String placeImage;
-    long scoreAvg;
+    String placeImage; // 이미지 맵핑시 수정 필요.
+    double scoreAvg; //jpa 평균 적용..  or jpql
 
 
-//    public Long getPlaceId(){
-//        return this.placeId;
-//    }
+    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
+    private List<Reply> replyList = new ArrayList<>();
+
+    public void addReply(Reply reply){
+        replyList.add(reply);
+    }
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.PERSIST)
+    private List<PlaceTag> placeTagList = new ArrayList<>();
+
+    public void addPlaceTag(PlaceTag placeTag){
+        this.placeTagList.add(placeTag);
+        if(placeTag.getPlace() != this){
+            placeTag.addPlace(this);
+        }
+    }
+
 
     @Override
     public String toString() {
@@ -45,6 +63,9 @@ public class Place {
                 ", description='" + description + '\'' +
                 ", address='" + address + '\'' +
                 ", placeImage='" + placeImage + '\'' +
+                ", scoreAvg=" + scoreAvg +
+
+                ", replyList=" + replyList.toString() +
                 '}';
     }
 }

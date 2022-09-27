@@ -1,5 +1,7 @@
 package com.mainproejct.server.place.controller;
 
+import com.mainproejct.server.dto.MainResponseDto;
+import com.mainproejct.server.dto.MultiResponseDto;
 import com.mainproejct.server.dto.SingleResponseDto;
 import com.mainproejct.server.place.dto.PlaceDto;
 import com.mainproejct.server.place.entity.Place;
@@ -43,20 +45,20 @@ public class PlaceController {
         Place createdPlace = placeService.createPlace(place);
 
 
-        System.out.print("*** requestBody ** : ");
-        System.out.println(requestBody.toString());
-        System.out.print("*** dto -> entity = place : ");
-        System.out.println(place.toString());
-        System.out.print("*** place -> responseDto = createdPlace :");
-        System.out.println(createdPlace.toString());
+//        System.out.print("*** requestBody ** : ");
+//        System.out.println(requestBody.toString());
+//        System.out.print("*** dto -> entity = place : ");
+//        System.out.println(place.toString());
+//        System.out.print("*** place -> responseDto = createdPlace :");
+//        System.out.println(createdPlace.toString());
 
      return new ResponseEntity<>(
              new SingleResponseDto<>(mapper.placeToPlaceResponse(createdPlace)), HttpStatus.CREATED);
     }
 
-/**
+    /**
  * Patch / {placeId}
-* patchPlace 구현
+* patchPlace 구현 완료
 **/
     @PatchMapping("/{place-id}")
     public ResponseEntity patchPlace(@RequestBody PlaceDto.patch requestBody,
@@ -75,44 +77,75 @@ public class PlaceController {
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.placeToPlaceResponse(updatedPlace)), HttpStatus.OK);
     }
-/**
- * 카테고리별  get / category / {category}
-* getPlaceCategory 구현
-**/
-    //카테고리별 get
+
+    /**
+     * getPlaceMain 구현 완료
+     * main 페이지에서 카테고리당 8개씩 장소를 불러온다.(OrderByScoreAvg)
+     **/
+    @GetMapping("/main")
+    public ResponseEntity getPlaceMain(){
+        List<Place> restaurantList = placeService.findPlaceByCategory("restaurant");
+        List<Place> cafeList = placeService.findPlaceByCategory("cafe");
+        List<Place> stayList = placeService.findPlaceByCategory("stay");
+        List<Place> hospitalList = placeService.findPlaceByCategory("hospital");
+        List<Place> etcList = placeService.findPlaceByCategory("etc");
+        return new ResponseEntity<>(
+                new MainResponseDto<>(
+                        mapper.placesToPlaceResponse(restaurantList),
+                        mapper.placesToPlaceResponse(cafeList),
+                        mapper.placesToPlaceResponse(stayList),
+                        mapper.placesToPlaceResponse(hospitalList),
+                        mapper.placesToPlaceResponse(etcList)), HttpStatus.OK);
+    }
+
+    /**
+    * getPlace/{placeId} 구현 완료
+    **/
+    @GetMapping("/{place-id}")
+    public ResponseEntity getPlace(@PathVariable("place-id") Long placeId){
+        Place findPlace = placeService.findPlace(placeId);
+        System.out.println("* FindPlace :" + findPlace.toString());
+        return new ResponseEntity<>(
+                new SingleResponseDto<>(mapper.placeToPlaceResponse(findPlace)), HttpStatus.OK);
+    }
+
+
+    /**
+     * 카테고리별  get / category / {category}
+    * getPlaceCategory 구현
+     * 카테고리별 get은 완료. tag 매핑해서 조회는 아직..
+     * scoreAvg 업데이트 하는 로직 필요..- reply에서 활용
+    **/
     @GetMapping("/category/{category}")
-    public ResponseEntity getPlaceCategory(@PathVariable("category") String category){
-
-        List<Place> placeList = placeService.findPlaceByCategory(category);
-
+    public ResponseEntity getPlaceCategory( @RequestParam(required = false) Integer page,//파라미터 널 가능
+                                            @RequestParam(required = false) Integer size,
+                                           @PathVariable(value = "category", required = false) String category){
+       // Page<Place> pagePlaces = placeService.findPlaces(page-1,size);
+       // List<Place> placeList = placeService.findPlaceByCategory(category, page-1, size);
+        List<Place> placeList = placeService.findPlaceByCategoryWithSpecs(category);
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.placesToPlaceResponse(placeList)), HttpStatus.OK);
     }
 
-    //전체 장소 get
-    @GetMapping
-    public String getPlaces(){
-        return null;
-    }
-//
-//    @GetMapping
-//    public ResponseEntity getMembers(@Positive @RequestParam int page,
+
+
+    /**
+    * getPlaces 구현
+     * bookmark 우선순위 미루기
+    **/
+//    @GetMapping("/bookmark")
+//    public ResponseEntity getPlaceByBookmark(@Positive @RequestParam int page,
 //                                     @Positive @RequestParam int size) {
 //        Page<Place> pagePlaces = placeService.findPlaces(page - 1, size);
 //        List<Place> places = pagePlaces.getContent();
 //        return new ResponseEntity<>(
-//                new MultiResponseDto<>(mapper.membersToMemberResponses(members),
-//                        pageMembers),
-//                HttpStatus.OK);
+//                new MultiResponseDto<>(mapper.placesToPlaceResponse(places), pagePlaces), HttpStatus.OK);
 //    }
 
-//    //특정 장소 get
-//    @GetMapping("/{place_id}")
-//    public  String getPlace(@PathVariable("place_id") long placeId){
-//        return null; //placeId / placeName / category / placeImage / serviceTime / hompage / number / address / description
-//    }
 
-    //특정 장소 delete
+    /**
+    * deletePlace 구현 완료      * 삭제시, reply등도 함께 삭제하는 것 구현 필요.
+    **/
     @DeleteMapping("/{place-id}")
     public ResponseEntity deletePlace(@PathVariable("place-id") long placeId) {
         placeService.deletePlace(placeId);

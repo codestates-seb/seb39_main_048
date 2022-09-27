@@ -1,33 +1,36 @@
 package com.mainproejct.server.reply.dto;
 
-import org.springframework.web.bind.annotation.RequestParam;
+import com.mainproejct.server.place.entity.Place;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 public class ReplyDto {
-
-
-    public class post {
+    @Getter
+    public static class post {
         String context;
-        String score;
+        double score;
         String replyImage;
-
     }
 
-    public class patch {
-
+    @Getter
+    public static class patch {
         long replyId;
 
         String context;
-        String score;
+        double score;
         String replyImage;
-
     }
 
-    public class response {
+    @AllArgsConstructor
+    @Getter
+    public static class response {
         long replyId;
 
         String context;
-        String score;
+        double score;
         String replyImage;
+
+        Long placeId;
 
     }
 }

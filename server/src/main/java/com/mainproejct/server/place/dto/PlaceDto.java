@@ -1,10 +1,10 @@
 package com.mainproejct.server.place.dto;
 
+import com.mainproejct.server.place.entity.PlaceTag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 
 public class PlaceDto {
@@ -19,6 +19,8 @@ public class PlaceDto {
         private String address;
         private String placeImage;
         private String description;
+
+        private List<PlaceTagDto> placeTagList;
 
         @Override
         public String toString() {
@@ -78,7 +80,9 @@ public class PlaceDto {
         private String address;
         private String placeImage;
         private String description;
-        private long scoreAvg;
+        private double scoreAvg;
+
+        private List<PlaceTagDto> placeTagList;
 
     }
 }
