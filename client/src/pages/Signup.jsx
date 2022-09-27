@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LogoColor from "../assets/LogoColor.png";
 import IdInput from "../components/input/IdInput";
 import PasswordInput from "../components/input/PasswordInput";
-import SNSLoginContainer from "../components/SNSLoginContainer";
-import useSWR from "swr";
+import SNSLoginContainer from  "../components/buttons/SNSLoginContainer";
 import axios from "axios";
 import useSignup from "../store/SignupStore";
 

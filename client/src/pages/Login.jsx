@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LogoColor from "../assets/LogoColor.png";
-import IdInput from "../components/input/IdInput";
-import PasswordInput from "../components/input/PasswordInput";
-import SNSLoginContainer from "../components/SNSLoginContainer";
+import SNSLoginContainer from "../components/buttons/SNSLoginContainer";
 import axios from "axios";
 import styled from "styled-components";
 import useLogin from "../store/LoginStore";

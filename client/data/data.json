@@ -1,7 +1,7 @@
 {
   "recommend": [
     {
-      "placeId": 1,
+      "id": 1,
       "placeName": "1) recomand",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -13,7 +13,7 @@
       "bookmark": true
     },
     {
-      "placeId": 2,
+      "id": 2,
       "placeName": "2) recomand",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -26,7 +26,7 @@
       "bookmark": true
     },
     {
-      "placeId": 3,
+      "id": 3,
       "placeName": "3) recomand",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -38,7 +38,7 @@
       "bookmark": true
     },
     {
-      "placeId": 4,
+      "id": 4,
       "placeName": "4) recomand",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -50,7 +50,7 @@
       "bookmark": true
     },
     {
-      "placeId": 5,
+      "id": 5,
       "placeName": "5) recomand",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -65,7 +65,7 @@
 
   "restaurant": [
     {
-      "placeId": 1,
+      "id": 1,
       "placeName": "1) 식당",
       "address": "주소입니다 707번길",
       "category": "식당",
@@ -77,7 +77,7 @@
       "bookmark": true
     },
     {
-      "placeId": 2,
+      "id": 2,
       "placeName": "2) 식당",
       "address": "주소입니다 707번길",
       "category": "식당",
@@ -90,7 +90,7 @@
       "bookmark": true
     },
     {
-      "placeId": 3,
+      "id": 3,
       "placeName": "3) 식당",
       "address": "주소입니다 707번길",
       "category": "식당",
@@ -104,7 +104,7 @@
   ],
   "cafe": [
     {
-      "placeId": 1,
+      "id": 1,
       "placeName": "1) 카페",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -116,7 +116,7 @@
       "bookmark": true
     },
     {
-      "placeId": 2,
+      "id": 2,
       "placeName": "2) 카페",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -129,7 +129,7 @@
       "bookmark": true
     },
     {
-      "placeId": 3,
+      "id": 3,
       "placeName": "3) 카페",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -143,7 +143,7 @@
   ],
   "stay": [
     {
-      "placeId": 1,
+      "id": 1,
       "placeName": "1) 숙소",
       "address": "주소입니다 707번길",
       "category": "숙소",
@@ -155,7 +155,7 @@
       "bookmark": true
     },
     {
-      "placeId": 2,
+      "id": 2,
       "placeName": "2) 숙소",
       "address": "주소입니다 707번길",
       "category": "숙소",
@@ -168,7 +168,7 @@
       "bookmark": true
     },
     {
-      "placeId": 3,
+      "id": 3,
       "placeName": "3) 숙소",
       "address": "주소입니다 707번길",
       "category": "숙소",
@@ -184,7 +184,7 @@
   
   "bookmark": [
     {
-      "placeId": 1,
+      "id": 1,
       "placeName": "1) 북마크",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -196,7 +196,7 @@
       "bookmark": true
     },
     {
-      "placeId": 2,
+      "id": 2,
       "placeName": "2) 내가 등록한 장소",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -209,7 +209,7 @@
       "bookmark": true
     },
     {
-      "placeId": 3,
+      "id": 3,
       "placeName": "3) 내가 등록한 장소",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -221,7 +221,7 @@
       "bookmark": true
     },
     {
-      "placeId": 4,
+      "id": 4,
       "placeName": "4) 안녕하세요 테스트",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -233,7 +233,7 @@
       "bookmark": true
     },
     {
-      "placeId": 5,
+      "id": 5,
       "placeName": "5) 안녕하세요 테스트",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -247,7 +247,7 @@
   ],
   "myplace": [
     {
-      "placeId": 1,
+      "id": 1,
       "placeName": "1) 내가 등록한 장소내가 등록한 장소",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -258,7 +258,7 @@
       ]
     },
     {
-      "placeId": 2,
+      "id": 2,
       "placeName": "2) 내가 등록한 장소",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -270,7 +270,7 @@
       ]
     },
     {
-      "placeId": 3,
+      "id": 3,
       "placeName": "3) 내가 등록한 장소",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -281,7 +281,7 @@
       ]
     },
     {
-      "placeId": 4,
+      "id": 4,
       "placeName": "4) 안녕하세요 테스트",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -292,7 +292,7 @@
       ]
     },
     {
-      "placeId": 5,
+      "id": 5,
       "placeName": "5) 안녕하세요 테스트",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -305,7 +305,7 @@
   ],
   "place": [
     {
-      "placeId": 1,
+      "id": 1,
       "placeName": "1) 안녕하세요 테스트",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -317,7 +317,7 @@
       "bookmark": false
     },
     {
-      "placeId": 2,
+      "id": 2,
       "placeName": "2) 안녕하세요 테스트",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -330,7 +330,7 @@
       "bookmark": true
     },
     {
-      "placeId": 3,
+      "id": 3,
       "placeName": "3) 안녕하세요 테스트",
       "address": "주소입니다 707번길",
       "category": "카페",
@@ -342,7 +342,7 @@
       "bookmark": true
     },
     {
-      "placeId": 4,
+      "id": 4,
       "placeName": "4) 안녕하세요 테스트",
       "address": "주소입니다 707번길",
       "category": "카페",

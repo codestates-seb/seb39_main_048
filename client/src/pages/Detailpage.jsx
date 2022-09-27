@@ -1,44 +1,68 @@
 import React from "react";
 import styled from "styled-components";
-import BasicButton from "../components/buttons/BasicButton";
-import HashTag from "../components/tags/HashTag";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as Star } from "../assets/Star.svg";
 import { ReactComponent as LocationEmpty } from "../assets/LocationEmpty.svg";
 import { ReactComponent as Clock } from "../assets/Clock.svg";
 import { ReactComponent as Globe } from "../assets/Globe.svg";
 import { ReactComponent as Phone } from "../assets/Phone.svg";
 import { ReactComponent as Description } from "../assets/Description.svg";
+import { useGetDetailPlace, useDeleteDetailPlace } from "../hooks/useAPI";
+import BasicButton from "../components/buttons/BasicButton";
+import HashTag from "../components/tags/HashTag";
 import KeywordSelectBtn from "../components/buttons/KeywordSelectBtn";
 import Footer from "../components/Footer";
 import Reviews from "../components/review/Reviews";
 
 const Detailpage = () => {
-  const tags = ["소형견", "대형견"];
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { data, isLoading, isError } = useGetDetailPlace(id);
+  console.log(data);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>ERR...</div>;
+
+  const onDelete = () => {
+    console.log("onDelete");
+    window.confirm("삭제하시겠습니까?");
+    useDeleteDetailPlace(id);
+    navigate("/place");
+  };
+
+  const onUpdate = () => {
+    console.log("onUpdate");
+  };
+
   return (
     <>
       <Detail>
         <div className="detailTop">
           <div className="PlaceName_category">
-            <PlaceName>챱챱 케이크</PlaceName>
-            <Category>카페</Category>
+            <PlaceName>{data.placeName}</PlaceName>
+            <Category>{data.category}</Category>
           </div>
           <div className="buttonGroup">
-            <BasicButton bgcolor={"#D9D9D9"} text={"삭제"} />
-            <BasicButton text={"수정"} />
+            <BasicButton
+              bgcolor={"#D9D9D9"}
+              text={"삭제"}
+              onDelete={onDelete}
+            />
+            <BasicButton text={"수정"} onUpdate={onUpdate} />
           </div>
         </div>
         <div className="detailTop_info">
           <Score>
             <Star />
-            <span>4.8</span>
+            <span>{data.score}</span>
           </Score>
           <ReviewInfo>후기 16개</ReviewInfo>
           <DataInfo>2022.09.22</DataInfo>
         </div>
         <div className="tagGroup">
-          {tags.map((tag, idx) => (
-            <HashTag text={tag} key={idx} />
-          ))}
+          {data &&
+            data.tags.map((tag, idx) => <HashTag text={tag} key={idx} />)}
         </div>
         <div className="imgs_detailInfo">
           <Imgs></Imgs>
@@ -46,7 +70,7 @@ const Detailpage = () => {
             <h2>상세페이지</h2>
             <Info>
               <LocationEmpty />
-              <DetailInfo>서울 서초구 서초중앙로 110 104호</DetailInfo>
+              <DetailInfo>{data.address}</DetailInfo>
             </Info>
             <Info>
               <Clock />

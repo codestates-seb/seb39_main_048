@@ -7,27 +7,10 @@ import { ReactComponent as Clock } from "../assets/Clock.svg";
 import { ReactComponent as Globe } from "../assets/Globe.svg";
 import { ReactComponent as Phone } from "../assets/Phone.svg";
 import { ReactComponent as Description } from "../assets/Description.svg";
-
+import { locationFilters, sizeFilters } from "../constant";
 import styled from "styled-components";
 
 const PlaceRegistration = () => {
-  const Sizes = ["전체", "소형견", "중형견", "대형견"];
-  const Places = [
-    "강남구･서초구",
-    "강동구･송파구",
-    "관악구･동작구",
-    "영등포･구로･금천",
-    "강서구･양천구",
-    "서대문･은평구",
-    "광진구･중랑구",
-    "강북･노원･도봉",
-    "동대문･성동구",
-    "마포구･용산구",
-    "중구･종로･성북",
-  ];
-
-  const SizeActive = () => {};
-  const PlaceActive = () => {};
 
   return (
     <div>
@@ -54,7 +37,7 @@ const PlaceRegistration = () => {
           <div>태그 선택</div>
           <div className="SizeTagSelect">
             <ul>
-              {Sizes.map((size, idx) => (
+              {sizeFilters.map((size, idx) => (
                 <li key={idx} onClick={SizeActive}>
                   {size}
                 </li>
@@ -66,7 +49,7 @@ const PlaceRegistration = () => {
           </div>
           <div className="PlaceTagSelect">
             <ul>
-              {Places.map((place, idx) => (
+              {locationFilters.map((place, idx) => (
                 <li key={idx} onClick={PlaceActive}>
                   {place}
                 </li>
@@ -169,7 +152,7 @@ const PlaceName = styled.div`
     width: 40%;
     height: 32px;
     margin-top: 24px;
-    padding: 12px;
+    padding: 23px;
     border: 1px solid;
     border-color: #d7e2eb;
     border-radius: 10px;
@@ -329,7 +312,7 @@ const ImageDetail = styled.div`
         color: #666666;
         width: 100%;
         height: 32px;
-        padding: 12px;
+        padding: 23px;
         border: 1px solid;
         border-color: #d7e2eb;
         border-radius: 10px;
@@ -348,7 +331,7 @@ const ImageDetail = styled.div`
         color: #666666;
         width: 100%;
         height: 32px;
-        padding: 12px;
+        padding: 23px;
         border: 1px solid;
         border-color: #d7e2eb;
         border-radius: 10px;
@@ -367,7 +350,7 @@ const ImageDetail = styled.div`
         color: #666666;
         width: 100%;
         height: 32px;
-        padding: 12px;
+        padding: 23px;
         border: 1px solid;
         border-color: #d7e2eb;
         border-radius: 10px;
@@ -386,7 +369,7 @@ const ImageDetail = styled.div`
         color: #666666;
         width: 100%;
         height: 32px;
-        padding: 12px;
+        padding: 23px;
         border: 1px solid;
         border-color: #d7e2eb;
         border-radius: 10px;
