@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { category } from "../../constant";
 import { BREAK_POINT_TABLET } from "../../constant";
-import { BREAK_POINT_PHONE } from "../../constant";
-
+import useFilters from "../../store/FilterStore";
 
 const Category = () => {
-  const [selectTitle, setSelectTitle] = useState("전체");
+  const { selectCategory, setSelectCategory } = useFilters();
 
   const handleClick = (e) => {
-    console.log(e.target.textContent);
-    setSelectTitle(e.target.textContent);
+    setSelectCategory(e.target.textContent);
   };
 
   return (
@@ -19,7 +17,7 @@ const Category = () => {
         <Item
           key={idx}
           onClick={handleClick}
-          className={selectTitle === item ? "active" : ""}
+          className={selectCategory === item ? "active" : ""}
         >
           {item}
         </Item>

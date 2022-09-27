@@ -1,32 +1,22 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
-import useDetectClose from "../../hooks/useDetectClose";
 import { ReactComponent as FilterIcon } from "../../assets/FilterIcon.svg";
-import useFilters from "../../store/FilterStore";
 import { sizeFilters, isOnlyFilters, locationFilters } from "../../constant";
 import { BREAK_POINT_TABLET } from "../../constant";
+import { useState } from "react";
+import FilterItem from "./FilterItem";
 
 const Filter = () => {
-  const [isOpen, ref, handleOpen] = useDetectClose(false);
-  const { filterData, setFilterData } = useFilters();
-  const filterRef = useRef([]);
+  // const [isOpen, ref, handleOpen] = useDetectClose(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = (e) => {
-    const data = e.target.textContent;
-    if (filterRef.current.includes(data)) {
-      const removeData = filterRef.current.filter((item) => item !== data);
-      filterRef.current = removeData;
-      setFilterData(filterRef.current);
-      return;
-    }
-    console.log(data);
-    filterRef.current.push(data);
-    setFilterData(filterRef.current);
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
   };
- 
+
   return (
     <FilterContainer>
-      <FilterGroup onClick={handleOpen} ref={ref}>
+      <FilterGroup onClick={handleOpen} bgcolor={isOpen ? "#f7fafe" : ""}>
         <span>filter</span>
         <FilterIcon />
       </FilterGroup>
@@ -34,24 +24,19 @@ const Filter = () => {
         <FilterSelect>
           <p>최대 4가지 항목을 선택하실 수 있습니다 :)</p>
           <SizeFilter>
-            {sizeFilters
-              .map((item, idx) => (
-                <FilterItem key={idx} onClick={handleClick}>
-                  {item}
-                </FilterItem>
-              ))}
+            {sizeFilters.map((item, idx) => (
+              <FilterItem item={item} key={idx} />
+            ))}
           </SizeFilter>
           <FormFilter>
-            {isOnlyFilters
-              .map((item, idx) => (
-                <FilterItem key={idx}>{item}</FilterItem>
-              ))}
+            {isOnlyFilters.map((item, idx) => (
+              <FilterItem item={item} key={idx} />
+            ))}
           </FormFilter>
           <LocaFilter>
-            {locationFilters
-              .map((item, idx) => (
-                <FilterItem key={idx}>{item}</FilterItem>
-              ))}
+            {locationFilters.map((item, idx) => (
+              <FilterItem item={item} key={idx} />
+            ))}
           </LocaFilter>
         </FilterSelect>
       ) : (
@@ -75,6 +60,7 @@ const FilterGroup = styled.div`
   color: #333;
   font-size: 14px;
   transition: all 0.3s;
+  background-color: ${(props) => props.bgcolor || "#fff"};
   cursor: pointer;
 
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
@@ -91,45 +77,38 @@ const FilterSelect = styled.div`
   z-index: 100;
   top: 55px;
   left: 0;
-  border-radius: 20px;
-  width: 312px;
-  max-height: 200px;
+  width: 550px;
+  max-height: 260px;
+  border-radius: 10px;
   background-color: #fff;
-  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e2e3;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 15%);
   overflow-y: auto;
   flex-wrap: wrap;
   p {
-    color: #2561e3;
-    font-size: 14px;
+    color: #666;
+    font-size: 12px;
   }
-`;
-
-const FilterItem = styled.div`
-  padding: 5px 10px;
-  font-size: 14px;
-  border-radius: 50px;
-  background-color: #eee;
-  cursor: pointer;
 `;
 
 const SizeFilter = styled.div`
   display: flex;
-  gap: 6px;
-  margin-top: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
 `;
 
 const FormFilter = styled.div`
   display: flex;
-  gap: 6px;
-  margin-top: 10px;
+  gap: 10px;
+  margin-top: 12px;
 `;
 
 const LocaFilter = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
-
-  gap: 6px;
+  margin-top: 12px;
+  gap: 10px;
 `;
 
 export default Filter;

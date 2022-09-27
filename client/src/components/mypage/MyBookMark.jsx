@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PlaceCard1 from "../cards/PlaceCard1";
-import { useGetBookMark } from "../../hooks/useAPI";
+import { useGetMypageData } from "../../hooks/useAPI";
 import { BREAK_POINT_TABLET } from "../../constant";
 
 const MyBookMark = ({menu}) => {
@@ -18,7 +18,7 @@ const MyBookMark = ({menu}) => {
   //   if (menu === "내가 등록한 장소") setUrl("/myplace");
   // }, [menu]);
 
-  const { data, isLoading, isError } = useGetBookMark(URL);
+  const { data, isLoading, isError } = useGetMypageData(URL);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>ERR...</div>;

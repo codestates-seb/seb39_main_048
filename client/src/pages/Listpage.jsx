@@ -3,10 +3,22 @@ import styled from "styled-components";
 import PlaceCard1 from "../components/cards/PlaceCard1";
 import FilterGroup from "../components/filters/FilterGroup";
 import Footer from "../components/Footer";
+import useFilters from "../store/FilterStore";
 import { useGetPlace } from "../hooks/useAPI";
 
 const Listpage = () => {
-  const { data, isLoading, isError } = useGetPlace();
+  const { selectCategory } = useFilters();
+  let URL = "";
+
+  // 스토어에 저장해바라~
+  if (selectCategory === "전체") URL = "/place";
+  if (selectCategory === "식당") URL = "/restaurant";
+  if (selectCategory === "카페") URL = "/cafe";
+  if (selectCategory === "숙소") URL = "/stay";
+  if (selectCategory === "병원") URL = "/place";
+  if (selectCategory === "기타") URL = "/place";
+
+  const { data, isLoading, isError } = useGetPlace(URL);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>ERR...</div>;

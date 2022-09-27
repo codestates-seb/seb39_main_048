@@ -5,7 +5,7 @@ const useDetectClose = (initialState) => {
   const ref = useRef(null);
 
   const handleOpen = () => {
-    setIsOpen(!isOpen);
+      setIsOpen(!isOpen);
   };
 
   useEffect(() => {
@@ -18,10 +18,9 @@ const useDetectClose = (initialState) => {
     // 왜 리턴을 removeEventListener
     if (isOpen) window.addEventListener("click", onClick);
     return () => window.removeEventListener("click", onClick);
-
   }, [isOpen]);
 
-  return [isOpen, ref, handleOpen];
+  return [isOpen, ref, handleOpen, setIsOpen];
 };
 
 export default useDetectClose;
