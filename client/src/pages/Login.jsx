@@ -1,19 +1,44 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import LogoColor from "../assets/LogoColor.png";
-import styled from "styled-components";
 import IdInput from "../components/input/IdInput";
 import PasswordInput from "../components/input/PasswordInput";
 import SNSLoginContainer from "../components/SNSLoginContainer";
+import axios from "axios";
+import styled from "styled-components";
+import useLogin from "../store/LoginStore";
 
 const Login = () => {
-  const onLogin = ({ userId, password }) => {
-    if (userId === "russ" && password === "whynot0") {
-      return {
-        access_token: "jx84e3kjew1njej3al2q9w",
-        refresh_token: "g2rjfd7452bjfgn;a&*(jkehj",
-      };
-    } else {
-      return undefined;
+  const { userId, password, setUserId, setPassword } = useLogin();
+
+  const onLogin = () => {
+    try {
+      let data = { userId };
+      axios
+        .post(
+          "http://localhost:3001/user",
+          {
+            userId: userId,
+            password: password,
+          },
+          {
+            headers: {
+              "Content-Type": `application/json`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log("res.data.accessToken : " + res.data);
+          axios.defaults.headers.common["Authorization"] = "Bearer " + res.data;
+        })
+        .catch((err) => {
+          console.log("login requset fail : " + err);
+        })
+        .finally(() => {
+          console.log("login request end");
+        });
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -28,11 +53,35 @@ const Login = () => {
           </p>
         </div>
         <div className="IdPassword">
-          <IdInput placeholder="아이디를 입력해 주세요" />
+          {/* <IdInput placeholder="아이디를 입력해 주세요" />
           <PasswordInput
             title="비밀번호"
             placeholder="비밀번호를 입력해 주세요"
-          />
+          /> */}
+          <Id>
+            <label>
+              <p>아이디</p>
+              <input
+                type="text"
+                maxlength="12"
+                minlength="6"
+                placeholder="아이디를 입력해 주세요"
+                onChange={(e) => setUserId(e.target.value)}
+              ></input>
+            </label>
+          </Id>
+          <Password>
+            <label>
+              <p>비밀번호</p>
+              <input
+                type="password"
+                maxlength="14"
+                minlength="8"
+                placeholder="영문 소문자, 숫자 포함 8자 이상 14자 이하"
+                onChange={(e) => setPassword(e.target.value)}
+              ></input>
+            </label>
+          </Password>
         </div>
         <div className="LoginBtns">
           <button id="LoginBtn" onClick={onLogin}>
@@ -136,6 +185,68 @@ const LoginPage = styled.div`
         cursor: pointer;
       }
     }
+  }
+`;
+
+const Id = styled.div`
+  p {
+    color: #333333;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  input {
+    background-image: url("https://img.icons8.com/material-outlined/100/999999/person-male.png");
+    color: #666666;
+    border: 1px solid #d7e2eb;
+    border-radius: 50px;
+    height: 48px;
+    width: 500px;
+    background-size: 20px;
+    background-position: 24px 12px;
+    background-repeat: no-repeat;
+    text-align: left;
+    text-indent: 52px;
+    font-size: 16px;
+  }
+
+  .ValidCheck {
+    font-size: 11px;
+    color: #4da771;
+    margin-top: 4px;
+    white-space: normal;
+  }
+`;
+
+const Password = styled.div`
+  p {
+    color: #333333;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  input {
+    background-image: url("https://img.icons8.com/ios/50/999999/password--v1.png");
+    color: #666666;
+    border: 1px solid #d7e2eb;
+    border-radius: 50px;
+    height: 48px;
+    width: 500px;
+    background-size: 20px;
+    background-position: 24px 12px;
+    background-repeat: no-repeat;
+    text-align: left;
+    text-indent: 52px;
+    font-size: 16px;
+  }
+
+  .ValidCheck {
+    font-size: 11px;
+    color: #4da771;
+    margin-top: 4px;
+    white-space: normal;
   }
 `;
 

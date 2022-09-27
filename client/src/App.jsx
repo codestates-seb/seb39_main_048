@@ -11,12 +11,11 @@ import Signup from "./pages/Signup";
 import Detailpage from "./pages/Detailpage";
 import ScrollToTop from "./hooks/useLocation";
 
-
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <ScrollToTop />
+        <ScrollToTop />
         <Nav />
         <Routes>
           <Route path="/" element={<Main />} />
