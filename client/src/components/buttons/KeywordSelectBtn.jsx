@@ -1,16 +1,31 @@
 import styled from "styled-components";
 import { Keywords } from "../../constant";
-
-const KeywordActive = () => {};
+import usePost from "../../store/PostStore";
 
 const KeywordSelectBtn = () => {
+  const { setKeyWord, keyWord } = usePost();
+
+  const handleClick = (e) => {
+    if (keyWord.includes(e.target.innerText)) {
+      const removeData = keyWord.filter((item) => item !== e.target.innerText);
+      setKeyWord(removeData);
+      return;
+    }
+    setKeyWord([...keyWord, e.target.innerText]);
+ 
+  };
+
   return (
     <KeywordBtn>
       <div className="KeywordContainer">
         <ul>
-          {Keywords.map((keyword, idx) => (
-            <li key={idx} onClick={KeywordActive}>
-              {keyword}
+          {Keywords.map((item, idx) => (
+            <li
+              key={idx}
+              onClick={handleClick}
+              className={keyWord.includes(item) ? "Active" : "kk"}
+            >
+              {item}
             </li>
           ))}
         </ul>
@@ -34,6 +49,11 @@ const KeywordBtn = styled.div`
       font-weight: 350;
       gap: 24px;
       padding: 24px;
+    }
+    .Active {
+      border: 1px solid #4da772;
+      background-color: #4da772;
+      color: #ffffff;
     }
 
     li {

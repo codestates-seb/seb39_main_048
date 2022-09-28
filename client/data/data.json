@@ -62,7 +62,6 @@
       "bookmark": true
     }
   ],
-
   "restaurant": [
     {
       "id": 1,
@@ -180,8 +179,6 @@
       "bookmark": true
     }
   ],
-
-  
   "bookmark": [
     {
       "id": 1,
@@ -305,53 +302,218 @@
   ],
   "place": [
     {
-      "id": 1,
-      "placeName": "1) 안녕하세요 테스트",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
+      "category": "식당",
+      "placeName": "⭐️ 테스트,,",
       "tags": [
-        "소형견",
-        "송파구-강동구"
+        "전체",
+        "반려견 전용",
+        "동대문･성동구"
       ],
-      "bookmark": false
+      "keyWord": [
+        "배변봉투",
+        "압마개 필수",
+        "데이케어",
+        "중성화 필수"
+      ],
+      "placeImage": "",
+      "serviceTime": "월~금 12:00 - 19:30 / 토, 일(정기휴무)",
+      "hompage": "",
+      "number": "1111",
+      "address": "경기 수원시 장안구 경수대로 748 (연무동)",
+      "description": "안녕하십셔",
+      "id": 1
     },
     {
-      "id": 2,
-      "placeName": "2) 안녕하세요 테스트",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
+      "category": "병원",
+      "placeName": "🚀 테스트테스트!!!!!!",
       "tags": [
         "소형견",
-        "중형견",
-        "송파구-강동구"
+        "반려견 동반",
+        "서대문･은평구"
       ],
-      "bookmark": true
+      "keyWord": [
+        "배변봉투",
+        "압마개 필수",
+        "데이케어",
+        "중성화 필수",
+        "예약가능"
+      ],
+      "placeImage": "",
+      "serviceTime": "월~금 12:00 - 19:30 / 토, 일(정기휴무)",
+      "hompage": "1323444",
+      "number": "121344 222",
+      "address": "경기 수원시 장안구 경수대로 748 (연무동)",
+      "description": "안녕하십셔",
+      "id": 2
     },
     {
-      "id": 3,
-      "placeName": "3) 안녕하세요 테스트",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
+      "category": "숙소",
+      "placeName": "🙆‍♀️ 테슷트",
       "tags": [
         "소형견",
-        "송파구-강동구"
+        "대형견",
+        "반려견 전용",
+        "관악구･동작구"
       ],
-      "bookmark": true
+      "keyWord": [
+        "주차장",
+        "무선인터넷",
+        "예약가능"
+      ],
+      "placeImage": "",
+      "serviceTime": " 월~금 12:00 - 19:30 / 토, 일(정기휴무)",
+      "hompage": "1323444",
+      "number": "ㅇㅇㅇ",
+      "address": "경기 안양시 동안구 경수대로 426 (호계동, 하늘빌딩)",
+      "description": "ㅇㄴㅇㅁㅈㅂ",
+      "id": 3
     },
     {
-      "id": 4,
-      "placeName": "4) 안녕하세요 테스트",
-      "address": "주소입니다 707번길",
-      "category": "카페",
-      "score": 4.5,
+      "category": "병원",
+      "placeName": "❤️ 테스트테스트!!!!!!",
+      "tags": [
+        "대형견",
+        "반려견 전용",
+        "영등포･구로･금천"
+      ],
+      "keyWord": [
+        "압마개 필수",
+        "데이케어"
+      ],
+      "placeImage": "",
+      "serviceTime": "월~금 12:00 - 19:30 / 토, 일(정기휴무)",
+      "hompage": "333",
+      "number": "444",
+      "address": "경기 수원시 권선구 경수대로 14 (대황교동, 대황교동 가스충전소)",
+      "description": "555",
+      "id": 4
+    },
+    {
+      "category": "숙소",
+      "placeName": "🏋️‍♀️ 테스트테스트!!!!!!",
       "tags": [
         "소형견",
-        "송파구-강동구"
+        "반려견 동반",
+        "강동구･송파구"
       ],
-      "bookmark": false
+      "keyWord": [
+        "압마개 필수",
+        "실외만 가능"
+      ],
+      "placeImage": "",
+      "serviceTime": "월~금 12:00 - 19:30 / 토, 일(정기휴무)",
+      "hompage": "",
+      "number": "333",
+      "address": "경기 화성시 봉담읍 안녕길 151 (수기리)",
+      "description": "333",
+      "id": 5
+    },
+    {
+      "category": "식당",
+      "placeName": "⭐️ 테스트,,",
+      "tags": [
+        "전체",
+        "반려견 전용",
+        "동대문･성동구"
+      ],
+      "keyWord": [
+        "배변봉투",
+        "압마개 필수",
+        "데이케어",
+        "중성화 필수"
+      ],
+      "placeImage": "",
+      "serviceTime": "월~금 12:00 - 19:30 / 토, 일(정기휴무)",
+      "hompage": "",
+      "number": "1111",
+      "address": "경기 수원시 장안구 경수대로 748 (연무동)",
+      "description": "안녕하십셔",
+      "id": 6
+    },
+    {
+      "category": "병원",
+      "placeName": "🚀 테스트테스트!!!!!!",
+      "tags": [
+        "소형견",
+        "반려견 동반",
+        "서대문･은평구"
+      ],
+      "keyWord": [
+        "배변봉투",
+        "압마개 필수",
+        "데이케어",
+        "중성화 필수",
+        "예약가능"
+      ],
+      "placeImage": "",
+      "serviceTime": "월~금 12:00 - 19:30 / 토, 일(정기휴무)",
+      "hompage": "1323444",
+      "number": "121344 222",
+      "address": "경기 수원시 장안구 경수대로 748 (연무동)",
+      "description": "안녕하십셔",
+      "id": 7
+    },
+    {
+      "category": "숙소",
+      "placeName": "🙆‍♀️ 테슷트",
+      "tags": [
+        "소형견",
+        "대형견",
+        "반려견 전용",
+        "관악구･동작구"
+      ],
+      "keyWord": [
+        "주차장",
+        "무선인터넷",
+        "예약가능"
+      ],
+      "placeImage": "",
+      "serviceTime": " 월~금 12:00 - 19:30 / 토, 일(정기휴무)",
+      "hompage": "1323444",
+      "number": "ㅇㅇㅇ",
+      "address": "경기 안양시 동안구 경수대로 426 (호계동, 하늘빌딩)",
+      "description": "ㅇㄴㅇㅁㅈㅂ",
+      "id": 8
+    },
+    {
+      "category": "병원",
+      "placeName": "❤️ 테스트테스트!!!!!!",
+      "tags": [
+        "대형견",
+        "반려견 전용",
+        "영등포･구로･금천"
+      ],
+      "keyWord": [
+        "압마개 필수",
+        "데이케어"
+      ],
+      "placeImage": "",
+      "serviceTime": "월~금 12:00 - 19:30 / 토, 일(정기휴무)",
+      "hompage": "333",
+      "number": "444",
+      "address": "경기 수원시 권선구 경수대로 14 (대황교동, 대황교동 가스충전소)",
+      "description": "555",
+      "id": 9
+    },
+    {
+      "category": "숙소",
+      "placeName": "🏋️‍♀️ 테스트테스트!!!!!!",
+      "tags": [
+        "소형견",
+        "반려견 동반",
+        "강동구･송파구"
+      ],
+      "keyWord": [
+        "압마개 필수",
+        "실외만 가능"
+      ],
+      "placeImage": "",
+      "serviceTime": "월~금 12:00 - 19:30 / 토, 일(정기휴무)",
+      "hompage": "",
+      "number": "333",
+      "address": "경기 화성시 봉담읍 안녕길 151 (수기리)",
+      "description": "333",
+      "id": 10
     }
   ],
   "search": [
@@ -821,6 +983,11 @@
       "userId": "qweqwe",
       "password": "qweqweq",
       "id": "qHxefJ6"
+    },
+    {
+      "id": "dddddd",
+      "password": "dddddddd",
+      "name": "dddd"
     }
   ]
 }

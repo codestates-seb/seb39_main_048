@@ -1,16 +1,57 @@
+import styled from "styled-components";
+import axios from "axios";
 import Category from "../components/buttons/Category";
 import KeywordSelectBtn from "../components/buttons/KeywordSelectBtn";
 import Footer from "../components/Footer";
-
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as Plus } from "../assets/Plus.svg";
-import { ReactComponent as Clock } from "../assets/Clock.svg";
-import { ReactComponent as Globe } from "../assets/Globe.svg";
-import { ReactComponent as Phone } from "../assets/Phone.svg";
-import { ReactComponent as Description } from "../assets/Description.svg";
-import { locationFilters, sizeFilters } from "../constant";
-import styled from "styled-components";
+import usePost from "../store/PostStore";
+import DetailInfo from "../components/registpage/DetailInfo";
+import TagSelect from "../components/registpage/TagSelect";
+import { useEffect } from "react";
+import AddressPost from "../components/registpage/AddressPost";
 
 const PlaceRegistration = () => {
+  const navigate = useNavigate();
+
+  const {
+    category,
+    placeName,
+    tags,
+    keyWord,
+    setSizeTags,
+    setIsOnlyTags,
+    setLocationTags,
+    setKeyWord,
+    placeImage,
+    serviceTime,
+    hompage,
+    number,
+    address,
+    description,
+    setPlaceName,
+  } = usePost();
+
+  const onCreate = async () => {
+    await axios
+      .post(`http://localhost:3001/place`, {
+        category,
+        placeName,
+        tags,
+        keyWord,
+        placeImage,
+        serviceTime,
+        hompage,
+        number,
+        address,
+        description,
+      })
+      .then((res) => res.data)
+      .then(() => setLocationTags([]), setSizeTags([]), setKeyWord([]), setIsOnlyTags([]))
+      .catch((err) => console.log(err));
+
+    navigate("/place");
+  };
 
   return (
     <div>
@@ -31,32 +72,10 @@ const PlaceRegistration = () => {
             type="text"
             id="PlaceInput"
             placeholder="장소나 상호명을 입력해주세요"
-          ></input>
+            onChange={(e) => setPlaceName(e.target.value)}
+          />
         </PlaceName>
-        <TagSelect>
-          <div>태그 선택</div>
-          <div className="SizeTagSelect">
-            <ul>
-              {sizeFilters.map((size, idx) => (
-                <li key={idx} onClick={SizeActive}>
-                  {size}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="PlaceTagComment">
-            위치 태그는 하나만 선택해 주세요
-          </div>
-          <div className="PlaceTagSelect">
-            <ul>
-              {locationFilters.map((place, idx) => (
-                <li key={idx} onClick={PlaceActive}>
-                  {place}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </TagSelect>
+        <TagSelect />
         <ImageDetail>
           <div className="ImgContainer">
             <div className="ImageUpload">
@@ -69,42 +88,18 @@ const PlaceRegistration = () => {
             </div>
             {/* <div className="ImgList"></div> */}
           </div>
-          <div className="DetailContainer">
-            상세정보
-            <div className="DetailInfo1">
-              <Clock />
-              <input placeholder="영업시간을 입력해 주세요"></input>
-            </div>
-            <span>예시 : 월~금 12:00 - 19:30 / 토, 일(정기휴무)</span>
-            <div className="DetailInfo2">
-              <Globe />
-              <input placeholder="대표 사이트가 있다면 입력해 주세요"></input>
-            </div>
-            <span>선택 입력란입니다. 사이트가 존재한다면 입력해 주세요 :)</span>
-            <div className="DetailInfo3">
-              <Phone />
-              <input placeholder="대표 번호를 입력해 주세요"></input>
-            </div>
-            <div className="DetailInfo4">
-              <Description />
-              <input placeholder="장소를 대표할 한 줄 설명을 적어주세요"></input>
-            </div>
-          </div>
+          <DetailInfo />
         </ImageDetail>
         <PlaceKeywordSelect>
           <div>장소에 해당하는 키워드를 선택해 주세요</div>
           <KeywordSelectBtn />
         </PlaceKeywordSelect>
-        <LocationInput>
-          <div>주소 입력</div>
-          <div className="LocationContainer">
-            <input placeholder="장소나 상호명을 입력해 주세요"></input>
-            <button type="주소 검색">주소 검색</button>
-          </div>
-        </LocationInput>
+        <AddressPost />
         <RegistrationBtn>
           <button className="Cancel">취소</button>
-          <button className="Registration">등록하기</button>
+          <button className="Registration" onClick={onCreate}>
+            등록하기
+          </button>
         </RegistrationBtn>
       </Page>
       <Footer />
@@ -156,74 +151,6 @@ const PlaceName = styled.div`
     border: 1px solid;
     border-color: #d7e2eb;
     border-radius: 10px;
-  }
-`;
-
-const TagSelect = styled.div`
-  color: #333333;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 56px;
-
-  .SizeTagSelect {
-    ul {
-      display: flex;
-      justify-content: start;
-      align-items: center;
-      font-size: 14px;
-      font-weight: 350;
-      gap: 10px;
-      margin-top: 24px;
-      margin-bottom: 24px;
-    }
-
-    li {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px 20px;
-      color: #4da772;
-      border: 1px solid;
-      border-radius: 50px;
-      border-color: #4da772;
-      background-color: #ffffff;
-      cursor: pointer;
-    }
-  }
-
-  .PlaceTagComment {
-    color: #487bff;
-    font-size: 12px;
-    font-weight: 350;
-  }
-
-  .PlaceTagSelect {
-    ul {
-      display: flex;
-      justify-content: start;
-      align-items: center;
-      flex-wrap: wrap;
-      font-size: 14px;
-      font-weight: 350;
-      gap: 10px;
-      margin-top: 24px;
-      margin-bottom: 24px;
-      max-width: 80%;
-    }
-
-    li {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px 20px;
-      color: #4da772;
-      border: 1px solid;
-      border-radius: 50px;
-      border-color: #4da772;
-      background-color: #ffffff;
-      margin-bottom: 8px;
-      cursor: pointer;
-    }
   }
 `;
 
@@ -281,101 +208,6 @@ const ImageDetail = styled.div`
       margin-top: 20px;
     } */
   }
-
-  .DetailContainer {
-    color: #333333;
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 64px;
-    width: 50%;
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-
-    span {
-      font-size: 12px;
-      font-weight: 350;
-      color: #487bff;
-      padding-left: 40px;
-      margin-top: 6px;
-    }
-
-    .DetailInfo1 {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      margin-top: 28px;
-
-      input {
-        font-size: 12px;
-        color: #666666;
-        width: 100%;
-        height: 32px;
-        padding: 23px;
-        border: 1px solid;
-        border-color: #d7e2eb;
-        border-radius: 10px;
-      }
-    }
-
-    .DetailInfo2 {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      margin-top: 16px;
-
-      input {
-        font-size: 12px;
-        color: #666666;
-        width: 100%;
-        height: 32px;
-        padding: 23px;
-        border: 1px solid;
-        border-color: #d7e2eb;
-        border-radius: 10px;
-      }
-    }
-
-    .DetailInfo3 {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      margin-top: 16px;
-
-      input {
-        font-size: 12px;
-        color: #666666;
-        width: 100%;
-        height: 32px;
-        padding: 23px;
-        border: 1px solid;
-        border-color: #d7e2eb;
-        border-radius: 10px;
-      }
-    }
-
-    .DetailInfo4 {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      margin-top: 16px;
-
-      input {
-        font-size: 12px;
-        color: #666666;
-        width: 100%;
-        height: 32px;
-        padding: 23px;
-        border: 1px solid;
-        border-color: #d7e2eb;
-        border-radius: 10px;
-      }
-    }
-  }
 `;
 
 const PlaceKeywordSelect = styled.div`
@@ -386,49 +218,6 @@ const PlaceKeywordSelect = styled.div`
 
   div {
     margin-bottom: 24px;
-  }
-`;
-
-const LocationInput = styled.div`
-  color: #333333;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 128px;
-
-  .LocationContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f5f5f5;
-    border: 1px solid;
-    border-color: #d7e2eb;
-    border-radius: 10px;
-    margin-top: 24px;
-    padding: 30px;
-    width: 60%;
-    height: 100px;
-    gap: 30px;
-
-    input {
-      font-size: 12px;
-      border: 1px solid;
-      border-color: #d7e2eb;
-      border-radius: 10px;
-      height: 100%;
-      width: 100%;
-      padding: 12px;
-    }
-    button {
-      color: #ffffff;
-      font-size: 12px;
-      font-weight: 500;
-      background-color: #ffb653;
-      border: 1px solid transparent;
-      border-radius: 10px;
-      height: 100%;
-      width: 20%;
-      cursor: pointer;
-    }
   }
 `;
 

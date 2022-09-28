@@ -9,9 +9,9 @@ import { ReactComponent as Globe } from "../assets/Globe.svg";
 import { ReactComponent as Phone } from "../assets/Phone.svg";
 import { ReactComponent as Description } from "../assets/Description.svg";
 import { useGetDetailPlace, useDeleteDetailPlace } from "../hooks/useAPI";
+import { Keywords } from "../constant";
 import BasicButton from "../components/buttons/BasicButton";
 import HashTag from "../components/tags/HashTag";
-import KeywordSelectBtn from "../components/buttons/KeywordSelectBtn";
 import Footer from "../components/Footer";
 import Reviews from "../components/review/Reviews";
 
@@ -19,13 +19,11 @@ const Detailpage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isLoading, isError } = useGetDetailPlace(id);
-  console.log(data);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>ERR...</div>;
 
   const onDelete = () => {
-    console.log("onDelete");
     window.confirm("삭제하시겠습니까?");
     useDeleteDetailPlace(id);
     navigate("/place");
@@ -67,33 +65,43 @@ const Detailpage = () => {
         <div className="imgs_detailInfo">
           <Imgs></Imgs>
           <Infos>
-            <h2>상세페이지</h2>
+            <h2>상세 정보</h2>
             <Info>
               <LocationEmpty />
               <DetailInfo>{data.address}</DetailInfo>
             </Info>
             <Info>
               <Clock />
-              <DetailInfo>
-                목~토 12:00 ~ 19:30, 수 12:00 ~ 19:00, 일 12:00 ~ 17:00, (휴무)
-                월,화요일
-              </DetailInfo>
+              <DetailInfo>{data.serviceTime}</DetailInfo>
             </Info>
             <Info>
               <Globe />
-              <DetailInfo>www.instagram.com/chyapchyap_cake</DetailInfo>
+              <DetailInfo color={data.hompage ? "" : "#999"}>{data.hompage ? data.hompage : "대표 사이트가 존재하지 않습니다."}</DetailInfo>
             </Info>
             <Info>
               <Phone />
-              <DetailInfo>1833-5555</DetailInfo>
+              <DetailInfo>{data.number}</DetailInfo>
             </Info>
             <Info>
               <Description />
-              <DetailInfo>볼 수 있는 너무너무 이쁜 수제 케이크 맛집</DetailInfo>
+              <DetailInfo>{data.description}</DetailInfo>
             </Info>
           </Infos>
         </div>
-        <KeywordSelectBtn />
+        <KeywordBtn>
+          <div className="KeywordContainer">
+            <ul>
+              {Keywords.map((item, idx) => (
+                <li
+                  key={idx}
+                  className={data.keyWord.includes(item) ? "Active" : "kk"}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </KeywordBtn>
       </Detail>
       <Reviews />
       <Map>
@@ -197,13 +205,14 @@ const Info = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 18px;
 `;
 
 const DetailInfo = styled.div`
   width: 100%;
   display: flex;
   gap: 16px;
+  color: ${(props) => props.color || "#333"};
 `;
 
 const Map = styled.div`
@@ -213,6 +222,39 @@ const Map = styled.div`
 
 const Title = styled.h2`
   font-size: 20px;
+`;
+
+const KeywordBtn = styled.div`
+  .KeywordContainer {
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: #d7e2eb;
+
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 12px;
+      font-weight: 350;
+      gap: 24px;
+      padding: 24px;
+    }
+    .Active {
+      border: 1px solid #4da772;
+      background-color: #4da772;
+      color: #ffffff;
+    }
+
+    li {
+      padding: 10px 15px;
+      color: #333;
+      border: 1px solid;
+      border-radius: 50px;
+      border-color: #f5f5f5;
+      background-color: #f5f5f5;
+    }
+  }
 `;
 
 export default Detailpage;

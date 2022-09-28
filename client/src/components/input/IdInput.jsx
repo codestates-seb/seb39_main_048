@@ -7,16 +7,11 @@ const IdInput = ({ placeholder }) => {
   const [idMessage, setIdMessage] = useState("");
   // const [isId, setIsId] = useState(false);
 
-  const { setUserId, setIsId, isId, userId } = useSignup();
-
-  console.log(isId);
-  console.log(userId);
+  const { setUserId, setIsId } = useSignup();
 
   const handleIdValid = (e) => {
     // 영문 6~12자
     const IdRegex = /^[a-z|A-Z]{6,12}$/;
-
-    console.log(IdRegex.test(e.target.value));
 
     if (e.target.value.length <= 5) {
       setIdMessage(`6~12자 영문 아이디를 적어주세요.`);

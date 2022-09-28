@@ -46,10 +46,11 @@ const PlaceCard1 = ({ data }) => {
             )}
           </BookMarkArea>
         </Infos>
-        <Address>서울 송파구 올림픽로 300 안녕하세요dhdh</Address>
+        <Address>{data.address}</Address>
         <Tags>
-          <HashTag text={"중형견"} />
-          <HashTag text={"종로구-어쩌구"} />
+          {data?.tags.map((tag, idx) => (
+            <HashTag text={tag} key={idx}/>
+          ))}
         </Tags>
       </PlaceInfo>
     </Card>
@@ -59,7 +60,7 @@ const PlaceCard1 = ({ data }) => {
 const Card = styled.div`
   border: 1px solid #d7e2eb;
   border-radius: 10px;
-  height: 282px;
+  /* height: 282px; */
   position: relative;
 `;
 
