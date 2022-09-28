@@ -8,7 +8,6 @@ const FilterItem = ({ item }) => {
 
   const handleClick = (e) => {
     const data = e.target.textContent;
-    console.log(filterData);
 
     // 이미 필터선택된 데이터라면 제거해줌
     if (filterData.includes(data)) {
@@ -24,7 +23,6 @@ const FilterItem = ({ item }) => {
 
     // 최대 선택 가능한 필터 제한 (토스트)
     if (filterData.length > 3) {
-      console.log("넘었다!");
       toast("최대 4개까지 선택 가능합니다!", {
         icon: "🥲",
         duration: 1500,
@@ -42,7 +40,6 @@ const FilterItem = ({ item }) => {
       return;
     }
 
-    console.log(data);
     setFilterData([...filterData, data]);
   };
 

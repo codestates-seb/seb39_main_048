@@ -1,75 +1,107 @@
 import React from "react";
 import styled from "styled-components";
-import BasicButton from "../components/buttons/BasicButton";
-import HashTag from "../components/tags/HashTag";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as Star } from "../assets/Star.svg";
 import { ReactComponent as LocationEmpty } from "../assets/LocationEmpty.svg";
 import { ReactComponent as Clock } from "../assets/Clock.svg";
 import { ReactComponent as Globe } from "../assets/Globe.svg";
 import { ReactComponent as Phone } from "../assets/Phone.svg";
 import { ReactComponent as Description } from "../assets/Description.svg";
-import KeywordSelectBtn from "../components/buttons/KeywordSelectBtn";
+import { useGetDetailPlace, useDeleteDetailPlace } from "../hooks/useAPI";
+import { Keywords } from "../constant";
+import BasicButton from "../components/buttons/BasicButton";
+import HashTag from "../components/tags/HashTag";
 import Footer from "../components/Footer";
 import Reviews from "../components/review/Reviews";
 
 const Detailpage = () => {
-  const tags = ["소형견", "대형견"];
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { data, isLoading, isError } = useGetDetailPlace(id);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>ERR...</div>;
+
+  const onDelete = () => {
+    window.confirm("삭제하시겠습니까?");
+    useDeleteDetailPlace(id);
+    navigate("/place");
+  };
+
+  const onUpdate = () => {
+    console.log("onUpdate");
+  };
+
   return (
     <>
       <Detail>
         <div className="detailTop">
           <div className="PlaceName_category">
-            <PlaceName>챱챱 케이크</PlaceName>
-            <Category>카페</Category>
+            <PlaceName>{data.placeName}</PlaceName>
+            <Category>{data.category}</Category>
           </div>
           <div className="buttonGroup">
-            <BasicButton bgcolor={"#D9D9D9"} text={"삭제"} />
-            <BasicButton text={"수정"} />
+            <BasicButton
+              bgcolor={"#D9D9D9"}
+              text={"삭제"}
+              onDelete={onDelete}
+            />
+            <BasicButton text={"수정"} onUpdate={onUpdate} />
           </div>
         </div>
         <div className="detailTop_info">
           <Score>
             <Star />
-            <span>4.8</span>
+            <span>{data.score}</span>
           </Score>
           <ReviewInfo>후기 16개</ReviewInfo>
           <DataInfo>2022.09.22</DataInfo>
         </div>
         <div className="tagGroup">
-          {tags.map((tag, idx) => (
-            <HashTag text={tag} key={idx} />
-          ))}
+          {data &&
+            data.tags.map((tag, idx) => <HashTag text={tag} key={idx} />)}
         </div>
         <div className="imgs_detailInfo">
           <Imgs></Imgs>
           <Infos>
-            <h2>상세페이지</h2>
+            <h2>상세 정보</h2>
             <Info>
               <LocationEmpty />
-              <DetailInfo>서울 서초구 서초중앙로 110 104호</DetailInfo>
+              <DetailInfo>{data.address}</DetailInfo>
             </Info>
             <Info>
               <Clock />
-              <DetailInfo>
-                목~토 12:00 ~ 19:30, 수 12:00 ~ 19:00, 일 12:00 ~ 17:00, (휴무)
-                월,화요일
-              </DetailInfo>
+              <DetailInfo>{data.serviceTime}</DetailInfo>
             </Info>
             <Info>
               <Globe />
-              <DetailInfo>www.instagram.com/chyapchyap_cake</DetailInfo>
+              <DetailInfo color={data.hompage ? "" : "#999"}>{data.hompage ? data.hompage : "대표 사이트가 존재하지 않습니다."}</DetailInfo>
             </Info>
             <Info>
               <Phone />
-              <DetailInfo>1833-5555</DetailInfo>
+              <DetailInfo>{data.number}</DetailInfo>
             </Info>
             <Info>
               <Description />
-              <DetailInfo>볼 수 있는 너무너무 이쁜 수제 케이크 맛집</DetailInfo>
+              <DetailInfo>{data.description}</DetailInfo>
             </Info>
           </Infos>
         </div>
-        <KeywordSelectBtn />
+        <KeywordBtn>
+          <div className="KeywordContainer">
+            <ul>
+              {Keywords.map((item, idx) => (
+                <li
+                  key={idx}
+                  className={data.keyWord.includes(item) ? "Active" : "kk"}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </KeywordBtn>
       </Detail>
       <Reviews />
       <Map>
@@ -173,13 +205,14 @@ const Info = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 18px;
 `;
 
 const DetailInfo = styled.div`
   width: 100%;
   display: flex;
   gap: 16px;
+  color: ${(props) => props.color || "#333"};
 `;
 
 const Map = styled.div`
@@ -189,6 +222,39 @@ const Map = styled.div`
 
 const Title = styled.h2`
   font-size: 20px;
+`;
+
+const KeywordBtn = styled.div`
+  .KeywordContainer {
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: #d7e2eb;
+
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 12px;
+      font-weight: 350;
+      gap: 24px;
+      padding: 24px;
+    }
+    .Active {
+      border: 1px solid #4da772;
+      background-color: #4da772;
+      color: #ffffff;
+    }
+
+    li {
+      padding: 10px 15px;
+      color: #333;
+      border: 1px solid;
+      border-radius: 50px;
+      border-color: #f5f5f5;
+      background-color: #f5f5f5;
+    }
+  }
 `;
 
 export default Detailpage;

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import { ReactComponent as BookMark } from "../../assets/BookMark.svg";
 import { ReactComponent as Dots } from "../../assets/Dots.svg";
@@ -7,17 +8,21 @@ import useDetectClose from "../../hooks/useDetectClose";
 import HashTag from "../tags/HashTag";
 import useMenu from "../../store/MenuStore";
 
-const PlaceCard1 = ({data}) => {
+const PlaceCard1 = ({ data }) => {
   const { menu } = useMenu();
   const [isOpen, ref, handleOpen] = useDetectClose(false);
 
   return (
     <Card>
-      <PlaceImg></PlaceImg>
+      <Link to={`/place/${data.id}`}>
+        <PlaceImg></PlaceImg>
+      </Link>
       <PlaceInfo>
         <Infos>
           <Title>
-            <PlaceName>{data.placeName}</PlaceName>
+            <Link to={`/place/${data.id}`}>
+              <PlaceName>{data.placeName}</PlaceName>
+            </Link>
             <Score>
               <Star />
               4.6
@@ -41,10 +46,11 @@ const PlaceCard1 = ({data}) => {
             )}
           </BookMarkArea>
         </Infos>
-        <Address>서울 송파구 올림픽로 300 안녕하세요dhdh</Address>
+        <Address>{data.address}</Address>
         <Tags>
-          <HashTag text={"중형견"} />
-          <HashTag text={"종로구-어쩌구"} />
+          {data?.tags.map((tag, idx) => (
+            <HashTag text={tag} key={idx}/>
+          ))}
         </Tags>
       </PlaceInfo>
     </Card>
@@ -54,7 +60,7 @@ const PlaceCard1 = ({data}) => {
 const Card = styled.div`
   border: 1px solid #d7e2eb;
   border-radius: 10px;
-  height: 282px;
+  /* height: 282px; */
   position: relative;
 `;
 
@@ -63,6 +69,7 @@ const PlaceImg = styled.div`
   height: 150px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  cursor: pointer;
 `;
 
 const PlaceInfo = styled.div`
@@ -103,6 +110,7 @@ const PlaceName = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 150px;
+  cursor: pointer;
 `;
 
 const Score = styled.div`

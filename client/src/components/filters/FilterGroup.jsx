@@ -5,6 +5,7 @@ import Category from "./Category";
 import Search from "./Search";
 import useFilters from "../../store/FilterStore";
 import { BREAK_POINT_TABLET } from "../../constant";
+import Sort from "./Sort";
 
 const FilterGroup = () => {
   const { filterData, setFilterData } = useFilters();
@@ -18,9 +19,12 @@ const FilterGroup = () => {
   return (
     <>
       <Group>
-        <Category />
-        <Filter />
-        <Search />
+        <div className="filters">
+          <Category />
+          <Filter />
+          <Search />
+        </div>
+        <Sort />
       </Group>
       <FilterItems>
         {filterData.map((item, idx) => (
@@ -39,13 +43,21 @@ const FilterGroup = () => {
 const Group = styled.div`
   display: flex;
   width: 100%;
-  gap: 24px;
-  /* justify-content: center; */
-  flex-wrap: wrap;
+  justify-content: space-between;
   transition: all 0.3s;
-
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     gap: 16px;
+  }
+
+  .filters {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    width: 100%;
+    transition: all 0.3s;
+    @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+      gap: 16px;
+    }
   }
 `;
 

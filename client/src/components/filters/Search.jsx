@@ -5,7 +5,6 @@ import useDetectClose from "../../hooks/useDetectClose";
 import { useGetSearch } from "../../hooks/useAPI";
 import { ReactComponent as SearchIcon } from "../../assets/SearchIcon.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
-import { useState } from "react";
 
 const Search = () => {
   const [isOpen, searchRef, handleOpen] = useDetectClose(false);
@@ -25,7 +24,6 @@ const Search = () => {
 
     if (targetData.length === 0) return setSearchData("");
     setSearchData(filterData);
-    console.log(searchData.length);
   };
 
   const handleAutoClick = (e) => {
@@ -40,17 +38,14 @@ const Search = () => {
         onClick={handleOpen}
         ref={searchRef}
       />
-      <SearchIcon
-        display={searchData.length === 0 ? "none" : ""}
-      />
-      {isOpen ? (
+      <SearchIcon display={searchData.length === 0 ? "none" : ""} />
+      {isOpen && searchData ? (
         <SearchDatas>
-          {searchData &&
-            searchData.map((data, idx) => (
-              <li key={idx} onClick={handleAutoClick}>
-                {data}
-              </li>
-            ))}
+          {searchData.map((data, idx) => (
+            <li key={idx} onClick={handleAutoClick}>
+              {data}
+            </li>
+          ))}
         </SearchDatas>
       ) : (
         ""
@@ -62,8 +57,7 @@ const Search = () => {
 const SearchGroup = styled.div`
   position: relative;
   width: 312px;
-  height: 100%;
-  padding: 18px 30px;
+  padding: 17px 30px;
   border: 1px solid #d7e2eb;
   border-radius: 50px;
   display: flex;
@@ -75,6 +69,7 @@ const SearchGroup = styled.div`
     height: 50%;
     width: 100%;
     font-size: 12px;
+    height: 100%;
     &:focus {
       border: none;
       outline: none;
@@ -86,7 +81,6 @@ const SearchGroup = styled.div`
 
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: 250px;
-    height: 100%;
     padding: 12px 15px;
     gap: 10px;
   }
@@ -94,7 +88,6 @@ const SearchGroup = styled.div`
 
 const SearchDatas = styled.ul`
   position: absolute;
-  display: ${(props) => props.display || "block"};
   text-align: start;
   z-index: 100;
   top: 55px;

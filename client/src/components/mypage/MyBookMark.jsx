@@ -27,8 +27,8 @@ const MyBookMark = ({menu}) => {
     <BookMark>
       <Title> {menu}</Title>
       <BookmarkCards>
-        {data.map((data) => (
-          <PlaceCard1 data={data} key={data.placeId} />
+        {data.map((data, idx) => (
+          <PlaceCard1 data={data} key={idx} />
         ))}
       </BookmarkCards>
     </BookMark>

@@ -14,7 +14,6 @@ const PlaceCardGroup1 = ({ title, data }) => {
   const handleNext = () => {
     if (currentCard >= TOTAL_SLIDES) return;
     else {
-      console.log("next");
       setCurrentCard(currentCard + 1);
     }
   };
@@ -22,7 +21,6 @@ const PlaceCardGroup1 = ({ title, data }) => {
   const handlePrev = () => {
     if (currentCard === 0) return;
     else {
-      console.log("prev");
       setCurrentCard(currentCard - 1);
     }
   };

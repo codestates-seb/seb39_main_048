@@ -35,12 +35,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/map" element={<Map />} />
-          <Route path="/list" element={<Listpage />} />
+          <Route path="/place" element={<Listpage />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/regist" element={<PlaceRegistration />} />
-          <Route path="/detail" element={<Detailpage />} />
+          <Route path="/place/:id" element={<Detailpage />} />
         </Routes>
       </BrowserRouter>
     </div>

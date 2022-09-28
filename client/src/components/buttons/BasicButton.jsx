@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const BasicButton = ({ bgcolor, text }) => {
-  return <Button bgcolor={bgcolor}>{text}</Button>;
+const BasicButton = ({ bgcolor, text, onDelete, onUpdate }) => {
+  return (
+    <Button bgcolor={bgcolor} onClick={onDelete || onUpdate}>
+      {text}
+    </Button>
+  );
 };
 
 const Button = styled.div`
@@ -15,6 +19,7 @@ const Button = styled.div`
   padding: 10px;
   background-color: ${(props) => props.bgcolor || "#ffb653"};
   color: #fff;
+  cursor: pointer;
 `;
 
 export default BasicButton;

@@ -20,7 +20,7 @@ const useDetectClose = (initialState) => {
     return () => window.removeEventListener("click", onClick);
   }, [isOpen]);
 
-  return [isOpen, ref, handleOpen, setIsOpen];
+  return [isOpen, ref, handleOpen];
 };
 
 export default useDetectClose;

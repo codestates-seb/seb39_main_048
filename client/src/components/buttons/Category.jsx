@@ -1,12 +1,15 @@
 import { useState } from "react";
 import styled from "styled-components";
+import usePost from "../../store/PostStore";
 
 const Category = () => {
   const Categorys = ["식당", "숙소", "카페", "병원", "기타"];
   const [currentActive, setCurrentActive] = useState("");
+  const { setCategory } = usePost();
 
   const BtnActive = (e) => {
     setCurrentActive(e.target.innerHTML);
+    setCategory(e.target.innerHTML)
   };
 
   return (
@@ -52,6 +55,7 @@ const CategoryBtn = styled.div`
     border-radius: 50px;
     border-color: #4da772;
     background-color: #ffffff;
+    transition: all 0.2s ease-in-out;
     cursor: pointer;
   }
 `;
