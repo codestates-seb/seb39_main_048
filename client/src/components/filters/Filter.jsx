@@ -3,20 +3,14 @@ import styled from "styled-components";
 import { ReactComponent as FilterIcon } from "../../assets/FilterIcon.svg";
 import { sizeFilters, isOnlyFilters, locationFilters } from "../../constant";
 import { BREAK_POINT_TABLET } from "../../constant";
-import { useState } from "react";
+import useDetectClose from "../../hooks/useDetectClose";
 import FilterItem from "./FilterItem";
 
 const Filter = () => {
-  // const [isOpen, ref, handleOpen] = useDetectClose(false);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
+  const [isOpen, ref, handleOpen] = useDetectClose(false);
   return (
-    <FilterContainer>
-      <FilterGroup onClick={handleOpen} bgcolor={isOpen ? "#f7fafe" : ""}>
+    <FilterContainer ref={ref}>
+      <FilterGroup onClick={handleOpen} bgcolor={isOpen ? "#f7fafe" : ""} >
         <span>filter</span>
         <FilterIcon />
       </FilterGroup>
@@ -54,7 +48,7 @@ const FilterGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 18px 32px;
+  padding: 17px 32px;
   border: 1px solid #d7e2eb;
   border-radius: 50px;
   color: #333;

@@ -3,7 +3,6 @@ import axios from "axios";
 
 const BASE_URL = `http://localhost:3001`;
 
-
 // --------------------목록 데이터--------------------
 export const useGetPlace = (url) => {
   const fetcher = async (innerURL) => {
@@ -20,7 +19,6 @@ export const useGetPlace = (url) => {
     isError: error,
   };
 };
-
 
 // --------------------마이페이지 데이터--------------------
 
@@ -74,4 +72,30 @@ export const useGetRecommend = () => {
   };
 };
 
+// --------------------디테일 데이터--------------------
+export const useGetDetailPlace = (id) => {
+  const fetcher = async (innerURL) => {
+    const res = await axios.get(`${BASE_URL}${innerURL}`);
+    console.log("useGetDetailPlace");
+    return res.data;
+  };
+  const { data, error } = useSWR(`/place/${id}`, fetcher);
 
+  return {
+    data: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+};
+
+// --------------------디테일 데이터 delete--------------------
+
+export const useDeleteDetailPlace = async (id) => {
+  try {
+    const { data } = await axios.delete(`${BASE_URL}/place/${id}`);
+    console.log("useDeleteDetailPlace");
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+};

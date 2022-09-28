@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import SNSBtns from "./buttons/SNSBtns";
-import { ReactComponent as GoogleLogo } from "../assets/SNSLogin/GoogleLogo.svg";
-import { ReactComponent as KakaoLogo } from "../assets/SNSLogin/KakaoLogo.svg";
+import SNSBtns from "./SNSBtns";
+import { ReactComponent as GoogleLogo } from "../../assets/SNSLogin/GoogleLogo.svg";
+import { ReactComponent as KakaoLogo } from "../../assets/SNSLogin/KakaoLogo.svg";
 
 const SNSLoginContainer = () => {
   return (

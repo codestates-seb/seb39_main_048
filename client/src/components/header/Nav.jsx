@@ -40,7 +40,7 @@ const Nav = ({ isLogin }) => {
           <Link to="/map">
             <div className="item place">지도로 찾기</div>
           </Link>
-          <Link to="/list">
+          <Link to="/place">
             <div className="item border">목록으로 찾기</div>
           </Link>
           <Link to="/regist">
@@ -137,6 +137,10 @@ const MenuGroup = styled.div`
 
   .item {
     padding: 15px 0;
+    transition: all 0.1s ease-in-out;
+    &:hover {
+      color: #4da772;
+    }
   }
 
   .border {

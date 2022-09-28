@@ -1,13 +1,16 @@
 import React from "react";
+import { useGetPlace } from "../hooks/useAPI";
+import Point from "../assets/Point.png";
 import styled from "styled-components";
 import PlaceCard1 from "../components/cards/PlaceCard1";
 import FilterGroup from "../components/filters/FilterGroup";
 import Footer from "../components/Footer";
 import useFilters from "../store/FilterStore";
-import { useGetPlace } from "../hooks/useAPI";
+import EmptyData from "../components/ui/EmptyData";
+import MoveRegist from "../components/buttons/MoveRegist";
 
 const Listpage = () => {
-  const { selectCategory } = useFilters();
+  const { selectCategory, filterData } = useFilters();
   let URL = "";
 
   // 스토어에 저장해바라~
@@ -27,14 +30,28 @@ const Listpage = () => {
     <>
       <ListPage>
         <Inner>
-          <Title>우리 반려견과 함께할 장소는?</Title>
+          <Title>
+            우리 반려견과 함께할 장소는?
+            <img src={Point}></img>
+          </Title>
+
           <FilterGroup />
           <CardGroup>
-            {data.map((place) => (
-              <PlaceCard1 data={place} key={place.placeId} />
-            ))}
+            {!filterData.length
+              ? data.map((place, idx) => <PlaceCard1 data={place} key={idx} />)
+              : ""}
+            {filterData.length &&
+            data.filter((data) => filterData.includes(...data.tags)).length ===
+              0 ? (
+              <EmptyData />
+            ) : (
+              data
+                .filter((data) => filterData.includes(...data.tags))
+                .map((place, idx) => <PlaceCard1 data={place} key={idx} />)
+            )}
           </CardGroup>
         </Inner>
+        <MoveRegist />
         <Footer />
       </ListPage>
     </>
@@ -48,20 +65,29 @@ const Inner = styled.div`
   max-width: 1280px;
   width: 80vw;
   margin: 0 auto;
-
   div:nth-child(2) {
     justify-content: start;
   }
 `;
 
-const Title = styled.h2`
-  font-size: 20px;
+const Title = styled.div`
+  font-size: 24px;
   color: #333;
+  font-weight: 700;
   margin-bottom: 24px;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: -12px;
+    left: 130px;
+    width: 75px;
+    z-index: -10;
+  }
 `;
 
 const CardGroup = styled.div`
-  margin-top: 64px;
+  margin-top: 40px;
   gap: 32px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));

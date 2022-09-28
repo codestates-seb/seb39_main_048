@@ -12,8 +12,6 @@ const Main = () => {
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>ERR...</div>;
 
-  console.log(data);
-
   return (
     <>
       <MainTitle></MainTitle>
