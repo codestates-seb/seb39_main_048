@@ -5,31 +5,34 @@ import IdInput from "../components/input/IdInput";
 import PasswordInput from "../components/input/PasswordInput";
 import SNSLoginContainer from "../components/SNSLoginContainer";
 import axios from "axios";
-import styled from "styled-components";
+import axiosInstance from "../api/core/axiosConfig";
 import useLogin from "../store/LoginStore";
 
-const Login = () => {
+import styled from "styled-components";
+
+const Login = ({ setIsLogin }) => {
   const { userId, password, setUserId, setPassword } = useLogin();
 
   const onLogin = () => {
     try {
       let data = { userId };
-      axios
+      axiosInstance
         .post(
-          "http://localhost:3001/user",
+          "/user",
           {
             userId: userId,
             password: password,
-          },
-          {
-            headers: {
-              "Content-Type": `application/json`,
-            },
           }
+          // {
+          //   headers: {
+          //     "Content-Type": `application/json`,
+          //   },
+          // }
         )
         .then((res) => {
           console.log("res.data.accessToken : " + res.data);
           axios.defaults.headers.common["Authorization"] = "Bearer " + res.data;
+          setIsLogin(true);
         })
         .catch((err) => {
           console.log("login requset fail : " + err);
