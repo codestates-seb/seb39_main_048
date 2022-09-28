@@ -37,7 +37,7 @@ const Nav = ({ isLogin }) => {
           </Link>
 
           <div className="menu">장소 탐색</div>
-          <Link to="/detail">
+          <Link to="/map">
             <div className="item place">지도로 찾기</div>
           </Link>
           <Link to="/list">
@@ -60,7 +60,9 @@ const Nav = ({ isLogin }) => {
             <div className="item border">회원가입</div>
           </Link>
           <div className="menu">장소 탐색</div>
-          <div className="item place">지도로 찾기</div>
+          <Link to="/map">
+            <div className="item place">지도로 찾기</div>
+          </Link>
           <Link to="/list">
             <div className="item">목록으로 찾기</div>
           </Link>
