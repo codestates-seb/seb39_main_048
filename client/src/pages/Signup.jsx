@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LogoColor from "../assets/LogoColor.png";
 import IdInput from "../components/input/IdInput";
@@ -6,6 +6,7 @@ import PasswordInput from "../components/input/PasswordInput";
 import SNSLoginContainer from  "../components/buttons/SNSLoginContainer";
 import axios from "axios";
 import useSignup from "../store/SignupStore";
+import axiosInstance from "../api/core/axiosConfig";
 
 import styled from "styled-components";
 
@@ -62,9 +63,9 @@ const Signup = () => {
 
   const onRegister = () => {
     if (isPasswordCheck && isId && isPassword && isName) {
-      axios
-        .post("http://localhost:3001/user", {
-          id: userId,
+      axiosInstance
+        .post("/user", {
+          userId: userId,
           password: password,
           name: name,
         })
@@ -80,6 +81,13 @@ const Signup = () => {
     console.log(userId, password, name);
   };
 
+  useEffect(() => {
+    return () => {
+      setIsId("");
+      setIsPasswordCheck(false);
+      setPasswordCheckMsg("");
+    };
+  }, []);
   return (
     <SingupPage>
       <div className="Container">
@@ -98,8 +106,8 @@ const Signup = () => {
               <p>이름</p>
               <input
                 type="text"
-                maxlength="6"
-                minlength="2"
+                maxLength="6"
+                minLength="2"
                 placeholder="6글자 이하 별명을 입력해 주세요"
                 onChange={handleNameValid}
               ></input>
@@ -122,8 +130,8 @@ const Signup = () => {
               <input
                 placeholder="비밀번호를 확인해 주세요"
                 type="password"
-                maxlength="14"
-                minlength="8"
+                maxLength="14"
+                minLength="8"
                 onChange={handlePasswordCheck}
               ></input>
               <div className="ValidCheck">{passwordCheckMsg}</div>

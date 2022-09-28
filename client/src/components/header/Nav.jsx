@@ -6,8 +6,8 @@ import { ReactComponent as Avatar } from "../../assets/Avatar.svg";
 import { ReactComponent as Hamberger } from "../../assets/Hamberger.svg";
 import useDetectClose from "../../hooks/useDetectClose";
 
-const Nav = () => {
-  const [isLogin, setIsLogin] = useState(true);
+const Nav = ({ isLogin }) => {
+  // const [isLogin, setIsLogin] = useState(true);
   const [isOpen, menuRef, handleOpen] = useDetectClose(false);
 
   return (
@@ -60,8 +60,11 @@ const Nav = () => {
             <div className="item border">회원가입</div>
           </Link>
           <div className="menu">장소 탐색</div>
-          <div className="item place">지도로 찾기</div>
-          <Link to="/place">
+
+          <Link to="/map">
+            <div className="item place">지도로 찾기</div>
+          </Link>
+          <Link to="/list">
             <div className="item">목록으로 찾기</div>
           </Link>
         </MenuGroup>

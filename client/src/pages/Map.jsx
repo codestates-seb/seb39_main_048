@@ -1,27 +1,24 @@
-/* global kakao */
+/*global kakao*/
+import React, { useEffect, useState } from "react";
+import { Map, MapMarker, StaticMap } from "react-kakao-maps-sdk";
 import styled from "styled-components";
 
-const Map = () => {
+const MapBackground = () => {
   return (
-    <MapPage
-      center={{ lat: 36.2683, lng: 127.6358 }}
-      style={{ width: "100%", height: "360px" }}
-      level={14}
-    >
-      <MarkerClusterer averageCenter={true} minLevel={10}>
-        {clusterPositionsData.positions.map((pos) => (
-          <MapMarker key={`${pos.lat}-${pos.lng}`} position={pos} />
-        ))}
-      </MarkerClusterer>
-    </MapPage>
+    <Map // 지도를 표시할 Container
+      center={{
+        // 지도의 중심좌표
+        lat: 37.56683321212213,
+        lng: 126.97864942648738,
+      }}
+      style={{
+        // 지도의 크기
+        width: "100vw",
+        height: "100vh",
+      }}
+      level={2} // 지도의 확대 레벨
+    />
   );
 };
 
-const MapPage = styled.div`
-  width: 100vw;
-  height: 100vh;
-`;
-
-const MarkerClusterer = styled.div``;
-
-export default Map;
+export default MapBackground;

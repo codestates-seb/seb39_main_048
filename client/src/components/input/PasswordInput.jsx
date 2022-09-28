@@ -29,8 +29,8 @@ const PasswordInput = ({ title, placeholder }) => {
 
         <input
           type="password"
-          maxlength="14"
-          minlength="8"
+          maxLength="14"
+          minLength="8"
           placeholder={placeholder}
           onChange={handlePasswordValid}
         ></input>

@@ -3,31 +3,34 @@ import { Link } from "react-router-dom";
 import LogoColor from "../assets/LogoColor.png";
 import SNSLoginContainer from "../components/buttons/SNSLoginContainer";
 import axios from "axios";
-import styled from "styled-components";
+import axiosInstance from "../api/core/axiosConfig";
 import useLogin from "../store/LoginStore";
 
-const Login = () => {
+import styled from "styled-components";
+
+const Login = ({ setIsLogin }) => {
   const { userId, password, setUserId, setPassword } = useLogin();
 
   const onLogin = () => {
     try {
       let data = { userId };
-      axios
+      axiosInstance
         .post(
-          "http://localhost:3001/user",
+          "/user",
           {
             userId: userId,
             password: password,
-          },
-          {
-            headers: {
-              "Content-Type": `application/json`,
-            },
           }
+          // {
+          //   headers: {
+          //     "Content-Type": `application/json`,
+          //   },
+          // }
         )
         .then((res) => {
           console.log("res.data.accessToken : " + res.data);
           axios.defaults.headers.common["Authorization"] = "Bearer " + res.data;
+          setIsLogin(true);
         })
         .catch((err) => {
           console.log("login requset fail : " + err);
@@ -61,8 +64,8 @@ const Login = () => {
               <p>아이디</p>
               <input
                 type="text"
-                maxlength="12"
-                minlength="6"
+                maxLength="12"
+                minLength="6"
                 placeholder="아이디를 입력해 주세요"
                 onChange={(e) => setUserId(e.target.value)}
               ></input>
@@ -73,8 +76,8 @@ const Login = () => {
               <p>비밀번호</p>
               <input
                 type="password"
-                maxlength="14"
-                minlength="8"
+                maxLength="14"
+                minLength="8"
                 placeholder="영문 소문자, 숫자 포함 8자 이상 14자 이하"
                 onChange={(e) => setPassword(e.target.value)}
               ></input>

@@ -30,8 +30,8 @@ const IdInput = ({ placeholder }) => {
         <p>아이디</p>
         <input
           type="text"
-          maxlength="12"
-          minlength="6"
+          maxLength="12"
+          minLength="6"
           placeholder={placeholder}
           onChange={handleIdValid}
         ></input>
