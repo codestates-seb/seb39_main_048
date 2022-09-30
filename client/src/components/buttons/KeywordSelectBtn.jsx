@@ -1,9 +1,16 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { Keywords } from "../../constant";
 import usePost from "../../store/PostStore";
 
-const KeywordSelectBtn = () => {
+const KeywordSelectBtn = ({ data, gap, width }) => {
   const { setKeyWord, keyWord } = usePost();
+
+  useEffect(() => {
+    if(data) {
+      setKeyWord(data.keyWord);
+    }
+  },[])
 
   const handleClick = (e) => {
     if (keyWord.includes(e.target.innerText)) {
@@ -12,11 +19,10 @@ const KeywordSelectBtn = () => {
       return;
     }
     setKeyWord([...keyWord, e.target.innerText]);
- 
   };
 
   return (
-    <KeywordBtn>
+    <KeywordBtn gap={gap} width={width}>
       <div className="KeywordContainer">
         <ul>
           {Keywords.map((item, idx) => (
@@ -47,7 +53,9 @@ const KeywordBtn = styled.div`
       flex-wrap: wrap;
       font-size: 12px;
       font-weight: 350;
-      gap: 24px;
+      margin: 0 auto;
+      width: ${(props) => props.width || ""};
+      gap: ${(props) => props.gap || "24px"};
       padding: 24px;
     }
     .Active {
@@ -64,6 +72,7 @@ const KeywordBtn = styled.div`
       border-color: #999999;
       background-color: #ffffff;
       cursor: pointer;
+      transition: all 0.3s;
     }
   }
 `;

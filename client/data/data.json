@@ -347,28 +347,6 @@
       "id": 2
     },
     {
-      "category": "숙소",
-      "placeName": "🙆‍♀️ 테슷트",
-      "tags": [
-        "소형견",
-        "대형견",
-        "반려견 전용",
-        "관악구･동작구"
-      ],
-      "keyWord": [
-        "주차장",
-        "무선인터넷",
-        "예약가능"
-      ],
-      "placeImage": "",
-      "serviceTime": " 월~금 12:00 - 19:30 / 토, 일(정기휴무)",
-      "hompage": "1323444",
-      "number": "ㅇㅇㅇ",
-      "address": "경기 안양시 동안구 경수대로 426 (호계동, 하늘빌딩)",
-      "description": "ㅇㄴㅇㅁㅈㅂ",
-      "id": 3
-    },
-    {
       "category": "병원",
       "placeName": "❤️ 테스트테스트!!!!!!",
       "tags": [
@@ -514,6 +492,27 @@
       "address": "경기 화성시 봉담읍 안녕길 151 (수기리)",
       "description": "333",
       "id": 10
+    },
+    {
+      "category": "카페",
+      "placeName": "💥 post hook 테스트",
+      "tags": [
+        "중형견",
+        "반려견 전용",
+        "강동구･송파구"
+      ],
+      "keyWord": [
+        "압마개 필수",
+        "데이케어",
+        "배변봉투"
+      ],
+      "placeImage": "",
+      "serviceTime": "강까마 귀여워",
+      "hompage": "안녕하십셔",
+      "number": "공일공 이오오오 삼삼사사",
+      "address": "서울 동대문구 경동시장로 1 (제기동)",
+      "description": "하하하",
+      "id": 11
     }
   ],
   "search": [

@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import PlaceCard1 from "../cards/PlaceCard1";
 import { useGetMypageData } from "../../hooks/useAPI";
 import { BREAK_POINT_TABLET } from "../../constant";
 
 const MyBookMark = ({menu}) => {
-  // 함수로 분리!
-  // const { menu } = useMenu();
-  // const [url, setUrl] = useState("/bookmark");
   let URL = "";
 
   if (menu === "북마크") URL = "/bookmark";
   if (menu === "내가 등록한 장소") URL = "/myplace";
-
-  // useEffect(() => {
-  //   if (menu === "북마크") setUrl("/bookmark");
-  //   if (menu === "내가 등록한 장소") setUrl("/myplace");
-  // }, [menu]);
 
   const { data, isLoading, isError } = useGetMypageData(URL);
 

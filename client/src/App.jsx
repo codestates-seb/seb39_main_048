@@ -13,7 +13,7 @@ import Detailpage from "./pages/Detailpage";
 import ScrollToTop from "./hooks/useLocation";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   useEffect(() => {
     if (localStorage.getItem("userId") === null) {

@@ -1,14 +1,15 @@
+import { useNavigate } from "react-router-dom";
+import { ReactComponent as Plus } from "../assets/Plus.svg";
+import { ToastInfo } from "../constant";
+import { usePostPlace } from "../hooks/useAPI";
+import toast, { Toaster } from "react-hot-toast";
 import styled from "styled-components";
-import axios from "axios";
 import Category from "../components/buttons/Category";
 import KeywordSelectBtn from "../components/buttons/KeywordSelectBtn";
 import Footer from "../components/Footer";
-import { useNavigate } from "react-router-dom";
-import { ReactComponent as Plus } from "../assets/Plus.svg";
 import usePost from "../store/PostStore";
 import DetailInfo from "../components/registpage/DetailInfo";
 import TagSelect from "../components/registpage/TagSelect";
-import { useEffect } from "react";
 import AddressPost from "../components/registpage/AddressPost";
 
 const PlaceRegistration = () => {
@@ -19,6 +20,9 @@ const PlaceRegistration = () => {
     placeName,
     tags,
     keyWord,
+    sizeTags,
+    locationTags,
+    isOnlyTags,
     setSizeTags,
     setIsOnlyTags,
     setLocationTags,
@@ -32,23 +36,50 @@ const PlaceRegistration = () => {
     setPlaceName,
   } = usePost();
 
+  const config = {
+    category,
+    placeName,
+    tags,
+    keyWord,
+    placeImage,
+    serviceTime,
+    hompage,
+    number,
+    address,
+    description,
+  };
+
+  // 검증부분 분리하기
   const onCreate = async () => {
-    await axios
-      .post(`http://localhost:3001/place`, {
-        category,
-        placeName,
-        tags,
-        keyWord,
-        placeImage,
-        serviceTime,
-        hompage,
-        number,
-        address,
-        description,
-      })
+    if (
+      !category.length ||
+      placeName === "" ||
+      !tags.length ||
+      !sizeTags.length ||
+      !locationTags.length ||
+      !isOnlyTags.length ||
+      serviceTime === "" ||
+      number === "" ||
+      description === "" ||
+      !keyWord.length ||
+      address === ""
+    ) {
+      toast("필수항목을 입력해주세요", {
+        icon: "😅",
+        ...ToastInfo,
+      });
+      window.scrollTo(0, 0);
+      return;
+    }
+    const postPlace = usePostPlace(config);
+    postPlace()
       .then((res) => res.data)
-      .then(() => setLocationTags([]), setSizeTags([]), setKeyWord([]), setIsOnlyTags([]))
-      .catch((err) => console.log(err));
+      .then(
+        () => setLocationTags([]),
+        setSizeTags([]),
+        setKeyWord([]),
+        setIsOnlyTags([])
+      );
 
     navigate("/place");
   };
@@ -61,7 +92,7 @@ const PlaceRegistration = () => {
           보아요:)
         </div>
         <WithPlace>
-          <div>반려견과 함께할 장소를 등록해 주세요</div>
+          <div>반려견과 함께할 장소를 구분해 주세요</div>
           <div className="Category">
             <Category />
           </div>
@@ -70,11 +101,11 @@ const PlaceRegistration = () => {
           <div>장소 이름(상호명)</div>
           <input
             type="text"
-            id="PlaceInput"
             placeholder="장소나 상호명을 입력해주세요"
             onChange={(e) => setPlaceName(e.target.value)}
           />
         </PlaceName>
+        <div className="Title">태그 선택</div>
         <TagSelect />
         <ImageDetail>
           <div className="ImgContainer">
@@ -103,6 +134,7 @@ const PlaceRegistration = () => {
         </RegistrationBtn>
       </Page>
       <Footer />
+      <Toaster />
     </div>
   );
 };
@@ -110,6 +142,13 @@ const PlaceRegistration = () => {
 const Page = styled.div`
   padding: 0 10%;
   padding-top: 70px;
+
+  .Title {
+    color: #333333;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
 
   .TopComment {
     color: #333333;
