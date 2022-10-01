@@ -15,23 +15,33 @@ const TagSelect = ({ data, bottom, margin }) => {
   } = usePost();
 
   useEffect(() => {
+    console.log('useEffect1: sizeTags', sizeTags);
     setTags([...sizeTags, ...isOnlyTags, ...locationTags]);
+    // console.log("detailUpdate", sizeTags, locationTags, isOnlyTags)
   }, [sizeTags, locationTags, isOnlyTags]);
 
   useEffect(() => {
     if (data) {
       setLocationTags(data.tags[data.tags.length-1])
       setIsOnlyTags(data.tags[data.tags.length-2])
+
+      console.log('useEffect2: sizeTags', data);
       setSizeTags(data.tags.slice(0, -2))
     }
   }, []);
 
   const handleClick = (e) => {
+    console.log('handleClick', sizeTags);
     if (sizeTags.includes(e.target.innerText)) {
-      const removeData = sizeTags.filter((item) => item !== e.target.innerText);
+      
+      const removeData = sizeTags.filter((item) => { 
+        console.log(item, e.target.innerText);
+       return item !== e.target.innerText
+      });
       setSizeTags(removeData);
       return;
     }
+    // console.log('sizeTags', sizeTags)
     setSizeTags([...sizeTags, e.target.innerText]);
   };
 
