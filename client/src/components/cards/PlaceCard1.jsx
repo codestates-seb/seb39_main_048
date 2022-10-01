@@ -15,7 +15,9 @@ const PlaceCard1 = ({ data }) => {
   return (
     <Card>
       <Link to={`/place/${data.id}`}>
-        <PlaceImg></PlaceImg>
+        <PlaceImg>
+          {data.placeImage ? <img src={data.placeImage}></img> : ""}
+        </PlaceImg>
       </Link>
       <PlaceInfo>
         <Infos>
@@ -48,9 +50,8 @@ const PlaceCard1 = ({ data }) => {
         </Infos>
         <Address>{data.address}</Address>
         <Tags>
-          {data?.tags.map((tag, idx) => (
-            <HashTag text={tag} key={idx}/>
-          ))}
+          {data.tags &&
+            data.tags.map((item, idx) => <HashTag text={item} key={idx} />)}
         </Tags>
       </PlaceInfo>
     </Card>
@@ -70,6 +71,12 @@ const PlaceImg = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   cursor: pointer;
+  img {
+    object-fit: cover;
+    height: 150px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
 `;
 
 const PlaceInfo = styled.div`

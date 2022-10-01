@@ -72,7 +72,7 @@ const Detailpage = () => {
             data.tags.map((tag, idx) => <HashTag text={tag} key={idx} />)}
         </div>
         <div className="imgs_detailInfo">
-          <Imgs></Imgs>
+          <Imgs>{data.placeImage ? <img src={data.placeImage} /> : ""}</Imgs>
           <Infos>
             <h2>상세 정보</h2>
             <Info>
@@ -202,6 +202,12 @@ const Imgs = styled.div`
   width: 100%;
   height: 20vw;
   background-color: #f5f5f5;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 20vw;
+  }
 `;
 
 const Infos = styled.div`

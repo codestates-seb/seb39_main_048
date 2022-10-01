@@ -1,9 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import { ReactComponent as Plus } from "../assets/Plus.svg";
-import { ToastInfo } from "../constant";
-import { usePostPlace } from "../hooks/useAPI";
-import toast, { Toaster } from "react-hot-toast";
+import React, { useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { usePostPlace } from "../hooks/useAPI";
+import { ToastInfo } from "../constant";
+import toast, { Toaster } from "react-hot-toast";
 import Category from "../components/buttons/Category";
 import KeywordSelectBtn from "../components/buttons/KeywordSelectBtn";
 import Footer from "../components/Footer";
@@ -11,32 +12,58 @@ import usePost from "../store/PostStore";
 import DetailInfo from "../components/registpage/DetailInfo";
 import TagSelect from "../components/registpage/TagSelect";
 import AddressPost from "../components/registpage/AddressPost";
+import UploadImg from "../components/registpage/UploadImg";
+import useImage from "../store/ImageStore";
 
 const PlaceRegistration = () => {
   const navigate = useNavigate();
+  const { file, setFile } = useImage();
 
   const {
+    setSizeTags,
+    setIsOnlyTags,
+    setLocationTags,
+    setCategory,
+    setPlaceName,
+    setTags,
+    setKeyWord,
+    setPlaceImage,
+    setServiceTime,
+    setHompage,
+    setNumber,
+    setAddress,
+    setDescription,
     category,
     placeName,
     tags,
     keyWord,
-    sizeTags,
-    locationTags,
-    isOnlyTags,
-    setSizeTags,
-    setIsOnlyTags,
-    setLocationTags,
-    setKeyWord,
     placeImage,
     serviceTime,
     hompage,
     number,
     address,
     description,
-    setPlaceName,
   } = usePost();
 
-  const config = {
+  useEffect(() => {
+    return () => {
+      setPlaceName("");
+      setCategory("");
+      setSizeTags([]);
+      setIsOnlyTags([]);
+      setLocationTags([]);
+      setTags([]);
+      setKeyWord([]);
+      setPlaceImage("");
+      setServiceTime("");
+      setHompage("");
+      setNumber("");
+      setAddress("");
+      setDescription("");
+    };
+  }, []);
+
+  const configData = {
     category,
     placeName,
     tags,
@@ -49,37 +76,10 @@ const PlaceRegistration = () => {
     description,
   };
 
-  // 검증부분 분리하기
+  // 검증부분 추가하기
   const onCreate = async () => {
-    if (
-      !category.length ||
-      placeName === "" ||
-      !tags.length ||
-      !sizeTags.length ||
-      !locationTags.length ||
-      !isOnlyTags.length ||
-      serviceTime === "" ||
-      number === "" ||
-      description === "" ||
-      !keyWord.length ||
-      address === ""
-    ) {
-      toast("필수항목을 입력해주세요", {
-        icon: "😅",
-        ...ToastInfo,
-      });
-      window.scrollTo(0, 0);
-      return;
-    }
-    const postPlace = usePostPlace(config);
-    postPlace()
-      .then((res) => res.data)
-      .then(
-        () => setLocationTags([]),
-        setSizeTags([]),
-        setKeyWord([]),
-        setIsOnlyTags([])
-      );
+    const postPlace = usePostPlace(configData);
+    postPlace().then((res) => res.data);
 
     navigate("/place");
   };
@@ -107,20 +107,10 @@ const PlaceRegistration = () => {
         </PlaceName>
         <div className="Title">태그 선택</div>
         <TagSelect />
-        <ImageDetail>
-          <div className="ImgContainer">
-            <div className="ImageUpload">
-              이미지 업로드
-              <button>파일선택</button>
-            </div>
-            <div className="ImgPlus">
-              <Plus />
-              <span>이미지 추가 (최대 5장)</span>
-            </div>
-            {/* <div className="ImgList"></div> */}
-          </div>
+        <div className="ImgGroup">
+          <UploadImg />
           <DetailInfo />
-        </ImageDetail>
+        </div>
         <PlaceKeywordSelect>
           <div>장소에 해당하는 키워드를 선택해 주세요</div>
           <KeywordSelectBtn />
@@ -160,6 +150,15 @@ const Page = styled.div`
     padding: 40px;
     margin-top: 150px;
   }
+
+  .ImgGroup {
+    display: flex;
+    gap: 32px;
+    color: #333333;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 64px;
+  }
 `;
 
 const WithPlace = styled.div`
@@ -190,62 +189,6 @@ const PlaceName = styled.div`
     border: 1px solid;
     border-color: #d7e2eb;
     border-radius: 10px;
-  }
-`;
-
-const ImageDetail = styled.div`
-  display: flex;
-  gap: 32px;
-  color: #333333;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 64px;
-
-  .ImgContainer {
-    width: 50%;
-
-    .ImageUpload {
-      display: flex;
-      justify-content: space-between;
-      button {
-        color: #ffffff;
-        border: 1px solid;
-        border-radius: 10px;
-        background-color: #ffb653;
-        padding: 10px 20px;
-        font-size: 12px;
-        cursor: pointer;
-      }
-    }
-    .ImgPlus {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      background-color: #f5f5f5;
-      height: 350px;
-      margin-top: 16px;
-
-      svg {
-        margin-top: -20px;
-      }
-
-      span {
-        font-size: 12px;
-        color: #999999;
-        margin-top: 24px;
-      }
-    }
-    /* .ImgList {
-      display: flex;
-      justify-content: space-around;
-      box-sizing: border-box;
-      background: #999999;
-      flex-wrap: wrap;
-      width: 25%;
-      height: 80px;
-      margin-top: 20px;
-    } */
   }
 `;
 

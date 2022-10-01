@@ -25,7 +25,7 @@ const Listpage = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>ERR...</div>;
-  
+
   return (
     <>
       <ListPage>
@@ -37,18 +37,9 @@ const Listpage = () => {
 
           <FilterGroup />
           <CardGroup>
-            {!filterData.length
-              ? data.map((place, idx) => <PlaceCard1 data={place} key={idx} />)
-              : ""}
-            {filterData.length &&
-            data.filter((data) => filterData.includes(...data.tags)).length ===
-              0 ? (
-              <EmptyData />
-            ) : (
-              data
-                .filter((data) => data.tags.includes(...filterData))
-                .map((place, idx) => <PlaceCard1 data={place} key={idx} />)
-            )}
+            {data.map((place, idx) => (
+              <PlaceCard1 data={place} key={idx} />
+            ))}
           </CardGroup>
         </Inner>
         <MoveRegist />

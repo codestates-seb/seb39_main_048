@@ -10,6 +10,19 @@ const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const {
+    setSizeTags,
+    setIsOnlyTags,
+    setLocationTags,
+    setCategory,
+    setPlaceName,
+    setTags,
+    setKeyWord,
+    setPlaceImage,
+    setServiceTime,
+    setHompage,
+    setNumber,
+    setAddress,
+    setDescription,
     category,
     placeName,
     tags,
@@ -18,13 +31,27 @@ const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
     serviceTime,
     hompage,
     number,
-    address,
-    description,
-    setLocationTags,
-    setSizeTags,
-    setKeyWord,
-    setIsOnlyTags,
+    description
   } = usePost();
+
+  useEffect(() => {
+    return () => {
+      setPlaceName("");
+      setCategory("");
+      setSizeTags([]);
+      setIsOnlyTags([]);
+      setLocationTags([]);
+      setTags([]);
+      setKeyWord([]);
+      setPlaceImage("");
+      setServiceTime("");
+      setHompage("");
+      setNumber("");
+      setAddress("");
+      setDescription("");
+    };
+  }, []);
+
   const config = {
     category,
     placeName,
@@ -34,7 +61,6 @@ const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
     serviceTime,
     hompage,
     number,
-    address,
     description,
   };
   useEffect(() => {

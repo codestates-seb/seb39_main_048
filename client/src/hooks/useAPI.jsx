@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import axios from "axios";
 
-const BASE_URL = `http://localhost:3001`;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 // --------------------목록 데이터--------------------
 export const useGetPlace = (url) => {
@@ -20,6 +20,7 @@ export const useGetPlace = (url) => {
   };
 };
 
+// --------POST--------
 export const usePostPlace = (config) => {
   const postPlace = async () => {
     try {
@@ -35,6 +36,7 @@ export const usePostPlace = (config) => {
   return postPlace;
 };
 
+// --------PATCH--------
 export const useUpdataPlace = (config, id) => {
   const updatePlace = async () => {
     try {
@@ -67,7 +69,7 @@ export const useGetDetailPlace = (id) => {
     isError: error,
   };
 };
-
+// --------DELETE--------
 export const useDeleteDetailPlace = async (id) => {
   try {
     const { data } = await axios.delete(`${BASE_URL}/place/${id}`);

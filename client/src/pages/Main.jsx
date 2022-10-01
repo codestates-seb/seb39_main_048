@@ -13,10 +13,10 @@ const Main = () => {
   return (
     <>
       <MainTitle></MainTitle>
-      <MainReviewCard />
       <MainPage>
         <PlaceCardGroup1 title={"추천장소 확인해봐요! 👀"} data={data} />
       </MainPage>
+      <MainReviewCard />
       <Footer />
     </>
   );
@@ -28,6 +28,7 @@ const MainPage = styled.div`
   width: 80vw;
   margin: 0 auto;
   color: #333;
+  margin-bottom: 128px;
   cursor: default;
   .center {
     text-align: center;
