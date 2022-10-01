@@ -4,12 +4,12 @@ import PlaceCard1 from "./PlaceCard1";
 import { ReactComponent as RightButton } from "../../assets/RightButton.svg";
 import { ReactComponent as LeftButton } from "../../assets/LeftButton.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
+import {selectCategory} from "../../constant"
 
 const PlaceCardGroup1 = ({ title, data }) => {
   const TOTAL_SLIDES = 3; // 화면 너머로 보이는 슬라이드 수
   const [currentCard, setCurrentCard] = useState(0);
   const cardRef = useRef(null);
-  const category = ["식당", "카페", "숙소", "병원", "기타"];
 
   const handleNext = () => {
     if (currentCard >= TOTAL_SLIDES) return;
@@ -34,7 +34,7 @@ const PlaceCardGroup1 = ({ title, data }) => {
     <Group>
       <h2>{title}</h2>
       <CategoryGroup>
-        {category.map((item, idx) => (
+        {selectCategory.map((item, idx) => (
           <Item
             key={idx}
             bgcolor={item === "식당" ? "#4DA772" : ""}
@@ -69,7 +69,6 @@ const Group = styled.div`
   margin-top: 64px;
   color: #333;
   h2 {
-    text-align: center;
     font-size: 24px;
     margin-bottom: 16px;
   }
@@ -77,10 +76,8 @@ const Group = styled.div`
 
 const CategoryGroup = styled.ul`
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 7px;
-  padding: 0.5rem;
   border-radius: 50px;
   transition: all 0.3s;
   margin-bottom: 24px;

@@ -21,11 +21,6 @@ const Login = ({ setIsLogin }) => {
             userId: userId,
             password: password,
           }
-          // {
-          //   headers: {
-          //     "Content-Type": `application/json`,
-          //   },
-          // }
         )
         .then((res) => {
           console.log("res.data.accessToken : " + res.data);

@@ -7,7 +7,6 @@ import { ReactComponent as Hamberger } from "../../assets/Hamberger.svg";
 import useDetectClose from "../../hooks/useDetectClose";
 
 const Nav = ({ isLogin }) => {
-  // const [isLogin, setIsLogin] = useState(true);
   const [isOpen, menuRef, handleOpen] = useDetectClose(false);
 
   return (

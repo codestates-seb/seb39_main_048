@@ -302,77 +302,66 @@
   ],
   "place": [
     {
-      "category": "식당",
-      "placeName": "⭐️ 테스트,,",
-      "tags": [
-        "전체",
-        "반려견 전용",
-        "동대문･성동구"
-      ],
-      "keyWord": [
-        "배변봉투",
-        "압마개 필수",
-        "데이케어",
-        "중성화 필수"
-      ],
-      "placeImage": "",
-      "serviceTime": "월~금 12:00 - 19:30 / 토, 일(정기휴무)",
-      "hompage": "",
-      "number": "1111",
-      "address": "경기 수원시 장안구 경수대로 748 (연무동)",
-      "description": "안녕하십셔",
-      "id": 1
-    },
-    {
-      "category": "병원",
-      "placeName": "🚀 테스트테스트!!!!!!",
-      "tags": [
-        "소형견",
-        "반려견 동반",
-        "서대문･은평구"
-      ],
-      "keyWord": [
-        "배변봉투",
-        "압마개 필수",
-        "데이케어",
-        "중성화 필수",
-        "예약가능"
-      ],
-      "placeImage": "",
-      "serviceTime": "월~금 12:00 - 19:30 / 토, 일(정기휴무)",
-      "hompage": "1323444",
-      "number": "121344 222",
-      "address": "경기 수원시 장안구 경수대로 748 (연무동)",
-      "description": "안녕하십셔",
-      "id": 2
-    },
-    {
-      "category": "병원",
-      "placeName": "❤️ 테스트테스트!!!!!!",
+      "category": "숙소",
+      "placeName": "숙소숙소숙소",
       "tags": [
         "대형견",
         "반려견 전용",
-        "영등포･구로･금천"
+        "관악구･동작구"
       ],
       "keyWord": [
+        "주차장",
         "압마개 필수",
-        "데이케어"
+        "리드줄 착용",
+        "무선인터넷"
       ],
       "placeImage": "",
-      "serviceTime": "월~금 12:00 - 19:30 / 토, 일(정기휴무)",
-      "hompage": "333",
-      "number": "444",
-      "address": "경기 수원시 권선구 경수대로 14 (대황교동, 대황교동 가스충전소)",
-      "description": "555",
+      "serviceTime": "숙소숙소",
+      "hompage": "숙소숙소",
+      "number": "숙소숙소",
+      "address": "",
+      "description": "숙소숙소",
+      "id": 2
+    },
+    {
+      "category": "식당",
+      "placeName": "바꾹면",
+      "tags": [
+        "전체",
+        "반",
+        "려",
+        "견",
+        " ",
+        "동",
+        "반",
+        "강남구･서초구"
+      ],
+      "keyWord": [
+        "주차장",
+        "무선인터넷"
+      ],
+      "placeImage": "",
+      "serviceTime": "바꾹면",
+      "hompage": "바꾹면",
+      "number": "바꾹면",
+      "address": "경기 화성시 봉담읍 안녕길 151 (수기리)",
+      "description": "바꾹면",
       "id": 4
     },
     {
-      "category": "숙소",
+      "category": "식당",
       "placeName": "🏋️‍♀️ 테스트테스트!!!!!!",
       "tags": [
-        "소형견",
-        "반려견 동반",
-        "강동구･송파구"
+        "전체",
+        "중형견",
+        "대형견",
+        "반",
+        "려",
+        "견",
+        " ",
+        "동",
+        "반",
+        "관악구･동작구"
       ],
       "keyWord": [
         "압마개 필수",
@@ -492,6 +481,67 @@
       "address": "경기 화성시 봉담읍 안녕길 151 (수기리)",
       "description": "333",
       "id": 10
+    },
+    {
+      "category": "카페",
+      "placeName": "💥 post hook 테스트",
+      "tags": [
+        "중형견",
+        "반려견 전용",
+        "강동구･송파구"
+      ],
+      "keyWord": [
+        "압마개 필수",
+        "데이케어",
+        "배변봉투"
+      ],
+      "placeImage": "",
+      "serviceTime": "강까마 귀여워",
+      "hompage": "안녕하십셔",
+      "number": "공일공 이오오오 삼삼사사",
+      "address": "서울 동대문구 경동시장로 1 (제기동)",
+      "description": "하하하",
+      "id": 11
+    },
+    {
+      "category": "식당",
+      "placeName": "테스트",
+      "tags": [
+        "전체",
+        "반려견 동반",
+        "강남구･서초구"
+      ],
+      "keyWord": [
+        "주차장",
+        "무선인터넷",
+        "예약가능"
+      ],
+      "placeImage": "",
+      "serviceTime": "ㄴㄴ",
+      "hompage": "ㄴㄴ",
+      "number": "ㄴㄴ",
+      "address": "부산 영도구 나눔길 1 (영선동2가)",
+      "description": "ㄴㄴ",
+      "id": 12
+    },
+    {
+      "category": "기타",
+      "placeName": "6:46 이미지 테스트",
+      "tags": [
+        "전체",
+        "반려견 동반",
+        "강남구･서초구"
+      ],
+      "keyWord": [
+        "주차장"
+      ],
+      "placeImage": "http://res.cloudinary.com/petckage/image/upload/v1664617612/kvgcvr12ithigtz5cztr.png",
+      "serviceTime": "6:46 이미지 테스트",
+      "hompage": "6:46 이미지 테스트",
+      "number": "6:46 이미지 테스트",
+      "address": "서울 동대문구 경희대로4길 73 (이문동)",
+      "description": "6:46 이미지 테스트",
+      "id": 17
     }
   ],
   "search": [
@@ -601,371 +651,6 @@
       "id": "e_ic0Ax",
       "password": "asdassdasd",
       "name": ""
-    },
-    {
-      "id": "bXozR8z",
-      "password": "xxxxxxxx",
-      "name": ""
-    },
-    {
-      "id": "qasdesd",
-      "password": "qwerty123",
-      "name": "qwes"
-    },
-    {
-      "id": "sadass",
-      "password": "qweqweq1ssss",
-      "name": "xczczx"
-    },
-    {
-      "id": "sadsad",
-      "password": "zzzzzzzzz",
-      "name": "dsd"
-    },
-    {
-      "id": "adsada",
-      "password": "zxcxzfafa",
-      "name": "123231"
-    },
-    {
-      "id": "sadasd",
-      "password": "cccccccc",
-      "name": "xzc1e4"
-    },
-    {
-      "id": "czxcxzczxc",
-      "password": "zxcxzczxczxczx",
-      "name": "asdasd"
-    },
-    {
-      "id": "zcxzcxzc",
-      "password": "",
-      "name": "asdsad"
-    },
-    {
-      "id": "zxczxc",
-      "password": "qqqqqqqqq",
-      "name": "asdsad"
-    },
-    {
-      "id": "zczcxzc",
-      "password": "aaaaaaaaaa",
-      "name": "vzxvzx"
-    },
-    {
-      "id": "qweqwewqe",
-      "password": "aaaaaaaa",
-      "name": "qweqwe"
-    },
-    {
-      "id": "qwewqeqw",
-      "password": "bbbbbbbbb",
-      "name": "qweqwe"
-    },
-    {
-      "id": "asdasda",
-      "password": "adadadadasd",
-      "name": "asdasd"
-    },
-    {
-      "id": "qweqweqw",
-      "password": "qqqqqqqq",
-      "name": "qweqwe"
-    },
-    {
-      "id": "asdasd",
-      "password": "zzzzzzzz",
-      "name": "zxczxc"
-    },
-    {
-      "id": "vAKnYAD",
-      "password": "xcxcxcxc",
-      "name": ""
-    },
-    {
-      "id": "mKnh4pz",
-      "password": "zzzzzzzz",
-      "name": ""
-    },
-    {
-      "id": "qweqweq",
-      "password": "qqqqqqqq",
-      "name": "qweqwe"
-    },
-    {
-      "id": "BC20GqD",
-      "password": "zzzzzzzz",
-      "name": "qwedas"
-    },
-    {
-      "id": "asdasdasd",
-      "password": "asdasdasasd",
-      "name": "asdasd"
-    },
-    {
-      "id": "zxczczxc",
-      "password": "qqqqqqqq",
-      "name": "qqqqq"
-    },
-    {
-      "id": "zxcxzcz",
-      "password": "zzzzzzzz",
-      "name": "zxcxzc"
-    },
-    {
-      "id": "zzcxzczxc",
-      "password": "qqqqqqqq",
-      "name": "zcxzc"
-    },
-    {
-      "id": "czxczxczxc",
-      "password": "11111111",
-      "name": "asdasd"
-    },
-    {
-      "id": "ewqeqwewqe",
-      "password": "cccccccccccccc",
-      "name": "zxcxzc"
-    },
-    {
-      "id": "xzczxczxcz",
-      "password": "11111111",
-      "name": "zxcxzc"
-    },
-    {
-      "id": "aazczxc",
-      "password": "qqqqqq11",
-      "name": "안녕하세요"
-    },
-    {
-      "id": "qwewqe",
-      "password": "11111111",
-      "name": "qweqwe"
-    },
-    {
-      "id": "zxcxzczx",
-      "password": "12121212",
-      "name": "zxczxc"
-    },
-    {
-      "id": "wqewqeqweqw",
-      "password": "11112222",
-      "name": "asdasd"
-    },
-    {
-      "id": "xzcxzc",
-      "password": "zxczxczxc",
-      "name": "cccxx"
-    },
-    {
-      "id": "cccccx",
-      "password": "cccccccc",
-      "name": "xcxcxx"
-    },
-    {
-      "id": "cxcxcxccxc",
-      "password": "zzzzxxxx",
-      "name": "ccccc"
-    },
-    {
-      "id": "ccccxx",
-      "password": "aaaaaaaaaaaaaa",
-      "name": "xxxxxx"
-    },
-    {
-      "id": "cxxcxcz",
-      "password": "zzzzzzzzzzzzzz",
-      "name": "zxczxc"
-    },
-    {
-      "id": "zczxczxczc",
-      "password": "zzzzzzzzzzzzzz",
-      "name": "xcxcxc"
-    },
-    {
-      "id": "czxcxzcxc",
-      "password": "zzzzzzzzzzzzzz",
-      "name": "xcxcx"
-    },
-    {
-      "id": "zczxczxc",
-      "password": "zzzzzzzzzzzzzz",
-      "name": "xcxcxc"
-    },
-    {
-      "id": "czczcxcxc",
-      "password": "zzzzzzzzzzzzz",
-      "name": "xcxcxc"
-    },
-    {
-      "id": "qweqeqew",
-      "password": "qqqqqqqqqqqqqq",
-      "name": "qwewqe"
-    },
-    {
-      "id": "qwewqeqwe",
-      "password": "qqqqqqqqqqqq",
-      "name": "wqeq1"
-    },
-    {
-      "id": "qwewqewq",
-      "password": "qqqqqqqqq",
-      "name": "qweq1"
-    },
-    {
-      "id": "qwqwqwqw",
-      "password": "zzzzzzzzzzz",
-      "name": "121212"
-    },
-    {
-      "id": "zxczxcc",
-      "password": "zzzzzzzz",
-      "name": "adada"
-    },
-    {
-      "id": "zczccxzz",
-      "password": "aaaaaaaaaa",
-      "name": "xcxcxc"
-    },
-    {
-      "id": "asdsad",
-      "password": "aaaaaaaa",
-      "name": "qqwe"
-    },
-    {
-      "id": "zxczczcc",
-      "password": "qqqqqqqqq1",
-      "name": "qqweqw"
-    },
-    {
-      "id": "qwewqewqe",
-      "password": "12345678901212",
-      "name": "qweqwe"
-    },
-    {
-      "id": "zxcxzc",
-      "password": "12121212",
-      "name": "qweqwe"
-    },
-    {
-      "id": "wqewqe",
-      "password": "121212121212",
-      "name": "zxcxz"
-    },
-    {
-      "id": "xczadad",
-      "password": "qwertyqwerty",
-      "name": "wqeweq"
-    },
-    {
-      "id": "zwqeqwe",
-      "password": "zzzzzzzzzzzzzz",
-      "name": "qweada"
-    },
-    {
-      "id": "qsdadweq",
-      "password": "qqqqqqqqqqqqqq",
-      "name": "1"
-    },
-    {
-      "id": "adasasd",
-      "password": "qqqqqqqqqqqqqq",
-      "name": "ㅁㄴㅇㅁㄴㅇ"
-    },
-    {
-      "id": "wqeqwezz",
-      "password": "zzzzzzzzzzzzzz",
-      "name": "zzzz"
-    },
-    {
-      "id": "zxccxx",
-      "password": "zccccccccccccc",
-      "name": "xczxc"
-    },
-    {
-      "id": "zcxczczx",
-      "password": "cccccccccccccc",
-      "name": "xcxc"
-    },
-    {
-      "id": "xcxcxc",
-      "password": "qqqqqqqqqqqqqq",
-      "name": "cxcxc"
-    },
-    {
-      "id": "xxxxxxx",
-      "password": "aaaaaaaaaaaaaa",
-      "name": "zzzz"
-    },
-    {
-      "id": "aaaaaa",
-      "password": "aaaaaaaaaaaaaa",
-      "name": "aaaa"
-    },
-    {
-      "id": "ccccccc",
-      "password": "cccccccccccccc",
-      "name": "zzzz"
-    },
-    {
-      "id": "zzzzwewe",
-      "password": "wwwwwwwwwwwwww",
-      "name": "zzzz"
-    },
-    {
-      "id": "wqeqweqe",
-      "password": "wwwwwwwwwwwwww",
-      "name": "wqewqe"
-    },
-    {
-      "id": "zxcxcxc",
-      "password": "qqqqqqqqqqqqqq",
-      "name": "zxzxzx"
-    },
-    {
-      "id": "xcxzcxcxcx",
-      "password": "zzzzzzzzzzzzzz",
-      "name": "zzzz"
-    },
-    {
-      "id": "sdsdsd",
-      "password": "zzzzzzzzzz",
-      "name": "sdsdsd"
-    },
-    {
-      "id": "cxcxcxcx",
-      "password": "qqqqqqqqqqqqqq",
-      "name": "cxxcxc"
-    },
-    {
-      "id": "axcxcxc",
-      "password": "zzzzzzzzzzzzzz",
-      "name": "xcxcxc"
-    },
-    {
-      "id": "zsdsdsd",
-      "password": "zzzzzzzzzzzzzz",
-      "name": "sdsds"
-    },
-    {
-      "userId": "qweqwe",
-      "password": "qweqweq",
-      "id": "j85QryM"
-    },
-    {
-      "userId": "qweqwe",
-      "password": "qweqweq",
-      "id": "WegCHeb"
-    },
-    {
-      "userId": "qweqwe",
-      "password": "qweqweq",
-      "id": "qHxefJ6"
-    },
-    {
-      "id": "dddddd",
-      "password": "dddddddd",
-      "name": "dddd"
     }
   ]
 }

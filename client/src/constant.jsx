@@ -7,6 +7,7 @@ export const myMenus = [
 
 // filterGroup
 export const category = ["전체", "식당", "카페", "숙소", "병원", "기타"];
+export const selectCategory = ["식당", "카페", "숙소", "병원", "기타"];
 export const sizeFilters = ["전체", "소형견", "중형견", "대형견"];
 export const isOnlyFilters = ["반려견 동반", "반려견 전용"];
 export const locationFilters = [
@@ -20,7 +21,7 @@ export const locationFilters = [
   "강북･노원･도봉",
   "동대문･성동구",
   "마포구･용산구",
-  "중구･종로･성북"
+  "중구･종로･성북",
 ];
 
 export const Keywords = [
@@ -39,3 +40,17 @@ export const Keywords = [
 // 반응형 기준
 export const BREAK_POINT_TABLET = 1128;
 export const BREAK_POINT_PHONE = 835;
+
+// toast
+export const ToastInfo = {
+  duration: 1500,
+  position: "top-center",
+  style: {
+    borderRadius: "10px",
+    background: "#333",
+    color: "#fff",
+    boxShadow: "none",
+    marginTop: "90px",
+    fontSize: "14px",
+  },
+};

@@ -5,39 +5,53 @@ import { ReactComponent as Clock } from "../../assets/Clock.svg";
 import { ReactComponent as Globe } from "../../assets/Globe.svg";
 import { ReactComponent as Phone } from "../../assets/Phone.svg";
 import { ReactComponent as Description } from "../../assets/Description.svg";
+import { useEffect } from "react";
 
-const DetailInfo = () => {
-  const { setServiceTime, setHompage, setNumber, setDescription } = usePost();
+const DetailInfo = ({ data, size, width, margin }) => {
+  const { setServiceTime, setHompage, setNumber, setDescription, serviceTime, hompage, number, description } = usePost();
+  useEffect(() => {
+    if(data) {
+      setServiceTime(data.serviceTime)
+      setHompage(data.hompage)
+      setNumber(data.number)
+      setDescription(data.description)
+    }
+  },[])
   return (
-    <DetailContainer>
+    <DetailContainer size={size} width={width} margin={margin}>
       상세정보
-      <div className="DetailInfo1">
+      <div className="DetailInfo firstItem">
         <Clock />
         <input
           placeholder="영업시간을 입력해 주세요"
+          defaultValue={data ? serviceTime : ""}
           onChange={(e) => setServiceTime(e.target.value)}
+          margin={margin}
         />
       </div>
       <span>예시 : 월~금 12:00 - 19:30 / 토, 일(정기휴무)</span>
-      <div className="DetailInfo2">
+      <div className="DetailInfo">
         <Globe />
         <input
           placeholder="대표 사이트가 있다면 입력해 주세요"
+          defaultValue={data ? hompage : ""}
           onChange={(e) => setHompage(e.target.value)}
         ></input>
       </div>
       <span>선택 입력란입니다. 사이트가 존재한다면 입력해 주세요 :)</span>
-      <div className="DetailInfo3">
+      <div className="DetailInfo">
         <Phone />
         <input
           placeholder="대표 번호를 입력해 주세요"
+          defaultValue={data ? number : ""}
           onChange={(e) => setNumber(e.target.value)}
         ></input>
       </div>
-      <div className="DetailInfo4">
+      <div className="DetailInfo">
         <Description />
         <input
           placeholder="장소를 대표할 한 줄 설명을 적어주세요"
+          defaultValue={data ? description : ""}
           onChange={(e) => setDescription(e.target.value)}
         ></input>
       </div>
@@ -47,10 +61,10 @@ const DetailInfo = () => {
 
 const DetailContainer = styled.div`
   color: #333333;
-  font-size: 20px;
+  font-size: ${(props) => props.size || "20px"};
   font-weight: 600;
   margin-bottom: 64px;
-  width: 50%;
+  width: ${(props) => props.width || "50%"};
   display: flex;
   justify-content: start;
   flex-direction: column;
@@ -63,80 +77,25 @@ const DetailContainer = styled.div`
     margin-top: 6px;
   }
 
-  .DetailInfo1 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-    margin-top: 28px;
-
-    input {
-      font-size: 12px;
-      color: #666666;
-      width: 100%;
-      height: 32px;
-      padding: 23px;
-      border: 1px solid;
-      border-color: #d7e2eb;
-      border-radius: 10px;
-    }
+  input {
+    font-size: 12px;
+    color: #666666;
+    width: 100%;
+    height: 32px;
+    padding: 23px;
+    border: 1px solid;
+    border-color: #d7e2eb;
+    border-radius: 10px;
   }
 
-  .DetailInfo2 {
+  .DetailInfo {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     gap: 24px;
     margin-top: 16px;
-
-    input {
-      font-size: 12px;
-      color: #666666;
-      width: 100%;
-      height: 32px;
-      padding: 23px;
-      border: 1px solid;
-      border-color: #d7e2eb;
-      border-radius: 10px;
-    }
   }
-
-  .DetailInfo3 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-    margin-top: 16px;
-
-    input {
-      font-size: 12px;
-      color: #666666;
-      width: 100%;
-      height: 32px;
-      padding: 23px;
-      border: 1px solid;
-      border-color: #d7e2eb;
-      border-radius: 10px;
-    }
-  }
-
-  .DetailInfo4 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-    margin-top: 16px;
-
-    input {
-      font-size: 12px;
-      color: #666666;
-      width: 100%;
-      height: 32px;
-      padding: 23px;
-      border: 1px solid;
-      border-color: #d7e2eb;
-      border-radius: 10px;
-    }
+  .firstItem {
+    margin-top: ${(props) => props.margin || "28px"};
   }
 `;
 

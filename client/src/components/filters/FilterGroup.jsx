@@ -5,7 +5,6 @@ import Category from "./Category";
 import Search from "./Search";
 import useFilters from "../../store/FilterStore";
 import { BREAK_POINT_TABLET } from "../../constant";
-import Sort from "./Sort";
 
 const FilterGroup = () => {
   const { filterData, setFilterData } = useFilters();
@@ -24,7 +23,6 @@ const FilterGroup = () => {
           <Filter />
           <Search />
         </div>
-        <Sort />
       </Group>
       <FilterItems>
         {filterData.map((item, idx) => (

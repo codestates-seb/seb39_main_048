@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import useFilters from "../../store/FilterStore";
 import toast, { Toaster } from "react-hot-toast";
+import { ToastInfo } from "../../constant";
 
 const FilterItem = ({ item }) => {
   const { filterData, setFilterData } = useFilters();
@@ -23,19 +24,7 @@ const FilterItem = ({ item }) => {
 
     // 최대 선택 가능한 필터 제한 (토스트)
     if (filterData.length > 3) {
-      toast("최대 4개까지 선택 가능합니다!", {
-        icon: "🥲",
-        duration: 1500,
-        position: "top-center",
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-          boxShadow: "none",
-          marginTop: "90px",
-          fontSize: "14px",
-        },
-      });
+      toast("최대 4개까지 선택 가능합니다!", { icon: "🥲", ...ToastInfo });
 
       return;
     }

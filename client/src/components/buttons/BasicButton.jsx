@@ -1,9 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-const BasicButton = ({ bgcolor, text, onDelete, onUpdate }) => {
+const BasicButton = ({
+  bgcolor,
+  text,
+  onDelete,
+  handleUpdateOpen,
+  onCancel,
+  onUpdate,
+}) => {
   return (
-    <Button bgcolor={bgcolor} onClick={onDelete || onUpdate}>
+    <Button
+      bgcolor={bgcolor}
+      onClick={onDelete || handleUpdateOpen || onCancel || onUpdate}
+    >
       {text}
     </Button>
   );

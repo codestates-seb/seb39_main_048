@@ -1,7 +1,7 @@
 import React from "react";
+import styled from "styled-components";
 import { useGetPlace } from "../hooks/useAPI";
 import Point from "../assets/Point.png";
-import styled from "styled-components";
 import PlaceCard1 from "../components/cards/PlaceCard1";
 import FilterGroup from "../components/filters/FilterGroup";
 import Footer from "../components/Footer";
@@ -37,18 +37,9 @@ const Listpage = () => {
 
           <FilterGroup />
           <CardGroup>
-            {!filterData.length
-              ? data.map((place, idx) => <PlaceCard1 data={place} key={idx} />)
-              : ""}
-            {filterData.length &&
-            data.filter((data) => filterData.includes(...data.tags)).length ===
-              0 ? (
-              <EmptyData />
-            ) : (
-              data
-                .filter((data) => filterData.includes(...data.tags))
-                .map((place, idx) => <PlaceCard1 data={place} key={idx} />)
-            )}
+            {data.map((place, idx) => (
+              <PlaceCard1 data={place} key={idx} />
+            ))}
           </CardGroup>
         </Inner>
         <MoveRegist />
@@ -58,7 +49,7 @@ const Listpage = () => {
   );
 };
 const ListPage = styled.div`
-  padding-top: 144px;
+  padding-top: 166px;
 `;
 
 const Inner = styled.div`
@@ -80,7 +71,7 @@ const Title = styled.div`
   img {
     position: absolute;
     top: -12px;
-    left: 130px;
+    left: 143px;
     width: 75px;
     z-index: -10;
   }

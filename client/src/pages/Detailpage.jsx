@@ -1,5 +1,4 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as Star } from "../assets/Star.svg";
@@ -10,12 +9,15 @@ import { ReactComponent as Phone } from "../assets/Phone.svg";
 import { ReactComponent as Description } from "../assets/Description.svg";
 import { useGetDetailPlace, useDeleteDetailPlace } from "../hooks/useAPI";
 import { Keywords } from "../constant";
+import styled from "styled-components";
 import BasicButton from "../components/buttons/BasicButton";
 import HashTag from "../components/tags/HashTag";
 import Footer from "../components/Footer";
 import Reviews from "../components/review/Reviews";
+import DetailUpdate from "../components/detailpage/DetailUpdate";
 
 const Detailpage = () => {
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isLoading, isError } = useGetDetailPlace(id);
@@ -29,8 +31,10 @@ const Detailpage = () => {
     navigate("/place");
   };
 
-  const onUpdate = () => {
-    console.log("onUpdate");
+  const handleUpdateOpen = () => {
+    window.scrollTo(0, 0);
+    setIsUpdateOpen(true);
+    console.log("isUpdateOpen", isUpdateOpen);
   };
 
   return (
@@ -47,7 +51,12 @@ const Detailpage = () => {
               text={"삭제"}
               onDelete={onDelete}
             />
-            <BasicButton text={"수정"} onUpdate={onUpdate} />
+            <BasicButton text={"수정"} handleUpdateOpen={handleUpdateOpen} />
+            <DetailUpdate
+              setIsOpen={setIsUpdateOpen}
+              isOpen={isUpdateOpen}
+              data={data}
+            />
           </div>
         </div>
         <div className="detailTop_info">
@@ -63,7 +72,7 @@ const Detailpage = () => {
             data.tags.map((tag, idx) => <HashTag text={tag} key={idx} />)}
         </div>
         <div className="imgs_detailInfo">
-          <Imgs></Imgs>
+          <Imgs>{data.placeImage ? <img src={data.placeImage} /> : ""}</Imgs>
           <Infos>
             <h2>상세 정보</h2>
             <Info>
@@ -76,7 +85,11 @@ const Detailpage = () => {
             </Info>
             <Info>
               <Globe />
-              <DetailInfo color={data.hompage ? "" : "#999"}>{data.hompage ? data.hompage : "대표 사이트가 존재하지 않습니다."}</DetailInfo>
+              <DetailInfo color={data.hompage ? "" : "#999"}>
+                {data.hompage
+                  ? data.hompage
+                  : "대표 사이트가 존재하지 않습니다."}
+              </DetailInfo>
             </Info>
             <Info>
               <Phone />
@@ -189,6 +202,12 @@ const Imgs = styled.div`
   width: 100%;
   height: 20vw;
   background-color: #f5f5f5;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 20vw;
+  }
 `;
 
 const Infos = styled.div`

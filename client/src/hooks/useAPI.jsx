@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import axios from "axios";
 
-const BASE_URL = `http://localhost:3001`;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 // --------------------목록 데이터--------------------
 export const useGetPlace = (url) => {
@@ -19,6 +19,69 @@ export const useGetPlace = (url) => {
     isError: error,
   };
 };
+
+// --------POST--------
+export const usePostPlace = (config) => {
+  const postPlace = async () => {
+    try {
+      const { data } = await axios.post(`${BASE_URL}/place`, config);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("usePostPlace");
+    return res.data;
+  };
+
+  return postPlace;
+};
+
+// --------PATCH--------
+export const useUpdataPlace = (config, id) => {
+  const updatePlace = async () => {
+    try {
+      const { data } = await axios.patch(`${BASE_URL}/place/${id}`, config);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("useUpdataPlace");
+    return res.data;
+  };
+
+  return updatePlace;
+};
+
+
+
+// --------------------디테일 데이터--------------------
+export const useGetDetailPlace = (id) => {
+  const fetcher = async (innerURL) => {
+    const res = await axios.get(`${BASE_URL}${innerURL}`);
+    console.log("useGetDetailPlace");
+    return res.data;
+  };
+  const { data, error } = useSWR(`/place/${id}`, fetcher);
+
+  return {
+    data: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+};
+// --------DELETE--------
+export const useDeleteDetailPlace = async (id) => {
+  try {
+    const { data } = await axios.delete(`${BASE_URL}/place/${id}`);
+    console.log("useDeleteDetailPlace");
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+
+
 
 // --------------------마이페이지 데이터--------------------
 
@@ -70,32 +133,4 @@ export const useGetRecommend = () => {
     isLoading: !error && !data,
     isError: error,
   };
-};
-
-// --------------------디테일 데이터--------------------
-export const useGetDetailPlace = (id) => {
-  const fetcher = async (innerURL) => {
-    const res = await axios.get(`${BASE_URL}${innerURL}`);
-    console.log("useGetDetailPlace");
-    return res.data;
-  };
-  const { data, error } = useSWR(`/place/${id}`, fetcher);
-
-  return {
-    data: data,
-    isLoading: !error && !data,
-    isError: error,
-  };
-};
-
-// --------------------디테일 데이터 delete--------------------
-
-export const useDeleteDetailPlace = async (id) => {
-  try {
-    const { data } = await axios.delete(`${BASE_URL}/place/${id}`);
-    console.log("useDeleteDetailPlace");
-    return data;
-  } catch (error) {
-    return error.response.data;
-  }
 };
