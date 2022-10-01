@@ -59,7 +59,6 @@ const Nav = ({ isLogin }) => {
             <div className="item border">회원가입</div>
           </Link>
           <div className="menu">장소 탐색</div>
-
           <Link to="/map">
             <div className="item place">지도로 찾기</div>
           </Link>
@@ -139,7 +138,7 @@ const MenuGroup = styled.div`
     padding: 15px 0;
     transition: all 0.1s ease-in-out;
     &:hover {
-     color: #4da772;
+      color: #4da772;
     }
   }
 
