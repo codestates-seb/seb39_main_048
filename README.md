@@ -14,7 +14,7 @@
 |                       강혜원 (FE 팀장)                       |                         이종원 (FE)                          |                         문주성 (BE)                          |                         오진현 (BE)                          |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 | <img src="https://avatars.githubusercontent.com/u/104333249?v=4" alt="img" width="100" /> | <img src="https://avatars.githubusercontent.com/u/104333083?v=4" alt="img" width="100" /> | <img src="https://avatars.githubusercontent.com/u/53209324?v=4" alt="Avatar" width="100" /> | <img src="https://avatars.githubusercontent.com/u/104333026?v=4 alt=" alt="img" title="img" width="100;" /> |
-|         [@kanghyew0n](https://github.com/kanghyew0n)         |           [@MrBellon](https://github.com/MrBellon)           |            [@JuSeong](https://github.com/JuSeong)            |         [@deanoh533]((https://github.com/deanoh533))         |
+|         [@kanghyew0n](https://github.com/kanghyew0n)         |           [@MrBellon](https://github.com/MrBellon)           |            [@JuSeong](https://github.com/JuSeong)            |         [@deanoh533](https://github.com/deanoh533)         |
 
 <br/>
 
