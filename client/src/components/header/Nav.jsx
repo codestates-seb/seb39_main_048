@@ -63,7 +63,7 @@ const Nav = ({ isLogin }) => {
           <Link to="/map">
             <div className="item place">지도로 찾기</div>
           </Link>
-          <Link to="/list">
+          <Link to="/place">
             <div className="item">목록으로 찾기</div>
           </Link>
         </MenuGroup>

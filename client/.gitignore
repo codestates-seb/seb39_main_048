@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 
+# api keys
 .env
 
 # Editor directories and files
