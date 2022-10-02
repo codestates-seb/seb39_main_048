@@ -4,11 +4,9 @@ import com.mainproejct.server.place.entity.PlaceTag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +17,13 @@ import java.util.List;
 public class Tag {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tagId;
 
-    String TagName;
+    @Column
+  //  @Id
+    private String tagName;
+
 
     @OneToMany(mappedBy = "tag")
     private List<PlaceTag> placeTagList = new ArrayList<>();

@@ -1,5 +1,6 @@
 package com.mainproejct.server.place.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mainproejct.server.tag.entity.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,10 +18,12 @@ public class PlaceTag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long placeTagId;
 
+
     @ManyToOne
     @JoinColumn(name = "PLACE_ID")
     private Place place;
 
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "TAG_ID")
     private Tag tag;
@@ -39,4 +42,12 @@ public class PlaceTag {
         }
     }
 
+    @Override
+    public String toString() {
+        return "PlaceTag{" +
+                "placeTagId=" + placeTagId +
+                ", place=" + place +
+                ", tag=" + tag +
+                '}';
+    }
 }

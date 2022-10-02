@@ -1,23 +1,23 @@
 package com.mainproejct.server.place.controller;
 
 import com.mainproejct.server.dto.MainResponseDto;
-import com.mainproejct.server.dto.MultiResponseDto;
 import com.mainproejct.server.dto.SingleResponseDto;
 import com.mainproejct.server.place.dto.PlaceDto;
+import com.mainproejct.server.place.dto.PlaceTagDto;
 import com.mainproejct.server.place.entity.Place;
+import com.mainproejct.server.place.entity.PlaceTag;
 import com.mainproejct.server.place.mapper.PlaceMapper;
-import com.mainproejct.server.place.repository.PlaceRepository;
 import com.mainproejct.server.place.service.PlaceService;
-import io.swagger.annotations.ApiOperation;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
+import com.mainproejct.server.tag.entity.Tag;
+import com.mainproejct.server.tag.service.TagService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Positive;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/api/v1/place")
@@ -26,9 +26,12 @@ public class PlaceController {
     private final PlaceService placeService;
     private final PlaceMapper mapper;
 
-    public PlaceController(PlaceService placeService, PlaceMapper mapper) {
+    private final TagService tagService;
+
+    public PlaceController(PlaceService placeService, PlaceMapper mapper, TagService tagService) {
         this.placeService = placeService;
         this.mapper = mapper;
+        this.tagService = tagService;
     }
 
 
@@ -39,18 +42,53 @@ public class PlaceController {
     // @ApiOperation(value = "장소등록", response = Place.class)
     //post
     @PostMapping
+    @Transactional
     public ResponseEntity postPlace(@RequestBody PlaceDto.post requestBody){
 
-        Place place = mapper.placePostToPlace(requestBody);
+        Place place = new Place();
+        place.setName(requestBody.getName());
+        place.setCategory(requestBody.getCategory());
+        place.setServiceTime(requestBody.getServiceTime());
+        place.setHomepage(requestBody.getHomepage());
+        place.setNumber(requestBody.getNumber());
+        place.setDescription(requestBody.getDescription());
+        place.setAddress(requestBody.getAddress());
+        place.setPlaceImage(requestBody.getPlaceImage());
+
+        PlaceTag placeTag = new PlaceTag();
+        //placeTag.addPlace(place);
+
+
+        for (PlaceTagDto placeTagDto : requestBody.getPlaceTagList()){
+            Tag tag = new Tag();
+            tag.setTagName(placeTagDto.getTagName());
+           
+            Tag createdTag = tagService.createdTag(tag);
+            placeTag.addTag(createdTag);
+            place.addPlaceTag(placeTag);
+            System.out.println("placeTag.toString() = " + placeTag.toString());
+
+        }
+
+
         Place createdPlace = placeService.createPlace(place);
 
 
+//           /////////////////
+//
+//        Place place = mapper.placePostToPlace(requestBody); //  place : placeTag[ tagName , tag, place ] 리스트에 포함
+//
+//        Tag findTag = place.getPlaceTagList().get(0).getTag();
+//        tagService.createdTag(findTag);
+//        Place createdPlace = placeService.createPlace(place);
+//
 //        System.out.print("*** requestBody ** : ");
 //        System.out.println(requestBody.toString());
 //        System.out.print("*** dto -> entity = place : ");
 //        System.out.println(place.toString());
 //        System.out.print("*** place -> responseDto = createdPlace :");
 //        System.out.println(createdPlace.toString());
+
 
      return new ResponseEntity<>(
              new SingleResponseDto<>(mapper.placeToPlaceResponse(createdPlace)), HttpStatus.CREATED);

@@ -33,6 +33,7 @@ public class PlaceDto {
                     ", address='" + address + '\'' +
                     ", placeImage='" + placeImage + '\'' +
                     ", description='" + description + '\'' +
+                    ", placeTagList=" + placeTagList +
                     '}';
         }
     }

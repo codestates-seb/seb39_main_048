@@ -1,35 +1,66 @@
 package com.mainproejct.server.place.service;
 
 import com.mainproejct.server.place.controller.PlaceSpecs;
+import com.mainproejct.server.place.dto.PlaceTagDto;
 import com.mainproejct.server.place.entity.Place;
+import com.mainproejct.server.place.entity.PlaceTag;
 import com.mainproejct.server.place.repository.PlaceRepository;
-import com.mainproejct.server.user.entity.User;
+import com.mainproejct.server.tag.entity.Tag;
+import com.mainproejct.server.tag.service.TagService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
+@Transactional(readOnly = true)
 public class PlaceService {
 
     private final PlaceRepository placeRepository;
+    private final TagService tagService;
 
-    public PlaceService(PlaceRepository placeRepository) {
+    public PlaceService(PlaceRepository placeRepository, TagService tagService) {
         this.placeRepository = placeRepository;
+        this.tagService = tagService;
     }
 
     /**
      * Post
     * createPlace 구현
     **/
-    public Place createPlace(Place place){
+    @Transactional
+    public Place createPlace(Place place){ //
+
+        //placeTagList 확인
+      //  verifyPlaceTagList(place.getPlaceTagList());
+//
+//        List<PlaceTag> placeTagList = place.getPlaceTagList();
+////
+////        placeTagList.stream().map(placeTag -> placeTag.getPlace());
+
+
         Place savedPlace = placeRepository.save(place);
+
         return savedPlace;
     }
+
+    private void verifyPlaceTagList(List<PlaceTag> placeTagList) {
+
+        //tagName이 존재하는지 확인, //존재하지 않으면 tagService에서 태그 생성
+        List<Tag> findTag = placeTagList.stream()
+                .map(placeTag -> {
+                    return tagService.findVerifiedTagName(placeTag.getTag());
+                }).collect(Collectors.toList());
+
+    }
+
 
     /**
     * Patch

@@ -14,4 +14,8 @@ public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecific
 
     List<Place> findTop8ByCategoryOrderByScoreAvg(String category);
     //List<Place> findByCategory(String category, PageRequest pageRequest);
+
+    Place findByName(String name);
+
+    List<Place> findByNameContaining(String name);
 }

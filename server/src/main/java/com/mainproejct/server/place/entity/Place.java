@@ -33,7 +33,7 @@ public class Place {
     double scoreAvg; //jpa 평균 적용..  or jpql
 
 
-    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE ,orphanRemoval = true)
     private List<Reply> replyList = new ArrayList<>();
 
     public void addReply(Reply reply){
@@ -45,9 +45,9 @@ public class Place {
 
     public void addPlaceTag(PlaceTag placeTag){
         this.placeTagList.add(placeTag);
-        if(placeTag.getPlace() != this){
-            placeTag.addPlace(this);
-        }
+//        if(placeTag.getPlace() != this){
+//            placeTag.addPlace(this);
+//        }
     }
 
 
@@ -64,8 +64,8 @@ public class Place {
                 ", address='" + address + '\'' +
                 ", placeImage='" + placeImage + '\'' +
                 ", scoreAvg=" + scoreAvg +
-
-                ", replyList=" + replyList.toString() +
+                ", replyList=" + replyList +
+                ", placeTagList=" + placeTagList +
                 '}';
     }
 }
