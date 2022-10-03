@@ -1,7 +1,6 @@
 package com.mainproejct.server.place.service;
 
 import com.mainproejct.server.place.controller.PlaceSpecs;
-import com.mainproejct.server.place.dto.PlaceTagDto;
 import com.mainproejct.server.place.entity.Place;
 import com.mainproejct.server.place.entity.PlaceTag;
 import com.mainproejct.server.place.repository.PlaceRepository;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @Transactional(readOnly = true)
@@ -90,8 +88,32 @@ public class PlaceService {
                 .ifPresent(scoreAvg -> findPlace.setScoreAvg(scoreAvg));
         Optional.ofNullable(place.getReplyList())
                 .ifPresent(replyList -> findPlace.setReplyList(replyList));
+        Optional.ofNullable(place.getPlaceTagList())
+                .ifPresent(placeTagList ->  {
 
-        return placeRepository.save(findPlace);
+                    placeTagList.stream().forEach(placeTag ->{
+                       Tag tag = new Tag();
+                       tag = tagService.createdTag(placeTag.getTag());
+                        placeTag.setTag(tag);
+                        findPlace.addPlaceTag(placeTag);
+                    });
+        });
+        //tagName 을 tag에 삽입
+        // tag를 저장(createdTag)
+        // placeTaag에 createdTag 저장 ->  tag에 placeTag 저장
+        // placeTag에 place 저장 - > place에 placeTag 저장
+
+                //.ifPresent(placeTags -> findPlace.setPlaceTagList(placeTags));
+//
+//        .stream().map(placeTag -> {
+//                    Tag savedTag = tagService.findVerifiedTagName(placeTag.getTag());
+//                    PlaceTag savedPlaceTag = new PlaceTag();
+//                    savedPlaceTag.addTag(savedTag);
+//                    return  savedPlaceTag;
+//            ).collect(Collectors.toList())).ifPresent(placeTags -> findPlace.addPlaceTag());
+//
+
+        return findPlace;//placeRepository.save(findPlace);
 
     }
 

@@ -1,5 +1,6 @@
 package com.mainproejct.server.place.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mainproejct.server.reply.entity.Reply;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,39 +34,27 @@ public class Place {
     double scoreAvg; //jpa 평균 적용..  or jpql
 
 
-    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE ,orphanRemoval = true)
+    @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
     private List<Reply> replyList = new ArrayList<>();
 
     public void addReply(Reply reply){
         replyList.add(reply);
     }
 
-    @OneToMany(mappedBy = "place", cascade = CascadeType.PERSIST)
+    @JsonIgnore
+    @OneToMany(mappedBy = "place", cascade = CascadeType.PERSIST , orphanRemoval = true)
     private List<PlaceTag> placeTagList = new ArrayList<>();
 
     public void addPlaceTag(PlaceTag placeTag){
         this.placeTagList.add(placeTag);
-//        if(placeTag.getPlace() != this){
-//            placeTag.addPlace(this);
-//        }
+        if(placeTag.getPlace() != this){
+            placeTag.addPlace(this);
+        }
+    }
+
+    public void removeTag(PlaceTag placeTag){
+        this.placeTagList.remove(placeTag);
     }
 
 
-    @Override
-    public String toString() {
-        return "Place{" +
-                "placeId=" + placeId +
-                ", name='" + name + '\'' +
-                ", category='" + category + '\'' +
-                ", serviceTime='" + serviceTime + '\'' +
-                ", homepage='" + homepage + '\'' +
-                ", number='" + number + '\'' +
-                ", description='" + description + '\'' +
-                ", address='" + address + '\'' +
-                ", placeImage='" + placeImage + '\'' +
-                ", scoreAvg=" + scoreAvg +
-                ", replyList=" + replyList +
-                ", placeTagList=" + placeTagList +
-                '}';
-    }
 }

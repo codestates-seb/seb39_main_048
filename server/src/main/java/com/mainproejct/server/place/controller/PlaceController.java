@@ -3,7 +3,7 @@ package com.mainproejct.server.place.controller;
 import com.mainproejct.server.dto.MainResponseDto;
 import com.mainproejct.server.dto.SingleResponseDto;
 import com.mainproejct.server.place.dto.PlaceDto;
-import com.mainproejct.server.place.dto.PlaceTagDto;
+import com.mainproejct.server.place.dto.TagNameDto;
 import com.mainproejct.server.place.entity.Place;
 import com.mainproejct.server.place.entity.PlaceTag;
 import com.mainproejct.server.place.mapper.PlaceMapper;
@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +45,7 @@ public class PlaceController {
     @PostMapping
     @Transactional
     public ResponseEntity postPlace(@RequestBody PlaceDto.post requestBody){
-
+        //place 생성 후 requestBody내용 set
         Place place = new Place();
         place.setName(requestBody.getName());
         place.setCategory(requestBody.getCategory());
@@ -54,41 +55,24 @@ public class PlaceController {
         place.setDescription(requestBody.getDescription());
         place.setAddress(requestBody.getAddress());
         place.setPlaceImage(requestBody.getPlaceImage());
-
-        PlaceTag placeTag = new PlaceTag();
         //placeTag.addPlace(place);
 
-
-        for (PlaceTagDto placeTagDto : requestBody.getPlaceTagList()){
+        //tagName 을 tag에 삽입
+        // tag를 저장(createdTag)
+        // placeTaag에 createdTag 저장 ->  tag에 placeTag 저장
+        // placeTag에 place 저장 - > place에 placeTag 저장
+        for (TagNameDto tagNameDto : requestBody.getTagNameList()){
             Tag tag = new Tag();
-            tag.setTagName(placeTagDto.getTagName());
-           
-            Tag createdTag = tagService.createdTag(tag);
-            placeTag.addTag(createdTag);
-            place.addPlaceTag(placeTag);
-            System.out.println("placeTag.toString() = " + placeTag.toString());
+            tag.setTagName(tagNameDto.getTagName());
 
+            Tag createdTag = tagService.createdTag(tag);
+
+            PlaceTag placeTag = new PlaceTag();
+            placeTag.addTag(createdTag);
+            placeTag.addPlace(place);
         }
 
-
         Place createdPlace = placeService.createPlace(place);
-
-
-//           /////////////////
-//
-//        Place place = mapper.placePostToPlace(requestBody); //  place : placeTag[ tagName , tag, place ] 리스트에 포함
-//
-//        Tag findTag = place.getPlaceTagList().get(0).getTag();
-//        tagService.createdTag(findTag);
-//        Place createdPlace = placeService.createPlace(place);
-//
-//        System.out.print("*** requestBody ** : ");
-//        System.out.println(requestBody.toString());
-//        System.out.print("*** dto -> entity = place : ");
-//        System.out.println(place.toString());
-//        System.out.print("*** place -> responseDto = createdPlace :");
-//        System.out.println(createdPlace.toString());
-
 
      return new ResponseEntity<>(
              new SingleResponseDto<>(mapper.placeToPlaceResponse(createdPlace)), HttpStatus.CREATED);
@@ -101,17 +85,38 @@ public class PlaceController {
     @PatchMapping("/{place-id}")
     public ResponseEntity patchPlace(@RequestBody PlaceDto.patch requestBody,
                                      @PathVariable("place-id") Long placeId){
-        System.out.print("////////");
-        System.out.println(requestBody.toString());
         Place place = mapper.placePatchToPlace(requestBody);
         place.setPlaceId(placeId);
-        System.out.print("////////");
-        System.out.println(place.toString());
 
         Place updatedPlace = placeService.updatePlace(place);
 
-        System.out.print("////////");
-        System.out.println(place.toString());
+
+        updatedPlace.getPlaceTagList().clear();
+
+        updatedPlace.getPlaceTagList()
+                .addAll(new ArrayList<>(place.getPlaceTagList()));
+
+
+//        PlaceTag placeTag = new PlaceTag();
+//        placeTag.addPlace(place);
+//        placeTag.addTag(tag);
+
+//        List<PlaceTag> plist = new ArrayList<>();
+//        plist = place.getPlaceTagList().stream().map(placeTag -> {
+//            placeTag.setPlace(updatedPlace);
+//            return null;
+//        });
+
+
+
+//                tagService.updateTag(place.getPlaceTagList()
+//                        .stream()
+//                        .map(placeTag -> placeTag.getTag()).collect(Collectors.toList()));
+
+
+        //updatedPlace.getPlaceTagList().addAll(place.getPlaceTagList());
+//        updatedPlace.getPlaceTagList().addAll(plist);
+
         return new ResponseEntity<>(
                 new SingleResponseDto<>(mapper.placeToPlaceResponse(updatedPlace)), HttpStatus.OK);
     }

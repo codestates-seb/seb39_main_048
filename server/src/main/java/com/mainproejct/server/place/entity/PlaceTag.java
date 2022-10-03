@@ -19,11 +19,12 @@ public class PlaceTag {
     private long placeTagId;
 
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "PLACE_ID")
     private Place place;
 
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "TAG_ID")
     private Tag tag;
@@ -42,12 +43,5 @@ public class PlaceTag {
         }
     }
 
-    @Override
-    public String toString() {
-        return "PlaceTag{" +
-                "placeTagId=" + placeTagId +
-                ", place=" + place +
-                ", tag=" + tag +
-                '}';
-    }
+
 }

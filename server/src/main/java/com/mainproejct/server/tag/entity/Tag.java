@@ -1,5 +1,6 @@
 package com.mainproejct.server.tag.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mainproejct.server.place.entity.PlaceTag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,11 +22,11 @@ public class Tag {
     private Long tagId;
 
     @Column
-  //  @Id
     private String tagName;
 
 
-    @OneToMany(mappedBy = "tag")
+    @JsonIgnore
+    @OneToMany(mappedBy = "tag") // cascade_remove
     private List<PlaceTag> placeTagList = new ArrayList<>();
 
 

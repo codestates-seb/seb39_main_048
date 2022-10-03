@@ -1,6 +1,5 @@
 package com.mainproejct.server.place.dto;
 
-import com.mainproejct.server.place.entity.PlaceTag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -20,22 +19,9 @@ public class PlaceDto {
         private String placeImage;
         private String description;
 
-        private List<PlaceTagDto> placeTagList;
+        private List<TagNameDto> tagNameList;
 
-        @Override
-        public String toString() {
-            return "post{" +
-                    "name='" + name + '\'' +
-                    ", category='" + category + '\'' +
-                    ", serviceTime='" + serviceTime + '\'' +
-                    ", homepage='" + homepage + '\'' +
-                    ", number='" + number + '\'' +
-                    ", address='" + address + '\'' +
-                    ", placeImage='" + placeImage + '\'' +
-                    ", description='" + description + '\'' +
-                    ", placeTagList=" + placeTagList +
-                    '}';
-        }
+
     }
 
     @Getter
@@ -51,6 +37,9 @@ public class PlaceDto {
         private String address;
         private String placeImage;
         private String description;
+        private List<TagNameDto> tagNameList;
+
+
 
         @Override
         public String toString() {
@@ -83,7 +72,7 @@ public class PlaceDto {
         private String description;
         private double scoreAvg;
 
-        private List<PlaceTagDto> placeTagList;
+        private List<TagNameDto> tagNameList;
 
     }
 }
