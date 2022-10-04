@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import useFilters from "../../store/FilterStore";
 import useDetectClose from "../../hooks/useDetectClose";
@@ -10,7 +10,7 @@ const Search = () => {
   const [isOpen, searchRef, handleOpen] = useDetectClose(false);
   const { data, isLoading, isError } = useGetPlace("/place");
   const { searchData, setSearchData, text, setText } = useFilters();
-  const [filter, setFilter] = useState(searchData)
+  const [filter, setFilter] = useState(searchData);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>ERR...</div>;
@@ -33,7 +33,7 @@ const Search = () => {
         data.toLowerCase().includes(targetData.toLowerCase())
       );
       console.log(filterData); // -> 여기까지 검색된 내용 잘 나옴
-      setFilter(filterData) //-> 여기서 넣으면 빈 배열이 나옴 -> 데이터 들어가는 속도가 늦어서?
+      setFilter(filterData); //-> 여기서 넣으면 빈 배열이 나옴 -> 데이터 들어가는 속도가 늦어서?
     }
   };
 

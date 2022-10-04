@@ -1,9 +1,12 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
 
-const Review = () => {
+const Review = ({ reply }) => {
+  const { id } = useParams();
+
   return (
     <ReviewItem>
       <ReviewLeft>
@@ -12,7 +15,7 @@ const Review = () => {
             <div className="user">
               <UserImg></UserImg>
               <div className="userInfo">
-                <UserName>kanghyew0n</UserName>
+                <UserName>{reply.replyId}</UserName>
                 <PostDate>2022.09.29</PostDate>
               </div>
             </div>
@@ -22,19 +25,12 @@ const Review = () => {
             </div>
           </div>
           <Score>
-            <Star /> <Star /> <Star /> <Star /> <Star />
+            <Star /> 평점 {reply.score}
           </Score>
         </div>
-        <p className="reviewContent">
-          케이크 정말 맛있어요~~ 주문해서 바로 픽업했고 디자인도 너무 예쁜데
-          맛도 너무 좋아요~전에 홍대 터*힙 여기서 사고 선제작후 냉동보관했다가
-          다시 녹여서 주는거 알고 정말 너무 실망해서 여기도 혹시나 하는 맘에
-          샀는데 당일 제작 당일 픽업했습니다.. 맛에 또 한번 놀랐구요. 다음
-          기념일도 여기로 주문하려고 합니다~ 마케팅만 번지르르하게 하는
-          다른데보다는 훨씬 나은거 같네요!!
-        </p>
+        <p className="reviewContent">{reply.context}</p>
       </ReviewLeft>
-      <ReviewRight></ReviewRight>
+      {/* <ReviewRight></ReviewRight> */}
     </ReviewItem>
   );
 };
@@ -71,22 +67,22 @@ const ReviewLeft = styled.div`
     cursor: pointer;
     transition: all 0.3s;
     @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
-    font-size: 12px;
-  }
+      font-size: 12px;
+    }
   }
   .reviewContent {
     font-size: 16px;
     color: #333;
     line-height: 150%;
     transition: all 0.3s;
-    
+
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     text-align: left;
     line-height: 1.6em;
     height: 5em;
-    
+
     @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
       font-size: 14px;
     }
@@ -123,6 +119,9 @@ const PostDate = styled.div`
   color: #999;
 `;
 
-const Score = styled.div``;
+const Score = styled.div`
+  font-size: 11;
+  color: #999;
+`;
 
 export default Review;
