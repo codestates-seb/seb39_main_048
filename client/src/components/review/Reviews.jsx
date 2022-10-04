@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import Modal from "react-modal";
 import styled from "styled-components";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import BasicButton from "../buttons/BasicButton";
