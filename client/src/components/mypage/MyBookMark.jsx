@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PlaceCard1 from "../cards/PlaceCard1";
 import { useGetMypageData } from "../../hooks/useAPI";
 import { BREAK_POINT_TABLET } from "../../constant";
+import Loading from "../ui/Loading";
 
 const MyBookMark = ({menu}) => {
   let URL = "";
@@ -12,7 +13,7 @@ const MyBookMark = ({menu}) => {
 
   const { data, isLoading, isError } = useGetMypageData(URL);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading/>
   if (isError) return <div>ERR...</div>;
 
   return (

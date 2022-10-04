@@ -1,36 +1,25 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { ToastInfo } from "../../constant";
+import toast, { Toaster } from "react-hot-toast";
 import { ReactComponent as Plus } from "../../assets/Plus.svg";
 import useImage from "../../store/ImageStore";
 import usePost from "../../store/PostStore";
 
 const UploadImg = () => {
   const { file, setFile } = useImage();
-  const {placeImage, setPlaceImage} = usePost();
-  
+  const { placeImage, setPlaceImage } = usePost();
   const [imgURL, setImgURL] = useState(null);
   const ref = useRef();
 
-  const onChangeImage = (e) => {
-    // const reader = new FileReader();
-    // setFile(ref.current.files[0]);
-    // console.log(file);
-
-    // reader.readAsDataURL(file);
-    // reader.onloadend = () => {
-    //   setImgURL(reader.result);
-    //   console.log("이미지주소", reader.result);
-    // };
-    setFile(e.target.files[0]);
-  };
-
-  const uploadImage = async() => {
+  const onChangeImage = async () => {
+    // 클라우디너리에 올리기
     let formData = new FormData();
     formData.append("api_key", import.meta.env.VITE_CLOUD_API_KEY);
     formData.append("upload_preset", import.meta.env.VITE_CLOUD_PRESET_NAME);
     formData.append("timestamp", (Date.now() / 1000) | 0);
-    formData.append(`file`, file);
+    formData.append(`file`, ref.current.files[0]);
 
     const config = {
       header: { "Content-Type": "multipart/form-data" },
@@ -40,15 +29,29 @@ const UploadImg = () => {
       .post(import.meta.env.VITE_CLOUD_API_URL, formData, config)
       .then((res) => {
         setPlaceImage(res.data.url);
-        console.log(res.data.url);
+        console.log("이미지 올라가는 중", res.data);
       })
       .catch((err) => console.log(err));
 
-      console.log("placeImage", placeImage)
-  }
+
+    // 미리보기
+    if (ref.current.files[0].size >= 3000000) {
+      toast("사진 용량은 3MB이내로 올려주세요!", { icon: "🥲", ...ToastInfo });
+      return;
+    }
+    const reader = new FileReader();
+    setFile(ref.current.files[0]);
+    console.log(ref.current.files[0].size);
+
+    reader.readAsDataURL(ref.current.files[0]);
+    reader.onloadend = () => {
+      setImgURL(reader.result);
+    };
+  };
 
   return (
     <ImageDetail>
+      <Toaster />
       <div className="ImgContainer">
         <div className="ImageUpload">
           이미지 업로드
@@ -65,10 +68,10 @@ const UploadImg = () => {
           <>
             <div className="ImgPlus">
               <Plus />
+              <span>이미지 3MB 이내</span>
             </div>
           </>
         )}
-        <button onClick={uploadImage}>이미지 선택 완료</button>
       </div>
     </ImageDetail>
   );

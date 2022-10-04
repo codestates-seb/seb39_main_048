@@ -7,7 +7,7 @@ export const myMenus = [
 
 // filterGroup
 export const category = ["전체", "식당", "카페", "숙소", "병원", "기타"];
-export const selectCategory = ["식당", "카페", "숙소", "병원", "기타"];
+export const SelectCategory = ["식당", "카페", "숙소", "병원", "기타"];
 export const sizeFilters = ["전체", "소형견", "중형견", "대형견"];
 export const isOnlyFilters = ["반려견 동반", "반려견 전용"];
 export const locationFilters = [

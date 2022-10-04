@@ -14,10 +14,13 @@ import TagSelect from "../components/registpage/TagSelect";
 import AddressPost from "../components/registpage/AddressPost";
 import UploadImg from "../components/registpage/UploadImg";
 import useImage from "../store/ImageStore";
+import { useState } from "react";
+import Loading from "../components/ui/Loading";
 
 const PlaceRegistration = () => {
   const navigate = useNavigate();
-  const { file, setFile } = useImage();
+  // const { file, setFile } = useImage();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     setSizeTags,
@@ -77,11 +80,15 @@ const PlaceRegistration = () => {
   };
 
   // 검증부분 추가하기
-  const onCreate = async () => {
-    const postPlace = usePostPlace(configData);
-    postPlace().then((res) => res.data);
-
-    navigate("/place");
+  const onCreate = () => {
+    if (placeImage.length) {
+      const postPlace = usePostPlace(configData);
+      postPlace().then((res) => {
+        res.data;
+        console.log("게시글 올라가는 중");
+        navigate("/place");
+      });
+    }
   };
 
   return (
@@ -117,10 +124,10 @@ const PlaceRegistration = () => {
         </PlaceKeywordSelect>
         <AddressPost />
         <RegistrationBtn>
-          <button className="Cancel">취소</button>
-          <button className="Registration" onClick={onCreate}>
-            등록하기
-          </button>
+              <button className="Cancel">취소</button>
+              <button className="Registration" onClick={onCreate}>
+                등록하기
+              </button>
         </RegistrationBtn>
       </Page>
       <Footer />
@@ -209,6 +216,7 @@ const RegistrationBtn = styled.div`
   align-items: center;
   height: 40px;
   gap: 20px;
+  position: relative;
 
   button {
     color: #ffffff;

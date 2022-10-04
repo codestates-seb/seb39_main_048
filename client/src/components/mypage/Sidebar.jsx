@@ -6,16 +6,23 @@ import useMenu from "../../store/MenuStore";
 import { myMenus } from "../../constant";
 import { BREAK_POINT_TABLET } from "../../constant";
 import { BREAK_POINT_PHONE } from "../../constant";
+import { useEffect } from "react";
 
 const Sidbar = () => {
   const { setMenu } = useMenu();
-  
   const [currentActive, setCurrentActive] = useState("마이페이지");
+
+  useEffect(() => {
+    return() => {
+      setMenu('마이페이지')
+    }
+  },[])
 
   const handleActive = (e) => {
     setCurrentActive(e.target.innerText);
     setMenu(e.target.innerText);
   };
+
 
   return (
     <SideBar>
@@ -159,6 +166,7 @@ const EditButton = styled.span`
   color: #4da772;
   padding: 5px 15px;
   cursor: pointer;
+  transition: all 0.3s;
   &:hover {
     color: #fff;
     background-color: #4da772;

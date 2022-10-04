@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useGetPlace } from "../hooks/useAPI";
 import Point from "../assets/Point.png";
@@ -8,23 +8,31 @@ import Footer from "../components/Footer";
 import useFilters from "../store/FilterStore";
 import EmptyData from "../components/ui/EmptyData";
 import MoveRegist from "../components/buttons/MoveRegist";
+import Loading from "../components/ui/Loading";
 
 const Listpage = () => {
-  const { selectCategory, filterData } = useFilters();
-  let URL = "";
+  const { selectCategory, searchWord, setSelectCategory, setFilterData } = useFilters();
 
-  // 스토어에 저장해바라~
+  useEffect(() => {
+    return () => {
+      setSelectCategory("전체");
+      setFilterData([])
+    };
+  }, []);
+  
+  let URL = "";
   if (selectCategory === "전체") URL = "/place";
   if (selectCategory === "식당") URL = "/restaurant";
   if (selectCategory === "카페") URL = "/cafe";
   if (selectCategory === "숙소") URL = "/stay";
   if (selectCategory === "병원") URL = "/place";
   if (selectCategory === "기타") URL = "/place";
-
+  
   const { data, isLoading, isError } = useGetPlace(URL);
-
-  if (isLoading) return <div>Loading...</div>;
+  
+  if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
+  
 
   return (
     <>
@@ -37,9 +45,18 @@ const Listpage = () => {
 
           <FilterGroup />
           <CardGroup>
-            {data.map((place, idx) => (
-              <PlaceCard1 data={place} key={idx} />
-            ))}
+            {searchWord
+              ? data
+                  .filter((place) => searchWord === place.placeName)
+                  .map((place, idx) => <PlaceCard1 data={place} key={idx} />)
+              : data.map((place, idx) => <PlaceCard1 data={place} key={idx} />)}
+            {searchWord &&
+            !data.filter((place) => searchWord === place.placeName).length ? (
+              <EmptyData />
+            ) : (
+              ""
+            )}
+            {!data.length ?  <EmptyData /> : ""}
           </CardGroup>
         </Inner>
         <MoveRegist />

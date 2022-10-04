@@ -57,7 +57,6 @@ const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
     placeName,
     tags,
     keyWord,
-    placeImage,
     serviceTime,
     hompage,
     number,

@@ -7,10 +7,17 @@ import { ReactComponent as Dots } from "../../assets/Dots.svg";
 import useDetectClose from "../../hooks/useDetectClose";
 import HashTag from "../tags/HashTag";
 import useMenu from "../../store/MenuStore";
+import { useDeleteMyPlace } from "../../hooks/useAPI";
 
 const PlaceCard1 = ({ data }) => {
   const { menu } = useMenu();
   const [isOpen, ref, handleOpen] = useDetectClose(false);
+
+  const onDelete = () => {
+    if (window.confirm("삭제하시겠습니까?")) {
+      useDeleteMyPlace(data.id);
+    }
+  };
 
   return (
     <Card>
@@ -41,7 +48,7 @@ const PlaceCard1 = ({ data }) => {
             {isOpen ? (
               <Buttons>
                 <Button>수정</Button>
-                <Button>삭제</Button>
+                <Button onClick={onDelete}>삭제</Button>
               </Buttons>
             ) : (
               ""
@@ -51,7 +58,7 @@ const PlaceCard1 = ({ data }) => {
         <Address>{data.address}</Address>
         <Tags>
           {data.tags &&
-            data.tags.map((item, idx) => <HashTag text={item} key={idx} />)}
+            data.tags.map((item, idx) => <HashTag text={item.tagName} key={idx} />)}
         </Tags>
       </PlaceInfo>
     </Card>
@@ -61,7 +68,7 @@ const PlaceCard1 = ({ data }) => {
 const Card = styled.div`
   border: 1px solid #d7e2eb;
   border-radius: 10px;
-  /* height: 282px; */
+  width: 100%;
   position: relative;
 `;
 
@@ -71,16 +78,25 @@ const PlaceImg = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   cursor: pointer;
+  overflow: hidden;
   img {
     object-fit: cover;
-    height: 150px;
+    width: 100%;
+    z-index: -100;
+    height: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      scale: 1.05;
+    }
   }
 `;
 
 const PlaceInfo = styled.div`
   padding: 20px 20px 25px 20px;
+  background-color: #fff;
 `;
 
 const Infos = styled.div`
@@ -149,7 +165,7 @@ const Buttons = styled.div`
 `;
 
 const Button = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   padding: 10px;
   cursor: pointer;
 `;

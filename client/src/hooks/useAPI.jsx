@@ -101,6 +101,17 @@ export const useGetMypageData = (url) => {
   };
 };
 
+// --------DELETE--------
+export const useDeleteMyPlace = async (id) => {
+  try {
+    const { data } = await axios.delete(`${BASE_URL}/myplace/${id}`);
+    console.log("useDeleteMyPlace");
+    return data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 // --------------------검색 데이터--------------------
 
 export const useGetSearch = () => {
@@ -120,13 +131,13 @@ export const useGetSearch = () => {
 
 // --------------------메인 추천 데이터--------------------
 
-export const useGetRecommend = () => {
-  const fetcher = async () => {
-    const res = await axios.get(`${BASE_URL}/recommend`);
+export const useGetRecommend = (url) => {
+  const fetcher = async (innerURL) => {
+    const res = await axios.get(`${BASE_URL}${innerURL}`);
     console.log("useGetRecommand");
     return res.data;
   };
-  const { data, error } = useSWR(`/recommend`, fetcher);
+  const { data, error } = useSWR(`${url}`, fetcher);
 
   return {
     data: data,
@@ -134,3 +145,6 @@ export const useGetRecommend = () => {
     isError: error,
   };
 };
+
+
+

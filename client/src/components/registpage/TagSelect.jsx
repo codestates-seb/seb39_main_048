@@ -1,4 +1,4 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import usePost from "../../store/PostStore";
 import { locationFilters, sizeFilters, isOnlyFilters } from "../../constant";
@@ -8,6 +8,7 @@ const TagSelect = ({ data, bottom, margin }) => {
     sizeTags,
     locationTags,
     isOnlyTags,
+    tags,
     setTags,
     setSizeTags,
     setLocationTags,
@@ -15,34 +16,28 @@ const TagSelect = ({ data, bottom, margin }) => {
   } = usePost();
 
   useEffect(() => {
-    console.log('useEffect1: sizeTags', sizeTags);
     setTags([...sizeTags, ...isOnlyTags, ...locationTags]);
-    // console.log("detailUpdate", sizeTags, locationTags, isOnlyTags)
   }, [sizeTags, locationTags, isOnlyTags]);
 
   useEffect(() => {
     if (data) {
-      setLocationTags(data.tags[data.tags.length-1])
-      setIsOnlyTags(data.tags[data.tags.length-2])
-
-      console.log('useEffect2: sizeTags', data);
-      setSizeTags(data.tags.slice(0, -2))
+      const tags = data.tags;
+      const size = tags.slice(0, -2);
+      setSizeTags(size);
+      setIsOnlyTags([tags[tags.length - 2]]);
+      setLocationTags([tags[tags.length - 1]]);
     }
   }, []);
 
   const handleClick = (e) => {
-    console.log('handleClick', sizeTags);
-    if (sizeTags.includes(e.target.innerText)) {
-      
-      const removeData = sizeTags.filter((item) => { 
-        console.log(item, e.target.innerText);
-       return item !== e.target.innerText
+    const tagvalue = sizeTags.map((tag) => tag.tagName);
+    if (tagvalue.includes(e.target.innerText)) {
+      const removeData = sizeTags.filter((item) => {
+        return item.tagName !== e.target.innerText;
       });
-      setSizeTags(removeData);
-      return;
+      return setSizeTags(removeData);
     }
-    // console.log('sizeTags', sizeTags)
-    setSizeTags([...sizeTags, e.target.innerText]);
+    setSizeTags([...sizeTags, { tagName: e.target.innerText }]);
   };
 
   return (
@@ -57,7 +52,12 @@ const TagSelect = ({ data, bottom, margin }) => {
             <li
               key={idx}
               onClick={handleClick}
-              className={sizeTags.includes(size) ? "Active" : ""}
+              className={
+                sizeTags.length &&
+                sizeTags.map((item) => item.tagName).includes(size)
+                  ? "Active"
+                  : ""
+              }
             >
               {size}
             </li>
@@ -69,8 +69,10 @@ const TagSelect = ({ data, bottom, margin }) => {
           {isOnlyFilters.map((only, idx) => (
             <li
               key={idx}
-              onClick={(e) => setIsOnlyTags([e.target.innerText])}
-              className={isOnlyTags.includes(only) ? "Active" : ""}
+              onClick={(e) => setIsOnlyTags([{ tagName: e.target.innerText }])}
+              className={
+                isOnlyTags[0] && isOnlyTags[0].tagName === only ? "Active" : ""
+              }
             >
               {only}
             </li>
@@ -82,8 +84,14 @@ const TagSelect = ({ data, bottom, margin }) => {
           {locationFilters.map((place, idx) => (
             <li
               key={idx}
-              onClick={(e) => setLocationTags([e.target.innerText])}
-              className={locationTags.includes(place) ? "Active" : ""}
+              onClick={(e) =>
+                setLocationTags([{ tagName: e.target.innerText }])
+              }
+              className={
+                locationTags[0] && locationTags[0].tagName === place
+                  ? "Active"
+                  : ""
+              }
             >
               {place}
             </li>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import usePost from "../../store/PostStore";
-import { selectCategory } from "../../constant";
+import { SelectCategory } from "../../constant";
 import { useEffect } from "react";
 
 const Category = ({ data }) => {
@@ -22,7 +22,7 @@ const Category = ({ data }) => {
   return (
     <CategoryBtn>
       <ul>
-        {selectCategory.map((category, idx) => (
+        {SelectCategory.map((category, idx) => (
           <li
             key={idx}
             onClick={BtnActive}

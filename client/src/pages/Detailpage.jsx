@@ -14,7 +14,8 @@ import BasicButton from "../components/buttons/BasicButton";
 import HashTag from "../components/tags/HashTag";
 import Footer from "../components/Footer";
 import Reviews from "../components/review/Reviews";
-import DetailUpdate from "../components/detailpage/DetailUpdate";
+import DetailUpdate from "../components/detailUpdate/DetailUpdate";
+import Loading from "../components/ui/Loading";
 
 const Detailpage = () => {
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
@@ -22,13 +23,14 @@ const Detailpage = () => {
   const { id } = useParams();
   const { data, isLoading, isError } = useGetDetailPlace(id);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
 
   const onDelete = () => {
-    window.confirm("삭제하시겠습니까?");
-    useDeleteDetailPlace(id);
-    navigate("/place");
+    if (window.confirm("삭제하시겠습니까?")) {
+      useDeleteDetailPlace(id);
+      navigate("/place");
+    }
   };
 
   const handleUpdateOpen = () => {
@@ -69,7 +71,7 @@ const Detailpage = () => {
         </div>
         <div className="tagGroup">
           {data &&
-            data.tags.map((tag, idx) => <HashTag text={tag} key={idx} />)}
+            data.tags.map((tag, idx) => <HashTag text={tag.tagName} key={idx} />)}
         </div>
         <div className="imgs_detailInfo">
           <Imgs>{data.placeImage ? <img src={data.placeImage} /> : ""}</Imgs>

@@ -4,12 +4,18 @@ import PlaceCard1 from "./PlaceCard1";
 import { ReactComponent as RightButton } from "../../assets/RightButton.svg";
 import { ReactComponent as LeftButton } from "../../assets/LeftButton.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
-import {selectCategory} from "../../constant"
+import { SelectCategory } from "../../constant";
+import useFilters from "../../store/FilterStore";
 
 const PlaceCardGroup1 = ({ title, data }) => {
-  const TOTAL_SLIDES = 3; // 화면 너머로 보이는 슬라이드 수
+  const { setSelectCategory, selectCategory } = useFilters();
+  const TOTAL_SLIDES = data.length - 4; // 화면 너머로 보이는 슬라이드 수
   const [currentCard, setCurrentCard] = useState(0);
   const cardRef = useRef(null);
+
+  const handleClick = (e) => {
+    setSelectCategory(e.target.textContent);
+  };
 
   const handleNext = () => {
     if (currentCard >= TOTAL_SLIDES) return;
@@ -30,15 +36,19 @@ const PlaceCardGroup1 = ({ title, data }) => {
     cardRef.current.style.transform = `translateX(calc(-${currentCard} * 294px))`; // 백틱을 사용하여 슬라이드로 이동하는 에니메이션을 만듭니다.
   }, [currentCard]);
 
+  useEffect(() => {
+    setCurrentCard(0)
+  }, [selectCategory]);
+
   return (
     <Group>
       <h2>{title}</h2>
       <CategoryGroup>
-        {selectCategory.map((item, idx) => (
+        {SelectCategory.map((item, idx) => (
           <Item
             key={idx}
-            bgcolor={item === "식당" ? "#4DA772" : ""}
-            color={item === "식당" ? "#fff" : ""}
+            onClick={handleClick}
+            className={selectCategory === item ? "active" : ""}
           >
             {item}
           </Item>
@@ -81,6 +91,11 @@ const CategoryGroup = styled.ul`
   border-radius: 50px;
   transition: all 0.3s;
   margin-bottom: 24px;
+
+  .active {
+    color: #fff;
+    background-color: #4da772;
+  }
 
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     gap: 0px;
