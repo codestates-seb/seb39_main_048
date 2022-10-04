@@ -11,7 +11,14 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create  # (1) ??? ?? ??
-    show-sql: true      # (2) SQL ?? ??
-    properties:
-      hibernate:
-        format_sql: true  # (3) SQL pretty print
+      show-sql: true      # (2) SQL ?? ??
+      properties:
+        hibernate:
+          format_sql: true  # (3) SQL pretty print
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher # 널포인트관련
