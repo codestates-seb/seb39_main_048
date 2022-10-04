@@ -85,7 +85,8 @@ public class ReplyService {
         place.setScoreAvg(avg);
         System.out.println("count and avg :" +  "/ " + avg);
 
-        placeService.updatePlace(place);
+        Place updatedPlace = placeService.updateScoreAvgPlace(place);
+
 
     }
 }

@@ -42,7 +42,7 @@ public class Place {
     }
 
     @JsonIgnore
-    @OneToMany(mappedBy = "place", cascade = CascadeType.PERSIST , orphanRemoval = true)
+    @OneToMany(mappedBy = "place", cascade = CascadeType.PERSIST)
     private List<PlaceTag> placeTagList = new ArrayList<>();
 
     public void addPlaceTag(PlaceTag placeTag){

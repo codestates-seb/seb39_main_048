@@ -117,6 +117,18 @@ public class PlaceService {
 
     }
 
+    public Place updateScoreAvgPlace(Place place){
+        Place findPlace = findVerifiedPlace(place.getPlaceId());
+        //Place findPlace = place;
+
+
+        Optional.ofNullable(place.getScoreAvg())
+                .ifPresent(scoreAvg -> findPlace.setScoreAvg(scoreAvg));
+
+        return placeRepository.save(findPlace);
+
+    }
+
 
     /**
      * get / category
