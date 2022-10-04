@@ -8,11 +8,22 @@ const BasicButton = ({
   handleUpdateOpen,
   onCancel,
   onUpdate,
+  onCreate,
+  isOpen,
+  handleClick,
 }) => {
   return (
     <Button
       bgcolor={bgcolor}
-      onClick={onDelete || handleUpdateOpen || onCancel || onUpdate}
+      onClick={
+        onDelete ||
+        handleUpdateOpen ||
+        onCancel ||
+        onUpdate ||
+        onCreate ||
+        isOpen ||
+        handleClick
+      }
     >
       {text}
     </Button>

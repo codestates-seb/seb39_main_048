@@ -52,8 +52,6 @@ export const useUpdataPlace = (config, id) => {
   return updatePlace;
 };
 
-
-
 // --------------------디테일 데이터--------------------
 export const useGetDetailPlace = (id) => {
   const fetcher = async (innerURL) => {
@@ -80,9 +78,6 @@ export const useDeleteDetailPlace = async (id) => {
   }
 };
 
-
-
-
 // --------------------마이페이지 데이터--------------------
 
 export const useGetMypageData = (url) => {
@@ -105,7 +100,7 @@ export const useGetMypageData = (url) => {
 
 export const useGetSearch = () => {
   const fetcher = async () => {
-    const res = await axios.get(`${BASE_URL}/search`);
+    const res = await axios.get(`${BASE_URL}/place/${id}/search`);
     console.log("useGetSearch");
     return res.data;
   };
@@ -133,4 +128,37 @@ export const useGetRecommend = () => {
     isLoading: !error && !data,
     isError: error,
   };
+};
+
+// --------------------후기 데이터--------------------
+
+export const useGetReply = () => {
+  const fetcher = async () => {
+    const res = await axios.get(`${BASE_URL}/reply`);
+    console.log("useGetReply");
+    return res.data;
+  };
+  const { data, error } = useSWR(`/reply`, fetcher);
+
+  return {
+    data: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+};
+
+// --------POST--------
+export const usePostReply = (config) => {
+  const postReply = async () => {
+    try {
+      const { data } = await axios.post(`${BASE_URL}/reply`, config);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("usePostReply");
+    return res.data;
+  };
+
+  return postReply;
 };

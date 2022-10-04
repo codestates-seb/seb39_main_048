@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ReactModal from "react-modal";
 import "./App.css";
 import Nav from "./components/header/Nav";
 import Map from "./pages/Map";
@@ -12,8 +13,10 @@ import Signup from "./pages/Signup";
 import Detailpage from "./pages/Detailpage";
 import ScrollToTop from "./hooks/useLocation";
 
+// ReactModal.setAppElement("#root");
+
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("userId") === null) {
