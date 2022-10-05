@@ -16,23 +16,24 @@ const Main = () => {
       setSelectCategory("식당");
     };
   }, []);
-
-  let URL = "";
-  if (selectCategory === "식당") URL = "/restaurant";
-  if (selectCategory === "카페") URL = "/cafe";
-  if (selectCategory === "숙소") URL = "/stay";
-  if (selectCategory === "병원") URL = "/place";
-  if (selectCategory === "기타") URL = "/place";
-
-  const { data, isLoading, isError } = useGetRecommend(URL);
+ 
+  const { data, isLoading, isError } = useGetRecommend("/api/v1/place/main");
   if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
+
+  let DATA = data.restaurant;
+  if (selectCategory === "식당") DATA = data.restaurant;
+  if (selectCategory === "카페") DATA = data.cafe;
+  if (selectCategory === "숙소") DATA = data.stay;
+  if (selectCategory === "병원") DATA = data.hospital;
+  if (selectCategory === "기타") DATA = data.etc;
+
 
   return (
     <>
      <MainTitle/>
       <MainPage>
-        <PlaceCardGroup1 title={"추천장소 확인해봐요! 👀"} data={data} />
+        <PlaceCardGroup1 title={"추천장소 확인해봐요! 👀"} data={DATA} />
       </MainPage>
       <MainReviewCard />
       <Footer />

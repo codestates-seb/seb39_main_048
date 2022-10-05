@@ -18,12 +18,37 @@ import Footer from "../components/Footer";
 import Reviews from "../components/review/Reviews";
 import DetailUpdate from "../components/detailUpdate/DetailUpdate";
 import Loading from "../components/ui/Loading";
+import { useEffect } from "react";
 
 const Detailpage = () => {
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isLoading, isError } = useGetDetailPlace(id);
+  const [category, setCategory] = useState("");
+
+  useEffect(() => {
+    if (data) {
+      console.log("useEffect", data)
+      switch (data.data.category) {
+        case "restaurant":
+          setCategory("식당");
+          break;
+        case "cafe":
+          setCategory("카페");
+          break;
+        case "stay":
+          setCategory("숙소");
+          break;
+        case "hospital":
+          setCategory("병원");
+          break;
+        case "etc":
+          setCategory("기타");
+          break;
+      }
+    }
+  }, [data]);
 
   if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
@@ -45,8 +70,8 @@ const Detailpage = () => {
       <Detail>
         <div className="detailTop">
           <div className="PlaceName_category">
-            <PlaceName>{data.placeName}</PlaceName>
-            <Category>{data.category}</Category>
+            <PlaceName>{data.data.name}</PlaceName>
+            <Category>{category}</Category>
           </div>
           <div className="buttonGroup">
             <BasicButton
@@ -58,41 +83,43 @@ const Detailpage = () => {
             <DetailUpdate
               setIsOpen={setIsUpdateOpen}
               isOpen={isUpdateOpen}
-              data={data}
+              data={data.data}
             />
           </div>
         </div>
         <div className="detailTop_info">
           <Score>
             <Star />
-            <span>{data.score}</span>
+            <span>{data.data.scoreAvg}</span>
           </Score>
           <ReviewInfo>후기 16개</ReviewInfo>
           <DataInfo>2022.09.22</DataInfo>
         </div>
         <div className="tagGroup">
           {data &&
-            data.tags.map((tag, idx) => (
+            data.data.tagNameList.map((tag, idx) => (
               <HashTag text={tag.tagName} key={idx} />
             ))}
         </div>
         <div className="imgs_detailInfo">
-          <Imgs>{data.placeImage ? <img src={data.placeImage} /> : ""}</Imgs>
+          <Imgs>
+            {data.data.placeImage ? <img src={data.data.placeImage} /> : ""}
+          </Imgs>
           <Infos>
             <h2>상세 정보</h2>
             <Info>
               <LocationEmpty />
-              <DetailInfo>{data.address}</DetailInfo>
+              <DetailInfo>{data.data.address}</DetailInfo>
             </Info>
             <Info>
               <Clock />
-              <DetailInfo>{data.serviceTime}</DetailInfo>
+              <DetailInfo>{data.data.serviceTime}</DetailInfo>
             </Info>
             <Info>
               <Globe />
-              <DetailInfo color={data.hompage ? "" : "#999"}>
-                {data.hompage ? (
-                  <a href={data.hompage}>{data.hompage}</a>
+              <DetailInfo color={data.data.homepage ? "" : "#999"}>
+                {data.data.homepage ? (
+                  <a href={data.data.homepage}>{data.data.homepage}</a>
                 ) : (
                   "대표 사이트가 존재하지 않습니다."
                 )}
@@ -100,16 +127,16 @@ const Detailpage = () => {
             </Info>
             <Info>
               <Phone />
-              <DetailInfo>{data.number}</DetailInfo>
+              <DetailInfo>{data.data.number}</DetailInfo>
             </Info>
             <Info>
               <Description />
-              <DetailInfo>{data.description}</DetailInfo>
+              <DetailInfo>{data.data.description}</DetailInfo>
             </Info>
           </Infos>
         </div>
         <KeywordBtn>
-          <div className="KeywordContainer">
+          {/* <div className="KeywordContainer">
             <ul>
               {Keywords.map((item, idx) => (
                 <li
@@ -120,7 +147,7 @@ const Detailpage = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
         </KeywordBtn>
       </Detail>
       <Reviews />

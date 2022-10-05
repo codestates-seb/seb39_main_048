@@ -4,29 +4,25 @@ import { ReactComponent as Star } from "../../assets/Star.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
 import { BREAK_POINT_TABLET_MINI } from "../../constant";
 
-const MypageReview = () => {
+const MypageReview = ({ data }) => {
   return (
     <ReviewItem>
       <ReviewLeft>
         <div className="topSection">
           <div className="user_buttons">
-            <PlaceName>챱챱 케이크 〉</PlaceName>
+            <PlaceName>{data.name} 〉</PlaceName>
             <div className="buttons">
               <div className="button">수정</div>
               <div className="button">삭제</div>
             </div>
           </div>
           <Score>
-            <Star /> <Star /> <Star /> <Star /> <Star />
+            <Star /> {data.score}
           </Score>
         </div>
         <PostDate>2022.09.29</PostDate>
         <p className="reviewContent">
-          케이크 정말 맛있어요~~ 주문해서 바로 픽업했고 디자인도 너무 예쁜데
-          맛도 너무 좋아요~전에 홍대 터*힙 여기서 사고 선제작후 냉동보관했다가
-          다시 녹여서 주는거 알고 정말 너무 실망해서 여기도 혹시나 하는 맘에
-          샀는데 당일 제작 당일 픽업했습니다.. 맛에 또 한번 놀랐구요.
-          업했습니다.. 맛에 또 한번 놀랐구요.
+          {data.context}
         </p>
       </ReviewLeft>
       <ReviewRight></ReviewRight>
@@ -47,7 +43,7 @@ const ReviewItem = styled.div`
   }
   @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
     gap: 10px;
-    }
+  }
 `;
 
 const ReviewLeft = styled.div`
@@ -61,7 +57,7 @@ const ReviewLeft = styled.div`
     align-items: center;
     gap: 20px;
     @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
-       gap: 0;
+      gap: 0;
     }
   }
   .buttons {
@@ -69,8 +65,8 @@ const ReviewLeft = styled.div`
     align-items: center;
     gap: 10px;
     @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
-       gap: 5;
-       margin-top: 5px;
+      gap: 5;
+      margin-top: 5px;
     }
   }
 
@@ -102,15 +98,13 @@ const ReviewLeft = styled.div`
     }
   }
 
-    @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
-      .user_buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-
-      }
-
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
+    .user_buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
     }
+  }
 `;
 
 const ReviewRight = styled.div`
@@ -126,8 +120,8 @@ const PlaceName = styled.div`
   color: #4da772;
   @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
     font-weight: 600;
-  font-size: 13px;
-    }
+    font-size: 13px;
+  }
 `;
 
 const PostDate = styled.div`

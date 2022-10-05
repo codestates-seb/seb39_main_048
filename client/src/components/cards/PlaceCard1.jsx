@@ -15,13 +15,13 @@ const PlaceCard1 = ({ data }) => {
 
   const onDelete = () => {
     if (window.confirm("삭제하시겠습니까?")) {
-      useDeleteMyPlace(data.id);
+      useDeleteMyPlace(data.placeId);
     }
   };
 
   return (
     <Card>
-      <Link to={`/place/${data.id}`}>
+      <Link to={`/place/${data.placeId}`}>
         <PlaceImg>
           {data.placeImage ? <img src={data.placeImage}></img> : ""}
         </PlaceImg>
@@ -29,12 +29,12 @@ const PlaceCard1 = ({ data }) => {
       <PlaceInfo>
         <Infos>
           <Title>
-            <Link to={`/place/${data.id}`}>
-              <PlaceName>{data.placeName}</PlaceName>
+            <Link to={`/place/${data.placeId}`}>
+              <PlaceName>{data.name}</PlaceName>
             </Link>
             <Score>
               <Star />
-              4.6
+             {data.scoreAvg}
             </Score>
           </Title>
           <BookMarkArea>
@@ -57,8 +57,8 @@ const PlaceCard1 = ({ data }) => {
         </Infos>
         <Address>{data.address}</Address>
         <Tags>
-          {data.tags &&
-            data.tags.map((item, idx) => <HashTag text={item.tagName} key={idx} />)}
+          {data.tagNameList &&
+            data.tagNameList.map((item, idx) => <HashTag text={item.tagName} key={idx} />)}
         </Tags>
       </PlaceInfo>
     </Card>

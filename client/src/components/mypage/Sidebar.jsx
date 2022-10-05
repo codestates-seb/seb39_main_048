@@ -74,7 +74,8 @@ const Sidbar = () => {
   };
 
   const config = {
-    userName,
+    userImage : userImg,
+    name : userName,
   };
 
   const onUpdate = () => {
@@ -109,8 +110,8 @@ const Sidbar = () => {
                 ""
               )}
               <div className="img">
-                {data[0].userImg ? (
-                  <img src={data[0].userImg} />
+                {data.data.userImage ? (
+                  <img src={data.data.userImg} />
                 ) : (
                   <div>
                     {isMyOpen ? (
@@ -132,7 +133,7 @@ const Sidbar = () => {
                 {isMyOpen ? (
                   <>
                     <UpdateName
-                      defaultValue={data[0].userName}
+                      defaultValue={data.data.name}
                       onChange={(e) => setUserName(e.target.value)}
                     ></UpdateName>
                     <Buttons>
@@ -154,7 +155,7 @@ const Sidbar = () => {
                   </>
                 ) : (
                   <>
-                    <UserName>{data[0].userName}</UserName>
+                    <UserName>{data.data.name}</UserName>
                     <Button onClick={() => setIsMyOpen(!isMyOpen)}>Edit</Button>
                   </>
                 )}

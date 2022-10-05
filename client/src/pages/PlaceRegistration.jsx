@@ -28,7 +28,7 @@ const PlaceRegistration = () => {
     setKeyWord,
     setPlaceImage,
     setServiceTime,
-    setHompage,
+    setHomepage,
     setNumber,
     setAddress,
     setDescription,
@@ -38,7 +38,7 @@ const PlaceRegistration = () => {
     keyWord,
     placeImage,
     serviceTime,
-    hompage,
+    homepage,
     number,
     address,
     description,
@@ -55,7 +55,7 @@ const PlaceRegistration = () => {
       setKeyWord([]);
       setPlaceImage("");
       setServiceTime("");
-      setHompage("");
+      setHomepage("");
       setNumber("");
       setAddress("");
       setDescription("");
@@ -64,12 +64,11 @@ const PlaceRegistration = () => {
 
   const configData = {
     category,
-    placeName,
-    tags,
-    keyWord,
+    name : placeName,
+    tagNameList : tags,
     placeImage,
     serviceTime,
-    hompage,
+    homepage,
     number,
     address,
     description,
@@ -81,7 +80,6 @@ const PlaceRegistration = () => {
       category,
       placeName,
       tags,
-      keyWord,
       placeImage,
       serviceTime,
       number,
@@ -99,7 +97,7 @@ const PlaceRegistration = () => {
     if (placeImage.length) {
       const postPlace = usePostPlace(configData);
       postPlace().then((res) => {
-        res.data;
+        console.log(res)
         console.log("게시글 올라가는 중");
         navigate("/place");
       });
@@ -133,10 +131,10 @@ const PlaceRegistration = () => {
           <UploadImg />
           <DetailInfo />
         </div>
-        <PlaceKeywordSelect>
+        {/* <PlaceKeywordSelect>
           <div>장소에 해당하는 키워드를 선택해 주세요</div>
           <KeywordSelectBtn />
-        </PlaceKeywordSelect>
+        </PlaceKeywordSelect> */}
         <AddressPost />
         <RegistrationBtn>
           <button className="Cancel">취소</button>

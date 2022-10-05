@@ -23,12 +23,12 @@ const Listpage = () => {
   }, []);
 
   let URL = "";
-  if (selectCategory === "전체") URL = "/place";
-  if (selectCategory === "식당") URL = "/restaurant";
-  if (selectCategory === "카페") URL = "/cafe";
-  if (selectCategory === "숙소") URL = "/stay";
-  if (selectCategory === "병원") URL = "/place";
-  if (selectCategory === "기타") URL = "/place";
+  if (selectCategory === "전체") URL = "/api/v1/place/category/all";
+  if (selectCategory === "식당") URL = "/api/v1/place/category/restaurant?page=1&size=1";
+  if (selectCategory === "카페") URL = "/api/v1/place/category/cafe";
+  if (selectCategory === "숙소") URL = "/api/v1/place/category/stay";
+  if (selectCategory === "병원") URL = "/api/v1/place/category/hospital";
+  if (selectCategory === "기타") URL = "/api/v1/place/category/etc";
 
   const { data, isLoading, isError } = useGetPlace(URL);
 
@@ -44,20 +44,20 @@ const Listpage = () => {
             <img src={Point}></img>
           </Title>
 
-          <FilterGroup />
+          <FilterGroup data={data.data}/>
           <CardGroup>
             {searchWord
-              ? data
-                  .filter((place) => searchWord === place.placeName)
+              ? data.data
+                  .filter((place) => searchWord === place.name)
                   .map((place, idx) => <PlaceCard1 data={place} key={idx} />)
-              : data.map((place, idx) => <PlaceCard1 data={place} key={idx} />)}
+              : data.data.map((place, idx) => <PlaceCard1 data={place} key={idx} />)}
             {searchWord &&
-            !data.filter((place) => searchWord === place.placeName).length ? (
+            !data.data.filter((place) => searchWord === place.name).length ? (
               <EmptyData />
             ) : (
               ""
             )}
-            {!data.length ? <EmptyData /> : ""}
+            {!data.data.length ? <EmptyData /> : ""}
           </CardGroup>
         </Inner>
         <MoveRegist />

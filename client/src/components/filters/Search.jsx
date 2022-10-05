@@ -7,15 +7,11 @@ import { ReactComponent as SearchIcon } from "../../assets/SearchIcon.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
 import Loading from "../ui/Loading";
 
-const Search = () => {
-  const [isOpen, searchRef, setIsOpen] = useDetectClose(false);
-  const { data, isLoading, isError } = useGetPlace("/place");
+const Search = ({ data }) => {
+  const [filter, setFilter] = useState([]);
   const { searchData, setSearchData, text, setText, setSearchWord } =
     useFilters();
-  const [filter, setFilter] = useState([]);
-
-  if (isLoading) return <Loading />;
-  if (isError) return <div>ERR...</div>;
+  const [isOpen, searchRef, setIsOpen] = useDetectClose(false);
 
   useEffect(() => {
     return () => {
@@ -31,7 +27,7 @@ const Search = () => {
 
   useEffect(() => {
     if (data) {
-      setSearchData(data.map((data) => data.placeName));
+      setSearchData(data.map((data) => data.name));
     }
   }, [data]);
 

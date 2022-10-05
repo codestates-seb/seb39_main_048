@@ -14,10 +14,10 @@ const PlaceCard2 = ({data}) => {
         <PlaceInfo>
           <Info>
             <InfoTop>
-              <PlaceName>{data.placeName}</PlaceName>
+              <PlaceName>{data.name}</PlaceName>
               <Score>
                 <Star />
-                <p>{data.score}</p>
+                <p>{data.scoreAvg}</p>
               </Score>
             </InfoTop>
             <Address>{data.address}</Address>

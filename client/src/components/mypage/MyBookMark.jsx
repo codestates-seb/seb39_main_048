@@ -8,8 +8,8 @@ import Loading from "../ui/Loading";
 const MyBookMark = ({menu}) => {
   let URL = "";
 
-  if (menu === "북마크") URL = "/bookmark";
-  if (menu === "내가 등록한 장소") URL = "/myplace";
+  if (menu === "북마크") URL = "/api/v1/mypage/bookmark";
+  if (menu === "내가 등록한 장소") URL = "/api/v1/mypage/place";
 
   const { data, isLoading, isError } = useGetMypageData(URL);
 
@@ -20,7 +20,7 @@ const MyBookMark = ({menu}) => {
     <BookMark>
       <Title> {menu}</Title>
       <BookmarkCards>
-        {data.map((data, idx) => (
+        {data.data.map((data, idx) => (
           <PlaceCard1 data={data} key={idx} />
         ))}
       </BookmarkCards>

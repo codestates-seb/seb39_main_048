@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { Keywords } from "../../constant";
 import usePost from "../../store/PostStore";
-import { BREAK_POINT_TABLET_MINI } from "../../constant";
 import { BREAK_POINT_PHONE } from "../../constant";
 
 const KeywordSelectBtn = ({ data, gap, width }) => {

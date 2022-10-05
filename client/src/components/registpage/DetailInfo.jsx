@@ -11,18 +11,18 @@ import { BREAK_POINT_PHONE } from "../../constant";
 const DetailInfo = ({ data, size, width, margin }) => {
   const {
     setServiceTime,
-    setHompage,
+    setHomepage,
     setNumber,
     setDescription,
     serviceTime,
-    hompage,
+    homepage,
     number,
     description,
   } = usePost();
   useEffect(() => {
     if (data) {
       setServiceTime(data.serviceTime);
-      setHompage(data.hompage);
+      setHomepage(data.homepage);
       setNumber(data.number);
       setDescription(data.description);
     }
@@ -44,8 +44,8 @@ const DetailInfo = ({ data, size, width, margin }) => {
         <Globe />
         <input
           placeholder="대표 사이트가 있다면 입력해 주세요"
-          defaultValue={data ? hompage : ""}
-          onChange={(e) => setHompage(e.target.value)}
+          defaultValue={data ? homepage : ""}
+          onChange={(e) => setHomepage(e.target.value)}
         ></input>
       </div>
       <span>선택 입력란입니다. 사이트가 존재한다면 입력해 주세요</span>

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import usePost from "../../store/PostStore";
 import { locationFilters, sizeFilters, isOnlyFilters } from "../../constant";
-import { BREAK_POINT_TABLET_MINI } from "../../constant";
 import { BREAK_POINT_PHONE } from "../../constant";
 
 const TagSelect = ({ data, bottom, margin }) => {
@@ -23,7 +22,7 @@ const TagSelect = ({ data, bottom, margin }) => {
 
   useEffect(() => {
     if (data) {
-      const tags = data.tags;
+      const tags = data.tagNameList;
       const size = tags.slice(0, -2);
       setSizeTags(size);
       setIsOnlyTags([tags[tags.length - 2]]);

@@ -13,18 +13,18 @@ const MapListCard = ({ data }) => {
 
   return (
     <Card>
-      <Link to={`/place/${data.id}`}>
+      <Link to={`/place/${data.placeId}`}>
         <PlaceImg></PlaceImg>
       </Link>
       <PlaceInfo>
         <Infos>
           <Title>
-            <Link to={`/place/${data.id}`}>
-              <PlaceName>{data.placeName}</PlaceName>
+            <Link to={`/place/${data.placeId}`}>
+              <PlaceName>{data.name}</PlaceName>
             </Link>
             <Score>
               <Star />
-              <p>{data.score}</p>
+              <p>{data.scoreAvg}</p>
             </Score>
           </Title>
         </Infos>

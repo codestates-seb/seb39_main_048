@@ -19,7 +19,7 @@ const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
     setKeyWord,
     setPlaceImage,
     setServiceTime,
-    setHompage,
+    setHomepage,
     setNumber,
     setAddress,
     setDescription,
@@ -29,7 +29,7 @@ const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
     keyWord,
     placeImage,
     serviceTime,
-    hompage,
+    homepage,
     number,
     description
   } = usePost();
@@ -45,7 +45,7 @@ const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
       setKeyWord([]);
       setPlaceImage("");
       setServiceTime("");
-      setHompage("");
+      setHomepage("");
       setNumber("");
       setAddress("");
       setDescription("");
@@ -54,11 +54,11 @@ const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
 
   const config = {
     category,
-    placeName,
-    tags,
+    name : placeName,
+    tagNameList : tags,
     keyWord,
     serviceTime,
-    hompage,
+    homepage,
     number,
     description,
   };
