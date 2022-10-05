@@ -3,19 +3,21 @@ import styled from "styled-components";
 import useMenu from "../../store/MenuStore";
 import MypageReview from "../review/MypageReview";
 import { BREAK_POINT_TABLET } from "../../constant";
+import { useGetMypageData } from "../../hooks/useAPI";
 
 const MyReview = () => {
   const { menu } = useMenu();
+  const { data, isLoading, isError } = useGetMypageData("/api/v1/mypage/reply");
+
+  console.log("mypage data : ",data)
+
+  if (isLoading) return <Loading/>
+  if (isError) return <div>ERR...</div>;
   return (
     <Myreview>
       <Title> {menu}</Title>
       <ReviewGroup>
-        <MypageReview />
-        <MypageReview />
-        <MypageReview />
-        <MypageReview />
-        <MypageReview />
-        <MypageReview />
+        <MypageReview data={data.data}/>
       </ReviewGroup>
     </Myreview>
   );

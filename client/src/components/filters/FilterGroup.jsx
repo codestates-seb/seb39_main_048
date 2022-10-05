@@ -6,7 +6,7 @@ import Search from "./Search";
 import useFilters from "../../store/FilterStore";
 import { BREAK_POINT_TABLET } from "../../constant";
 
-const FilterGroup = () => {
+const FilterGroup = ({data}) => {
   const { filterData, setFilterData } = useFilters();
 
   const handleRemove = (e) => {
@@ -21,7 +21,7 @@ const FilterGroup = () => {
         <div className="filters">
           <Category />
           <Filter />
-          <Search />
+          <Search data={data}/>
         </div>
       </Group>
       <FilterItems>

@@ -1,7 +1,7 @@
 import create from "zustand";
 
 const useMenu = create((set) => ({
-  menu: "마이페이지",
+  menu: "내가 등록한 장소",
   setMenu: (menu) => set(() => ({ menu })),
 }));
 

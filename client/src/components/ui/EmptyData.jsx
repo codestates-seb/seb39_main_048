@@ -5,7 +5,7 @@ const EmptyData = () => {
   return (
     <Empty>
       <div>｡°(°´ᯅ`°)°｡</div>
-      <div>검색하신 장소를 찾을 수가 없어요</div>
+      <div>장소를 찾을 수가 없어요</div>
     </Empty>
   );
 };

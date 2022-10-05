@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import { ReactComponent as Avatar } from "../../assets/Avatar.svg";
 import { ReactComponent as Hamberger } from "../../assets/Hamberger.svg";
 import useDetectClose from "../../hooks/useDetectClose";
+import { BREAK_POINT_PHONE } from "../../constant";
 
 const Nav = ({ isLogin }) => {
   const [isOpen, menuRef, handleOpen] = useDetectClose(false);
@@ -81,6 +82,11 @@ const NavBar = styled.div`
   box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
   z-index: 300;
   position: fixed;
+  transition: all 0.3s;
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    height: 50px;
+    box-shadow: none;
+  }
 `;
 
 const Inner = styled.div`
@@ -95,6 +101,15 @@ const Inner = styled.div`
   img {
     width: 83px;
     height: 36px;
+    transition: all 0.3s;
+  }
+
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    padding: 0 5vw;
+    img {
+      width: 50px;
+      height: 22px;
+    }
   }
 `;
 
@@ -106,6 +121,9 @@ const MenuIcons = styled.div`
   border: 1px solid #d7e2eb;
   border-radius: 50px;
   cursor: pointer;
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    padding: 6px 10px;
+    }
 `;
 
 const MenuGroup = styled.div`
@@ -122,6 +140,10 @@ const MenuGroup = styled.div`
   font-size: 15px;
   z-index: 400;
   transition: all 0.3s;
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    top: 50px;
+    right: 5vw;
+    }
 
   div {
     cursor: pointer;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import usePost from "../../store/PostStore";
-import { selectCategory } from "../../constant";
+import { SelectCategory } from "../../constant";
 import { useEffect } from "react";
 
 const Category = ({ data }) => {
@@ -10,19 +10,52 @@ const Category = ({ data }) => {
 
   useEffect(() => {
     if (data) {
-      setCurrentActive(data);
+      switch (data) {
+        case "restaurant":
+          setCurrentActive("식당");
+          break;
+        case "cafe":
+          setCurrentActive("카페");
+          break;
+        case "stay":
+          setCurrentActive("숙소");
+          break;
+        case "hospital":
+          setCurrentActive("병원");
+          break;
+        case "etc":
+          setCurrentActive("기타");
+          break;
+      }
     }
   }, []);
 
   const BtnActive = (e) => {
     setCurrentActive(e.target.innerHTML);
-    setCategory(e.target.innerHTML);
+    switch (e.target.innerHTML) {
+      case "식당":
+        setCategory("restaurant");
+        break;
+      case "카페":
+        setCategory("cafe");
+        break;
+      case "숙소":
+        setCategory("stay");
+        break;
+      case "병원":
+        setCategory("hospital");
+        break;
+      case "기타":
+        setCategory("etc");
+        break;
+    }
+    
   };
 
   return (
     <CategoryBtn>
       <ul>
-        {selectCategory.map((category, idx) => (
+        {SelectCategory.map((category, idx) => (
           <li
             key={idx}
             onClick={BtnActive}

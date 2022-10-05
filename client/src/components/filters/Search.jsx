@@ -5,24 +5,41 @@ import useDetectClose from "../../hooks/useDetectClose";
 import { useGetPlace } from "../../hooks/useAPI";
 import { ReactComponent as SearchIcon } from "../../assets/SearchIcon.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
+import Loading from "../ui/Loading";
 
+<<<<<<< HEAD
 const Search = () => {
   const [isOpen, searchRef, handleOpen] = useDetectClose(false);
   const { data, isLoading, isError } = useGetPlace("/place");
   const { searchData, setSearchData, text, setText } = useFilters();
   const [filter, setFilter] = useState(searchData);
+=======
+const Search = ({ data }) => {
+  const [filter, setFilter] = useState([]);
+  const { searchData, setSearchData, text, setText, setSearchWord } =
+    useFilters();
+  const [isOpen, searchRef, setIsOpen] = useDetectClose(false);
+>>>>>>> 636222e9b3283f6b53700573725b164c52654125
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>ERR...</div>;
+
+  useEffect(() => {
+    return () => {
+      setSearchWord("");
+    };
+  }, [text]);
+
+  useEffect(() => {
+    return () => {
+      setText("");
+    };
+  }, []);
 
   useEffect(() => {
     if (data) {
-      setSearchData(data.map((data) => data.placeName)); // 장소명만 골라서 배열구성
+      setSearchData(data.map((data) => data.name));
     }
   }, [data]);
 
-  // searchData === 검색되는 전체 데이터 (장소이름)
-  // filterData === 검색어가 포함되어 있는 searchData -> 잘 안됨
   const hadleChange = (e) => {
     if (data) {
       console.log(searchData);
@@ -32,25 +49,41 @@ const Search = () => {
       let filterData = searchData.filter((data) =>
         data.toLowerCase().includes(targetData.toLowerCase())
       );
+<<<<<<< HEAD
       console.log(filterData); // -> 여기까지 검색된 내용 잘 나옴
       setFilter(filterData); //-> 여기서 넣으면 빈 배열이 나옴 -> 데이터 들어가는 속도가 늦어서?
+=======
+
+      console.log(filterData);
+      setFilter(filterData);
+
+      if (filterData.length) {
+        setIsOpen(!isOpen);
+      }
+
+>>>>>>> 636222e9b3283f6b53700573725b164c52654125
     }
   };
 
   const handleAutoClick = (e) => {
     setText(e.target.textContent);
   };
+
+  const handleSearch = () => {
+    console.log("here");
+    setSearchWord(text);
+  };
+
   return (
     <SearchGroup>
       <input
         placeholder="장소 이름이나 상호명을 검색해주세요."
         onChange={hadleChange}
         value={text}
-        onClick={handleOpen}
         ref={searchRef}
       />
-      <SearchIcon />
-      {isOpen && searchData.length ? (
+      <SearchIcon onClick={handleSearch} />
+      {isOpen && filter.length ? (
         <SearchDatas>
           {filter.map((data, idx) => (
             <li key={idx} onClick={handleAutoClick}>
@@ -115,6 +148,11 @@ const SearchDatas = styled.ul`
   li {
     cursor: pointer;
     padding: 10px 25px;
+    transition: all 0.2s;
+    &:hover {
+      color: #4da772;
+    }
+
     &:first-child {
       padding-top: 25px;
     }

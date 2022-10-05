@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { usePostPlace } from "../hooks/useAPI";
 import { ToastInfo } from "../constant";
+import { BREAK_POINT_TABLET_MINI } from "../constant";
+import { BREAK_POINT_PHONE } from "../constant";
 import toast, { Toaster } from "react-hot-toast";
 import Category from "../components/buttons/Category";
 import KeywordSelectBtn from "../components/buttons/KeywordSelectBtn";
@@ -13,11 +14,9 @@ import DetailInfo from "../components/registpage/DetailInfo";
 import TagSelect from "../components/registpage/TagSelect";
 import AddressPost from "../components/registpage/AddressPost";
 import UploadImg from "../components/registpage/UploadImg";
-import useImage from "../store/ImageStore";
 
 const PlaceRegistration = () => {
   const navigate = useNavigate();
-  const { file, setFile } = useImage();
 
   const {
     setSizeTags,
@@ -29,7 +28,7 @@ const PlaceRegistration = () => {
     setKeyWord,
     setPlaceImage,
     setServiceTime,
-    setHompage,
+    setHomepage,
     setNumber,
     setAddress,
     setDescription,
@@ -39,7 +38,7 @@ const PlaceRegistration = () => {
     keyWord,
     placeImage,
     serviceTime,
-    hompage,
+    homepage,
     number,
     address,
     description,
@@ -56,7 +55,7 @@ const PlaceRegistration = () => {
       setKeyWord([]);
       setPlaceImage("");
       setServiceTime("");
-      setHompage("");
+      setHomepage("");
       setNumber("");
       setAddress("");
       setDescription("");
@@ -65,23 +64,44 @@ const PlaceRegistration = () => {
 
   const configData = {
     category,
-    placeName,
-    tags,
-    keyWord,
+    name : placeName,
+    tagNameList : tags,
     placeImage,
     serviceTime,
-    hompage,
+    homepage,
     number,
     address,
     description,
   };
 
   // 검증부분 추가하기
-  const onCreate = async () => {
-    const postPlace = usePostPlace(configData);
-    postPlace().then((res) => res.data);
+  const onCreate = () => {
+    const data = [
+      category,
+      placeName,
+      tags,
+      placeImage,
+      serviceTime,
+      number,
+      address,
+      description,
+    ];
+    const valid = data.filter((data) => data.length === 0);
+    console.log("valid", valid.length);
+    if (valid.length !== 0) {
+      toast("필수 항목을 모두 작성해주세요!", { icon: "🥲", ...ToastInfo });
+      window.scrollTo(0, 0);
+      return;
+    }
 
-    navigate("/place");
+    if (placeImage.length) {
+      const postPlace = usePostPlace(configData);
+      postPlace().then((res) => {
+        console.log(res)
+        console.log("게시글 올라가는 중");
+        navigate("/place");
+      });
+    }
   };
 
   return (
@@ -111,10 +131,10 @@ const PlaceRegistration = () => {
           <UploadImg />
           <DetailInfo />
         </div>
-        <PlaceKeywordSelect>
+        {/* <PlaceKeywordSelect>
           <div>장소에 해당하는 키워드를 선택해 주세요</div>
           <KeywordSelectBtn />
-        </PlaceKeywordSelect>
+        </PlaceKeywordSelect> */}
         <AddressPost />
         <RegistrationBtn>
           <button className="Cancel">취소</button>
@@ -146,9 +166,9 @@ const Page = styled.div`
     box-sizing: border-box;
     background: #f5f5f5;
     width: 100%;
-    height: 100px;
     padding: 40px;
     margin-top: 150px;
+    line-height: 150%;
   }
 
   .ImgGroup {
@@ -158,6 +178,27 @@ const Page = styled.div`
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 64px;
+  }
+
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    padding-top: 110px;
+
+    .TopComment {
+      font-size: 14px;
+      box-sizing: border-box;
+      background: #f5f5f5;
+      width: 100%;
+      padding: 23px;
+      margin-top: 0;
+      line-height: 150%;
+    }
+    .ImgGroup {
+      display: block;
+    }
+    .Title {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
   }
 `;
 
@@ -171,6 +212,15 @@ const WithPlace = styled.div`
   .Category {
     margin-top: 24px;
   }
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    font-size: 16px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+
+    .Category {
+      margin-top: 16px;
+    }
+  }
 `;
 
 const PlaceName = styled.div`
@@ -182,6 +232,7 @@ const PlaceName = styled.div`
   input {
     font-size: 12px;
     color: #666666;
+    min-width: 520px;
     width: 40%;
     height: 32px;
     margin-top: 24px;
@@ -189,6 +240,23 @@ const PlaceName = styled.div`
     border: 1px solid;
     border-color: #d7e2eb;
     border-radius: 10px;
+  }
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
+    input {
+      min-width: 100%;
+    }
+  }
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    font-size: 16px;
+    margin-bottom: 48px;
+    input {
+    height: 32px;
+    margin-top: 24px;
+    padding: 20px;
+    border: 1px solid;
+    border-color: #d7e2eb;
+    border-radius: 10px;
+  }
   }
 `;
 
@@ -209,6 +277,7 @@ const RegistrationBtn = styled.div`
   align-items: center;
   height: 40px;
   gap: 20px;
+  position: relative;
 
   button {
     color: #ffffff;
