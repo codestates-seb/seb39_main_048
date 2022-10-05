@@ -38,7 +38,7 @@ const Review = ({ reply }) => {
     placeId,
   };
 
-  const onUpdate = () => {
+  const onUpdate = (id) => {
     console.log("updateConfig", config);
 
     const updateReply = useUpdataReply(config, id);
@@ -62,24 +62,23 @@ const Review = ({ reply }) => {
     window.confirm("삭제하시겠습니까?");
     useDeleteReply(id);
     console.log(id);
+    window.location.reload();
   };
 
   return (
     <ReviewItem>
       <ReviewLeft>
         <div className="userInfo">
-          <UserImg></UserImg>
-          <UserName>{reply.replyId}</UserName>
-          <PostDate>2022.09.29</PostDate>
+          <div className="userImg">
+            <UserImg></UserImg>
+          </div>
+          <div className="userDate">
+            <div className="userName">{reply.replyId}</div>
+            <div className="postDate">2022.09.29</div>
+          </div>
         </div>
         {isEdit ? (
           <EditForm>
-            <textarea
-              className="editTextarea"
-              value={editReply}
-              maxLength={300}
-              onChange={(e) => setEditReply(e.target.value)}
-            />
             <div className="scoreInput">
               평점 ⭐️
               <select
@@ -94,6 +93,12 @@ const Review = ({ reply }) => {
                 <option value="5">5</option>
               </select>
             </div>
+            <textarea
+              className="editTextarea"
+              value={editReply}
+              maxLength={250}
+              onChange={(e) => setEditReply(e.target.value)}
+            />
             <div className="editBtns">
               <span onClick={onUpdate}>수정</span>
               <span onClick={handleCancel}>취소</span>
@@ -101,6 +106,10 @@ const Review = ({ reply }) => {
           </EditForm>
         ) : (
           <OriginReply>
+            <div className="originScore">
+              <Star /> 평점 {reply.score}
+            </div>
+            <p className="reviewContent">{reply.context}</p>
             <div className="buttons">
               <div className="button" onClick={handleUpdate}>
                 수정
@@ -109,10 +118,6 @@ const Review = ({ reply }) => {
                 삭제
               </div>
             </div>
-            <div className="originScore">
-              <Star /> 평점 {reply.score}
-            </div>
-            <p className="reviewContent">{reply.context}</p>
           </OriginReply>
         )}
       </ReviewLeft>
@@ -134,7 +139,32 @@ const ReviewLeft = styled.div`
   .userInfo {
     display: flex;
     align-items: center;
+    width: 50%;
     gap: 20px;
+
+    .userImage {
+      display: flex;
+    }
+
+    .userDate {
+      .userName {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 6px;
+        transition: all 0.3s;
+        @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+          font-size: 16px;
+        }
+      }
+      .postDate {
+        font-size: 12px;
+        color: #999;
+      }
+    }
   }
 `;
 
@@ -142,44 +172,85 @@ const EditForm = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  height: 5em;
+  gap: 15px;
 
+  .scoreInput {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    width: 10%;
+    font-size: 14px;
+    color: #999;
+    select {
+      width: 75%;
+      @media only screen and (min-width: ${BREAK_POINT_TABLET}px) {
+        width: 60%;
+      }
+    }
+  }
+
+  .editBtns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 5%;
+    span {
+      font-size: 14px;
+      color: #666;
+      cursor: pointer;
+      border: 1px solid #d7e2eb;
+      padding: 1.5px;
+      border-radius: 3px;
+      transition: all 0.3s;
+      @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+        font-size: 12px;
+        padding: 0.5px;
+      }
+    }
+  }
   textarea {
     display: flex;
-    justify-content: flex-end;
+    /* justify-content: center; */
     align-items: center;
     padding: 15px;
     width: 100%;
-    height: 100px;
+    height: 80px;
     border-radius: 10px;
     border: 1px solid #d7e2eb;
     resize: none;
     font-size: 14px;
     color: #333333;
   }
-  .scoreInput {
-    /* display: flex;
-    align-items: center; */
-    font-size: 14px;
-  }
-
-  span {
-    font-size: 14px;
-    color: #666;
-    cursor: pointer;
-    transition: all 0.3s;
-    @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
-      font-size: 12px;
-    }
-  }
 `;
 
 const OriginReply = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5em;
+  gap: 15px;
+  width: 100%;
+  .originScore {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+    color: #999;
+    width: 10%;
+  }
   .buttons {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
+    flex-direction: column;
+    gap: 10px;
+    width: 5%;
     .button {
       font-size: 14px;
       color: #666;
@@ -190,20 +261,16 @@ const OriginReply = styled.div`
       }
     }
   }
-  .originScore {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 11;
-    color: #999;
-  }
 
   p {
     font-size: 16px;
-    color: #333;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    color: #333333;
     line-height: 150%;
     transition: all 0.3s;
-
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
@@ -215,22 +282,6 @@ const OriginReply = styled.div`
       font-size: 14px;
     }
   }
-`;
-
-const UserName = styled.div`
-  font-size: 18px;
-  color: #333;
-  font-weight: 600;
-  margin-bottom: 6px;
-  transition: all 0.3s;
-  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
-    font-size: 16px;
-  }
-`;
-
-const PostDate = styled.div`
-  font-size: 12px;
-  color: #999;
 `;
 
 const UserImg = styled.div`

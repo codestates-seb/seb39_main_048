@@ -64,7 +64,7 @@ const Signup = () => {
   const onRegister = () => {
     if (isPasswordCheck && isId && isPassword && isName) {
       axios
-        .post("http:///api/v1/user", {
+        .post("http://175.121.124.2:8080/api/v1/user", {
           userId: userId,
           password: password,
           name: name,

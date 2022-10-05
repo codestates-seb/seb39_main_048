@@ -59,28 +59,6 @@ const Reviews = ({ setIsChange, isChange }) => {
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>ERR...</div>;
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(context);
-  //   if (!context.length) {
-  //     e.preventDefault();
-  //     alert("내용을 입력해주세요.");
-  //     return;
-  //   }
-
-  //   axios
-  //     .post(`http://localhost:3001/reply`, {
-  //       context: context,
-  //       replyId: replyId,
-  //       placeId: Number(id),
-  //       score: score,
-  //     })
-  //     .then((res) => res.data)
-  //     .then((data) => console.log("reply", data));
-  //   setContext("");
-  //   setIsChange(!isChange);
-  // };
-
   return (
     <ReviewGroup>
       <TopSection>
@@ -95,7 +73,7 @@ const Reviews = ({ setIsChange, isChange }) => {
           <textarea
             value={context}
             placeholder="후기를 입력해 주세요"
-            maxLength={300}
+            maxLength={250}
             onChange={(e) => setContext(e.target.value)}
           />
           <div className="scoreInput">
