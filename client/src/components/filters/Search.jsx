@@ -7,11 +7,19 @@ import { ReactComponent as SearchIcon } from "../../assets/SearchIcon.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
 import Loading from "../ui/Loading";
 
+<<<<<<< HEAD
+const Search = () => {
+  const [isOpen, searchRef, handleOpen] = useDetectClose(false);
+  const { data, isLoading, isError } = useGetPlace("/place");
+  const { searchData, setSearchData, text, setText } = useFilters();
+  const [filter, setFilter] = useState(searchData);
+=======
 const Search = ({ data }) => {
   const [filter, setFilter] = useState([]);
   const { searchData, setSearchData, text, setText, setSearchWord } =
     useFilters();
   const [isOpen, searchRef, setIsOpen] = useDetectClose(false);
+>>>>>>> 636222e9b3283f6b53700573725b164c52654125
 
 
   useEffect(() => {
@@ -41,6 +49,10 @@ const Search = ({ data }) => {
       let filterData = searchData.filter((data) =>
         data.toLowerCase().includes(targetData.toLowerCase())
       );
+<<<<<<< HEAD
+      console.log(filterData); // -> 여기까지 검색된 내용 잘 나옴
+      setFilter(filterData); //-> 여기서 넣으면 빈 배열이 나옴 -> 데이터 들어가는 속도가 늦어서?
+=======
 
       console.log(filterData);
       setFilter(filterData);
@@ -49,6 +61,7 @@ const Search = ({ data }) => {
         setIsOpen(!isOpen);
       }
 
+>>>>>>> 636222e9b3283f6b53700573725b164c52654125
     }
   };
 

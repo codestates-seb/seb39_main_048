@@ -121,6 +121,7 @@ const TopSection = styled.div`
   padding: 20px 20px;
   width: 100%;
   gap: 50px;
+
   .review_score {
     display: flex;
     align-items: center;

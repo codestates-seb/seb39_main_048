@@ -64,7 +64,8 @@ const Signup = () => {
   const onRegister = () => {
     if (isPasswordCheck && isId && isPassword && isName) {
       axios
-        .post("http:///api/v1/user", {
+
+        .post("http:///api/v1/user/signup", {
           userId: userId,
           password: password,
           name: name,

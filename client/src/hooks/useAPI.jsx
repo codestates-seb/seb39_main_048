@@ -35,7 +35,7 @@ export const usePostPlace = (config) => {
     } catch (err) {
       console.log(err);
     }
-    return ;
+    return;
   };
 
   return postPlace;
@@ -45,7 +45,10 @@ export const usePostPlace = (config) => {
 export const useUpdataPlace = (config, id) => {
   const updatePlace = async () => {
     try {
-      const { data } = await axios.patch(`${BASE_URL}/api/v1/place/${id}`, config);
+      const { data } = await axios.patch(
+        `${BASE_URL}/api/v1/place/${id}`,
+        config
+      );
       return data;
     } catch (err) {
       console.log(err);
@@ -84,7 +87,6 @@ export const useDeleteDetailPlace = async (id) => {
 };
 
 // --------------------마이페이지 데이터--------------------
-
 
 export const useGetMyInfo = () => {
   const fetcher = async () => {
@@ -261,4 +263,20 @@ export const useDeleteReply = async () => {
   } catch (err) {
     return err.response.data;
   }
+};
+
+// --------------------지도 데이터--------------------
+export const useGetMap = () => {
+  const fetcher = async () => {
+    const res = await axios.get(`${BASE_URL}/map`);
+    console.log("useGetMap");
+    return res.data;
+  };
+  const { data, error } = useSWR(`/map`, fetcher);
+
+  return {
+    data: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
 };
