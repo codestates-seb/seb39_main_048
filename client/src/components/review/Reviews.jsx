@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import { ReactComponent as Star } from "../../assets/Star.svg";
@@ -6,40 +6,80 @@ import BasicButton from "../buttons/BasicButton";
 import Review from "./Review";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { useGetReply } from "../../hooks/useAPI";
+import { Navigate, useParams } from "react-router-dom";
+import { useGetReply, usePostReply } from "../../hooks/useAPI";
+import usePostReview from "../../store/PostReply";
 
 const notify = () => toast.success(" 후기가 등록되었습니다 🦮");
 
 const Reviews = ({ setIsChange, isChange }) => {
-  const [context, setContext] = useState("");
   const { id } = useParams();
   const { data, isLoading, isError } = useGetReply();
-  console.log(data);
+
+  const {
+    replyId,
+    context,
+    score,
+    placeId,
+    setReplyId,
+    setContext,
+    setScore,
+    setPlaceId,
+  } = usePostReview();
+
+  useEffect(() => {
+    return () => {
+      setReplyId("");
+      setContext("");
+      setScore("");
+      setPlaceId("");
+    };
+  }, []);
+
+  const config = {
+    replyId,
+    context,
+    score,
+    placeId,
+  };
+
+  const handleSubmit = async (e) => {
+    const postReply = usePostReply(config);
+    postReply().then((res) => res.data);
+    console.log(data);
+    if (!context.length || !((e) => setScore(e.target.value))) {
+      e.stopPropagation();
+      // alert("내용을 입력해주세요.");
+      return toast.error("내용을 입력해주세요.📝");
+    }
+
+    window.location.reload();
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>ERR...</div>;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(context);
-    if (!context.length) {
-      e.preventDefault();
-      alert("내용을 입력해주세요.");
-      return;
-    }
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(context);
+  //   if (!context.length) {
+  //     e.preventDefault();
+  //     alert("내용을 입력해주세요.");
+  //     return;
+  //   }
 
-    axios
-      .post(`http://localhost:3001/reply`, {
-        context: context,
-        replyId: replyId,
-        placeId: Number(id),
-      })
-      .then((res) => res.data)
-      .then((data) => console.log("reply", data));
-    setContext("");
-    setIsChange(!isChange);
-  };
+  //   axios
+  //     .post(`http://localhost:3001/reply`, {
+  //       context: context,
+  //       replyId: replyId,
+  //       placeId: Number(id),
+  //       score: score,
+  //     })
+  //     .then((res) => res.data)
+  //     .then((data) => console.log("reply", data));
+  //   setContext("");
+  //   setIsChange(!isChange);
+  // };
 
   return (
     <ReviewGroup>
@@ -58,6 +98,20 @@ const Reviews = ({ setIsChange, isChange }) => {
             maxLength={300}
             onChange={(e) => setContext(e.target.value)}
           />
+          <div className="scoreInput">
+            평점 ⭐️
+            <select
+              id="score"
+              name="score"
+              onChange={(e) => setScore(e.target.value)}
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
           <div className="createBtn">
             <BasicButton
               text={"등록"}
@@ -118,6 +172,15 @@ const TopSection = styled.div`
       resize: none;
       font-size: 14px;
       color: #333333;
+    }
+    .scoreInput {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+      font-size: 14px;
+      width: 20%;
+      gap: 10px;
     }
     .createBtn {
       display: flex;

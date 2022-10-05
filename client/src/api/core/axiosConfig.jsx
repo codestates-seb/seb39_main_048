@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: ":8080",
+  baseURL: "http://:8080",
   timeout: 2500,
   withCredentials: false, // 쿠키를 사용하지 않기 때문에 false
   headers: {

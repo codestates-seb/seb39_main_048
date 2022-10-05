@@ -162,3 +162,30 @@ export const usePostReply = (config) => {
 
   return postReply;
 };
+
+// --------PATCH--------
+export const useUpdataReply = (config) => {
+  const updateReply = async () => {
+    try {
+      const { data } = await axios.patch(`${BASE_URL}/reply`, config);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("useUpdataReply");
+    return res.data;
+  };
+
+  return updateReply;
+};
+
+// --------DELETE--------
+export const useDeleteReply = async () => {
+  try {
+    const { data } = await axios.delete(`${BASE_URL}/reply`);
+    console.log("useDeleteReply");
+    return data;
+  } catch (err) {
+    return err.response.data;
+  }
+};
