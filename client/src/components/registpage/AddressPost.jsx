@@ -3,10 +3,9 @@ import styled from "styled-components";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import usePost from "../../store/PostStore";
 
-const AddressPost = () => {
+const AddressPost = (props) => {
   const { address, setAddress } = usePost();
   const [isOpen, setIsOpen] = useState(false);
-  const [detailAddress, setDetailAddress] = useState(false);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -26,7 +25,15 @@ const AddressPost = () => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    setAddress(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    console.log(data);
+    console.log(fullAddress);
+    console.log(data.zonecode);
+    setAddress(fullAddress);
+
+    props.setcompany({
+      ...props.company,
+      address: fullAddress,
+    });
   };
 
   return (
@@ -45,21 +52,19 @@ const AddressPost = () => {
             <button onClick={handleClick}>주소 검색</button>
           )}
         </div>
-
-        <input
-          placeholder="상세 주소를 입력해주세요."
-          onChange={(e) => setDetailAddress(e.target.value)}
-        />
       </div>
+
       {isOpen ? (
-        <DaumPostcodeEmbed
-          style={{
-            width: "350px",
-            border: "1px solid #d7e2eb",
-            marginTop: "16px",
-          }}
-          onComplete={handleComplete}
-        />
+        <Modal onClick={handleClick}>
+          <DaumPostcodeEmbed
+            style={{
+              width: "350px",
+              border: "1px solid #d7e2eb",
+              marginTop: "16px",
+            }}
+            onComplete={handleComplete}
+          />
+        </Modal>
       ) : (
         ""
       )}
@@ -113,6 +118,19 @@ const LocationInput = styled.div`
     gap: 16px;
     margin-bottom: 10px;
   }
+`;
+
+const Modal = styled.div`
+  background: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 300;
 `;
 
 export default AddressPost;

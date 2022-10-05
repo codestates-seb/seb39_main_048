@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import LogoWhite from "../assets/LogoWhite.png";
 import styled from "styled-components";
+import { BREAK_POINT_TABLET_MINI } from "../constant";
 
 const Footer = () => {
   return (
@@ -41,9 +42,31 @@ const Footer = () => {
           <p>Phone</p>
         </div>
       </FooterContainer>
+      <MobileFooter>
+        ⓒ 2022. <span> seoul in petkage</span> all rights reserved.
+      </MobileFooter>
     </>
   );
 };
+
+const MobileFooter = styled.div`
+  display: none;
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
+    display: flex;
+    margin-top: 100px;
+    color: #fff;
+    background-color: #4da772;
+    padding: 0 10%;
+    height: 80px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    span {
+      font-weight: 600;
+    }
+  }
+`;
 
 const FooterContainer = styled.div`
   display: flex;
@@ -53,6 +76,9 @@ const FooterContainer = styled.div`
   margin-top: 200px;
   padding: 0 10%;
   height: 240px;
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
+    display: none;
+  }
 
   .LogoSection {
     display: flex;

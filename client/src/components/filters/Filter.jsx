@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { ReactComponent as FilterIcon } from "../../assets/FilterIcon.svg";
 import { sizeFilters, isOnlyFilters, locationFilters } from "../../constant";
 import { BREAK_POINT_TABLET } from "../../constant";
+import { BREAK_POINT_TABLET_MINI } from "../../constant";
+import { BREAK_POINT_PHONE } from "../../constant";
 import useDetectClose from "../../hooks/useDetectClose";
 import FilterItem from "./FilterItem";
 
@@ -10,7 +12,7 @@ const Filter = () => {
   const [isOpen, ref, handleOpen] = useDetectClose(false);
   return (
     <FilterContainer ref={ref}>
-      <FilterGroup onClick={handleOpen} bgcolor={isOpen ? "#f7fafe" : ""} >
+      <FilterGroup onClick={handleOpen} bgcolor={isOpen ? "#f7fafe" : ""}>
         <span>filter</span>
         <FilterIcon />
       </FilterGroup>
@@ -82,6 +84,18 @@ const FilterSelect = styled.div`
   p {
     color: #666;
     font-size: 12px;
+  }
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+    left: -200px;
+  }
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
+    left: -300px;
+    width: 400px;
+  }
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    left: 0;
+    width: 300px;
+    padding: 16px;
   }
 `;
 

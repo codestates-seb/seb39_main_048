@@ -15,7 +15,7 @@ const UpdateForm = ({ data, handleClose }) => {
   } = usePost();
 
   useEffect(() => {
-    setPlaceName(data.placeName);
+    setPlaceName(data.name);
   }, []);
   return (
     <Form>
@@ -36,8 +36,8 @@ const UpdateForm = ({ data, handleClose }) => {
         <h3>태그 선택</h3>
         <TagSelect data={data} bottom={"0"} margin={"36px"}/>
         <DetailInfo data={data} size={"16px"} width={"80%"} margin={"16px"}/>
-        <h3>해당하는 키워드 선택</h3>
-        <KeywordSelectBtn data={data} gap={"12px"} width={"90%"}/>
+        {/* <h3>해당하는 키워드 선택</h3>
+        <KeywordSelectBtn data={data} gap={"12px"} width={"90%"}/> */}
       </Inner>
     </Form>
   );

@@ -9,32 +9,60 @@ import { ReactComponent as Phone } from "../assets/Phone.svg";
 import { ReactComponent as Description } from "../assets/Description.svg";
 import { useGetDetailPlace, useDeleteDetailPlace } from "../hooks/useAPI";
 import { Keywords } from "../constant";
+import { BREAK_POINT_TABLET_MINI } from "../constant";
+import { BREAK_POINT_PHONE } from "../constant";
 import styled from "styled-components";
 import BasicButton from "../components/buttons/BasicButton";
 import HashTag from "../components/tags/HashTag";
 import Footer from "../components/Footer";
 import Reviews from "../components/review/Reviews";
-import DetailUpdate from "../components/detailpage/DetailUpdate";
+import DetailUpdate from "../components/detailUpdate/DetailUpdate";
+import Loading from "../components/ui/Loading";
+import { useEffect } from "react";
 
 const Detailpage = () => {
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const { data, isLoading, isError } = useGetDetailPlace(id);
+  const [category, setCategory] = useState("");
 
-  if (isLoading) return <div>Loading...</div>;
+  useEffect(() => {
+    if (data) {
+      console.log("useEffect", data)
+      switch (data.data.category) {
+        case "restaurant":
+          setCategory("식당");
+          break;
+        case "cafe":
+          setCategory("카페");
+          break;
+        case "stay":
+          setCategory("숙소");
+          break;
+        case "hospital":
+          setCategory("병원");
+          break;
+        case "etc":
+          setCategory("기타");
+          break;
+      }
+    }
+  }, [data]);
+
+  if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
 
   const onDelete = () => {
-    window.confirm("삭제하시겠습니까?");
-    useDeleteDetailPlace(id);
-    navigate("/place");
+    if (window.confirm("삭제하시겠습니까?")) {
+      useDeleteDetailPlace(id);
+      navigate("/place");
+    }
   };
 
   const handleUpdateOpen = () => {
     window.scrollTo(0, 0);
     setIsUpdateOpen(true);
-    console.log("isUpdateOpen", isUpdateOpen);
   };
 
   return (
@@ -42,8 +70,8 @@ const Detailpage = () => {
       <Detail>
         <div className="detailTop">
           <div className="PlaceName_category">
-            <PlaceName>{data.placeName}</PlaceName>
-            <Category>{data.category}</Category>
+            <PlaceName>{data.data.name}</PlaceName>
+            <Category>{category}</Category>
           </div>
           <div className="buttonGroup">
             <BasicButton
@@ -55,54 +83,60 @@ const Detailpage = () => {
             <DetailUpdate
               setIsOpen={setIsUpdateOpen}
               isOpen={isUpdateOpen}
-              data={data}
+              data={data.data}
             />
           </div>
         </div>
         <div className="detailTop_info">
           <Score>
             <Star />
-            <span>{data.score}</span>
+            <span>{data.data.scoreAvg}</span>
           </Score>
           <ReviewInfo>후기 16개</ReviewInfo>
           <DataInfo>2022.09.22</DataInfo>
         </div>
         <div className="tagGroup">
           {data &&
-            data.tags.map((tag, idx) => <HashTag text={tag} key={idx} />)}
+            data.data.tagNameList.map((tag, idx) => (
+              <HashTag text={tag.tagName} key={idx} />
+            ))}
         </div>
         <div className="imgs_detailInfo">
-          <Imgs>{data.placeImage ? <img src={data.placeImage} /> : ""}</Imgs>
+          <Imgs>
+            {data.data.placeImage ? <img src={data.data.placeImage} /> : ""}
+          </Imgs>
           <Infos>
             <h2>상세 정보</h2>
             <Info>
               <LocationEmpty />
-              <DetailInfo>{data.address}</DetailInfo>
+              <DetailInfo>{data.data.address}</DetailInfo>
             </Info>
             <Info>
               <Clock />
-              <DetailInfo>{data.serviceTime}</DetailInfo>
+              <DetailInfo>{data.data.serviceTime}</DetailInfo>
             </Info>
             <Info>
               <Globe />
-              <DetailInfo color={data.hompage ? "" : "#999"}>
-                {data.hompage
-                  ? data.hompage
-                  : "대표 사이트가 존재하지 않습니다."}
+              <DetailInfo color={data.data.homepage ? "" : "#999"}>
+                {data.data.homepage ? (
+                  <a href={data.data.homepage}>{data.data.homepage}</a>
+                ) : (
+                  "대표 사이트가 존재하지 않습니다."
+                )}
               </DetailInfo>
             </Info>
             <Info>
               <Phone />
-              <DetailInfo>{data.number}</DetailInfo>
+              <DetailInfo>{data.data.number}</DetailInfo>
             </Info>
             <Info>
               <Description />
-              <DetailInfo>{data.description}</DetailInfo>
+              <DetailInfo>{data.data.description}</DetailInfo>
             </Info>
           </Infos>
         </div>
         <KeywordBtn>
-          <div className="KeywordContainer">
+          {/* <div className="KeywordContainer">
             <ul>
               {Keywords.map((item, idx) => (
                 <li
@@ -113,13 +147,11 @@ const Detailpage = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
         </KeywordBtn>
       </Detail>
       <Reviews />
-      <Map>
-        <Title>찾아가는 길</Title>
-      </Map>
+
       <Footer />
     </>
   );
@@ -155,18 +187,38 @@ const Detail = styled.div`
     align-items: center;
     gap: 12px;
     margin-top: 16px;
+    transition: all 0.3s;
+    flex-wrap: wrap;
   }
 
   .imgs_detailInfo {
     display: flex;
     gap: 48px;
     margin: 36px 0 50px 0;
+    transition: all 0.3s;
+  }
+
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
+    .imgs_detailInfo {
+      display: block;
+      margin: 36px 0 50px 0;
+    }
+  }
+
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    width: 85vw;
+    padding-top: 100px;
   }
 `;
 
 const PlaceName = styled.div`
   font-size: 24px;
   font-weight: 500;
+  transition: all 0.3s;
+
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    font-size: 20px;
+  }
 `;
 
 const Category = styled.div`
@@ -175,6 +227,12 @@ const Category = styled.div`
   color: #fff;
   border-radius: 50px;
   font-size: 14px;
+  transition: all 0.3s;
+
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
 `;
 
 const Score = styled.div`
@@ -191,22 +249,28 @@ const ReviewInfo = styled.div`
   color: #666;
   font-size: 14px;
   cursor: pointer;
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    font-size: 12px;
+  }
 `;
 
 const DataInfo = styled.div`
   color: #666;
   font-size: 14px;
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    font-size: 12px;
+  }
 `;
 
 const Imgs = styled.div`
   width: 100%;
-  height: 20vw;
+  height: 250px;
   background-color: #f5f5f5;
 
   img {
     object-fit: cover;
     width: 100%;
-    height: 20vw;
+    height: 250px;
   }
 `;
 
@@ -218,6 +282,13 @@ const Infos = styled.div`
     color: #333;
     margin-bottom: 16px;
   }
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
+    margin: 36px 0;
+    h2 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  }
 `;
 
 const Info = styled.div`
@@ -225,6 +296,10 @@ const Info = styled.div`
   align-items: center;
   gap: 16px;
   margin-bottom: 18px;
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    gap: 15px;
+    margin-bottom: 12px;
+  }
 `;
 
 const DetailInfo = styled.div`
@@ -232,15 +307,14 @@ const DetailInfo = styled.div`
   display: flex;
   gap: 16px;
   color: ${(props) => props.color || "#333"};
-`;
+  line-height: 150%;
 
-const Map = styled.div`
-  padding: 0 10%;
-  margin-top: 64px;
-`;
-
-const Title = styled.h2`
-  font-size: 20px;
+  a {
+    color: #0059ff;
+  }
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    font-size: 14px;
+  }
 `;
 
 const KeywordBtn = styled.div`
@@ -258,6 +332,7 @@ const KeywordBtn = styled.div`
       font-weight: 350;
       gap: 24px;
       padding: 24px;
+      transition: all 0.3s;
     }
     .Active {
       border: 1px solid #4da772;
@@ -272,6 +347,15 @@ const KeywordBtn = styled.div`
       border-radius: 50px;
       border-color: #f5f5f5;
       background-color: #f5f5f5;
+    }
+    @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+      ul {
+        display: flex;
+        justify-content: start;
+        font-size: 12px;
+        gap: 12px;
+        padding: 14px;
+      }
     }
   }
 `;

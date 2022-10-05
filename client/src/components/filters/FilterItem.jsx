@@ -3,6 +3,7 @@ import styled from "styled-components";
 import useFilters from "../../store/FilterStore";
 import toast, { Toaster } from "react-hot-toast";
 import { ToastInfo } from "../../constant";
+import { BREAK_POINT_PHONE } from "../../constant";
 
 const FilterItem = ({ item }) => {
   const { filterData, setFilterData } = useFilters();
@@ -55,6 +56,11 @@ const Filter = styled.div`
   border: 1px solid ${(props) => props.color || "#f2f4f7"};
   color: ${(props) => props.color || "#333"};
   cursor: pointer;
+  transition: all 0.3s;
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
 `;
 
 export default FilterItem;

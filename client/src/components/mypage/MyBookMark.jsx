@@ -3,23 +3,24 @@ import styled from "styled-components";
 import PlaceCard1 from "../cards/PlaceCard1";
 import { useGetMypageData } from "../../hooks/useAPI";
 import { BREAK_POINT_TABLET } from "../../constant";
+import Loading from "../ui/Loading";
 
 const MyBookMark = ({menu}) => {
   let URL = "";
 
-  if (menu === "북마크") URL = "/bookmark";
-  if (menu === "내가 등록한 장소") URL = "/myplace";
+  if (menu === "북마크") URL = "/api/v1/mypage/bookmark";
+  if (menu === "내가 등록한 장소") URL = "/api/v1/mypage/place";
 
   const { data, isLoading, isError } = useGetMypageData(URL);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading/>
   if (isError) return <div>ERR...</div>;
 
   return (
     <BookMark>
       <Title> {menu}</Title>
       <BookmarkCards>
-        {data.map((data, idx) => (
+        {data.data.map((data, idx) => (
           <PlaceCard1 data={data} key={idx} />
         ))}
       </BookmarkCards>

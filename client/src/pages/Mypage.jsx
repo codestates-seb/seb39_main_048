@@ -7,7 +7,7 @@ import MyBookMark from "../components/mypage/MyBookMark";
 import useMenu from "../store/MenuStore";
 import MyReview from "../components/mypage/MyReview";
 import { BREAK_POINT_TABLET } from "../constant";
-import { BREAK_POINT_PHONE } from "../constant";
+import { BREAK_POINT_TABLET_MINI } from "../constant";
 
 const Mypage = () => {
   const { menu } = useMenu();
@@ -36,8 +36,8 @@ const MyPage = styled.div`
     margin: 0 auto;
     display: block;
   }
-  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
-    width: 90vw;
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
+    width: 85vw;
   }
 `;
 
