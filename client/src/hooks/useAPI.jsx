@@ -52,8 +52,6 @@ export const useUpdataPlace = (config, id) => {
   return updatePlace;
 };
 
-
-
 // --------------------디테일 데이터--------------------
 export const useGetDetailPlace = (id) => {
   const fetcher = async (innerURL) => {
@@ -80,10 +78,39 @@ export const useDeleteDetailPlace = async (id) => {
   }
 };
 
-
-
-
 // --------------------마이페이지 데이터--------------------
+
+export const useGetMyInfo = () => {
+  const fetcher = async () => {
+    const res = await axios.get(`${BASE_URL}/member`);
+    console.log("useGetMyInfo");
+    return res.data;
+  };
+  const { data, error } = useSWR(`/member`, fetcher);
+
+  return {
+    data: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+};
+
+// --------PATCH--------
+export const useUpdataMyInfo = (config) => {
+  const updatePlace = async () => {
+    try {
+      const { data } = await axios.patch(`${BASE_URL}/member/1`, config);
+      console.log("useUpdataMyInfo : ", data)
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("useUpdataMyInfo");
+    return useUpdataMyInfo;
+  };
+
+  return updatePlace;
+};
 
 export const useGetMypageData = (url) => {
   const fetcher = async (innerURL) => {
@@ -145,6 +172,3 @@ export const useGetRecommend = (url) => {
     isError: error,
   };
 };
-
-
-

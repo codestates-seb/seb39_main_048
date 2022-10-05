@@ -39,7 +39,8 @@ export const Keywords = [
 
 // 반응형 기준
 export const BREAK_POINT_TABLET = 1128;
-export const BREAK_POINT_PHONE = 835;
+export const BREAK_POINT_TABLET_MINI = 835;
+export const BREAK_POINT_PHONE = 500;
 
 // toast
 export const ToastInfo = {

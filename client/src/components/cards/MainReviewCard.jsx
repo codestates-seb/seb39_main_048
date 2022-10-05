@@ -4,8 +4,9 @@ import User1 from "../../assets/people/User1.png";
 import User2 from "../../assets/people/User2.png";
 import User3 from "../../assets/people/User3.png";
 import Score from "../ui/Score";
-import { BREAK_POINT_PHONE } from "../../constant";
+import { BREAK_POINT_TABLET_MINI } from "../../constant";
 import { BREAK_POINT_TABLET } from "../../constant";
+import { BREAK_POINT_PHONE } from "../../constant";
 
 const MainReviewCard = () => {
   return (
@@ -69,9 +70,19 @@ const ReviewCard = styled.div`
       margin-bottom: 0px;
     }
   }
-  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
     height: 600px;
     background-color: #eff6f1;
+  }
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    height: 580px;
+    h2 {
+      font-size: 18px;
+      padding-top: 40px;
+    }
+    h4 {
+      font-size: 12px;
+    }
   }
 `;
 
@@ -90,8 +101,12 @@ const ReviewGroup = styled.div`
     margin: 0 auto;
   }
 
-  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
     flex-direction: column;
+  }
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    gap: 16px;
+    padding-top: 20px;
   }
 `;
 
@@ -128,7 +143,7 @@ const Container = styled.div`
     }
   }
 
-  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
     width: 100%;
     max-width: 100%;
     min-width: 100%;
@@ -140,6 +155,12 @@ const Container = styled.div`
       width: 75px;
       top: 70%;
       left: 65px;
+    }
+  }
+
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    img {
+      top: 65%;
     }
   }
 `;
@@ -154,8 +175,8 @@ const Content = styled.div`
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     font-size: 12px;
   }
-  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
-    font-size: 14px;
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
+    font-size: 12px;
     padding: 16px 20px 3px 0px;
     text-align: start;
   }

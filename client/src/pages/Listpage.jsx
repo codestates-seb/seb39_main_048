@@ -9,17 +9,19 @@ import useFilters from "../store/FilterStore";
 import EmptyData from "../components/ui/EmptyData";
 import MoveRegist from "../components/buttons/MoveRegist";
 import Loading from "../components/ui/Loading";
+import { BREAK_POINT_PHONE } from "../constant";
 
 const Listpage = () => {
-  const { selectCategory, searchWord, setSelectCategory, setFilterData } = useFilters();
+  const { selectCategory, searchWord, setSelectCategory, setFilterData } =
+    useFilters();
 
   useEffect(() => {
     return () => {
       setSelectCategory("전체");
-      setFilterData([])
+      setFilterData([]);
     };
   }, []);
-  
+
   let URL = "";
   if (selectCategory === "전체") URL = "/place";
   if (selectCategory === "식당") URL = "/restaurant";
@@ -27,12 +29,11 @@ const Listpage = () => {
   if (selectCategory === "숙소") URL = "/stay";
   if (selectCategory === "병원") URL = "/place";
   if (selectCategory === "기타") URL = "/place";
-  
+
   const { data, isLoading, isError } = useGetPlace(URL);
-  
+
   if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
-  
 
   return (
     <>
@@ -56,7 +57,7 @@ const Listpage = () => {
             ) : (
               ""
             )}
-            {!data.length ?  <EmptyData /> : ""}
+            {!data.length ? <EmptyData /> : ""}
           </CardGroup>
         </Inner>
         <MoveRegist />
@@ -67,6 +68,10 @@ const Listpage = () => {
 };
 const ListPage = styled.div`
   padding-top: 166px;
+
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    padding-top: 110px;
+  }
 `;
 
 const Inner = styled.div`
@@ -76,6 +81,9 @@ const Inner = styled.div`
   div:nth-child(2) {
     justify-content: start;
   }
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    width: 85vw;
+  }
 `;
 
 const Title = styled.div`
@@ -84,13 +92,24 @@ const Title = styled.div`
   font-weight: 700;
   margin-bottom: 24px;
   position: relative;
+  transition: all 0.3s;
 
   img {
     position: absolute;
     top: -12px;
-    left: 143px;
+    left: 130px;
     width: 75px;
     z-index: -10;
+    transition: all 0.3s;
+  }
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    font-size: 20px;
+    img {
+      top: -12px;
+      left: 110px;
+      width: 65px;
+      z-index: -10;
+    }
   }
 `;
 

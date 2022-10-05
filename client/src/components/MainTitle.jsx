@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { BREAK_POINT_PHONE } from "../constant";
 
 const MainTitle = () => {
   return (
@@ -12,10 +14,14 @@ const MainTitle = () => {
         <MainText>Seoul in Petkage</MainText>
       </MainWapper>
       <Buttons>
-        <Button>목록으로 찾기</Button>
-        <Button color={"#4da772"} border={"#4da772"} bgColor={"#fff"}>
-          장소 등록하기
-        </Button>
+        <Link to="/place">
+          <Button>목록으로 찾기</Button>
+        </Link>
+        <Link to="/regist">
+          <Button color={"#4da772"} border={"#4da772"} bgColor={"#fff"}>
+            장소 등록하기
+          </Button>
+        </Link>
       </Buttons>
     </Main>
   );
@@ -57,6 +63,11 @@ const MainText = styled.div`
       border-color: transparent;
     }
   }
+
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    width: 300px;
+    font-size: 2.05em;
+  }
 `;
 
 const Buttons = styled.div`
@@ -70,7 +81,7 @@ const Buttons = styled.div`
 const Button = styled.div`
   padding: 13px 20px;
   background-color: ${(props) => props.bgColor || " #4da772"};
-  color:${(props) => props.color || " #fff"};
+  color: ${(props) => props.color || " #fff"};
   border-radius: 50px;
   font-size: 13px;
   border: 1px solid #4da772;

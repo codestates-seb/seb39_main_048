@@ -1,22 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import usePost from "../../store/PostStore";
 import { ReactComponent as Clock } from "../../assets/Clock.svg";
 import { ReactComponent as Globe } from "../../assets/Globe.svg";
 import { ReactComponent as Phone } from "../../assets/Phone.svg";
 import { ReactComponent as Description } from "../../assets/Description.svg";
-import { useEffect } from "react";
+import { BREAK_POINT_TABLET_MINI } from "../../constant";
+import { BREAK_POINT_PHONE } from "../../constant";
 
 const DetailInfo = ({ data, size, width, margin }) => {
-  const { setServiceTime, setHompage, setNumber, setDescription, serviceTime, hompage, number, description } = usePost();
+  const {
+    setServiceTime,
+    setHompage,
+    setNumber,
+    setDescription,
+    serviceTime,
+    hompage,
+    number,
+    description,
+  } = usePost();
   useEffect(() => {
-    if(data) {
-      setServiceTime(data.serviceTime)
-      setHompage(data.hompage)
-      setNumber(data.number)
-      setDescription(data.description)
+    if (data) {
+      setServiceTime(data.serviceTime);
+      setHompage(data.hompage);
+      setNumber(data.number);
+      setDescription(data.description);
     }
-  },[])
+  }, []);
   return (
     <DetailContainer size={size} width={width} margin={margin}>
       상세정보
@@ -38,7 +48,7 @@ const DetailInfo = ({ data, size, width, margin }) => {
           onChange={(e) => setHompage(e.target.value)}
         ></input>
       </div>
-      <span>선택 입력란입니다. 사이트가 존재한다면 입력해 주세요 :)</span>
+      <span>선택 입력란입니다. 사이트가 존재한다면 입력해 주세요</span>
       <div className="DetailInfo">
         <Phone />
         <input
@@ -68,6 +78,11 @@ const DetailContainer = styled.div`
   display: flex;
   justify-content: start;
   flex-direction: column;
+  transition: all 0.3s;
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
+    width: ${(props) => props.width || "100%"};
+    font-size: ${(props) => props.size || "18px"};
+  }
 
   span {
     font-size: 12px;
@@ -86,6 +101,10 @@ const DetailContainer = styled.div`
     border: 1px solid;
     border-color: #d7e2eb;
     border-radius: 10px;
+    transition: all 0.3s;
+    @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+      padding: 20px;
+    }
   }
 
   .DetailInfo {
@@ -96,6 +115,10 @@ const DetailContainer = styled.div`
   }
   .firstItem {
     margin-top: ${(props) => props.margin || "28px"};
+    transition: all 0.3s;
+    @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+      margin-top: ${(props) => props.margin || "20px"};
+    }
   }
 `;
 

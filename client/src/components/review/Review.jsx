@@ -34,7 +34,6 @@ const Review = () => {
           다른데보다는 훨씬 나은거 같네요!!
         </p>
       </ReviewLeft>
-      <ReviewRight></ReviewRight>
     </ReviewItem>
   );
 };

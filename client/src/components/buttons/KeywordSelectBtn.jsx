@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { Keywords } from "../../constant";
 import usePost from "../../store/PostStore";
+import { BREAK_POINT_TABLET_MINI } from "../../constant";
+import { BREAK_POINT_PHONE } from "../../constant";
 
 const KeywordSelectBtn = ({ data, gap, width }) => {
   const { setKeyWord, keyWord } = usePost();
@@ -57,6 +59,7 @@ const KeywordBtn = styled.div`
       width: ${(props) => props.width || ""};
       gap: ${(props) => props.gap || "24px"};
       padding: 24px;
+     
     }
     .Active {
       border: 1px solid #4da772;
@@ -73,6 +76,10 @@ const KeywordBtn = styled.div`
       background-color: #ffffff;
       cursor: pointer;
       transition: all 0.3s;
+
+      @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+       // 여기부터
+      }
     }
   }
 `;

@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import usePost from "../../store/PostStore";
 import { locationFilters, sizeFilters, isOnlyFilters } from "../../constant";
+import { BREAK_POINT_TABLET_MINI } from "../../constant";
+import { BREAK_POINT_PHONE } from "../../constant";
 
 const TagSelect = ({ data, bottom, margin }) => {
   const {
@@ -121,9 +123,15 @@ const Tag = styled.div`
       margin-top: 14px;
       margin-bottom: ${(props) => props.bottom || "24px"};
       flex-wrap: wrap;
+      transition: all 0.3s;
       .Active {
         background-color: #4da772;
         color: #ffffff;
+      }
+      @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+        gap: 10px;
+        margin-top: 10px;
+        margin-bottom: ${(props) => props.bottom || "12px"};
       }
     }
 
@@ -140,6 +148,10 @@ const Tag = styled.div`
       background-color: #ffffff;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
+      @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+        padding: 8px 15px;
+        font-size: 12px;
+      }
     }
   }
 

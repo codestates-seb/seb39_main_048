@@ -1,4 +1,12 @@
 {
+  "member": [
+    {
+      "id": 1,
+      "userId": "hyewon",
+      "userName": "kanghyewon",
+      "userImg": "http://res.cloudinary.com/petckage/image/upload/v1664897613/rfytghevud7rtkuovmlg.png"
+    }
+  ],
   "recommend": [
     {
       "id": 1,
@@ -257,7 +265,7 @@
   ],
   "place": [
     {
-      "category": "병원",
+      "category": "카페",
       "placeName": "챱챱 케이크",
       "tags": [
         {
@@ -286,8 +294,8 @@
       "id": 1
     },
     {
-      "category": "병원",
-      "placeName": "수정 ) 곳스테이입니다 ",
+      "category": "숙소",
+      "placeName": "곳스테이입니다 ",
       "tags": [
         {
           "tagName": "소형견"
@@ -311,14 +319,14 @@
       ],
       "placeImage": "http://res.cloudinary.com/petckage/image/upload/v1664845933/upwbhoyokeanuvgg6fpx.jpg",
       "serviceTime": "체크인 18:00체크아웃 12:00!!",
-      "hompage": "http://gout.modoo.at/!!",
+      "hompage": "http://gout.modoo.at/",
       "number": "0507-1376-0035!!",
       "address": "대구 동구 팔공로 525 (지묘동)",
       "description": "!!인테리어도 이쁘고 애견 동반으로 이용하기도 좋은 숙소",
       "id": 2
     },
     {
-      "category": "",
+      "category": "병원",
       "placeName": "24시 청담 우리 동물병원",
       "tags": [
         {
@@ -344,6 +352,59 @@
       "address": "서울 강남구 삼성로 614 (삼성동)",
       "description": "24시간 병원",
       "id": 3
+    },
+    {
+      "category": "카페",
+      "placeName": "맛있는 카페",
+      "tags": [
+        {
+          "tagName": "소형견"
+        },
+        {
+          "tagName": "반려견 동반"
+        },
+        {
+          "tagName": "강동구･송파구"
+        }
+      ],
+      "keyWord": [
+        "압마개 필수",
+        "리드줄 착용"
+      ],
+      "placeImage": "http://res.cloudinary.com/petckage/image/upload/v1664901684/oqgxwlc6akodqslohods.jpg",
+      "serviceTime": "케이크 가게",
+      "hompage": "",
+      "number": "안녕하세요",
+      "address": "서울 동대문구 서울시립대로 5 (답십리동, 신답극동아파트)",
+      "description": "맛있겠다",
+      "id": 4
+    },
+    {
+      "category": "기타",
+      "placeName": "기타입니다",
+      "tags": [
+        {
+          "tagName": "대형견"
+        },
+        {
+          "tagName": "반려견 전용"
+        },
+        {
+          "tagName": "강동구･송파구"
+        }
+      ],
+      "keyWord": [
+        "데이케어",
+        "호텔링",
+        "중성화 필수"
+      ],
+      "placeImage": "http://res.cloudinary.com/petckage/image/upload/v1664903000/stmtyynztojlqybcljso.png",
+      "serviceTime": "영업시간",
+      "hompage": "대표 사이트",
+      "number": "번호",
+      "address": "서울 종로구 북촌로1길 9 (안국동)",
+      "description": "장소",
+      "id": 5
     }
   ],
   "search": [

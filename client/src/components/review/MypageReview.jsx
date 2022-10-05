@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
-import { BREAK_POINT_PHONE } from "../../constant";
+import { BREAK_POINT_TABLET_MINI } from "../../constant";
 
 const MypageReview = () => {
   return (
@@ -45,7 +45,7 @@ const ReviewItem = styled.div`
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     padding: 20px 0;
   }
-  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
     gap: 10px;
     }
 `;
@@ -60,7 +60,7 @@ const ReviewLeft = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
-    @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
        gap: 0;
     }
   }
@@ -68,7 +68,7 @@ const ReviewLeft = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
-    @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
        gap: 5;
        margin-top: 5px;
     }
@@ -97,12 +97,12 @@ const ReviewLeft = styled.div`
     color: #333;
     line-height: 150%;
     transition: all 0.3s;
-    @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
       font-size: 12px;
     }
   }
 
-    @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
       .user_buttons {
         display: flex;
         flex-direction: column;
@@ -124,7 +124,7 @@ const PlaceName = styled.div`
   font-weight: 600;
   font-size: 15px;
   color: #4da772;
-  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
     font-weight: 600;
   font-size: 13px;
     }

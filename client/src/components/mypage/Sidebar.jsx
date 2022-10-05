@@ -1,63 +1,180 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import styled from "styled-components";
-import User from "../../assets/User.png";
-import { ReactComponent as Location } from "../../assets/Location.svg";
 import useMenu from "../../store/MenuStore";
+import { ReactComponent as UserImg } from "../../assets/UserImg.svg";
+import { ReactComponent as CirclePlus } from "../../assets/CirclePlus.svg";
+import { useGetMyInfo, useUpdataMyInfo } from "../../hooks/useAPI";
 import { myMenus } from "../../constant";
 import { BREAK_POINT_TABLET } from "../../constant";
+import { BREAK_POINT_TABLET_MINI } from "../../constant";
 import { BREAK_POINT_PHONE } from "../../constant";
-import { useEffect } from "react";
+import Loading from "../ui/Loading";
+import useUser from "../../store/UserStore";
+import useImage from "../../store/ImageStore";
 
 const Sidbar = () => {
   const { setMenu } = useMenu();
+  const { userName, userImg, setUserName, setUserImg } = useUser();
+  const { setFile } = useImage();
   const [currentActive, setCurrentActive] = useState("마이페이지");
-
+  const [isMyOpen, setIsMyOpen] = useState(false);
+  const [imgURL, setImgURL] = useState(null);
+  const ref = useRef();
   useEffect(() => {
-    return() => {
-      setMenu('마이페이지')
+    return () => {
+      setMenu("마이페이지");
+    };
+  }, []);
+
+  const { data, isLoading, isError } = useGetMyInfo();
+  if (isLoading) return <Loading />;
+  if (isError) return <div>ERR...</div>;
+
+  console.log(data);
+
+  const onChangeImage = async () => {
+    // 클라우디너리에 올리기
+    let formData = new FormData();
+    formData.append("api_key", import.meta.env.VITE_CLOUD_API_KEY);
+    formData.append("upload_preset", import.meta.env.VITE_CLOUD_PRESET_NAME);
+    formData.append("timestamp", (Date.now() / 1000) | 0);
+    formData.append(`file`, ref.current.files[0]);
+
+    const config = {
+      header: { "Content-Type": "multipart/form-data" },
+    };
+
+    await axios
+      .post(import.meta.env.VITE_CLOUD_API_URL, formData, config)
+      .then((res) => {
+        setUserImg(res.data.url);
+        console.log("이미지 올라가는 중", res.data);
+      })
+      .catch((err) => console.log(err));
+
+    // 미리보기
+    if (ref.current.files[0].size >= 1000000) {
+      toast("사진 용량은 1MB이내로 올려주세요!", { icon: "🥲", ...ToastInfo });
+      return;
     }
-  },[])
+    const reader = new FileReader();
+    setFile(ref.current.files[0]);
+    console.log(ref.current.files[0].size);
+
+    reader.readAsDataURL(ref.current.files[0]);
+    reader.onloadend = () => {
+      setImgURL(reader.result);
+    };
+  };
 
   const handleActive = (e) => {
     setCurrentActive(e.target.innerText);
     setMenu(e.target.innerText);
   };
 
+  const config = {
+    userName,
+  };
+
+  const onUpdate = () => {
+    const updateMyinfo = useUpdataMyInfo(config);
+    updateMyinfo().then((data) => setUserName(data));
+    setIsMyOpen(false);
+    console.log("config", userName);
+  };
+
+  const onImageUpload = (e) => {
+    e.preventDefault();
+    ref.current.click();
+  };
 
   return (
-    <SideBar>
-      <div className="sticky">
-        <Title>내 프로필</Title>
+    <>
+      <SideBar>
+        <div className="sticky">
+          <Title>내 프로필</Title>
 
-        <SideBarContent>
-          <UserInfo>
-            <div className="img">
-              <img src={User} />
-            </div>
-            <div>
-              <UserName>kanghyew0n</UserName>
-              <UserLoca>
-                <Location />
-                <span>강남구-서초구</span>
-              </UserLoca>
-            </div>
-
-            <EditButton>Edit</EditButton>
-          </UserInfo>
-          <MyMenu>
-            {myMenus.map((menu, idx) => (
-              <div
-                className={currentActive === menu ? "menu active" : "menu"}
-                onClick={handleActive}
-                key={-idx}
-              >
-                <Menu key={idx}>{menu}</Menu>
+          <SideBarContent>
+            <UserInfo>
+              {isMyOpen ? (
+                <input
+                  className="none"
+                  type="file"
+                  accept="image/*"
+                  ref={ref}
+                  onChange={onChangeImage}
+                />
+              ) : (
+                ""
+              )}
+              <div className="img">
+                {data[0].userImg ? (
+                  <img src={data[0].userImg} />
+                ) : (
+                  <div>
+                    {isMyOpen ? (
+                      imgURL ? (
+                        <img src={imgURL} />
+                      ) : (
+                        <CirclePlus
+                          onClick={onImageUpload}
+                          cursor={"pointer"}
+                        />
+                      )
+                    ) : (
+                      <UserImg />
+                    )}
+                  </div>
+                )}
               </div>
-            ))}
-          </MyMenu>
-        </SideBarContent>
-      </div>
-    </SideBar>
+              <div className="userInfo">
+                {isMyOpen ? (
+                  <>
+                    <UpdateName
+                      defaultValue={data[0].userName}
+                      onChange={(e) => setUserName(e.target.value)}
+                    ></UpdateName>
+                    <Buttons>
+                      <Button
+                        onClick={() => setIsMyOpen(!isMyOpen)}
+                        bgcolor={"#fff"}
+                        color={"#4da772"}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        onClick={onUpdate}
+                        bgcolor={"#4da772"}
+                        color={"#fff"}
+                      >
+                        Save
+                      </Button>
+                    </Buttons>
+                  </>
+                ) : (
+                  <>
+                    <UserName>{data[0].userName}</UserName>
+                    <Button onClick={() => setIsMyOpen(!isMyOpen)}>Edit</Button>
+                  </>
+                )}
+              </div>
+            </UserInfo>
+            <MyMenu>
+              {myMenus.map((menu, idx) => (
+                <div
+                  className={currentActive === menu ? "menu active" : "menu"}
+                  onClick={handleActive}
+                  key={-idx}
+                >
+                  <Menu key={idx}>{menu}</Menu>
+                </div>
+              ))}
+            </MyMenu>
+          </SideBarContent>
+        </div>
+      </SideBar>
+    </>
   );
 };
 
@@ -75,6 +192,10 @@ const SideBar = styled.div`
     width: 100%;
     margin-right: 0;
     padding-top: 130px;
+  }
+
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    padding-top: 80px;
   }
 `;
 
@@ -108,7 +229,7 @@ const SideBarContent = styled.div`
     justify-content: space-between;
     padding: 15px;
   }
-  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
     display: block;
     padding: 15px;
   }
@@ -124,9 +245,15 @@ const UserInfo = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    img {
+      width: 100px;
+      border-radius: 50px;
+    }
   }
-  img {
-    width: 100px;
+
+  .none {
+    display: none;
   }
 
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
@@ -136,40 +263,49 @@ const UserInfo = styled.div`
     .img {
       width: 50px;
       height: 50px;
+      img {
+        width: 50px;
+        border-radius: 50px;
+      }
     }
-    img {
-      width: 50px;
-    }
+
+  
   }
 `;
 
 const UserName = styled.div`
-  margin: 15px 0 6px 0;
+  margin: 15px 0 20px 0;
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
-    margin: 0 0 3px 0;
-  }
-`;
-const UserLoca = styled.div`
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 15px;
-  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
-    margin-bottom: 0;
-    font-size: 12px;
+    margin: 0 0 10px 0;
+
   }
 `;
 
-const EditButton = styled.span`
+const UpdateName = styled.input`
+  padding: 5px;
+  margin: 10px 0 14px 0;
+  width: 100%;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Button = styled.span`
   font-size: 12px;
   border-radius: 50px;
   border: 1px solid #4da772;
-  color: #4da772;
+  color: ${(props) => props.color || "#4da772"};
+  background-color: ${(props) => props.bgcolor || "#fff"};
   padding: 5px 15px;
   cursor: pointer;
   transition: all 0.3s;
   &:hover {
-    color: #fff;
-    background-color: #4da772;
+    color: ${(props) => props.color || "#fff"};
+    background-color: ${(props) => props.bgcolor || "#4da772"};
   }
 `;
 
@@ -200,7 +336,7 @@ const MyMenu = styled.ul`
     .menu {
       margin-top: 0;
     }
-    @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
       margin-top: 15px;
       flex-wrap: wrap;
     }
@@ -212,7 +348,7 @@ const Menu = styled.li`
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     font-size: 14px;
   }
-  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
     padding: 1.5vw 2vw;
     font-size: 13px;
   }
