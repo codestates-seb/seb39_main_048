@@ -543,6 +543,41 @@
       "placeId": 8,
       "score": 3,
       "id": 8
+    },
+    {
+      "context": "잠이오지만 해내야지!! 화이링~",
+      "replyId": "알베르토",
+      "placeId": 8,
+      "score": 3,
+      "id": 22
+    },
+    {
+      "replyId": "",
+      "context": "국밥집인데 까르보나라가 끝내줍니다! 이탈리아 온줄\n\n",
+      "score": "5",
+      "placeId": "",
+      "id": 23
+    },
+    {
+      "replyId": "",
+      "context": "마드리드, 바르셀로나, 지로나, 사라고사, 발렌시아, 마요르카, 빌바오, 소시에다드",
+      "score": "4",
+      "placeId": "",
+      "id": 24
+    },
+    {
+      "replyId": "",
+      "context": "커리어스킬, 이야기인문학, 제일기획아이디어 페스티벌, 헤커스텝스, 빅포카",
+      "score": "2",
+      "placeId": "",
+      "id": 25
+    },
+    {
+      "replyId": "",
+      "context": "내용을 입력중입니다",
+      "score": "3",
+      "placeId": "",
+      "id": 26
     }
   ]
 }
