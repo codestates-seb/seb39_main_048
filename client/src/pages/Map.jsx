@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Map, MapMarker, StaticMap } from "react-kakao-maps-sdk";
 import MapBackground from "../components/map/MapBackground";
 import styled from "styled-components";
-import { BREAK_POINT_TABLET } from "../constant";
 import FilterGroup from "../components/filters/FilterGroup";
 import MapListCard from "../components/cards/MapListCard";
 import useFilters from "../store/FilterStore";

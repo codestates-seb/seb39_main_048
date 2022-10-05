@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import styled from "styled-components";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import BasicButton from "../buttons/BasicButton";
 import Review from "./Review";
 import toast, { Toaster } from "react-hot-toast";
-import axios from "axios";
 import { Navigate, useParams } from "react-router-dom";
 import { useGetReply, usePostReply } from "../../hooks/useAPI";
 import usePostReview from "../../store/PostReply";
 
 const notify = () => toast.success(" 후기가 등록되었습니다 🦮");
 
-const Reviews = ({ setIsChange, isChange }) => {
+const Reviews = ({}) => {
   const { id } = useParams();
   const { data, isLoading, isError } = useGetReply();
+  console.log(data);
 
   const {
     replyId,
@@ -47,7 +46,8 @@ const Reviews = ({ setIsChange, isChange }) => {
     const postReply = usePostReply(config);
     postReply().then((res) => res.data);
     console.log(data);
-    if (!context.length || !((e) => setScore(e.target.value))) {
+
+    if (context.length === 0) {
       e.stopPropagation();
       // alert("내용을 입력해주세요.");
       return toast.error("내용을 입력해주세요.📝");
@@ -59,43 +59,21 @@ const Reviews = ({ setIsChange, isChange }) => {
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>ERR...</div>;
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(context);
-  //   if (!context.length) {
-  //     e.preventDefault();
-  //     alert("내용을 입력해주세요.");
-  //     return;
-  //   }
-
-  //   axios
-  //     .post(`http://localhost:3001/reply`, {
-  //       context: context,
-  //       replyId: replyId,
-  //       placeId: Number(id),
-  //       score: score,
-  //     })
-  //     .then((res) => res.data)
-  //     .then((data) => console.log("reply", data));
-  //   setContext("");
-  //   setIsChange(!isChange);
-  // };
-
   return (
     <ReviewGroup>
       <TopSection>
         <div className="review_score">
-          <Title>후기 6</Title>
+          <Title>후기 {data.length}</Title>
           <Score>
             <Star />
-            <ScoreText>평점 4.8</ScoreText>
+            <ScoreText>평점 4.5</ScoreText>
           </Score>
         </div>
         <div className="createReply">
           <textarea
             value={context}
             placeholder="후기를 입력해 주세요"
-            maxLength={300}
+            maxLength={250}
             onChange={(e) => setContext(e.target.value)}
           />
           <div className="scoreInput">
@@ -115,7 +93,7 @@ const Reviews = ({ setIsChange, isChange }) => {
           <div className="createBtn">
             <BasicButton
               text={"등록"}
-              isOpen={notify}
+              handleClick={notify}
               onCreate={handleSubmit}
             />
             <Toaster />

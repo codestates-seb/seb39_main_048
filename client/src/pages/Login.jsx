@@ -46,11 +46,6 @@ const Login = ({ setIsLogin }) => {
           </p>
         </div>
         <div className="IdPassword">
-          {/* <IdInput placeholder="아이디를 입력해 주세요" />
-          <PasswordInput
-            title="비밀번호"
-            placeholder="비밀번호를 입력해 주세요"
-          /> */}
           <Id>
             <label>
               <p>아이디</p>

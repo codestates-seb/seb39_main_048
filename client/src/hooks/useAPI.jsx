@@ -189,3 +189,19 @@ export const useDeleteReply = async () => {
     return err.response.data;
   }
 };
+
+// --------------------지도 데이터--------------------
+export const useGetMap = () => {
+  const fetcher = async () => {
+    const res = await axios.get(`${BASE_URL}/map`);
+    console.log("useGetMap");
+    return res.data;
+  };
+  const { data, error } = useSWR(`/map`, fetcher);
+
+  return {
+    data: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+};

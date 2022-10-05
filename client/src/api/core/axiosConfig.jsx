@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://:8080",
+  baseURL: "http://175.121.124.2:8080",
   timeout: 2500,
   withCredentials: false, // 쿠키를 사용하지 않기 때문에 false
   headers: {
@@ -10,8 +10,6 @@ const axiosInstance = axios.create({
     // Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   },
 });
-// [사용법] 아래와 같이 사용 -> 기본으로 위의 timeout 및 header 설정
-// axiosInstance.get("http://localhost:3001");
 
 // req를 인터셉터(interceptor) 하기
 axiosInstance.interceptors.request.use(
