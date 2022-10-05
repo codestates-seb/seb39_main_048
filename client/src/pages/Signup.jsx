@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LogoColor from "../assets/LogoColor.png";
 import IdInput from "../components/input/IdInput";
 import PasswordInput from "../components/input/PasswordInput";
-import SNSLoginContainer from  "../components/buttons/SNSLoginContainer";
+import SNSLoginContainer from "../components/buttons/SNSLoginContainer";
 import axios from "axios";
 import useSignup from "../store/SignupStore";
 import axiosInstance from "../api/core/axiosConfig";
@@ -63,8 +63,8 @@ const Signup = () => {
 
   const onRegister = () => {
     if (isPasswordCheck && isId && isPassword && isName) {
-      axiosInstance
-        .post("/user", {
+      axios
+        .post("http:///api/v1/user", {
           userId: userId,
           password: password,
           name: name,

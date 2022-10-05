@@ -13,26 +13,27 @@ const MapListCard = ({ data }) => {
 
   return (
     <Card>
-      <Link to={`/place/${data.placeId}`}>
-        <PlaceImg></PlaceImg>
+      <Link to={`/place/${data.id}`}>
+        <PlaceImg>
+          {data.placeImage ? <img src={data.placeImage}></img> : ""}
+        </PlaceImg>
       </Link>
       <PlaceInfo>
         <Infos>
           <Title>
-            <Link to={`/place/${data.placeId}`}>
-              <PlaceName>{data.name}</PlaceName>
+            <Link to={`/place/${data.id}`}>
+              <PlaceName>{data.placeName}</PlaceName>
             </Link>
             <Score>
               <Star />
-              <p>{data.scoreAvg}</p>
+              4.6
             </Score>
           </Title>
         </Infos>
         <Address>{data.address}</Address>
         <Tags>
-          {data?.tags.map((tag, idx) => (
-            <HashTag text={tag} key={idx} />
-          ))}
+          {data.tags &&
+            data.tags.map((item, idx) => <HashTag text={item} key={idx} />)}
         </Tags>
       </PlaceInfo>
     </Card>
@@ -42,20 +43,30 @@ const MapListCard = ({ data }) => {
 const Card = styled.div`
   border: 1px solid #d7e2eb;
   border-radius: 10px;
-  /* height: 282px; */
   position: relative;
+  width: 320px;
+  height: 120px;
+  opacity: 0.9;
 `;
 
 const PlaceImg = styled.div`
   background-color: #f5f5f5;
-  height: 150px;
+  height: 120px;
   border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
   cursor: pointer;
+  position: absolute;
+
+  img {
+    object-fit: fill;
+    height: 120px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
 `;
 
 const PlaceInfo = styled.div`
-  padding: 20px 20px 25px 20px;
+  padding: 8px 5px 8px 120px;
 `;
 
 const Infos = styled.div`
@@ -66,23 +77,23 @@ const Infos = styled.div`
   margin-bottom: 6px;
 `;
 const Address = styled.div`
-  font-size: 14px;
+  font-size: 10px;
   color: #333;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 200px;
-  margin-bottom: 12px;
+  max-width: 180px;
+  margin-bottom: 5px;
 `;
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 2px;
 `;
 
 const Title = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 5px;
   align-items: center;
 `;
 
@@ -91,42 +102,19 @@ const PlaceName = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 150px;
+  max-width: 190px;
   cursor: pointer;
 `;
 
 const Score = styled.div`
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 11px;
   color: #999;
   gap: 3px;
   svg {
-    margin-top: -3px;
+    margin-top: -4px;
   }
-`;
-
-const BookMarkArea = styled.div`
-  position: relative;
-  svg {
-    cursor: pointer;
-  }
-`;
-
-const Buttons = styled.div`
-  position: absolute;
-  width: 50px;
-  background-color: #fff;
-  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  text-align: center;
-  right: 0;
-`;
-
-const Button = styled.div`
-  font-size: 14px;
-  padding: 10px;
-  cursor: pointer;
 `;
 
 export default MapListCard;

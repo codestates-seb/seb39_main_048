@@ -13,6 +13,7 @@ const Search = ({ data }) => {
     useFilters();
   const [isOpen, searchRef, setIsOpen] = useDetectClose(false);
 
+
   useEffect(() => {
     return () => {
       setSearchWord("");
@@ -40,12 +41,14 @@ const Search = ({ data }) => {
       let filterData = searchData.filter((data) =>
         data.toLowerCase().includes(targetData.toLowerCase())
       );
+
       console.log(filterData);
       setFilter(filterData);
 
       if (filterData.length) {
         setIsOpen(!isOpen);
       }
+
     }
   };
 

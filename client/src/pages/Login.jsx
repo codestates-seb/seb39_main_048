@@ -15,15 +15,12 @@ const Login = ({ setIsLogin }) => {
     try {
       let data = { userId };
       axiosInstance
-        .post(
-          "/user",
-          {
-            userId: userId,
-            password: password,
-          }
-        )
+        .post("/api/v1/login", {
+          userId: userId,
+          password: password,
+        })
         .then((res) => {
-          console.log("res.data.accessToken : " + res.data);
+          console.log("res.data.access_Token : " + res.data);
           axios.defaults.headers.common["Authorization"] = "Bearer " + res.data;
           setIsLogin(true);
         })

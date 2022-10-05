@@ -85,6 +85,7 @@ export const useDeleteDetailPlace = async (id) => {
 
 // --------------------마이페이지 데이터--------------------
 
+
 export const useGetMyInfo = () => {
   const fetcher = async () => {
     const res = await axios.get(`${BASE_URL}/api/v1/mypage `, {
@@ -172,7 +173,7 @@ export const useDeleteMyPlace = async (id) => {
 
 export const useGetSearch = () => {
   const fetcher = async () => {
-    const res = await axios.get(`${BASE_URL}/search`);
+    const res = await axios.get(`${BASE_URL}/place/${id}/search`);
     console.log("useGetSearch");
     return res.data;
   };
@@ -200,4 +201,64 @@ export const useGetRecommend = (url) => {
     isLoading: !error && !data,
     isError: error,
   };
+};
+
+// --------------------후기 데이터--------------------
+
+export const useGetReply = () => {
+  const fetcher = async () => {
+    const res = await axios.get(`${BASE_URL}/reply`);
+    console.log("useGetReply");
+    return res.data;
+  };
+  const { data, error } = useSWR(`/reply`, fetcher);
+
+  return {
+    data: data,
+    isLoading: !error && !data,
+    isError: error,
+  };
+};
+
+// --------POST--------
+export const usePostReply = (config) => {
+  const postReply = async () => {
+    try {
+      const { data } = await axios.post(`${BASE_URL}/reply`, config);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("usePostReply");
+    return res.data;
+  };
+
+  return postReply;
+};
+
+// --------PATCH--------
+export const useUpdataReply = (config) => {
+  const updateReply = async () => {
+    try {
+      const { data } = await axios.patch(`${BASE_URL}/reply`, config);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("useUpdataReply");
+    return res.data;
+  };
+
+  return updateReply;
+};
+
+// --------DELETE--------
+export const useDeleteReply = async () => {
+  try {
+    const { data } = await axios.delete(`${BASE_URL}/reply`);
+    console.log("useDeleteReply");
+    return data;
+  } catch (err) {
+    return err.response.data;
+  }
 };
