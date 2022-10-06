@@ -6,20 +6,7 @@ import { BREAK_POINT_TABLET } from "../../constant";
 const MySummary = () => {
   return (
     <Summary>
-<<<<<<< HEAD
-      <Bookmark>
-        <Info>
-          <h2>북마크</h2>
-          <span>더보기</span>
-        </Info>
-        <BookmarkCards>
-          {/* <PlaceCard1 />
-          <PlaceCard1 />
-          <PlaceCard1 /> */}
-        </BookmarkCards>
-      </Bookmark>
-=======
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
+
       <Myplace>
         <Info>
           <h2>내가 등록한 장소</h2>
@@ -67,20 +54,6 @@ const Summary = styled.div`
   }
 `;
 
-<<<<<<< HEAD
-const Bookmark = styled.div`
-  margin-bottom: 48px;
-`;
-
-const BookmarkCards = styled.div`
-  width: 100%;
-  gap: 24px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-`;
-
-=======
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
 const Myplace = styled.div`
   margin-bottom: 48px;
 `;

@@ -5,10 +5,7 @@ import { useUpdataPlace } from "../../hooks/useAPI";
 import UpdateForm from "./UpdateForm";
 import BasicButton from "../buttons/BasicButton";
 import usePost from "../../store/PostStore";
-<<<<<<< HEAD
-=======
 import { BREAK_POINT_TABLET } from "../../constant";
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
 
 const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
   const { id } = useParams();
@@ -35,7 +32,7 @@ const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
     serviceTime,
     homepage,
     number,
-    description
+    description,
   } = usePost();
 
   useEffect(() => {
@@ -58,8 +55,8 @@ const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
 
   const config = {
     category,
-    name : placeName,
-    tagNameList : tags,
+    name: placeName,
+    tagNameList: tags,
     keyWord,
     serviceTime,
     homepage,
@@ -84,7 +81,7 @@ const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
   };
 
   const onUpdate = () => {
-    console.log('updateConfig', config);
+    console.log("updateConfig", config);
 
     const updatePlace = useUpdataPlace(config, id);
     updatePlace()
@@ -170,13 +167,10 @@ const UpdateGroup = styled.div`
       opacity: 1;
     }
   }
-<<<<<<< HEAD
-=======
 
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     width: 100%;
   }
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
 `;
 
 const UpdateViewer = styled.div`
@@ -185,14 +179,9 @@ const UpdateViewer = styled.div`
   border-radius: 10px;
   margin: 100px 0;
   padding-bottom: 30px;
-<<<<<<< HEAD
-=======
-
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
-    border-radius: 10px 10px 0 0 ;
-
+    border-radius: 10px 10px 0 0;
   }
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
 `;
 const Buttons = styled.div`
   display: flex;

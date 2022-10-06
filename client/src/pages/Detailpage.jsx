@@ -8,7 +8,6 @@ import { ReactComponent as Globe } from "../assets/Globe.svg";
 import { ReactComponent as Phone } from "../assets/Phone.svg";
 import { ReactComponent as Description } from "../assets/Description.svg";
 import { useGetDetailPlace, useDeleteDetailPlace } from "../hooks/useAPI";
-import { Keywords } from "../constant";
 import { BREAK_POINT_TABLET_MINI } from "../constant";
 import { BREAK_POINT_PHONE } from "../constant";
 import styled from "styled-components";
@@ -19,10 +18,7 @@ import Reviews from "../components/review/Reviews";
 import DetailUpdate from "../components/detailUpdate/DetailUpdate";
 import Loading from "../components/ui/Loading";
 import { useEffect } from "react";
-<<<<<<< HEAD
 import usePostReview from "../store/PostReply";
-=======
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
 
 const Detailpage = () => {
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
@@ -30,18 +26,11 @@ const Detailpage = () => {
   const { id } = useParams();
   const { data, isLoading, isError } = useGetDetailPlace(id);
   const [category, setCategory] = useState("");
-<<<<<<< HEAD
   const { replyLength, setReplyLength } = usePostReview();
 
   useEffect(() => {
     if (data) {
-      console.log("useEffect", data);
-=======
-
-  useEffect(() => {
-    if (data) {
       console.log("useEffect", data)
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
       switch (data.data.category) {
         case "restaurant":
           setCategory("식당");
@@ -62,13 +51,10 @@ const Detailpage = () => {
     }
   }, [data]);
 
-<<<<<<< HEAD
   useEffect(() => {
     setReplyLength(replyLength);
   }, [replyLength]);
 
-=======
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
   if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
 
@@ -109,15 +95,11 @@ const Detailpage = () => {
         <div className="detailTop_info">
           <Score>
             <Star />
-<<<<<<< HEAD
+
             <span>{data.data.scoreAvg.toFixed(1)}</span>
           </Score>
           <ReviewInfo>후기 {replyLength}개</ReviewInfo>
-=======
-            <span>{data.data.scoreAvg}</span>
-          </Score>
-          <ReviewInfo>후기 16개</ReviewInfo>
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
+
           <DataInfo>2022.09.22</DataInfo>
         </div>
         <div className="tagGroup">
@@ -175,11 +157,7 @@ const Detailpage = () => {
           </div> */}
         </KeywordBtn>
       </Detail>
-<<<<<<< HEAD
       <Reviews scoreAvg={data.data.scoreAvg.toFixed(1)} />
-=======
-      <Reviews />
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
 
       <Footer />
     </>

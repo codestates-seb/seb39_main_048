@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-const MyPlace = () => {
-  
-  return (
-    <div>MyPlace</div>
-  )
-}
-
-export default MyPlace
-=======
 import React from "react";
 import styled from "styled-components";
 import PlaceCard1 from "../cards/PlaceCard1";
@@ -65,4 +53,3 @@ const PlaceCards = styled.div`
 `;
 
 export default MyPlace;
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
