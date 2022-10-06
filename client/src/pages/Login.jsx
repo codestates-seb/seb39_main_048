@@ -1,35 +1,44 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogoColor from "../assets/LogoColor.png";
 import SNSLoginContainer from "../components/buttons/SNSLoginContainer";
 import axios from "axios";
 import axiosInstance from "../api/core/axiosConfig";
 import useLogin from "../store/LoginStore";
 import styled from "styled-components";
+import useMamber from "../store/MemberStore";
+import jwt_decode from "jwt-decode";
 
 const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 
-const Login = ({ setIsLogin }) => {
-  const { userId, password, setUserId, setPassword } = useLogin();
+const Login = () => {
+  const { userId, password, setUserId, setPassword, setIsLogin } = useLogin();
+  const navigate = useNavigate();
+  const { setUser } = useMamber();
+
+  // const decoded = jwt_decode(localStorage.getItem("access_Token"));
 
   const onLogin = () => {
     try {
-      let data = { userId };
       axiosInstance
         .post(`${BASE_URL}/api/v1/login`, {
           userId: userId,
           password: password,
         })
         .then((res) => {
-          console.log("res.data.access_Token : " + res.data);
-          axios.defaults.headers.common["Authorization"] = "Bearer " + res.data;
+          console.log(res);
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${localStorage.getItem("access_Token")}`;
           setIsLogin(true);
+          const decoded = jwt_decode(localStorage.getItem("access_Token"));
+
+          setUser(decoded.userId);
+          navigate("/");
         })
         .catch((err) => {
-          console.log("login requset fail : " + err);
-        })
-        .finally(() => {
-          console.log("login request end");
+          console.log(err);
+          console.log("error: " + JSON.stringify(localStorage));
         });
     } catch (err) {
       console.log(err);

@@ -7,7 +7,6 @@ import { BREAK_POINT_TABLET_MINI } from "../constant";
 import { BREAK_POINT_PHONE } from "../constant";
 import toast, { Toaster } from "react-hot-toast";
 import Category from "../components/buttons/Category";
-import KeywordSelectBtn from "../components/buttons/KeywordSelectBtn";
 import Footer from "../components/Footer";
 import usePost from "../store/PostStore";
 import DetailInfo from "../components/registpage/DetailInfo";
@@ -17,7 +16,6 @@ import UploadImg from "../components/registpage/UploadImg";
 
 const PlaceRegistration = () => {
   const navigate = useNavigate();
-
   const {
     setSizeTags,
     setIsOnlyTags,
@@ -97,10 +95,10 @@ const PlaceRegistration = () => {
     if (placeImage.length) {
       const postPlace = usePostPlace(configData);
       postPlace().then((res) => {
-        console.log(res);
-        console.log("게시글 올라가는 중");
         navigate("/place");
       });
+
+      console.log("configData", configData)
     }
   };
 

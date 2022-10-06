@@ -9,6 +9,7 @@ import usePost from "../../store/PostStore";
 import Loading from "../ui/Loading";
 import { BREAK_POINT_TABLET_MINI } from "../../constant";
 import { BREAK_POINT_PHONE } from "../../constant";
+import instance from "../../api/core/Config";
 
 const UploadImg = () => {
   const { setFile } = useImage();
@@ -17,7 +18,9 @@ const UploadImg = () => {
   const [isLoading, setIsLoading] = useState(false);
   const ref = useRef();
 
+  
   const onChangeImage = async () => {
+
     // 클라우디너리에 올리기
     let formData = new FormData();
     formData.append("api_key", import.meta.env.VITE_CLOUD_API_KEY);
@@ -25,13 +28,11 @@ const UploadImg = () => {
     formData.append("timestamp", (Date.now() / 1000) | 0);
     formData.append(`file`, ref.current.files[0]);
 
-    const config = {
-      header: { "Content-Type": "multipart/form-data" },
-    };
 
-    await axios
-      .post(import.meta.env.VITE_CLOUD_API_URL, formData, config)
+    await instance
+      .post(import.meta.env.VITE_CLOUD_API_URL, formData)
       .then((res) => {
+        // delete axios.headers.common["Authorization"]
         setPlaceImage(res.data.url);
         console.log("이미지 올라가는 중", res.data);
       })
@@ -102,7 +103,6 @@ const ImageDetail = styled.div`
     cursor: pointer;
   }
   .ImgContainer {
-   
     .ImageUpload {
       display: flex;
       align-items: center;

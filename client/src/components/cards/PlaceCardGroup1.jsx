@@ -57,7 +57,7 @@ const PlaceCardGroup1 = ({ title, data }) => {
       <Container>
         <Cards ref={cardRef}>
           {data.map((data, idx) => (
-            <PlaceCard1 data={data} key={idx} width={"240px"} />
+            <PlaceCard1 data={data} key={idx} width={"264px"} />
           ))}
         </Cards>
       </Container>
