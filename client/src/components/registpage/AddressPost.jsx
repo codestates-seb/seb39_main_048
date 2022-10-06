@@ -2,10 +2,19 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import usePost from "../../store/PostStore";
+import { ReactComponent as Close } from "../../assets/Close.svg";
+import { BREAK_POINT_TABLET_MINI } from "../../constant";
+import { BREAK_POINT_PHONE } from "../../constant";
 
 const AddressPost = (props) => {
   const { address, setAddress } = usePost();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (address) {
+      setIsOpen(!isOpen);
+    }
+  }, [address]);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -38,13 +47,14 @@ const AddressPost = (props) => {
 
   return (
     <LocationInput>
-      <div>주소 입력</div>
+      <div className="title">주소 입력</div>
       <div className="LocationContainer">
         <div className="searchAddress">
           <input
             placeholder="주소를 검색해주세요"
             defaultValue={address}
             onClick={() => setIsOpen(true)}
+            readonly
           />
           {isOpen ? (
             <button onClick={handleClick}>닫기</button>
@@ -56,14 +66,19 @@ const AddressPost = (props) => {
 
       {isOpen ? (
         <Modal onClick={handleClick}>
-          <DaumPostcodeEmbed
-            style={{
-              width: "350px",
-              border: "1px solid #d7e2eb",
-              marginTop: "16px",
-            }}
-            onComplete={handleComplete}
-          />
+          <Container>
+            <CloseButton>
+              <Close nClick={handleClick}/>
+            </CloseButton>
+            <DaumPostcodeEmbed
+              style={{
+                width: "350px",
+                border: "1px solid #d7e2eb",
+                marginTop: "16px",
+              }}
+              onComplete={handleComplete}
+            />
+          </Container>
         </Modal>
       ) : (
         ""
@@ -85,8 +100,12 @@ const LocationInput = styled.div`
     border-radius: 10px;
     margin-top: 24px;
     padding: 30px;
-    width: 60%;
+    width: 70%;
     gap: 30px;
+
+    @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
+      width: 100%;
+    }
 
     input {
       font-size: 12px;
@@ -96,6 +115,7 @@ const LocationInput = styled.div`
       height: 100%;
       width: 100%;
       padding: 12px;
+      min-width: 220px;
     }
     button {
       color: #ffffff;
@@ -118,6 +138,24 @@ const LocationInput = styled.div`
     gap: 16px;
     margin-bottom: 10px;
   }
+
+  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+    .title {
+      font-size: 18px;
+    }
+    .LocationContainer {
+      padding: 10px;
+      input {
+        margin-bottom: 10px;
+      }
+      .searchAddress {
+        display: block;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 const Modal = styled.div`
@@ -131,6 +169,22 @@ const Modal = styled.div`
   height: 100%;
   width: 100%;
   z-index: 300;
+`;
+
+const Container = styled.div`
+  position: relative;
+
+`
+
+const CloseButton = styled.div`
+  background-color: #f5f5f5;
+  position: absolute;
+  width: 100%;
+  top: -20px;
+  padding: 8px 30px 8px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
 `;
 
 export default AddressPost;

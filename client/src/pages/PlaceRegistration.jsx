@@ -180,7 +180,7 @@ const Page = styled.div`
     margin-bottom: 64px;
   }
 
-  @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
+  @media only screen and (max-width: ${BREAK_POINT_TABLET_MINI}px) {
     padding-top: 110px;
 
     .TopComment {

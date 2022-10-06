@@ -11,7 +11,8 @@ const EmptyData = () => {
 };
 
 const Empty = styled.div`
-  width: 100%;
+  width: 80vw;
+  max-width: 1280px;
   color: #b8bdb9;
   font-size: 14px;
   font-weight: 600;

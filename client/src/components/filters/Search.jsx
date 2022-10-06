@@ -2,24 +2,14 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import useFilters from "../../store/FilterStore";
 import useDetectClose from "../../hooks/useDetectClose";
-import { useGetPlace } from "../../hooks/useAPI";
 import { ReactComponent as SearchIcon } from "../../assets/SearchIcon.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
-import Loading from "../ui/Loading";
 
-<<<<<<< HEAD
-const Search = () => {
-  const [isOpen, searchRef, handleOpen] = useDetectClose(false);
-  const { data, isLoading, isError } = useGetPlace("/place");
-  const { searchData, setSearchData, text, setText } = useFilters();
-  const [filter, setFilter] = useState(searchData);
-=======
 const Search = ({ data }) => {
   const [filter, setFilter] = useState([]);
   const { searchData, setSearchData, text, setText, setSearchWord } =
     useFilters();
   const [isOpen, searchRef, setIsOpen] = useDetectClose(false);
->>>>>>> 636222e9b3283f6b53700573725b164c52654125
 
 
   useEffect(() => {
@@ -36,32 +26,23 @@ const Search = ({ data }) => {
 
   useEffect(() => {
     if (data) {
-      setSearchData(data.map((data) => data.name));
+      setSearchData(data.data.map((data) => data.name));
     }
   }, [data]);
 
   const hadleChange = (e) => {
     if (data) {
-      console.log(searchData);
       let targetData = e.target.value;
       setText(targetData);
 
       let filterData = searchData.filter((data) =>
         data.toLowerCase().includes(targetData.toLowerCase())
       );
-<<<<<<< HEAD
-      console.log(filterData); // -> 여기까지 검색된 내용 잘 나옴
-      setFilter(filterData); //-> 여기서 넣으면 빈 배열이 나옴 -> 데이터 들어가는 속도가 늦어서?
-=======
-
-      console.log(filterData);
       setFilter(filterData);
 
       if (filterData.length) {
         setIsOpen(!isOpen);
       }
-
->>>>>>> 636222e9b3283f6b53700573725b164c52654125
     }
   };
 
@@ -74,6 +55,12 @@ const Search = ({ data }) => {
     setSearchWord(text);
   };
 
+  const onSearch = (e) => {
+    if (e.key) {
+      setSearchWord(text);
+    }
+  };
+
   return (
     <SearchGroup>
       <input
@@ -81,6 +68,7 @@ const Search = ({ data }) => {
         onChange={hadleChange}
         value={text}
         ref={searchRef}
+        onKeyPress={onSearch}
       />
       <SearchIcon onClick={handleSearch} />
       {isOpen && filter.length ? (

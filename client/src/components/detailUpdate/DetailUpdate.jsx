@@ -5,6 +5,7 @@ import { useUpdataPlace } from "../../hooks/useAPI";
 import UpdateForm from "./UpdateForm";
 import BasicButton from "../buttons/BasicButton";
 import usePost from "../../store/PostStore";
+import { BREAK_POINT_TABLET } from "../../constant";
 
 const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
   const { id } = useParams();
@@ -166,6 +167,10 @@ const UpdateGroup = styled.div`
       opacity: 1;
     }
   }
+
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+    width: 100%;
+  }
 `;
 
 const UpdateViewer = styled.div`
@@ -174,6 +179,11 @@ const UpdateViewer = styled.div`
   border-radius: 10px;
   margin: 100px 0;
   padding-bottom: 30px;
+
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+    border-radius: 10px 10px 0 0 ;
+
+  }
 `;
 const Buttons = styled.div`
   display: flex;

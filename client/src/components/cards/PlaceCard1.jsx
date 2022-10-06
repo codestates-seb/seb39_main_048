@@ -9,7 +9,7 @@ import HashTag from "../tags/HashTag";
 import useMenu from "../../store/MenuStore";
 import { useDeleteMyPlace } from "../../hooks/useAPI";
 
-const PlaceCard1 = ({ data }) => {
+const PlaceCard1 = ({ data, width }) => {
   const { menu } = useMenu();
   const [isOpen, ref, handleOpen] = useDetectClose(false);
 
@@ -20,7 +20,7 @@ const PlaceCard1 = ({ data }) => {
   };
 
   return (
-    <Card>
+    <Card width={width}>
       <Link to={`/place/${data.placeId}`}>
         <PlaceImg>
           {data.placeImage ? <img src={data.placeImage}></img> : ""}
@@ -34,16 +34,16 @@ const PlaceCard1 = ({ data }) => {
             </Link>
             <Score>
               <Star />
-             {data.scoreAvg}
+              {data.scoreAvg}
             </Score>
           </Title>
-          <BookMarkArea>
+          <DotsArea>
             {menu === "내가 등록한 장소" ? (
               <div onClick={handleOpen} ref={ref}>
                 <Dots />
               </div>
             ) : (
-              <BookMark />
+              ""
             )}
             {isOpen ? (
               <Buttons>
@@ -53,12 +53,14 @@ const PlaceCard1 = ({ data }) => {
             ) : (
               ""
             )}
-          </BookMarkArea>
+          </DotsArea>
         </Infos>
         <Address>{data.address}</Address>
         <Tags>
           {data.tagNameList &&
-            data.tagNameList.map((item, idx) => <HashTag text={item.tagName} key={idx} />)}
+            data.tagNameList.map((item, idx) => (
+              <HashTag text={item.tagName} key={idx} />
+            ))}
         </Tags>
       </PlaceInfo>
     </Card>
@@ -68,13 +70,15 @@ const PlaceCard1 = ({ data }) => {
 const Card = styled.div`
   border: 1px solid #d7e2eb;
   border-radius: 10px;
-  width: 100%;
+  /* min-width: 220px; */
   position: relative;
+  width: ${(props) => props.width || ""};
 `;
 
 const PlaceImg = styled.div`
   background-color: #f5f5f5;
   height: 150px;
+  /* height: 100%; */
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   cursor: pointer;
@@ -96,13 +100,13 @@ const PlaceImg = styled.div`
 
 const PlaceInfo = styled.div`
   padding: 20px 20px 25px 20px;
-  background-color: #fff;
 `;
 
 const Infos = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  gap: 10px;
   justify-content: space-between;
   margin-bottom: 6px;
 `;
@@ -123,7 +127,9 @@ const Tags = styled.div`
 
 const Title = styled.div`
   display: flex;
-  gap: 8px;
+  /* gap: 8px; */
+  width: 100%;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -147,10 +153,15 @@ const Score = styled.div`
   }
 `;
 
-const BookMarkArea = styled.div`
+const DotsArea = styled.div`
   position: relative;
-  svg {
-    cursor: pointer;
+  div {
+    display: flex;
+    align-items: center;
+
+    svg {
+      cursor: pointer;
+    }
   }
 `;
 

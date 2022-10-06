@@ -6,23 +6,30 @@ import { ReactComponent as Plus } from "../../assets/Plus-lg.svg";
 
 const MoveRegist = () => {
   return (
-    <Link to="/regist">
-      <Button>
-        <Plus />
-      </Button>
-    </Link>
+    <Container>
+      <Link to="/regist">
+        <Button>
+          <Plus />
+        </Button>
+      </Link>
+    </Container>
   );
 };
 
-const Button = styled.div`
+const Container = styled.div`
+  width: 56px;
+  height: 56px;
   position: sticky;
   bottom: 5%;
   left: 95%;
+`;
+
+const Button = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 56px;
-  height: 56px;
   border-radius: 50px;
   background-color: #4da772;
   filter: drop-shadow(rgba(0, 0, 0, 0.2) 0px 0px 8px);
