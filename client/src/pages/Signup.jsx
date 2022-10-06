@@ -7,8 +7,10 @@ import SNSLoginContainer from "../components/buttons/SNSLoginContainer";
 import axios from "axios";
 import useSignup from "../store/SignupStore";
 import axiosInstance from "../api/core/axiosConfig";
-
 import styled from "styled-components";
+
+const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
+
 
 const Signup = () => {
   const {
@@ -65,7 +67,7 @@ const Signup = () => {
     if (isPasswordCheck && isId && isPassword && isName) {
       axios
 
-        .post("http:///api/v1/user/signup", {
+        .post(`${BASE_URL}/api/v1/user/signup`, {
           userId: userId,
           password: password,
           name: name,

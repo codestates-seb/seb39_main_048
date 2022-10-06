@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ReactModal from "react-modal";
 import "./App.css";
 import Nav from "./components/header/Nav";
 import Map from "./pages/Map";

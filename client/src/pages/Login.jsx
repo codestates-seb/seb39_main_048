@@ -5,8 +5,9 @@ import SNSLoginContainer from "../components/buttons/SNSLoginContainer";
 import axios from "axios";
 import axiosInstance from "../api/core/axiosConfig";
 import useLogin from "../store/LoginStore";
-
 import styled from "styled-components";
+
+const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 
 const Login = ({ setIsLogin }) => {
   const { userId, password, setUserId, setPassword } = useLogin();
@@ -15,7 +16,7 @@ const Login = ({ setIsLogin }) => {
     try {
       let data = { userId };
       axiosInstance
-        .post("/api/v1/login", {
+        .post(`${BASE_URL}/api/v1/login`, {
           userId: userId,
           password: password,
         })

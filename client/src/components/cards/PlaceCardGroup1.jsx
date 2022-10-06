@@ -57,7 +57,7 @@ const PlaceCardGroup1 = ({ title, data }) => {
       <Container>
         <Cards ref={cardRef}>
           {data.map((data, idx) => (
-            <PlaceCard1 data={data} key={idx} />
+            <PlaceCard1 data={data} key={idx} width={"240px"}/>
           ))}
         </Cards>
       </Container>
@@ -126,13 +126,9 @@ const Container = styled.div`
 `;
 
 const Cards = styled.div`
-  display: grid;
-  width: 500vw;
+  display: flex;
+  width: 2144px;
   gap: 32px;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(240px, calc((80vw - 96px) / 4))
-  );
 `;
 
 const Buttons = styled.div`

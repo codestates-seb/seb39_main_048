@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useGetPlace } from "../hooks/useAPI";
 import Point from "../assets/Point.png";
@@ -9,11 +9,18 @@ import useFilters from "../store/FilterStore";
 import EmptyData from "../components/ui/EmptyData";
 import MoveRegist from "../components/buttons/MoveRegist";
 import Loading from "../components/ui/Loading";
+import { BREAK_POINT_TABLET } from "../constant";
 import { BREAK_POINT_PHONE } from "../constant";
 
 const Listpage = () => {
-  const { selectCategory, searchWord, setSelectCategory, setFilterData } =
-    useFilters();
+  const {
+    selectCategory,
+    searchWord,
+    setSelectCategory,
+    setFilterData,
+    filterData,
+  } = useFilters();
+  const [realData, setRealData] = useState([]);
 
   useEffect(() => {
     return () => {
@@ -22,9 +29,29 @@ const Listpage = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (data) {
+      if (filterData.length) {
+        const group = data.data.map((data) => data.tagNameList);
+
+        const arr = [];
+        for (let i = 0; i < group.length; i++) {
+          const tagArr = group[i].map((data) => data.tagName);
+          if (
+            filterData.length ===
+            tagArr.filter((data) => filterData.includes(data)).length
+          ) {
+            arr.push(data.data[i]);
+          }
+        }
+        setRealData(arr);
+      }
+    }
+  }, [filterData]);
+
   let URL = "";
   if (selectCategory === "전체") URL = "/api/v1/place/category/all";
-  if (selectCategory === "식당") URL = "/api/v1/place/category/restaurant?page=1&size=1";
+  if (selectCategory === "식당") URL = "/api/v1/place/category/restaurant";
   if (selectCategory === "카페") URL = "/api/v1/place/category/cafe";
   if (selectCategory === "숙소") URL = "/api/v1/place/category/stay";
   if (selectCategory === "병원") URL = "/api/v1/place/category/hospital";
@@ -35,6 +62,7 @@ const Listpage = () => {
   if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
 
+  console.log("data", data)
   return (
     <>
       <ListPage>
@@ -44,20 +72,42 @@ const Listpage = () => {
             <img src={Point}></img>
           </Title>
 
-          <FilterGroup data={data.data}/>
-          <CardGroup>
-            {searchWord
+          <FilterGroup data={data} />
+          <CardGroup grid={data.data.length < 4 ? "repeat(4, 1fr)" : ""}>
+            {!searchWord && !filterData.length
+              ? data.data.map((place, idx) => (
+                  <PlaceCard1 data={place} key={idx} />
+                ))
+              : ""}
+            {filterData.length && searchWord ? (
+              realData
+                .filter((place) => searchWord === place.name)
+                .map((place, idx) => <PlaceCard1 data={place} key={idx} />)
+            ) : filterData.length && searchWord && !realData ? (
+              <EmptyData />
+            ) : (
+              ""
+            )}
+
+            {filterData.length && !searchWord && realData.length ? (
+              realData.map((data, idx) => <PlaceCard1 data={data} key={idx} />)
+            ) : !realData.length && filterData.length ? (
+              <EmptyData />
+            ) : (
+              ""
+            )}
+            {searchWord && !filterData.length
               ? data.data
                   .filter((place) => searchWord === place.name)
                   .map((place, idx) => <PlaceCard1 data={place} key={idx} />)
-              : data.data.map((place, idx) => <PlaceCard1 data={place} key={idx} />)}
+              : ""}
             {searchWord &&
             !data.data.filter((place) => searchWord === place.name).length ? (
               <EmptyData />
             ) : (
               ""
             )}
-            {!data.data.length ? <EmptyData /> : ""}
+            {/* {!data.length ? <EmptyData /> : ""} */}
           </CardGroup>
         </Inner>
         <MoveRegist />
@@ -66,6 +116,7 @@ const Listpage = () => {
     </>
   );
 };
+
 const ListPage = styled.div`
   padding-top: 166px;
 
@@ -117,7 +168,12 @@ const CardGroup = styled.div`
   margin-top: 40px;
   gap: 32px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: ${(props) =>
+    props.grid || "repeat(auto-fit, minmax(240px, 1fr))"};
+
+  @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
 `;
 
 export default Listpage;

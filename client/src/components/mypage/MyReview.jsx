@@ -4,6 +4,7 @@ import useMenu from "../../store/MenuStore";
 import MypageReview from "../review/MypageReview";
 import { BREAK_POINT_TABLET } from "../../constant";
 import { useGetMypageData } from "../../hooks/useAPI";
+import Loading from "../../components/ui/Loading"
 
 const MyReview = () => {
   const { menu } = useMenu();
