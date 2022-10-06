@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Sidbar from "../components/mypage/Sidebar";
 import MySummary from "../components/mypage/MySummary";
 import Footer from "../components/Footer";
-import MyBookMark from "../components/mypage/MyBookMark";
+import MyPlace from "../components/mypage/MyPlace";
 import useMenu from "../store/MenuStore";
 import MyReview from "../components/mypage/MyReview";
 import { BREAK_POINT_TABLET } from "../constant";
@@ -18,7 +18,7 @@ const Mypage = () => {
         <Sidbar />
         <Content>
           {menu === "마이페이지" ? <MySummary /> : ""}
-          {menu === "북마크" || "내가 등록한 장소" ? <MyBookMark menu={menu}/> : ""}
+          {menu === "내가 등록한 장소" ? <MyPlace menu={menu} /> : ""}
           {menu === "내가 작성한 후기" ? <MyReview /> : ""}
         </Content>
       </MyPage>

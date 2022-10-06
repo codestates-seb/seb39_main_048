@@ -1,9 +1,4 @@
-export const myMenus = [
-  "마이페이지",
-  "북마크",
-  "내가 등록한 장소",
-  "내가 작성한 후기",
-];
+export const myMenus = ["마이페이지", "내가 등록한 장소", "내가 작성한 후기"];
 
 // filterGroup
 export const category = ["전체", "식당", "카페", "숙소", "병원", "기타"];

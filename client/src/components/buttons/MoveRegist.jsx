@@ -6,6 +6,7 @@ import { ReactComponent as Plus } from "../../assets/Plus-lg.svg";
 
 const MoveRegist = () => {
   return (
+<<<<<<< HEAD
     <Link to="/regist">
       <Button>
         <Plus />
@@ -23,6 +24,32 @@ const Button = styled.div`
   align-items: center;
   width: 56px;
   height: 56px;
+=======
+    <Container>
+      <Link to="/regist">
+        <Button>
+          <Plus />
+        </Button>
+      </Link>
+    </Container>
+  );
+};
+
+const Container = styled.div`
+  width: 56px;
+  height: 56px;
+  position: sticky;
+  bottom: 5%;
+  left: 95%;
+`;
+
+const Button = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+>>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
   border-radius: 50px;
   background-color: #4da772;
   filter: drop-shadow(rgba(0, 0, 0, 0.2) 0px 0px 8px);

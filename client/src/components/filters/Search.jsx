@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import useFilters from "../../store/FilterStore";
 import useDetectClose from "../../hooks/useDetectClose";
-import { useGetPlace } from "../../hooks/useAPI";
 import { ReactComponent as SearchIcon } from "../../assets/SearchIcon.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
-import Loading from "../ui/Loading";
 
 const Search = ({ data }) => {
   const [filter, setFilter] = useState([]);
@@ -27,22 +25,23 @@ const Search = ({ data }) => {
 
   useEffect(() => {
     if (data) {
-      setSearchData(data.map((data) => data.name));
+      setSearchData(data.data.map((data) => data.name));
     }
   }, [data]);
 
   const hadleChange = (e) => {
     if (data) {
-      console.log(searchData);
       let targetData = e.target.value;
       setText(targetData);
 
       let filterData = searchData.filter((data) =>
         data.toLowerCase().includes(targetData.toLowerCase())
       );
+      setFilter(filterData);
 
-      console.log(filterData); // -> 여기까지 검색된 내용 잘 나옴
-      setFilter(filterData); //-> 여기서 넣으면 빈 배열이 나옴 -> 데이터 들어가는 속도가 늦어서?
+      if (filterData.length) {
+        setIsOpen(!isOpen);
+      }
     }
   };
 
@@ -55,6 +54,12 @@ const Search = ({ data }) => {
     setSearchWord(text);
   };
 
+  const onSearch = (e) => {
+    if (e.key) {
+      setSearchWord(text);
+    }
+  };
+
   return (
     <SearchGroup>
       <input
@@ -62,6 +67,7 @@ const Search = ({ data }) => {
         onChange={hadleChange}
         value={text}
         ref={searchRef}
+        onKeyPress={onSearch}
       />
       <SearchIcon onClick={handleSearch} />
       {isOpen && filter.length ? (
