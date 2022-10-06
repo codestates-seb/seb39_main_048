@@ -4,8 +4,11 @@ import com.mainproject.server.place.entity.Place;
 import com.mainproject.server.place.service.PlaceService;
 import com.mainproject.server.reply.entity.Reply;
 import com.mainproject.server.reply.repository.ReplyRepository;
+import com.mainproject.server.user.entity.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +26,7 @@ public class ReplyService {
      * Post
      * createReply 구현
      **/
+    @Transactional
     public Reply createReply(Reply reply) {
         //scoreAvg 업데이트
         updateScoreAvg(reply);
@@ -36,6 +40,7 @@ public class ReplyService {
      * Patch
      * updateReply구현
      **/
+    @Transactional
     public Reply updateReply(Reply reply) {
         Reply findReply = findVerifiedReply(reply.getReplyId());
 
@@ -54,10 +59,12 @@ public class ReplyService {
      * Delete
      * deleteReply 구현
      **/
-    public void deleteReply(long replyId) {
+    @Transactional
+    public Reply deleteReply(long replyId) {
         Reply findReply = findVerifiedReply(replyId);
-        replyRepository.delete(findReply);
-        updateScoreAvg(findReply);
+        replyRepository.deleteById(replyId);
+        return findReply;
+
     }
 
 
@@ -69,12 +76,13 @@ public class ReplyService {
         return findReply;
     }
 
+    @Transactional
     private Reply savedReply(Reply reply) {
         return replyRepository.save(reply);
     }
 
 
-    private void updateScoreAvg(Reply reply) {
+    public void updateScoreAvg(Reply reply) {
         Place place = reply.getPlace();
 
         double avg = place.getReplyList().stream()
@@ -84,8 +92,17 @@ public class ReplyService {
         place.setScoreAvg(avg);
         System.out.println("count and avg :" +  "/ " + avg);
 
-        Place updatedPlace = placeService.updateScoreAvgPlace(place);
+        placeService.updateScoreAvgPlace(place);
 
+
+    }
+
+    public List<Reply> findReplyByUser(User user) {
+        return replyRepository.findByUser(user);
+    }
+
+    public List<Reply> findReplyByPlace(Place place) {
+        return replyRepository.findByPlace(place);
 
     }
 }

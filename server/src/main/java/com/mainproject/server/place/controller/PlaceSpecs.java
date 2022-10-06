@@ -19,7 +19,7 @@ public class PlaceSpecs {
         };
     }
 
-    public static Specification<Place> categoryPl(final String category){
+    public static Specification<Place> categoryFind(final String category){
         return new Specification<Place>() {
             @Override
             public Predicate toPredicate(Root<Place> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -27,4 +27,6 @@ public class PlaceSpecs {
             }
         };
     }
+
+
 }

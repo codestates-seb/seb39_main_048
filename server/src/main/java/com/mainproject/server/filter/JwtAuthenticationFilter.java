@@ -52,7 +52,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         PrincipalDetails principalDetails  = (PrincipalDetails) authResult.getPrincipal();
 
         String jwtToken = JWT.create()
-                .withExpiresAt(new Date(System.currentTimeMillis()+(60000*10)))
+                .withExpiresAt(new Date(System.currentTimeMillis()+(60000*1000)))
                 .withClaim("userId",principalDetails.getUser().getUserId())
                 .sign(Algorithm.HMAC512("safari"));
         response.addHeader("Authorization","Bearer "+jwtToken);

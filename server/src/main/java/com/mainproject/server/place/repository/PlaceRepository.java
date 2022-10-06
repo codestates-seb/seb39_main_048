@@ -1,6 +1,7 @@
 package com.mainproject.server.place.repository;
 
 import com.mainproject.server.place.entity.Place;
+import com.mainproject.server.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -14,4 +15,6 @@ public interface PlaceRepository extends JpaRepository<Place, Long>, JpaSpecific
     Place findByName(String name);
 
     List<Place> findByNameContaining(String name);
+
+    List<Place> findByUser(User user);
 }

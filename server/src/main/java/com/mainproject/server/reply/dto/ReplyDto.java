@@ -30,6 +30,6 @@ public class ReplyDto {
         String replyImage;
 
         Long placeId;
-
+        String userId;
     }
 }

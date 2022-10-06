@@ -5,6 +5,7 @@ import com.mainproject.server.filter.JwtAuthenticationFilter;
 import com.mainproject.server.filter.JwtAuthorizationFilter;
 import com.mainproject.server.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @RequiredArgsConstructor
@@ -25,11 +27,13 @@ public class SecurityConfig {
 
     //private final CustomAuthenticationManager authenticationManager;
      private final UserRepository userRepository;
+     private final CorsFilter corsFilter;
 
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
+        http.addFilter(corsFilter);
         http.csrf().disable();
         http.headers().frameOptions().disable();
         http.formLogin().disable();
