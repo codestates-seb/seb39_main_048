@@ -35,7 +35,7 @@ const Review = ({ reply }) => {
     if (!editScore) {
       return toast.error("평점을 선택해 주세요.📝");
     }
-    const updateReply = useUpdataReply(config, reply.replyId);
+    const updateReply = useUpdataReply(config, id, reply.replyId);
     updateReply()
       .then((res) => console.log(res))
       .then(() => setContext(""), setScore(""));

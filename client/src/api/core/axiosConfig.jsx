@@ -16,8 +16,10 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     // 토큰 확인
-    const Token = localStorage.getItem("access_Token"); // 로컬 스토리지에서 access_token 조회
+    const Token = localStorage.getItem("accessToken"); // 로컬 스토리지에서 access_token 조회
     config.headers.Authorization = `Bearer ${Token}`; // 조회된 access_token을 헤더에 삽입
+    console.log("토", Token);
+    console.log("config", config.headers.Authorization);
     return config;
   },
   (err) => {
@@ -27,35 +29,14 @@ axiosInstance.interceptors.request.use(
 );
 
 // res를 인터셉터(interceptor) 하기
-axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async (err) => {
-    const {
-      config,
-      response: { status },
-    } = err;
-    if (status === 401) {
-      if (err.response.data.code === "expired") {
-        const originalRequest = config;
-        const refresh_Token = await localStorage.getItem("refresh_Token");
-        // Token refresh 요청
-        const { data } = await axios.post(
-          `${config.API_URL}/refreshToken`, // token refresh api
-          {},
-          { headers: { Authorization: `Bearer ${refresh_Token}` } }
-        );
-        // 새로운 토큰 저장
-        dispatch(userSlice.actions.setAccess_Token(data.data.access_Token));
-        originalRequest.headers.Authorization = `Bearer ${data.data.access_Token}`;
-        // 401로 요청 실패했던 요청 새로운 토큰으로 재요청
-        return axios(originalRequest);
-      }
-    }
-    return Promise.reject(err);
-  }
-);
+axiosInstance.interceptors.response.use((response) => {
+  localStorage.setItem(
+    "access_Token",
+    response.headers.authorization.split(" ")[1]
+  );
+  console.log("response", response.headers.authorization.split(" ")[1]);
+  return response;
+});
 
 export default axiosInstance;
 
@@ -68,3 +49,5 @@ export default axiosInstance;
 // // instance.interceptors.request.use(function () { /*...*/ });
 
 // localStorage.removeItem("key"); 로그아웃 시
+
+const token = localStorage.getItem("token");

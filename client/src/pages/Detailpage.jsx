@@ -30,7 +30,7 @@ const Detailpage = () => {
 
   useEffect(() => {
     if (data) {
-      console.log("useEffect", data)
+      console.log("useEffect", data);
       switch (data.data.category) {
         case "restaurant":
           setCategory("식당");

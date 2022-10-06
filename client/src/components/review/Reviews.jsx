@@ -4,7 +4,7 @@ import { ReactComponent as Star } from "../../assets/Star.svg";
 import BasicButton from "../buttons/BasicButton";
 import Review from "./Review";
 import toast, { Toaster } from "react-hot-toast";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetReply, usePostReply } from "../../hooks/useAPI";
 import usePostReview from "../../store/PostReply";
 

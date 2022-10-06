@@ -47,7 +47,6 @@ const AddressPost = (props) => {
 
   return (
     <LocationInput>
-
       <div className="title">주소 입력</div>
       <div className="LocationContainer">
         <div className="searchAddress">
@@ -55,8 +54,7 @@ const AddressPost = (props) => {
             placeholder="주소를 검색해주세요"
             defaultValue={address}
             onClick={() => setIsOpen(true)}
-
-            readonly
+            readOnly
           />
           {isOpen ? (
             <button onClick={handleClick}>닫기</button>
@@ -70,7 +68,7 @@ const AddressPost = (props) => {
         <Modal onClick={handleClick}>
           <Container>
             <CloseButton>
-              <Close nClick={handleClick}/>
+              <Close nClick={handleClick} />
             </CloseButton>
             <DaumPostcodeEmbed
               style={{
@@ -175,8 +173,7 @@ const Modal = styled.div`
 
 const Container = styled.div`
   position: relative;
-
-`
+`;
 
 const CloseButton = styled.div`
   background-color: #f5f5f5;

@@ -21,8 +21,8 @@ const Login = ({ setIsLogin }) => {
           password: password,
         })
         .then((res) => {
-          console.log("res.data.access_Token : " + res.data);
-          axios.defaults.headers.common["Authorization"] = "Bearer " + res.data;
+          // console.log("res.data.access_Token : " + res.data);
+          // axios.defaults.headers.common["Authorization"] = "Bearer " + res.data;
           setIsLogin(true);
         })
         .catch((err) => {
