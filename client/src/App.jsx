@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/header/Nav";
@@ -11,23 +11,29 @@ import PlaceRegistration from "./pages/PlaceRegistration";
 import Signup from "./pages/Signup";
 import Detailpage from "./pages/Detailpage";
 import ScrollToTop from "./hooks/useLocation";
-
-// ReactModal.setAppElement("#root");
+import useLogin from "./store/LoginStore";
+import jwt_decode from "jwt-decode";
+import useMamber from "./store/MemberStore";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
+  const { isLogin, setIsLogin } = useLogin();
+  const { setUser } = useMamber();
 
   useEffect(() => {
-    if (localStorage.getItem("userId") === null) {
-      // localStorage 에 userId 이라는 key 값으로 저장된 값이 없다면
+    if (localStorage.getItem("access_Token") === null) {
       console.log("isLogin ? : 로그인 상태 아님", isLogin);
     } else {
-      // localStorage 에 userId 이라는 key 값으로 저장된 값이 있다면
-      // 로그인 상태 변경
       setIsLogin(true);
       console.log("isLogin ? : 로그인", isLogin);
     }
-  });
+  }, []);
+
+  useEffect(() => {
+    if (isLogin) {
+      const decoded = jwt_decode(localStorage.getItem("access_Token"));
+      setUser(decoded.userId);
+    }
+  }, []);
 
   return (
     <div className="App">

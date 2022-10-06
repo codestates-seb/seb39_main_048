@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useSearchParams } from "react-router-dom";
 import { useGetPlace } from "../hooks/useAPI";
 import Point from "../assets/Point.png";
 import PlaceCard1 from "../components/cards/PlaceCard1";
@@ -21,6 +22,8 @@ const Listpage = () => {
     filterData,
   } = useFilters();
   const [realData, setRealData] = useState([]);
+  // const page = searchParams.get("page");
+  // const size = searchParams.get("size");
 
   useEffect(() => {
     return () => {
@@ -62,14 +65,13 @@ const Listpage = () => {
   if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
 
-  console.log("data", data);
   return (
     <>
       <ListPage>
         <Inner>
           <Title>
             우리 반려견과 함께할 장소는?
-            <img src={Point}></img>
+            <img src={Point}/>
           </Title>
 
           <FilterGroup data={data} />

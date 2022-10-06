@@ -21,15 +21,19 @@ const Sidbar = () => {
   const [isMyOpen, setIsMyOpen] = useState(false);
   const [imgURL, setImgURL] = useState(null);
   const ref = useRef();
+
+  const { data, isLoading, isError } = useGetMyInfo();
+  if (isLoading) return <Loading />;
+  if (isError) return <div>ERR...</div>;
+
+  console.log("!!!!!!", data.data)
+
   useEffect(() => {
     return () => {
       setMenu("마이페이지");
     };
   }, []);
 
-  const { data, isLoading, isError } = useGetMyInfo();
-  if (isLoading) return <Loading />;
-  if (isError) return <div>ERR...</div>;
 
   const onChangeImage = async () => {
     // 클라우디너리에 올리기
@@ -107,9 +111,10 @@ const Sidbar = () => {
               ) : (
                 ""
               )}
+
               <div className="img">
                 {data.data.userImage ? (
-                  <img src={data.data.userImg} />
+                  <img src={data.data.userImage} />
                 ) : (
                   <div>
                     {isMyOpen ? (
@@ -159,6 +164,8 @@ const Sidbar = () => {
                 )}
               </div>
             </UserInfo>
+
+
             <MyMenu>
               {myMenus.map((menu, idx) => (
                 <div

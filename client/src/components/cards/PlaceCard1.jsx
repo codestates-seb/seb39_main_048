@@ -34,7 +34,7 @@ const PlaceCard1 = ({ data, width }) => {
             </Link>
             <Score>
               <Star />
-              {data.scoreAvg}
+              {data.scoreAvg.toFixed(1)}
             </Score>
           </Title>
           <DotsArea>

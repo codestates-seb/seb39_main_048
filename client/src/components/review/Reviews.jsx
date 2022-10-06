@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import BasicButton from "../buttons/BasicButton";
 import Review from "./Review";
+import { ToastInfo } from "../../constant";
 import toast, { Toaster } from "react-hot-toast";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetReply, usePostReply } from "../../hooks/useAPI";
 import usePostReview from "../../store/PostReply";
 
@@ -13,7 +14,7 @@ const notify = () => toast.success(" 후기가 등록되었습니다 🦮");
 const Reviews = ({ scoreAvg }) => {
   const { id } = useParams();
   const { data, isLoading, isError } = useGetReply(id);
-  const { replyLength, setReplyLength } = usePostReview();
+  const { setReplyLength } = usePostReview();
 
   const {
     replyId,
@@ -51,17 +52,15 @@ const Reviews = ({ scoreAvg }) => {
   const handleSubmit = async (e) => {
     if (context.length === 0) {
       e.stopPropagation();
-      // alert("내용을 입력해주세요.");
-      return toast.error("내용을 입력해 주세요.📝");
+      return toast("내용을 입력해주세요!!", { icon: "📝", ...ToastInfo });
     }
     if (!score) {
-      return toast.error("평점을 선택해 주세요.📝");
+      return toast("평점을 선택해 주세요!", { icon: "⭐️", ...ToastInfo });
     }
     console.log("config", config);
     const postReply = usePostReply(config, id);
-    postReply().then((res) => console.log(res.data));
-
-    window.location.reload(`/place/${id}`);
+    postReply().then((res) => console.log(res));
+    // window.location.reload();
   };
 
   if (isLoading) return <div>Loading...</div>;
