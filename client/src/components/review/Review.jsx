@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { ToastInfo } from "../../constant";
 import toast, { Toaster } from "react-hot-toast";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
 import { useDeleteReply, useUpdataReply } from "../../hooks/useAPI";
 import usePostReview from "../../store/PostReply";
+import useMamber from "../../store/MemberStore";
 
 const Review = ({ reply }) => {
   const { id } = useParams();
   const [isEdit, setIsEdit] = useState(false);
   const [editReply, setEditReply] = useState(reply.context);
   const [editScore, setEditScore] = useState(reply.score);
-
   const { setReplyId, setContext, setScore, setPlaceId } = usePostReview();
+  const { user } = useMamber();
 
   useEffect(() => {
     return () => {
@@ -33,16 +35,15 @@ const Review = ({ reply }) => {
   const onUpdate = () => {
     console.log("updateConfig", config);
     if (!editScore) {
-      return toast.error("평점을 선택해 주세요.📝");
+      toast("평점을 선택해 주세요!", { icon: "📝", ...ToastInfo });
+      return;
     }
     const updateReply = useUpdataReply(config, id, reply.replyId);
     updateReply()
       .then((res) => console.log(res))
       .then(() => setContext(""), setScore(""));
-
     setIsEdit(false);
-
-    // window.location.reload();
+    window.location.reload();
   };
 
   const handleCancel = () => {
@@ -58,26 +59,30 @@ const Review = ({ reply }) => {
     if (window.confirm("삭제하시겠습니까?")) {
       useDeleteReply(reply.replyId);
       console.log(reply.replyId);
-      // window.location.reload();
     }
   };
 
   return (
     <ReviewItem>
+      <Toaster />
       <ReviewLeft>
         <div className="userInfo">
-          <div className="userImg">
-            <UserImg></UserImg>
+          <div className="user">
+            <div className="userImg">
+              <UserImg></UserImg>
+            </div>
+            <div className="userDate">
+              <div className="userName">{reply.userId}</div>
+              <div className="postDate">2022.09.29</div>
+            </div>
           </div>
-          <div className="userDate">
-            <div className="userName">{reply.replyId}</div>
-            <div className="postDate">2022.09.29</div>
-          </div>
-        </div>
-        {isEdit ? (
-          <EditForm>
+          {!isEdit ? (
+            <div className="originScore">
+              <Star /> 평점 {reply.score ? reply.score : 1}
+            </div>
+          ) : (
             <div className="scoreInput">
-              평점 ⭐️
+              ⭐️ 평점 
               <select
                 id="score"
                 name="score"
@@ -92,6 +97,10 @@ const Review = ({ reply }) => {
                 <option value="5">5</option>
               </select>
             </div>
+          )}
+        </div>
+        {isEdit ? (
+          <EditForm>
             <textarea
               className="editTextarea"
               value={editReply}
@@ -105,18 +114,19 @@ const Review = ({ reply }) => {
           </EditForm>
         ) : (
           <OriginReply>
-            <div className="originScore">
-              <Star /> 평점 {reply.score ? reply.score : 1}
-            </div>
             <p className="reviewContent">{reply.context}</p>
-            <div className="buttons">
-              <div className="button" onClick={handleUpdate}>
-                수정
+            {user === reply.userId ? (
+              <div className="buttons">
+                <div className="button" onClick={handleUpdate}>
+                  수정
+                </div>
+                <div className="button" onClick={onDelete}>
+                  삭제
+                </div>
               </div>
-              <div className="button" onClick={onDelete}>
-                삭제
-              </div>
-            </div>
+            ) : (
+              ""
+            )}
           </OriginReply>
         )}
       </ReviewLeft>
@@ -138,8 +148,14 @@ const ReviewLeft = styled.div`
   .userInfo {
     display: flex;
     align-items: center;
-    width: 50%;
-    gap: 20px;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    .user {
+      display: flex;
+      gap: 20px;
+    }
 
     .userImage {
       display: flex;

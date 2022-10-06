@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as Star } from "../assets/Star.svg";
@@ -17,8 +17,8 @@ import Footer from "../components/Footer";
 import Reviews from "../components/review/Reviews";
 import DetailUpdate from "../components/detailUpdate/DetailUpdate";
 import Loading from "../components/ui/Loading";
-import { useEffect } from "react";
 import usePostReview from "../store/PostReply";
+import useMamber from "../store/MemberStore";
 
 const Detailpage = () => {
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
@@ -27,6 +27,7 @@ const Detailpage = () => {
   const { data, isLoading, isError } = useGetDetailPlace(id);
   const [category, setCategory] = useState("");
   const { replyLength, setReplyLength } = usePostReview();
+  const { user } = useMamber();
 
   useEffect(() => {
     if (data) {
@@ -78,7 +79,7 @@ const Detailpage = () => {
             <PlaceName>{data.data.name}</PlaceName>
             <Category>{category}</Category>
           </div>
-          <div className="buttonGroup">
+         {user === data.data.userId ? ( <div className="buttonGroup">
             <BasicButton
               bgcolor={"#D9D9D9"}
               text={"삭제"}
@@ -90,7 +91,7 @@ const Detailpage = () => {
               isOpen={isUpdateOpen}
               data={data.data}
             />
-          </div>
+          </div>) : ""}
         </div>
         <div className="detailTop_info">
           <Score>

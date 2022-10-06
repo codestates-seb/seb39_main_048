@@ -1,14 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as Avatar } from "../../assets/Avatar.svg";
 import { ReactComponent as Hamberger } from "../../assets/Hamberger.svg";
 import useDetectClose from "../../hooks/useDetectClose";
 import { BREAK_POINT_PHONE } from "../../constant";
+import useLogin from "../../store/LoginStore";
+import toast, { Toaster } from "react-hot-toast";
+import { ToastInfo } from "../../constant";
 
-const Nav = ({ isLogin }) => {
+const Nav = () => {
   const [isOpen, menuRef, handleOpen] = useDetectClose(false);
+  const navigate = useNavigate();
+  const { isLogin, setIsLogin } = useLogin();
+
+  const handleLogout = () => {
+    console.log("here");
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      localStorage.removeItem("access_Token");
+      setIsLogin(false);
+      navigate("/");
+    }
+  };
+
+  const handleMap = () => {
+    return toast("미구현 기능입니다.", { icon: "🥲", ...ToastInfo });
+  };
 
   return (
     <>
@@ -37,16 +55,20 @@ const Nav = ({ isLogin }) => {
           </Link>
 
           <div className="menu">장소 탐색</div>
-          <Link to="/map">
-            <div className="item place">지도로 찾기</div>
-          </Link>
+
+          <div className="item place" onClick={handleMap}>
+            지도로 찾기
+          </div>
+
           <Link to="/place">
             <div className="item border">목록으로 찾기</div>
           </Link>
           <Link to="/regist">
             <div className="item border">장소 등록하기</div>
           </Link>
-          <div className="item">로그아웃</div>
+          <div className="item" onClick={handleLogout}>
+            로그아웃
+          </div>
         </MenuGroup>
       ) : (
         ""
@@ -60,9 +82,9 @@ const Nav = ({ isLogin }) => {
             <div className="item border">회원가입</div>
           </Link>
           <div className="menu">장소 탐색</div>
-          <Link to="/map">
-            <div className="item place">지도로 찾기</div>
-          </Link>
+          <div className="item place" onClick={handleMap}>
+            지도로 찾기
+          </div>
           <Link to="/place">
             <div className="item">목록으로 찾기</div>
           </Link>
@@ -70,6 +92,7 @@ const Nav = ({ isLogin }) => {
       ) : (
         ""
       )}
+      <Toaster />
     </>
   );
 };
@@ -123,7 +146,7 @@ const MenuIcons = styled.div`
   cursor: pointer;
   @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
     padding: 6px 10px;
-    }
+  }
 `;
 
 const MenuGroup = styled.div`
@@ -143,7 +166,7 @@ const MenuGroup = styled.div`
   @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
     top: 50px;
     right: 5vw;
-    }
+  }
 
   div {
     cursor: pointer;

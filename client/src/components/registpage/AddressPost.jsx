@@ -6,7 +6,7 @@ import { ReactComponent as Close } from "../../assets/Close.svg";
 import { BREAK_POINT_TABLET_MINI } from "../../constant";
 import { BREAK_POINT_PHONE } from "../../constant";
 
-const AddressPost = (props) => {
+const AddressPost = () => {
   const { address, setAddress } = usePost();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -38,11 +38,6 @@ const AddressPost = (props) => {
     console.log(fullAddress);
     console.log(data.zonecode);
     setAddress(fullAddress);
-
-    props.setcompany({
-      ...props.company,
-      address: fullAddress,
-    });
   };
 
   return (
@@ -68,7 +63,7 @@ const AddressPost = (props) => {
         <Modal onClick={handleClick}>
           <Container>
             <CloseButton>
-              <Close nClick={handleClick} />
+              <Close onClick={handleClick} />
             </CloseButton>
             <DaumPostcodeEmbed
               style={{

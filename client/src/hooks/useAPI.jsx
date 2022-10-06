@@ -1,5 +1,7 @@
 import useSWR from "swr";
 import axios from "axios";
+import axiosInstance from "../api/core/axiosConfig";
+import instance from "../api/core/Config";
 
 const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 
@@ -24,13 +26,10 @@ export const useGetPlace = (url) => {
 export const usePostPlace = (config) => {
   const postPlace = async () => {
     try {
-      const { data } = await axios.post(`${BASE_URL}/api/v1/place`, config, {
-        headers: {
-          Authorization:
-            "Bearer " +
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMTg0ODksInVzZXJJZCI6InRlc3QifQ.sBQifnO4gUXUS4WfGduf737tcwVz97g6d6yCAVqpRXFPiu9rKn9RfKlSxgg09kKPU47J6M5FBGkm0kEHYw4deg",
-        },
-      });
+      const { data } = await axiosInstance.post(
+        `${BASE_URL}/api/v1/place`,
+        config
+      );
       return data;
     } catch (err) {
       console.log(err);
@@ -90,13 +89,7 @@ export const useDeleteDetailPlace = async (id) => {
 
 export const useGetMyInfo = () => {
   const fetcher = async () => {
-    const res = await axios.get(`${BASE_URL}/api/v1/mypage `, {
-      headers: {
-        Authorization:
-          "Bearer " +
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMTg0ODksInVzZXJJZCI6InRlc3QifQ.sBQifnO4gUXUS4WfGduf737tcwVz97g6d6yCAVqpRXFPiu9rKn9RfKlSxgg09kKPU47J6M5FBGkm0kEHYw4deg",
-      },
-    });
+    const res = await axiosInstance.get(`${BASE_URL}/api/v1/mypage`);
     console.log("useGetMyInfo");
     return res.data;
   };
@@ -113,13 +106,10 @@ export const useGetMyInfo = () => {
 export const useUpdataMyInfo = (config) => {
   const updatePlace = async () => {
     try {
-      const { data } = await axios.patch(`${BASE_URL}/api/v1/mypage`, config, {
-        headers: {
-          Authorization:
-            "Bearer " +
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMTg0ODksInVzZXJJZCI6InRlc3QifQ.sBQifnO4gUXUS4WfGduf737tcwVz97g6d6yCAVqpRXFPiu9rKn9RfKlSxgg09kKPU47J6M5FBGkm0kEHYw4deg",
-        },
-      });
+      const { data } = await axiosInstance.patch(
+        `${BASE_URL}/api/v1/mypage`,
+        config
+      );
       console.log("useUpdataMyInfo : ", data);
       return data;
     } catch (err) {
@@ -134,13 +124,7 @@ export const useUpdataMyInfo = (config) => {
 
 export const useGetMypageData = (url) => {
   const fetcher = async (innerURL) => {
-    const res = await axios.get(`${BASE_URL}${innerURL}`, {
-      headers: {
-        Authorization:
-          "Bearer " +
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMTg0ODksInVzZXJJZCI6InRlc3QifQ.sBQifnO4gUXUS4WfGduf737tcwVz97g6d6yCAVqpRXFPiu9rKn9RfKlSxgg09kKPU47J6M5FBGkm0kEHYw4deg",
-      },
-    });
+    const res = await axiosInstance.get(`${BASE_URL}${innerURL}`);
     console.log("url", url);
     console.log("useGetMypageData");
     return res.data;
@@ -157,13 +141,9 @@ export const useGetMypageData = (url) => {
 // --------DELETE--------
 export const useDeleteMyPlace = async (id) => {
   try {
-    const { data } = await axios.delete(`${BASE_URL}/api/v1/place/${id}`, {
-      headers: {
-        Authorization:
-          "Bearer " +
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMTg0ODksInVzZXJJZCI6InRlc3QifQ.sBQifnO4gUXUS4WfGduf737tcwVz97g6d6yCAVqpRXFPiu9rKn9RfKlSxgg09kKPU47J6M5FBGkm0kEHYw4deg",
-      },
-    });
+    const { data } = await axiosInstance.delete(
+      `${BASE_URL}/api/v1/place/${id}`
+    );
     console.log("useDeleteMyPlace");
     return data;
   } catch (error) {
@@ -171,25 +151,7 @@ export const useDeleteMyPlace = async (id) => {
   }
 };
 
-// --------------------검색 데이터--------------------
-
-export const useGetSearch = () => {
-  const fetcher = async () => {
-    const res = await axios.get(`${BASE_URL}/place/${id}/search`);
-    console.log("useGetSearch");
-    return res.data;
-  };
-  const { data, error } = useSWR(`/search`, fetcher);
-
-  return {
-    data: data,
-    isLoading: !error && !data,
-    isError: error,
-  };
-};
-
 // --------------------메인 추천 데이터--------------------
-
 export const useGetRecommend = (url) => {
   const fetcher = async (innerURL) => {
     const res = await axios.get(`${BASE_URL}${innerURL}`);
@@ -209,13 +171,7 @@ export const useGetRecommend = (url) => {
 
 export const useGetReply = (id) => {
   const fetcher = async () => {
-    const res = await axios.get(`${BASE_URL}/api/v1/place/${id}/reply`, {
-      headers: {
-        Authorization:
-          "Bearer " +
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMTg0ODksInVzZXJJZCI6InRlc3QifQ.sBQifnO4gUXUS4WfGduf737tcwVz97g6d6yCAVqpRXFPiu9rKn9RfKlSxgg09kKPU47J6M5FBGkm0kEHYw4deg",
-      },
-    });
+    const res = await instance.get(`${BASE_URL}/api/v1/place/${id}/reply`);
     console.log("useGetReply");
     return res.data;
   };
@@ -232,23 +188,16 @@ export const useGetReply = (id) => {
 export const usePostReply = (config, id) => {
   const postReply = async () => {
     try {
-      const { data } = await axios.post(
+      const { data } = await axiosInstance.post(
         `${BASE_URL}/api/v1/place/${id}/reply`,
-        config,
-        {
-          headers: {
-            Authorization:
-              "Bearer " +
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMTg0ODksInVzZXJJZCI6InRlc3QifQ.sBQifnO4gUXUS4WfGduf737tcwVz97g6d6yCAVqpRXFPiu9rKn9RfKlSxgg09kKPU47J6M5FBGkm0kEHYw4deg",
-          },
-        }
+        config
       );
       return data;
     } catch (err) {
       console.log(err);
     }
     console.log("usePostReply");
-    return res.data;
+    // return res.data;
   };
 
   return postReply;
@@ -258,16 +207,9 @@ export const usePostReply = (config, id) => {
 export const useUpdataReply = (config, id, replyId) => {
   const updateReply = async () => {
     try {
-      const { data } = await axios.patch(
+      const { data } = await axiosInstance.patch(
         `${BASE_URL}/api/v1/place/${id}/reply/${replyId}`,
-        config,
-        {
-          headers: {
-            Authorization:
-              "Bearer " +
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMTg0ODksInVzZXJJZCI6InRlc3QifQ.sBQifnO4gUXUS4WfGduf737tcwVz97g6d6yCAVqpRXFPiu9rKn9RfKlSxgg09kKPU47J6M5FBGkm0kEHYw4deg",
-          },
-        }
+        config
       );
       return data;
     } catch (err) {
@@ -283,17 +225,13 @@ export const useUpdataReply = (config, id, replyId) => {
 // --------DELETE--------
 export const useDeleteReply = async (id) => {
   try {
-    const { data } = await axios.delete(`${BASE_URL}/api/v1/reply/${id}`, {
-      headers: {
-        Authorization:
-          "Bearer " +
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMTg0ODksInVzZXJJZCI6InRlc3QifQ.sBQifnO4gUXUS4WfGduf737tcwVz97g6d6yCAVqpRXFPiu9rKn9RfKlSxgg09kKPU47J6M5FBGkm0kEHYw4deg",
-      },
-    });
+    const { data } = await axiosInstance.delete(
+      `${BASE_URL}/api/v1/reply/${id}`
+    );
     console.log("useDeleteReply");
     return data;
   } catch (err) {
-    return err.response.data;
+    return err;
   }
 };
 
