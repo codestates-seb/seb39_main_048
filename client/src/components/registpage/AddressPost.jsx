@@ -2,26 +2,20 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import usePost from "../../store/PostStore";
-<<<<<<< HEAD
-=======
 import { ReactComponent as Close } from "../../assets/Close.svg";
 import { BREAK_POINT_TABLET_MINI } from "../../constant";
 import { BREAK_POINT_PHONE } from "../../constant";
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
 
 const AddressPost = (props) => {
   const { address, setAddress } = usePost();
   const [isOpen, setIsOpen] = useState(false);
 
-<<<<<<< HEAD
-=======
   useEffect(() => {
     if (address) {
       setIsOpen(!isOpen);
     }
   }, [address]);
 
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
@@ -53,21 +47,16 @@ const AddressPost = (props) => {
 
   return (
     <LocationInput>
-<<<<<<< HEAD
-      <div>주소 입력</div>
-=======
+
       <div className="title">주소 입력</div>
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
       <div className="LocationContainer">
         <div className="searchAddress">
           <input
             placeholder="주소를 검색해주세요"
             defaultValue={address}
             onClick={() => setIsOpen(true)}
-<<<<<<< HEAD
-=======
+
             readonly
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
           />
           {isOpen ? (
             <button onClick={handleClick}>닫기</button>
@@ -79,16 +68,6 @@ const AddressPost = (props) => {
 
       {isOpen ? (
         <Modal onClick={handleClick}>
-<<<<<<< HEAD
-          <DaumPostcodeEmbed
-            style={{
-              width: "350px",
-              border: "1px solid #d7e2eb",
-              marginTop: "16px",
-            }}
-            onComplete={handleComplete}
-          />
-=======
           <Container>
             <CloseButton>
               <Close nClick={handleClick}/>
@@ -102,7 +81,6 @@ const AddressPost = (props) => {
               onComplete={handleComplete}
             />
           </Container>
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
         </Modal>
       ) : (
         ""
@@ -124,11 +102,6 @@ const LocationInput = styled.div`
     border-radius: 10px;
     margin-top: 24px;
     padding: 30px;
-<<<<<<< HEAD
-    width: 60%;
-    gap: 30px;
-
-=======
     width: 70%;
     gap: 30px;
 
@@ -136,7 +109,6 @@ const LocationInput = styled.div`
       width: 100%;
     }
 
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
     input {
       font-size: 12px;
       border: 1px solid;
@@ -145,10 +117,7 @@ const LocationInput = styled.div`
       height: 100%;
       width: 100%;
       padding: 12px;
-<<<<<<< HEAD
-=======
       min-width: 220px;
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
     }
     button {
       color: #ffffff;
@@ -171,8 +140,6 @@ const LocationInput = styled.div`
     gap: 16px;
     margin-bottom: 10px;
   }
-<<<<<<< HEAD
-=======
 
   @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
     .title {
@@ -191,7 +158,6 @@ const LocationInput = styled.div`
       }
     }
   }
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
 `;
 
 const Modal = styled.div`
@@ -207,8 +173,6 @@ const Modal = styled.div`
   z-index: 300;
 `;
 
-<<<<<<< HEAD
-=======
 const Container = styled.div`
   position: relative;
 
@@ -225,5 +189,4 @@ const CloseButton = styled.div`
   justify-content: end;
 `;
 
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
 export default AddressPost;
