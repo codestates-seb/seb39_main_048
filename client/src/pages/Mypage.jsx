@@ -18,7 +18,7 @@ const Mypage = () => {
         <Sidbar />
         <Content>
           {menu === "마이페이지" ? <MySummary /> : ""}
-          {menu === "내가 등록한 장소" ? <MyPlace menu={menu}/> : ""}
+          {menu === "내가 등록한 장소" ? <MyPlace menu={menu} /> : ""}
           {menu === "내가 작성한 후기" ? <MyReview /> : ""}
         </Content>
       </MyPage>

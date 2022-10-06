@@ -11,7 +11,6 @@ const Search = ({ data }) => {
     useFilters();
   const [isOpen, searchRef, setIsOpen] = useDetectClose(false);
 
-
   useEffect(() => {
     return () => {
       setSearchWord("");

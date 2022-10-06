@@ -62,7 +62,7 @@ const Listpage = () => {
   if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
 
-  console.log("data", data)
+  console.log("data", data);
   return (
     <>
       <ListPage>

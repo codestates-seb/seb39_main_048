@@ -10,10 +10,10 @@ import usePostReview from "../../store/PostReply";
 
 const notify = () => toast.success(" 후기가 등록되었습니다 🦮");
 
-const Reviews = ({}) => {
+const Reviews = ({ scoreAvg }) => {
   const { id } = useParams();
-  const { data, isLoading, isError } = useGetReply();
-  console.log(data);
+  const { data, isLoading, isError } = useGetReply(id);
+  const { replyLength, setReplyLength } = usePostReview();
 
   const {
     replyId,
@@ -35,25 +35,33 @@ const Reviews = ({}) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (data) {
+      setReplyLength(data.data.length);
+    }
+  }, [data]);
+
   const config = {
     replyId,
     context,
     score,
-    placeId,
+    placeId: id,
   };
 
   const handleSubmit = async (e) => {
-    const postReply = usePostReply(config);
-    postReply().then((res) => res.data);
-    console.log(data);
-
     if (context.length === 0) {
       e.stopPropagation();
       // alert("내용을 입력해주세요.");
-      return toast.error("내용을 입력해주세요.📝");
+      return toast.error("내용을 입력해 주세요.📝");
     }
+    if (!score) {
+      return toast.error("평점을 선택해 주세요.📝");
+    }
+    console.log("config", config);
+    const postReply = usePostReply(config, id);
+    postReply().then((res) => console.log(res.data));
 
-    window.location.reload();
+    window.location.reload(`/place/${id}`);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -63,10 +71,10 @@ const Reviews = ({}) => {
     <ReviewGroup>
       <TopSection>
         <div className="review_score">
-          <Title>후기 {data.length}</Title>
+          <Title>후기 {data.data.length}</Title>
           <Score>
             <Star />
-            <ScoreText>평점 4.5</ScoreText>
+            <ScoreText>{scoreAvg}</ScoreText>
           </Score>
         </div>
         <div className="createReply">
@@ -83,6 +91,7 @@ const Reviews = ({}) => {
               name="score"
               onChange={(e) => setScore(e.target.value)}
             >
+              <option value="">선택</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -101,7 +110,10 @@ const Reviews = ({}) => {
         </div>
       </TopSection>
       <Reply>
-        {data && data.map((reply) => <Review key={reply.id} reply={reply} />)}
+        {data.data &&
+          data.data.map((reply) => (
+            <Review key={reply.replyId} reply={reply} />
+          ))}
       </Reply>
     </ReviewGroup>
   );

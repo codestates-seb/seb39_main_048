@@ -64,8 +64,8 @@ const PlaceRegistration = () => {
 
   const configData = {
     category,
-    name : placeName,
-    tagNameList : tags,
+    name: placeName,
+    tagNameList: tags,
     placeImage,
     serviceTime,
     homepage,
@@ -97,7 +97,7 @@ const PlaceRegistration = () => {
     if (placeImage.length) {
       const postPlace = usePostPlace(configData);
       postPlace().then((res) => {
-        console.log(res)
+        console.log(res);
         console.log("게시글 올라가는 중");
         navigate("/place");
       });
@@ -196,9 +196,9 @@ const Page = styled.div`
       display: block;
     }
     .Title {
-    font-size: 16px;
-    margin-bottom: 16px;
-  }
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
   }
 `;
 
@@ -250,13 +250,13 @@ const PlaceName = styled.div`
     font-size: 16px;
     margin-bottom: 48px;
     input {
-    height: 32px;
-    margin-top: 24px;
-    padding: 20px;
-    border: 1px solid;
-    border-color: #d7e2eb;
-    border-radius: 10px;
-  }
+      height: 32px;
+      margin-top: 24px;
+      padding: 20px;
+      border: 1px solid;
+      border-color: #d7e2eb;
+      border-radius: 10px;
+    }
   }
 `;
 

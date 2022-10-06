@@ -207,13 +207,19 @@ export const useGetRecommend = (url) => {
 
 // --------------------후기 데이터--------------------
 
-export const useGetReply = () => {
+export const useGetReply = (id) => {
   const fetcher = async () => {
-    const res = await axios.get(`${BASE_URL}/reply`);
+    const res = await axios.get(`${BASE_URL}/api/v1/place/${id}/reply`, {
+      headers: {
+        Authorization:
+          "Bearer " +
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMDA1NjAsInVzZXJJZCI6InRlc3QxMiJ9.5fCAzmK13tIERnUDgj4kwovFeYKlwtLMNdA_s0P_sNVZATNenkNpw5QzTdm_a4lP2bcWYBwTD6ar91o_AQvwDQ",
+      },
+    });
     console.log("useGetReply");
     return res.data;
   };
-  const { data, error } = useSWR(`/reply`, fetcher);
+  const { data, error } = useSWR(`/api/v1/place/${id}/reply`, fetcher);
 
   return {
     data: data,
@@ -223,10 +229,20 @@ export const useGetReply = () => {
 };
 
 // --------POST--------
-export const usePostReply = (config) => {
+export const usePostReply = (config, id) => {
   const postReply = async () => {
     try {
-      const { data } = await axios.post(`${BASE_URL}/reply`, config);
+      const { data } = await axios.post(
+        `${BASE_URL}/api/v1/place/${id}/reply`,
+        config,
+        {
+          headers: {
+            Authorization:
+              "Bearer " +
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMDA1NjAsInVzZXJJZCI6InRlc3QxMiJ9.5fCAzmK13tIERnUDgj4kwovFeYKlwtLMNdA_s0P_sNVZATNenkNpw5QzTdm_a4lP2bcWYBwTD6ar91o_AQvwDQ",
+          },
+        }
+      );
       return data;
     } catch (err) {
       console.log(err);
@@ -239,10 +255,20 @@ export const usePostReply = (config) => {
 };
 
 // --------PATCH--------
-export const useUpdataReply = (config) => {
+export const useUpdataReply = (config, id) => {
   const updateReply = async () => {
     try {
-      const { data } = await axios.patch(`${BASE_URL}/reply`, config);
+      const { data } = await axios.patch(
+        `${BASE_URL}/api/v1/place/${id}/reply/${id}`,
+        config,
+        {
+          headers: {
+            Authorization:
+              "Bearer " +
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMDA1NjAsInVzZXJJZCI6InRlc3QxMiJ9.5fCAzmK13tIERnUDgj4kwovFeYKlwtLMNdA_s0P_sNVZATNenkNpw5QzTdm_a4lP2bcWYBwTD6ar91o_AQvwDQ",
+          },
+        }
+      );
       return data;
     } catch (err) {
       console.log(err);
@@ -255,9 +281,18 @@ export const useUpdataReply = (config) => {
 };
 
 // --------DELETE--------
-export const useDeleteReply = async () => {
+export const useDeleteReply = async (id) => {
   try {
-    const { data } = await axios.delete(`${BASE_URL}/reply`);
+    const { data } = await axios.delete(
+      `${BASE_URL}/api/v1/place/${id}/reply/${id}`,
+      {
+        headers: {
+          Authorization:
+            "Bearer " +
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NjUxMDA1NjAsInVzZXJJZCI6InRlc3QxMiJ9.5fCAzmK13tIERnUDgj4kwovFeYKlwtLMNdA_s0P_sNVZATNenkNpw5QzTdm_a4lP2bcWYBwTD6ar91o_AQvwDQ",
+        },
+      }
+    );
     console.log("useDeleteReply");
     return data;
   } catch (err) {

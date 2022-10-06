@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-const MyPlace = () => {
-  
-  return (
-    <div>MyPlace</div>
-  )
-}
-
-export default MyPlace
-=======
 import React from "react";
 import styled from "styled-components";
 import PlaceCard1 from "../cards/PlaceCard1";
@@ -17,26 +5,30 @@ import { useGetMypageData } from "../../hooks/useAPI";
 import { BREAK_POINT_TABLET } from "../../constant";
 import Loading from "../ui/Loading";
 
-const MyPlace = ({menu}) => {
+const MyBookMark = ({menu}) => {
+  let URL = "";
 
-  const { data, isLoading, isError } = useGetMypageData("/api/v1/mypage/place");
+  if (menu === "북마크") URL = "/api/v1/mypage/bookmark";
+  if (menu === "내가 등록한 장소") URL = "/api/v1/mypage/place";
+
+  const { data, isLoading, isError } = useGetMypageData(URL);
 
   if (isLoading) return <Loading/>
   if (isError) return <div>ERR...</div>;
 
   return (
-    <Place>
+    <BookMark>
       <Title> {menu}</Title>
-      <PlaceCards grid={data.data.length < 3 ? "repeat(3, 1fr)" : ""}>
+      <BookmarkCards>
         {data.data.map((data, idx) => (
           <PlaceCard1 data={data} key={idx} />
         ))}
-      </PlaceCards>
-    </Place>
+      </BookmarkCards>
+    </BookMark>
   );
 };
 
-const Place = styled.div`
+const BookMark = styled.div`
   padding-top: 144px;
   width: 100%;
   margin-bottom: 48px;
@@ -57,12 +49,11 @@ const Title = styled.h2`
   }
 `;
 
-const PlaceCards = styled.div`
+const BookmarkCards = styled.div`
   width: 100%;
   gap: 24px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 `;
 
-export default MyPlace;
->>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
+export default MyBookMark;

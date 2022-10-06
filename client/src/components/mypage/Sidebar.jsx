@@ -31,6 +31,11 @@ const Sidbar = () => {
   if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
 
+<<<<<<< HEAD
+  console.log(data);
+
+=======
+>>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
   const onChangeImage = async () => {
     // 클라우디너리에 올리기
     let formData = new FormData();

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import toast, { Toaster } from "react-hot-toast";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
 import { useDeleteReply, useUpdataReply } from "../../hooks/useAPI";
@@ -12,16 +13,7 @@ const Review = ({ reply }) => {
   const [editReply, setEditReply] = useState(reply.context);
   const [editScore, setEditScore] = useState(reply.score);
 
-  const {
-    replyId,
-    context,
-    score,
-    placeId,
-    setReplyId,
-    setContext,
-    setScore,
-    setPlaceId,
-  } = usePostReview();
+  const { setReplyId, setContext, setScore, setPlaceId } = usePostReview();
 
   useEffect(() => {
     return () => {
@@ -33,21 +25,24 @@ const Review = ({ reply }) => {
   }, []);
 
   const config = {
-    replyId,
-    context,
-    score,
-    placeId,
+    replyId: reply.replyId,
+    context: editReply,
+    score: editScore,
   };
 
-  const onUpdate = (id) => {
+  const onUpdate = () => {
     console.log("updateConfig", config);
-
-    const updateReply = useUpdataReply(config, id);
+    if (!editScore) {
+      return toast.error("평점을 선택해 주세요.📝");
+    }
+    const updateReply = useUpdataReply(config, reply.replyId);
     updateReply()
-      .then((res) => console.log(res.data))
+      .then((res) => console.log(res))
       .then(() => setContext(""), setScore(""));
 
-    window.location.reload();
+    setIsEdit(false);
+
+    // window.location.reload();
   };
 
   const handleCancel = () => {
@@ -60,10 +55,11 @@ const Review = ({ reply }) => {
   };
 
   const onDelete = () => {
-    window.confirm("삭제하시겠습니까?");
-    useDeleteReply(id);
-    console.log(id);
-    window.location.reload();
+    if (window.confirm("삭제하시겠습니까?")) {
+      useDeleteReply(reply.replyId);
+      console.log(reply.replyId);
+      // window.location.reload();
+    }
   };
 
   return (
@@ -88,6 +84,7 @@ const Review = ({ reply }) => {
                 value={editScore}
                 onChange={(e) => setEditScore(e.target.value)}
               >
+                <option value="">선택</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -109,7 +106,7 @@ const Review = ({ reply }) => {
         ) : (
           <OriginReply>
             <div className="originScore">
-              <Star /> 평점 {reply.score}
+              <Star /> 평점 {reply.score ? reply.score : 1}
             </div>
             <p className="reviewContent">{reply.context}</p>
             <div className="buttons">

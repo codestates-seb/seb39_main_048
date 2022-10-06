@@ -3,7 +3,10 @@ import styled from "styled-components";
 import usePost from "../../store/PostStore";
 import { SelectCategory } from "../../constant";
 import { useEffect } from "react";
+<<<<<<< HEAD
+=======
 import { BREAK_POINT_PHONE } from "../../constant";
+>>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
 
 const Category = ({ data }) => {
   const [currentActive, setCurrentActive] = useState("");
@@ -79,7 +82,10 @@ const CategoryBtn = styled.div`
     justify-content: start;
     align-items: center;
     gap: 10px;
+<<<<<<< HEAD
+=======
     flex-wrap: wrap;
+>>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde
 
     .Active {
       background-color: #4da772;
@@ -100,6 +106,11 @@ const CategoryBtn = styled.div`
     transition: all 0.2s ease-in-out;
     cursor: pointer;
   }
+<<<<<<< HEAD
+`;
+
+export default Category;
+=======
   @media only screen and (max-width: ${BREAK_POINT_PHONE}px) {
     font-size: 12px;
     li {
@@ -110,3 +121,4 @@ const CategoryBtn = styled.div`
 
 export default Category;
 
+>>>>>>> 5ef896edf001fbf98031bee0bafd2e9251779fde

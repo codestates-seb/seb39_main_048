@@ -37,7 +37,7 @@ const PlaceCardGroup1 = ({ title, data }) => {
   }, [currentCard]);
 
   useEffect(() => {
-    setCurrentCard(0)
+    setCurrentCard(0);
   }, [selectCategory]);
 
   return (
@@ -57,7 +57,7 @@ const PlaceCardGroup1 = ({ title, data }) => {
       <Container>
         <Cards ref={cardRef}>
           {data.map((data, idx) => (
-            <PlaceCard1 data={data} key={idx} width={"240px"}/>
+            <PlaceCard1 data={data} key={idx} width={"240px"} />
           ))}
         </Cards>
       </Container>

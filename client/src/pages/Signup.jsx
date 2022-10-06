@@ -11,7 +11,6 @@ import styled from "styled-components";
 
 const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 
-
 const Signup = () => {
   const {
     setUserId,
