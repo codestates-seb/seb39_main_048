@@ -1,11 +1,15 @@
 package com.mainproject.server.place.service;
 
 import com.mainproject.server.place.controller.PlaceSpecs;
+import com.mainproject.server.place.dto.PlaceDto;
+import com.mainproject.server.place.dto.TagNameDto;
 import com.mainproject.server.place.repository.PlaceRepository;
 import com.mainproject.server.place.entity.Place;
 import com.mainproject.server.place.entity.PlaceTag;
+import com.mainproject.server.reply.entity.Reply;
 import com.mainproject.server.tag.entity.Tag;
 import com.mainproject.server.tag.service.TagService;
+import com.mainproject.server.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -34,19 +38,39 @@ public class PlaceService {
     * createPlace 구현
     **/
     @Transactional
-    public Place createPlace(Place place){ //
+    public Place createPlace(PlaceDto.post requestBody, User user){
 
-        //placeTagList 확인
-      //  verifyPlaceTagList(place.getPlaceTagList());
-//
-//        List<PlaceTag> placeTagList = place.getPlaceTagList();
-////
-////        placeTagList.stream().map(placeTag -> placeTag.getPlace());
+        //place 생성 후 requestBody내용 set
+        Place place = new Place();
+        place.setName(requestBody.getName());
+        place.setCategory(requestBody.getCategory());
+        place.setServiceTime(requestBody.getServiceTime());
+        place.setHomepage(requestBody.getHomepage());
+        place.setNumber(requestBody.getNumber());
+        place.setDescription(requestBody.getDescription());
+        place.setAddress(requestBody.getAddress());
+        place.setPlaceImage(requestBody.getPlaceImage());
+        place.addUser(user);
 
+        //placeTag.addPlace(place);
 
-        Place savedPlace = placeRepository.save(place);
+        //tagName 을 tag에 삽입
+        // tag를 저장(createdTag)
+        // placeTaag에 createdTag 저장 ->  tag에 placeTag 저장
+        // placeTag에 place 저장 - > place에 placeTag 저장
 
-        return savedPlace;
+        for (TagNameDto tagNameDto : requestBody.getTagNameList()){
+            Tag tag = new Tag();
+            tag.setTagName(tagNameDto.getTagName());
+
+            Tag createdTag = tagService.createdTag(tag);
+
+            PlaceTag placeTag = new PlaceTag();
+            placeTag.addTag(createdTag);
+            placeTag.addPlace(place);
+        }
+
+        return placeRepository.save(place);
     }
 
     private void verifyPlaceTagList(List<PlaceTag> placeTagList) {
@@ -64,6 +88,7 @@ public class PlaceService {
     * Patch
      * updatePlace구현
     **/
+    @Transactional
     public Place updatePlace(Place place){
         Place findPlace = findVerifiedPlace(place.getPlaceId());
         //Place findPlace = place;
@@ -97,25 +122,12 @@ public class PlaceService {
                         findPlace.addPlaceTag(placeTag);
                     });
         });
-        //tagName 을 tag에 삽입
-        // tag를 저장(createdTag)
-        // placeTaag에 createdTag 저장 ->  tag에 placeTag 저장
-        // placeTag에 place 저장 - > place에 placeTag 저장
 
-                //.ifPresent(placeTags -> findPlace.setPlaceTagList(placeTags));
-//
-//        .stream().map(placeTag -> {
-//                    Tag savedTag = tagService.findVerifiedTagName(placeTag.getTag());
-//                    PlaceTag savedPlaceTag = new PlaceTag();
-//                    savedPlaceTag.addTag(savedTag);
-//                    return  savedPlaceTag;
-//            ).collect(Collectors.toList())).ifPresent(placeTags -> findPlace.addPlaceTag());
-//
-
-        return findPlace;//placeRepository.save(findPlace);
+        return findPlace;
 
     }
 
+    @Transactional
     public Place updateScoreAvgPlace(Place place){
         Place findPlace = findVerifiedPlace(place.getPlaceId());
         //Place findPlace = place;
@@ -145,21 +157,29 @@ public class PlaceService {
     }
 
 
-    public List<Place> findPlaceByCategoryWithSpecs( String category){
-        Specification<Place> spec = Specification.where(PlaceSpecs.categoryPl(category));
-//        if (category != null) {
-//
-//        }
+    public Page<Place> findPlaceByCategoryWithSpecs( String category, int page, int size){
+        if(category.equals("all")) {
+            //Specification<Place> spec = Specification.where(PlaceSpecs.categoryFind(null));
+            //return   placeRepository.findAllByOrderByPlaceIdDesc();
+            return placeRepository.findAll(PageRequest.of(page,size,Sort.by("placeId").descending()));
+        }
+        else {
+            Specification<Place> spec = Specification.where(PlaceSpecs.categoryFind(category));
+//            return   placeRepository.findAll(spec,Sort.by("placeId").descending());
+            return   placeRepository.findAll(spec,PageRequest.of(page,size,Sort.by("placeId").descending()));
+        }
+
 
 //        Page<Place> pageSpec = placeRepository.findAll(spec);
 //        List<Place> pageSpecList = pageSpec.getContent();
-        return   placeRepository.findAll(spec);
+
     }
 
     /**
      * Delete
     * deletePlace 구현
     **/
+    @Transactional
     public void deletePlace(long placeId) {
         Place findPlace = findVerifiedPlace(placeId);
         placeRepository.delete(findPlace);
@@ -174,6 +194,12 @@ public class PlaceService {
         return findPlace;
 
     }
+
+    public List<Place> findPlaceByUser(User user) {
+     return   placeRepository.findByUserOrderByPlaceIdDesc(user);
+    }
+
+
 
 //    private void verifyExistsPlaceId(long placeId) {
 //        // todo

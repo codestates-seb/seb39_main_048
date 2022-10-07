@@ -21,6 +21,7 @@ public interface PlaceMapper {
     Place placePatchToPlace(PlaceDto.patch requestBody);
     @Mapping (source = "tagName",  target = "tag.tagName")
     PlaceTag tagNameDtoToPlaceTag (TagNameDto tagNameDto);
+    @Mapping(source = "user.userId" , target ="userId")
     @Mapping(source = "place.placeTagList", target = "tagNameList")// (1)
     PlaceDto.response placeToPlaceResponse(Place place);
     @Mapping(expression = "java(placeTag.getTag().getTagName())", target ="tagName") //(2)

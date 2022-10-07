@@ -2,6 +2,7 @@ package com.mainproject.server.place.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mainproject.server.reply.entity.Reply;
+import com.mainproject.server.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,11 @@ public class Place {
     String placeImage; // 이미지 맵핑시 수정 필요.
     double scoreAvg; //jpa 평균 적용..  or jpql
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "User_ID")
+    private User user;
+
 
     @OneToMany(mappedBy = "place", cascade = CascadeType.REMOVE)
     private List<Reply> replyList = new ArrayList<>();
@@ -51,11 +57,14 @@ public class Place {
         }
     }
 
-    public void removeTag(PlaceTag placeTag){
-        this.placeTagList.remove(placeTag);
+    public void addUser(User user){
+        this.user = user;
+        if(!user.getPlaceList().contains(this)){
+            user.getPlaceList().add(this);
+        }
     }
 
-//    @Override
+      //@Override
 //    public String toString(){
 //        return ToStringBuilder.reflectionToString(this, ToStringStyler.JSON_STYLE);
 //    }

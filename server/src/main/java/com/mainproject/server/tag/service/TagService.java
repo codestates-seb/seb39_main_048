@@ -32,8 +32,6 @@ public class TagService {
     public Tag createdTag(Tag tag) {
        Optional<Tag> optionalTag = tagRepository.findByTagName(tag.getTagName());
        return optionalTag.orElseGet(()->tagRepository.save(tag));
-
-       // return tagRepository.findByTagName(tag.getTagName()).orElseGet(()->tagRepository.save(tag));
     }
 
     public  void deleteTag(Tag tag){

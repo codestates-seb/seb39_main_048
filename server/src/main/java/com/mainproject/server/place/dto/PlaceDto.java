@@ -19,6 +19,7 @@ public class PlaceDto {
         private String placeImage;
         private String description;
 
+
         private List<TagNameDto> tagNameList;
 
 
@@ -71,6 +72,7 @@ public class PlaceDto {
         private String placeImage;
         private String description;
         private double scoreAvg;
+        private String userId;
 
         private List<TagNameDto> tagNameList;
 
