@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import useMenu from "../../store/MenuStore";
 import { ReactComponent as UserImg } from "../../assets/UserImg.svg";
@@ -12,6 +11,7 @@ import { BREAK_POINT_PHONE } from "../../constant";
 import Loading from "../ui/Loading";
 import useUser from "../../store/UserStore";
 import useImage from "../../store/ImageStore";
+import instance from "../../api/core/Config";
 
 const Sidbar = () => {
   const { setMenu } = useMenu();
@@ -22,18 +22,17 @@ const Sidbar = () => {
   const [imgURL, setImgURL] = useState(null);
   const ref = useRef();
 
-  const { data, isLoading, isError } = useGetMyInfo();
-  if (isLoading) return <Loading />;
-  if (isError) return <div>ERR...</div>;
-
-  console.log("!!!!!!", data.data)
-
   useEffect(() => {
     return () => {
       setMenu("마이페이지");
     };
   }, []);
 
+  const { data, isLoading, isError } = useGetMyInfo();
+  if (isLoading) return <Loading />;
+  if (isError) return <div>ERR...</div>;
+
+  console.log(data);
 
   const onChangeImage = async () => {
     // 클라우디너리에 올리기
@@ -43,12 +42,8 @@ const Sidbar = () => {
     formData.append("timestamp", (Date.now() / 1000) | 0);
     formData.append(`file`, ref.current.files[0]);
 
-    const config = {
-      header: { "Content-Type": "multipart/form-data" },
-    };
-
-    await axios
-      .post(import.meta.env.VITE_CLOUD_API_URL, formData, config)
+    await instance
+      .post(import.meta.env.VITE_CLOUD_API_URL, formData)
       .then((res) => {
         setUserImg(res.data.url);
         console.log("이미지 올라가는 중", res.data);
@@ -73,18 +68,19 @@ const Sidbar = () => {
   const handleActive = (e) => {
     setCurrentActive(e.target.innerText);
     setMenu(e.target.innerText);
+    window.scrollTo(0, 0);
   };
 
   const config = {
     userImage : userImg,
-    name : userName,
+    name: userName,
   };
 
   const onUpdate = () => {
     const updateMyinfo = useUpdataMyInfo(config);
     updateMyinfo().then((data) => setUserName(data));
     setIsMyOpen(false);
-    console.log("config", userName);
+    console.log("config : ", userName);
   };
 
   const onImageUpload = (e) => {
@@ -113,7 +109,12 @@ const Sidbar = () => {
               )}
 
               <div className="img">
-                {data.data.userImage ? (
+                {!isMyOpen ? data.data.userImage ? <img src={data.data.userImage} /> : (
+                  <UserImg />
+                ) : (
+                  <CirclePlus onClick={onImageUpload} cursor={"pointer"} />
+                )}
+                {/* {data && data.data.userImage ? (
                   <img src={data.data.userImage} />
                 ) : (
                   <div>
@@ -130,7 +131,7 @@ const Sidbar = () => {
                       <UserImg />
                     )}
                   </div>
-                )}
+                )} */}
               </div>
               <div className="userInfo">
                 {isMyOpen ? (
@@ -158,13 +159,12 @@ const Sidbar = () => {
                   </>
                 ) : (
                   <>
-                    <UserName>{data.data.name}</UserName>
+                    <UserName>{data?.data.name}</UserName>
                     <Button onClick={() => setIsMyOpen(!isMyOpen)}>Edit</Button>
                   </>
                 )}
               </div>
             </UserInfo>
-
 
             <MyMenu>
               {myMenus.map((menu, idx) => (
@@ -251,6 +251,7 @@ const UserInfo = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
 
     img {
       width: 100px;
@@ -269,13 +270,12 @@ const UserInfo = styled.div`
     .img {
       width: 50px;
       height: 50px;
+      margin: 0;
       img {
         width: 50px;
         border-radius: 50px;
       }
     }
-
-  
   }
 `;
 
@@ -283,7 +283,6 @@ const UserName = styled.div`
   margin: 15px 0 20px 0;
   @media only screen and (max-width: ${BREAK_POINT_TABLET}px) {
     margin: 0 0 10px 0;
-
   }
 `;
 

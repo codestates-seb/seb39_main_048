@@ -19,6 +19,8 @@ import DetailUpdate from "../components/detailUpdate/DetailUpdate";
 import Loading from "../components/ui/Loading";
 import usePostReview from "../store/PostReply";
 import useMamber from "../store/MemberStore";
+import jwt_decode from "jwt-decode";
+
 
 const Detailpage = () => {
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
@@ -27,7 +29,13 @@ const Detailpage = () => {
   const { data, isLoading, isError } = useGetDetailPlace(id);
   const [category, setCategory] = useState("");
   const { replyLength, setReplyLength } = usePostReview();
-  const { user } = useMamber();
+  const { user, setUser } = useMamber();
+
+  console.log("user",user )
+  useEffect(() => {
+    const decoded = jwt_decode(localStorage.getItem("access_Token"));
+    setUser(decoded.userId);
+  }, [])
 
   useEffect(() => {
     if (data) {

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ReactComponent as Star } from "../../assets/Star.svg";
-import { ReactComponent as BookMark } from "../../assets/BookMark.svg";
 import { ReactComponent as Dots } from "../../assets/Dots.svg";
 import useDetectClose from "../../hooks/useDetectClose";
 import HashTag from "../tags/HashTag";
@@ -173,6 +172,8 @@ const Buttons = styled.div`
   border-radius: 5px;
   text-align: center;
   right: 0;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Button = styled.div`

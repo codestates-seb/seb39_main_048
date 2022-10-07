@@ -3,22 +3,18 @@ import styled from "styled-components";
 import useMenu from "../../store/MenuStore";
 import MypageReview from "../review/MypageReview";
 import { BREAK_POINT_TABLET } from "../../constant";
-import { useGetMypageData } from "../../hooks/useAPI";
-import Loading from "../../components/ui/Loading"
+import EmptyData from "../ui/EmptyData";
 
-const MyReview = () => {
+const MyReview = ({ data }) => {
   const { menu } = useMenu();
-  const { data, isLoading, isError } = useGetMypageData("/api/v1/mypage/reply");
 
-  console.log("mypage data : ",data)
-
-  if (isLoading) return <Loading/>
-  if (isError) return <div>ERR...</div>;
   return (
     <Myreview>
       <Title> {menu}</Title>
       <ReviewGroup>
-        <MypageReview data={data.data}/>
+        {data.data.length ? data.data.map((data, idx) => (
+          <MypageReview key={idx} reply={data} />
+        )) : <EmptyData  width={"100%"} text={"아직 등록한 후기가 없어요"}/>}
       </ReviewGroup>
     </Myreview>
   );
