@@ -108,8 +108,8 @@ public class ReplyController {
     public ResponseEntity deleteReply(@AuthenticationPrincipal PrincipalDetails principalDetails,
             @PathVariable("reply-id") long replyId) {
         principalDetails.getUser();// ㅅㅏ용자 검증용
-        Reply reply = replyService.deleteReply(replyId);
-        replyService.updateScoreAvg(reply);
+        long placeId = replyService.deleteReply(replyId);
+        replyService.updateScoreAvgWithDelete(placeId);
 
         return  new ResponseEntity(HttpStatus.NO_CONTENT);
     }}

@@ -18,8 +18,8 @@ public interface UserMapper {
 
     //ReplyDto.response replyToReplyResponse(Reply reply);
 
-    @Mapping(source = "placeList", target = "placeList")
-    @Mapping(source = "replyList", target = "replyList")
+//    @Mapping(source = "placeList", target = "placeList")
+//    @Mapping(source = "replyList", target = "replyList")
     UserResponseDto userToUserResponseDto(User findUser);
 
     List<Place> PlaceListToPlaceDtoList(List<PlaceDto.response> placeDtoList);

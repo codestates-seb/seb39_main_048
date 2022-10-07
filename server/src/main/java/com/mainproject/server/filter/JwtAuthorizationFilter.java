@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -27,13 +28,21 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         String jwtHeader = request.getHeader("Authorization");
 
-        if(jwtHeader ==null || !jwtHeader.startsWith("Bearer") || jwtHeader.startsWith("Bearer null")){
-            chain.doFilter(request,response);
-            return;
-        }
+//            if(jwtHeader.equals("Bearer test")){
+//                chain.doFilter(request, response);
+//            }
+
+            if (jwtHeader == null || !jwtHeader.startsWith("Bearer") || Objects.equals(jwtHeader, "Bearer test")) {
+                chain.doFilter(request, response);
+                return;
+            }
+
         String jwtToken = request.getHeader("Authorization").replace("Bearer ","");
 
         String userId = JWT.require(Algorithm.HMAC512("safari")).build().verify(jwtToken).getClaim("userId").asString();
+
+
+
 
         if(userId != null){
             User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("멤버 없음"));

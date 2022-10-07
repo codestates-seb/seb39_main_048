@@ -60,10 +60,11 @@ public class ReplyService {
      * deleteReply 구현
      **/
     @Transactional
-    public Reply deleteReply(long replyId) {
+    public long deleteReply(long replyId) {
         Reply findReply = findVerifiedReply(replyId);
+        long findPlaceIdByReply = findReply.getPlace().getPlaceId();
         replyRepository.deleteById(replyId);
-        return findReply;
+        return findPlaceIdByReply;
 
     }
 
@@ -103,6 +104,19 @@ public class ReplyService {
 
     public List<Reply> findReplyByPlace(Place place) {
         return replyRepository.findByPlace(place);
+
+    }
+
+    public void updateScoreAvgWithDelete(long placeId) {
+       Place findPlce= placeService.findPlace(placeId);
+        double avg = findPlce.getReplyList().stream()
+                .mapToDouble(Reply::getScore)
+                .average().orElse(0.0);
+
+        findPlce.setScoreAvg(avg);
+        System.out.println("count and avg :" +  "/ " + avg);
+
+        placeService.updateScoreAvgPlace(findPlce);
 
     }
 }

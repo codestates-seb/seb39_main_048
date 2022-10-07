@@ -13,6 +13,7 @@ import com.mainproject.server.user.entity.User;
 import com.mainproject.server.user.mapper.UserMapper;
 import com.mainproject.server.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

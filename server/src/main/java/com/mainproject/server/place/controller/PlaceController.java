@@ -2,6 +2,7 @@ package com.mainproject.server.place.controller;
 
 import com.mainproject.server.auth.PrincipalDetails;
 import com.mainproject.server.dto.MainResponseDto;
+import com.mainproject.server.dto.MultiResponseDto;
 import com.mainproject.server.dto.SingleResponseDto;
 import com.mainproject.server.place.dto.PlaceDto;
 import com.mainproject.server.place.dto.TagNameDto;
@@ -13,6 +14,7 @@ import com.mainproject.server.tag.entity.Tag;
 import com.mainproject.server.tag.service.TagService;
 import com.mainproject.server.user.entity.User;
 import com.mainproject.server.user.service.UserService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -58,7 +60,8 @@ public class PlaceController {
      * patchPlace 구현 완료
      **/
     @PatchMapping("/{place-id}")
-    public ResponseEntity patchPlace(@RequestBody PlaceDto.patch requestBody,
+    public ResponseEntity patchPlace(@AuthenticationPrincipal PrincipalDetails principalDetails,
+                                     @RequestBody PlaceDto.patch requestBody,
                                      @PathVariable("place-id") Long placeId) {
         Place place = mapper.placePatchToPlace(requestBody);
         place.setPlaceId(placeId);
@@ -109,12 +112,13 @@ public class PlaceController {
     public ResponseEntity getPlaceCategory(@RequestParam(required = false) Integer page,//파라미터 널 가능
                                            @RequestParam(required = false) Integer size,
                                            @PathVariable(value = "category", required = false) String category) {
-        // Page<Place> pagePlaces = placeService.findPlaces(page-1,size);
+         //Page<Place> pagePlaces = placeService.findPlaces(page-1,size);
         // List<Place> placeList = placeService.findPlaceByCategory(category, page-1, size);
 
-        List<Place> placeList = placeService.findPlaceByCategoryWithSpecs(category);
+        Page<Place> placeList = placeService.findPlaceByCategoryWithSpecs(category, page-1, size);
+        List<Place> places = placeList.getContent();
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.placesToPlaceResponse(placeList)), HttpStatus.OK);
+                new MultiResponseDto<>(mapper.placesToPlaceResponse(places),placeList), HttpStatus.OK);
     }
 
     /**
@@ -134,7 +138,8 @@ public class PlaceController {
      * deletePlace 구현 완료      * 삭제시, reply등도 함께 삭제하는 것 구현 필요.
      **/
     @DeleteMapping("/{place-id}")
-    public ResponseEntity deletePlace(@PathVariable("place-id") long placeId) {
+    public ResponseEntity deletePlace(@AuthenticationPrincipal PrincipalDetails principalDetails,
+                                      @PathVariable("place-id") long placeId) {
         placeService.deletePlace(placeId);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);

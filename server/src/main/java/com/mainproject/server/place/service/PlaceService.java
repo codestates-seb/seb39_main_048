@@ -6,6 +6,7 @@ import com.mainproject.server.place.dto.TagNameDto;
 import com.mainproject.server.place.repository.PlaceRepository;
 import com.mainproject.server.place.entity.Place;
 import com.mainproject.server.place.entity.PlaceTag;
+import com.mainproject.server.reply.entity.Reply;
 import com.mainproject.server.tag.entity.Tag;
 import com.mainproject.server.tag.service.TagService;
 import com.mainproject.server.user.entity.User;
@@ -156,14 +157,16 @@ public class PlaceService {
     }
 
 
-    public List<Place> findPlaceByCategoryWithSpecs( String category){
+    public Page<Place> findPlaceByCategoryWithSpecs( String category, int page, int size){
         if(category.equals("all")) {
             //Specification<Place> spec = Specification.where(PlaceSpecs.categoryFind(null));
-            return   placeRepository.findAll();
+            //return   placeRepository.findAllByOrderByPlaceIdDesc();
+            return placeRepository.findAll(PageRequest.of(page,size,Sort.by("placeId").descending()));
         }
         else {
             Specification<Place> spec = Specification.where(PlaceSpecs.categoryFind(category));
-            return   placeRepository.findAll(spec);
+//            return   placeRepository.findAll(spec,Sort.by("placeId").descending());
+            return   placeRepository.findAll(spec,PageRequest.of(page,size,Sort.by("placeId").descending()));
         }
 
 
@@ -193,8 +196,10 @@ public class PlaceService {
     }
 
     public List<Place> findPlaceByUser(User user) {
-     return   placeRepository.findByUser(user);
+     return   placeRepository.findByUserOrderByPlaceIdDesc(user);
     }
+
+
 
 //    private void verifyExistsPlaceId(long placeId) {
 //        // todo
