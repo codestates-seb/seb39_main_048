@@ -4,8 +4,14 @@ import styled from "styled-components";
 import SNSBtns from "./SNSBtns";
 import { ReactComponent as GoogleLogo } from "../../assets/SNSLogin/GoogleLogo.svg";
 import { ReactComponent as KakaoLogo } from "../../assets/SNSLogin/KakaoLogo.svg";
+import toast, { Toaster } from "react-hot-toast";
+import { ToastInfo } from "../../constant";
 
 const SNSLoginContainer = () => {
+  const handleMap = () => {
+    return toast("공사중  입나다", { icon: "🚧", ...ToastInfo });
+  };
+
   return (
     <SNSBtnContainer>
       <div>
@@ -17,13 +23,13 @@ const SNSLoginContainer = () => {
       <div className="SNSButtons">
         <SNSBtns
           text={"Google"}
-          onClick={() => alert("Google")}
+          onClick={handleMap}
           type={"Google"}
           svg={<GoogleLogo />}
         ></SNSBtns>
         <SNSBtns
           text={"Kakao"}
-          onClick={() => alert("Kakao")}
+          onClick={handleMap}
           type={"Kakao"}
           svg={<KakaoLogo />}
         ></SNSBtns>

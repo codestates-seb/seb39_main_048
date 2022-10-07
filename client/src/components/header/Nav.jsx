@@ -21,6 +21,7 @@ const Nav = () => {
       localStorage.removeItem("access_Token");
       setIsLogin(false);
       navigate("/");
+      return toast("로그아웃 되었습니다", { icon: "👋🏻", ...ToastInfo });
     }
   };
 

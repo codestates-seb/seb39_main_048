@@ -43,7 +43,7 @@ const Review = ({ reply }) => {
       .then((res) => console.log(res))
       .then(() => setContext(""), setScore(""));
     setIsEdit(false);
-    window.location.reload();
+    // window.location.reload();
   };
 
   const handleCancel = () => {
@@ -82,7 +82,7 @@ const Review = ({ reply }) => {
             </div>
           ) : (
             <div className="scoreInput">
-              ⭐️ 평점 
+              ⭐️ 평점
               <select
                 id="score"
                 name="score"

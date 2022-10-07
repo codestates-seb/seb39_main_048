@@ -8,6 +8,8 @@ import useLogin from "../store/LoginStore";
 import styled from "styled-components";
 import useMamber from "../store/MemberStore";
 import jwt_decode from "jwt-decode";
+import toast, { Toaster } from "react-hot-toast";
+import { ToastInfo } from "../constant";
 
 const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 
@@ -35,8 +37,10 @@ const Login = () => {
 
           setUser(decoded.userId);
           navigate("/");
+          toast("환영합니다", { icon: "🤗", ...ToastInfo });
         })
         .catch((err) => {
+          toast("로그인 실패", { icon: "❌", ...ToastInfo });
           console.log(err);
           console.log("error: " + JSON.stringify(localStorage));
         });
@@ -63,7 +67,7 @@ const Login = () => {
                 type="text"
                 maxLength="12"
                 minLength="6"
-                placeholder="아이디를 입력해 주세요"
+                placeholder="아이디를 입력해 주세요 (영문 소문자)"
                 onChange={(e) => setUserId(e.target.value)}
               ></input>
             </label>
