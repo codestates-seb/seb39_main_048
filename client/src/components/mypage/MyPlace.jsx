@@ -1,24 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import PlaceCard1 from "../cards/PlaceCard1";
-import { useGetMypageData } from "../../hooks/useAPI";
 import { BREAK_POINT_TABLET } from "../../constant";
-import Loading from "../ui/Loading";
+import EmptyData from "../ui/EmptyData";
+const MyPlace = ({data}) => {
 
-const MyPlace = ({menu}) => {
-
-  const { data, isLoading, isError } = useGetMypageData("/api/v1/mypage/place");
-
-  if (isLoading) return <Loading/>
-  if (isError) return <div>ERR...</div>;
 
   return (
     <Place>
-      <Title> {menu}</Title>
+      <Title>내가 등록한 장소</Title>
       <PlaceCards grid={data.data.length < 3 ? "repeat(3, 1fr)" : ""}>
-        {data.data.map((data, idx) => (
+        {data.data.length ? data.data.map((data, idx) => (
           <PlaceCard1 data={data} key={idx} />
-        ))}
+        )) : <EmptyData width={"100%"} text={"아직 등록한 장소가 없어요"}/>}
       </PlaceCards>
     </Place>
   );
@@ -49,7 +43,7 @@ const PlaceCards = styled.div`
   width: 100%;
   gap: 24px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: ${(props) => props.grid || "repeat(auto-fit, minmax(250px, 1fr))"}
 `;
 
 export default MyPlace;

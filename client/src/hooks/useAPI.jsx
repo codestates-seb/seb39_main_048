@@ -89,12 +89,14 @@ export const useDeleteDetailPlace = async (id) => {
 
 export const useGetMyInfo = () => {
   const fetcher = async () => {
-    const res = await axiosInstance.get(`${BASE_URL}/api/v1/mypage`);
-    console.log("useGetMyInfo");
+    const access_Token = localStorage.getItem("access_Token") || "없음"
+    axios.defaults.headers.common["Authorization"] = `Bearer ${access_Token}`;
+    const res = await axios.get(`${BASE_URL}/api/v1/mypage`);
+    console.log("useGetMyInfo : ", res);
     return res.data;
   };
-  const { data, error } = useSWR(`/api/v1/mypage `, fetcher);
-
+  const { data, error } = useSWR(`/api/v1/mypage`, fetcher);
+  console.log("/api/v1/mypage", data);
   return {
     data: data,
     isLoading: !error && !data,
@@ -106,7 +108,9 @@ export const useGetMyInfo = () => {
 export const useUpdataMyInfo = (config) => {
   const updatePlace = async () => {
     try {
-      const { data } = await axiosInstance.patch(
+      const access_Token = localStorage.getItem("access_Token") || "없음"
+      axios.defaults.headers.common["Authorization"] = `Bearer ${access_Token}`;
+      const { data } = await axios.patch(
         `${BASE_URL}/api/v1/mypage`,
         config
       );
@@ -124,7 +128,9 @@ export const useUpdataMyInfo = (config) => {
 
 export const useGetMypageData = (url) => {
   const fetcher = async (innerURL) => {
-    const res = await axiosInstance.get(`${BASE_URL}${innerURL}`);
+    const access_Token = localStorage.getItem("access_Token") || "없음"
+    axios.defaults.headers.common["Authorization"] = `Bearer ${access_Token}`;
+    const res = await axios.get(`${BASE_URL}${innerURL}`);
     console.log("url", url);
     console.log("useGetMypageData");
     return res.data;

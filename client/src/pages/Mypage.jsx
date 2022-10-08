@@ -8,18 +8,28 @@ import useMenu from "../store/MenuStore";
 import MyReview from "../components/mypage/MyReview";
 import { BREAK_POINT_TABLET } from "../constant";
 import { BREAK_POINT_TABLET_MINI } from "../constant";
+import { useGetMypageData } from "../hooks/useAPI";
+import Loading from "../components/ui/Loading";
 
 const Mypage = () => {
   const { menu } = useMenu();
+  let URL = "";
+  if (menu === "마이페이지") URL = "/api/v1/mypage/place";
+  if (menu === "내가 등록한 장소") URL = "/api/v1/mypage/place";
+  if (menu === "내가 작성한 후기") URL = "/api/v1/mypage/reply";
+  const { data, isLoading, isError } = useGetMypageData(URL);
+
+  if (isLoading) return <Loading />;
+  if (isError) return <div>ERR...</div>;
 
   return (
     <>
       <MyPage>
         <Sidbar />
         <Content>
-          {menu === "마이페이지" ? <MySummary /> : ""}
-          {menu === "내가 등록한 장소" ? <MyPlace menu={menu} /> : ""}
-          {menu === "내가 작성한 후기" ? <MyReview /> : ""}
+          {menu === "마이페이지" ? <MySummary place={data} /> : ""}
+          {menu === "내가 등록한 장소" ? <MyPlace data={data} /> : ""}
+          {menu === "내가 작성한 후기" ? <MyReview data={data} /> : ""}
         </Content>
       </MyPage>
       <Footer />
