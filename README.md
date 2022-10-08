@@ -17,7 +17,6 @@
 - **[API 명세서 보러가기](https://www.notion.so/Main-Project-API-7dd600edfced4bfda12f17ab503b590f)**
 - **[피그마 디자인 보러가기](https://www.figma.com/file/9ELwRLq7RbeH1Zf5kdmqZ5/%EC%82%AC%ED%8C%8C%EB%A6%AC-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=0%3A1)**
 <br/>
-
 <br/>
 
 ## 🔜 Demo
@@ -25,7 +24,7 @@
 
 
 <br/>
-
+<br/>
 
 ## 👾 Tech Stack
 #### Front
@@ -44,7 +43,7 @@
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 | <img src="https://onsil-thegreenhouse.github.io/assets/images//programming/java/java-logo.jpg" alt="img" width="130" /> | <img src="https://velog.velcdn.com/images%2Fgalaxy%2Fpost%2Fb501f325-1810-4e26-962e-e66ca0b94ca9%2Fimage.png" alt="img" width="130" /> | <img src="https://blog.kakaocdn.net/dn/bvZSDO/btq91NL1uyg/oWv1FjqxKn2nc3kw7epnYK/img.png" alt="img" width="100" /> | <img src="https://velog.velcdn.com/images/seongwon97/post/0c166ca6-19e3-4eef-9f3a-82540cf2fea4/spring%20security.png" alt="post-thumbnail" height="100" /> |
 
-
+<br/>
 <br/>
 
 ## <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="25px"> Contributors
@@ -55,5 +54,4 @@
 |         [@kanghyew0n](https://github.com/kanghyew0n)         |           [@MrBellon](https://github.com/MrBellon)           |            [@JuSeong](https://github.com/JuSeong1130)             |         [@deanoh533](https://github.com/deanoh533)         |
 
 <br/>
-
 <br/>
