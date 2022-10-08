@@ -65,6 +65,32 @@ const Listpage = () => {
   if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
 
+  // const Place = {
+  //   Original: (place) => !searchWord && !filterData.length ? <PlaceCard1 data={place} key={idx} /> : '',
+  //   dedd: (place) => !searchWord && !filterData.length ? <PlaceCard1 data={place} key={idx} /> : '',
+  //   dasd: (place) => !searchWord && !filterData.length ? <PlaceCard1 data={place} key={idx} /> : '',
+  //   dadwd: (place) => !searchWord && !filterData.length ? <PlaceCard1 data={place} key={idx} /> : ''
+  // }
+  // const places = [
+  //   {
+  //     condition: !searchWord && !filterData.length,
+  //     component: <PlaceCard1 data={place} key={idx} />
+  //   },
+  //   {
+  //     condition: !searchWord && !filterData.length,
+  //     component: <PlaceCard1 data={place} key={idx} />
+  //   },
+  //   {
+  //     condition: !searchWord && !filterData.length,
+  //     component: <PlaceCard1 data={place} key={idx} />
+  //   },
+  //       {
+  //     condition: !searchWord && !filterData.length,
+  //     component: <PlaceCard1 data={place} key={idx} />
+  //   },
+
+  // ]
+
   return (
     <>
       <ListPage>
@@ -75,8 +101,15 @@ const Listpage = () => {
           </Title>
 
           <FilterGroup data={data} />
+          
           <CardGroup grid={data.data.length < 4 || realData.length < 4 ||  data.data
                   .filter((place) => searchWord === place.name).length ? "repeat(4, 1fr)" : ""}>
+              {/* {Place.Original(place)}
+              {Place.dedd(place)}
+              {Place.dadwd(place)}
+              {Place.daad(place)} */}
+
+
             {!searchWord && !filterData.length
               ? data.data.map((place, idx) => (
                   <PlaceCard1 data={place} key={idx} />
