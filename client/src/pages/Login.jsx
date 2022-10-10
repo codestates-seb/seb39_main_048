@@ -8,6 +8,8 @@ import useLogin from "../store/LoginStore";
 import styled from "styled-components";
 import useMamber from "../store/MemberStore";
 import jwt_decode from "jwt-decode";
+import toast, { Toaster } from "react-hot-toast";
+import { ToastInfo } from "../constant";
 
 const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 
@@ -33,6 +35,10 @@ const Login = () => {
           setIsLogin(true);
           const decoded = jwt_decode(localStorage.getItem("access_Token"));
           setUser(decoded.userId);
+          toast(`${decoded.userId}님 어서오세요!`, {
+            icon: "❤️",
+            ...ToastInfo,
+          });
           navigate("/");
         })
         .catch((err) => {
@@ -93,6 +99,7 @@ const Login = () => {
           </Link>
         </div>
       </div>
+      <Toaster />
     </LoginPage>
   );
 };

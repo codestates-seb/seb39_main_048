@@ -111,9 +111,9 @@ const Sidbar = () => {
               <div className="img">
                 {!isMyOpen ? data.data.userImage ? <img src={data.data.userImage} /> : (
                   <UserImg />
-                ) : (
-                  <CirclePlus onClick={onImageUpload} cursor={"pointer"} />
-                )}
+                ) : 
+                  imgURL ? <img src={imgURL} /> : <CirclePlus onClick={onImageUpload} cursor={"pointer"} />
+                }
                 {/* {data && data.data.userImage ? (
                   <img src={data.data.userImage} />
                 ) : (
@@ -159,7 +159,7 @@ const Sidbar = () => {
                   </>
                 ) : (
                   <>
-                    <UserName>{data?.data.name}</UserName>
+                    <UserName>{data.data.name}</UserName>
                     <Button onClick={() => setIsMyOpen(!isMyOpen)}>Edit</Button>
                   </>
                 )}

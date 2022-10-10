@@ -20,7 +20,7 @@ import Loading from "../components/ui/Loading";
 import usePostReview from "../store/PostReply";
 import useMamber from "../store/MemberStore";
 import jwt_decode from "jwt-decode";
-
+import useLogin from "../store/LoginStore";
 
 const Detailpage = () => {
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
@@ -30,12 +30,15 @@ const Detailpage = () => {
   const [category, setCategory] = useState("");
   const { replyLength, setReplyLength } = usePostReview();
   const { user, setUser } = useMamber();
+  const { isLogin } = useLogin();
 
-  console.log("user",user )
+  console.log("user", user);
   useEffect(() => {
-    const decoded = jwt_decode(localStorage.getItem("access_Token"));
-    setUser(decoded.userId);
-  }, [])
+    if (isLogin) {
+      const decoded = jwt_decode(localStorage.getItem("access_Token"));
+      setUser(decoded.userId);
+    }
+  }, []);
 
   useEffect(() => {
     if (data) {
@@ -87,19 +90,23 @@ const Detailpage = () => {
             <PlaceName>{data.data.name}</PlaceName>
             <Category>{category}</Category>
           </div>
-         {user === data.data.userId ? ( <div className="buttonGroup">
-            <BasicButton
-              bgcolor={"#D9D9D9"}
-              text={"삭제"}
-              onDelete={onDelete}
-            />
-            <BasicButton text={"수정"} handleUpdateOpen={handleUpdateOpen} />
-            <DetailUpdate
-              setIsOpen={setIsUpdateOpen}
-              isOpen={isUpdateOpen}
-              data={data.data}
-            />
-          </div>) : ""}
+          {user === data.data.userId ? (
+            <div className="buttonGroup">
+              <BasicButton
+                bgcolor={"#D9D9D9"}
+                text={"삭제"}
+                onDelete={onDelete}
+              />
+              <BasicButton text={"수정"} handleUpdateOpen={handleUpdateOpen} />
+              <DetailUpdate
+                setIsOpen={setIsUpdateOpen}
+                isOpen={isUpdateOpen}
+                data={data.data}
+              />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <div className="detailTop_info">
           <Score>
@@ -189,6 +196,7 @@ const Detail = styled.div`
   .buttonGroup {
     display: flex;
     gap: 12px;
+    height: 100%;
     align-items: center;
   }
 

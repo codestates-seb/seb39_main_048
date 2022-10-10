@@ -146,7 +146,7 @@ const Listpage = () => {
             {/* {!data.length ? <EmptyData /> : ""} */}
           </CardGroup>
         </Inner>
-        <Paging/>
+        <Paging size={data.data.length}/>
         <MoveRegist />
         <Footer />
       </ListPage>

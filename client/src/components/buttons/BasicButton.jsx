@@ -40,6 +40,7 @@ const Button = styled.div`
   padding: 10px;
   background-color: ${(props) => props.bgcolor || "#ffb653"};
   color: #fff;
+  text-align: center;
   cursor: pointer;
 `;
 
