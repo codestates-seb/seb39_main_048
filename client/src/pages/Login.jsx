@@ -35,6 +35,10 @@ const Login = () => {
           setIsLogin(true);
           const decoded = jwt_decode(localStorage.getItem("access_Token"));
           setUser(decoded.userId);
+          toast(`${decoded.userId}님 어서오세요!`, {
+            icon: "❤️",
+            ...ToastInfo,
+          });
           navigate("/");
           toast("환영합니다", { icon: "🤗", ...ToastInfo });
         })
@@ -97,6 +101,7 @@ const Login = () => {
           </Link>
         </div>
       </div>
+      <Toaster />
     </LoginPage>
   );
 };

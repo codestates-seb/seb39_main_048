@@ -6,7 +6,8 @@ import PasswordInput from "../components/input/PasswordInput";
 import SNSLoginContainer from "../components/buttons/SNSLoginContainer";
 import axios from "axios";
 import useSignup from "../store/SignupStore";
-import axiosInstance from "../api/core/axiosConfig";
+import toast, { Toaster } from "react-hot-toast";
+import { ToastInfo } from "../constant";
 import styled from "styled-components";
 
 const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
@@ -76,6 +77,7 @@ const Signup = () => {
         .catch((err) => {
           console.log(err.data);
         });
+      toast("회원가입에 성공하셨습니다!", { icon: "🏡", ...ToastInfo });
       navigate(`/login`);
     } else {
       console.log("안됨");
@@ -141,6 +143,7 @@ const Signup = () => {
           <SNSLoginContainer />
         </div>
       </div>
+      <Toaster />
     </SingupPage>
   );
 };
