@@ -34,7 +34,6 @@ const Login = () => {
           ] = `Bearer ${localStorage.getItem("access_Token")}`;
           setIsLogin(true);
           const decoded = jwt_decode(localStorage.getItem("access_Token"));
-
           setUser(decoded.userId);
           navigate("/");
           toast("환영합니다", { icon: "🤗", ...ToastInfo });

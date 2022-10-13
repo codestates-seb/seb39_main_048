@@ -4,10 +4,13 @@ import styled from "styled-components";
 import { ToastInfo } from "../../constant";
 import toast, { Toaster } from "react-hot-toast";
 import { ReactComponent as Star } from "../../assets/Star.svg";
+import { ReactComponent as UserImg } from "../../assets/UserImg.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
 import { useDeleteReply, useUpdataReply } from "../../hooks/useAPI";
 import usePostReview from "../../store/PostReply";
 import useMamber from "../../store/MemberStore";
+import { useGetMyInfo } from "../../hooks/useAPI";
+import Loading from "../ui/Loading";
 
 const Review = ({ reply }) => {
   const { id } = useParams();
@@ -25,6 +28,12 @@ const Review = ({ reply }) => {
       setPlaceId("");
     };
   }, []);
+
+  
+  const { data, isLoading, isError } = useGetMyInfo();
+  if (isLoading) return <Loading />;
+  if (isError) return <div>ERR...</div>;
+
 
   const config = {
     replyId: reply.replyId,
@@ -68,9 +77,9 @@ const Review = ({ reply }) => {
       <ReviewLeft>
         <div className="userInfo">
           <div className="user">
-            <div className="userImg">
-              <UserImg></UserImg>
-            </div>
+            <User>
+              {data.data.userImage ? <img src={data.data.userImage} /> : <UserImg/>}
+            </User>
             <div className="userDate">
               <div className="userName">{reply.userId}</div>
               <div className="postDate">2022.09.29</div>
@@ -299,11 +308,15 @@ const OriginReply = styled.div`
   }
 `;
 
-const UserImg = styled.div`
+const User = styled.div`
   width: 48px;
   height: 48px;
   border-radius: 50px;
   background-color: #f5f5f5;
+  img{
+    width: 48px;
+  height: 48px;
+  }
 `;
 
 export default Review;

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSearchParams } from "react-router-dom";
 import { useGetPlace } from "../hooks/useAPI";
 import Point from "../assets/Point.png";
 import PlaceCard1 from "../components/cards/PlaceCard1";
@@ -12,6 +11,8 @@ import MoveRegist from "../components/buttons/MoveRegist";
 import Loading from "../components/ui/Loading";
 import { BREAK_POINT_TABLET } from "../constant";
 import { BREAK_POINT_PHONE } from "../constant";
+import Paging from "../components/ui/Pagination";
+import usePaging from "../store/PageStore";
 
 const Listpage = () => {
   const {
@@ -20,10 +21,9 @@ const Listpage = () => {
     setSelectCategory,
     setFilterData,
     filterData,
-  } = useFilters();
+  } = useFilters(); 
+  const {pageInfo} = usePaging();
   const [realData, setRealData] = useState([]);
-  // const page = searchParams.get("page");
-  // const size = searchParams.get("size");
 
   useEffect(() => {
     return () => {
@@ -53,17 +53,43 @@ const Listpage = () => {
   }, [filterData]);
 
   let URL = "";
-  if (selectCategory === "전체") URL = "/api/v1/place/category/all";
-  if (selectCategory === "식당") URL = "/api/v1/place/category/restaurant";
-  if (selectCategory === "카페") URL = "/api/v1/place/category/cafe";
-  if (selectCategory === "숙소") URL = "/api/v1/place/category/stay";
-  if (selectCategory === "병원") URL = "/api/v1/place/category/hospital";
-  if (selectCategory === "기타") URL = "/api/v1/place/category/etc";
+  if (selectCategory === "전체") URL = `/api/v1/place/category/all?page=${pageInfo}&size=8`;
+  if (selectCategory === "식당") URL = `/api/v1/place/category/restaurant?page=${pageInfo}&size=8`;
+  if (selectCategory === "카페") URL = `/api/v1/place/category/cafe?page=${pageInfo}&size=8`;
+  if (selectCategory === "숙소") URL = `/api/v1/place/category/stay?page=${pageInfo}&size=8`;
+  if (selectCategory === "병원") URL = `/api/v1/place/category/hospital?page=${pageInfo}&size=8`;
+  if (selectCategory === "기타") URL = `/api/v1/place/category/etc?page=${pageInfo}&size=8`;
 
   const { data, isLoading, isError } = useGetPlace(URL);
 
   if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
+
+  // const Place = {
+  //   Original: (place) => !searchWord && !filterData.length ? <PlaceCard1 data={place} key={idx} /> : '',
+  //   dedd: (place) => !searchWord && !filterData.length ? <PlaceCard1 data={place} key={idx} /> : '',
+  //   dasd: (place) => !searchWord && !filterData.length ? <PlaceCard1 data={place} key={idx} /> : '',
+  //   dadwd: (place) => !searchWord && !filterData.length ? <PlaceCard1 data={place} key={idx} /> : ''
+  // }
+  // const places = [
+  //   {
+  //     condition: !searchWord && !filterData.length,
+  //     component: <PlaceCard1 data={place} key={idx} />
+  //   },
+  //   {
+  //     condition: !searchWord && !filterData.length,
+  //     component: <PlaceCard1 data={place} key={idx} />
+  //   },
+  //   {
+  //     condition: !searchWord && !filterData.length,
+  //     component: <PlaceCard1 data={place} key={idx} />
+  //   },
+  //       {
+  //     condition: !searchWord && !filterData.length,
+  //     component: <PlaceCard1 data={place} key={idx} />
+  //   },
+
+  // ]
 
   return (
     <>
@@ -75,7 +101,15 @@ const Listpage = () => {
           </Title>
 
           <FilterGroup data={data} />
-          <CardGroup grid={data.data.length < 4 ? "repeat(4, 1fr)" : ""}>
+          
+          <CardGroup grid={data.data.length < 4 || realData.length < 4 ||  data.data
+                  .filter((place) => searchWord === place.name).length ? "repeat(4, 1fr)" : ""}>
+              {/* {Place.Original(place)}
+              {Place.dedd(place)}
+              {Place.dadwd(place)}
+              {Place.daad(place)} */}
+
+
             {!searchWord && !filterData.length
               ? data.data.map((place, idx) => (
                   <PlaceCard1 data={place} key={idx} />
@@ -112,6 +146,7 @@ const Listpage = () => {
             {/* {!data.length ? <EmptyData /> : ""} */}
           </CardGroup>
         </Inner>
+        <Paging/>
         <MoveRegist />
         <Footer />
       </ListPage>

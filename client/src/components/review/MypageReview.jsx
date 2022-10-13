@@ -1,31 +1,46 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { ReactComponent as Star } from "../../assets/Star.svg";
 import { BREAK_POINT_TABLET } from "../../constant";
 import { BREAK_POINT_TABLET_MINI } from "../../constant";
+import { useGetDetailPlace } from "../../hooks/useAPI";
+import Loading from "../ui/Loading";
+import { useDeleteReply } from "../../hooks/useAPI";
 
-const MypageReview = ({ data }) => {
+const MypageReview = ({ reply }) => {
+  const { data, isLoading, isError } = useGetDetailPlace(reply.placeId);
+  if (isLoading) return <Loading />;
+  if (isError) return <div>ERR...</div>;
+
+  const handleDelete = () => {
+    if (window.confirm("댓글을 삭제하시겠습니까?")) {
+      useDeleteReply(reply.replyId);
+      // window.location.reload()
+    }
+  };
+
   return (
     <ReviewItem>
       <ReviewLeft>
         <div className="topSection">
           <div className="user_buttons">
-            <PlaceName>{data.name} 〉</PlaceName>
+            <Link to={`/place/${reply.placeId}`}>
+              <PlaceName>{data.data.name} 〉</PlaceName>
+            </Link>
             <div className="buttons">
-              <div className="button">수정</div>
-              <div className="button">삭제</div>
+              <div className="button" onClick={handleDelete}>
+                삭제
+              </div>
             </div>
           </div>
           <Score>
-            <Star /> {data.score}
+            <Star /> {reply.score}
           </Score>
         </div>
         <PostDate>2022.09.29</PostDate>
-        <p className="reviewContent">
-          {data.context}
-        </p>
+        <p className="reviewContent">{reply.context}</p>
       </ReviewLeft>
-      <ReviewRight></ReviewRight>
     </ReviewItem>
   );
 };

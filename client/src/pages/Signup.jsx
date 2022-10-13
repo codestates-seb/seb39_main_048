@@ -120,12 +120,6 @@ const Signup = () => {
             title="비밀번호"
             placeholder="영문 소문자, 숫자 포함 8자 이상 14자 이하"
           />
-          {/* <PasswordInput
-            id="pw2"
-            title="비밀번호 확인"
-            placeholder="비밀번호를 확인해 주세요"
-            onChange={onPasswordCheck}
-          /> */}
           <div className="PasswordCheckInput">
             <label>
               <p>비밀번호 확인</p>
