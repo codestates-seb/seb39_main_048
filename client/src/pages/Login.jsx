@@ -28,7 +28,6 @@ const Login = () => {
           password: password,
         })
         .then((res) => {
-          console.log(res);
           axios.defaults.headers.common[
             "Authorization"
           ] = `Bearer ${localStorage.getItem("access_Token")}`;

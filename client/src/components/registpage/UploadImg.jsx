@@ -34,7 +34,6 @@ const UploadImg = () => {
       .then((res) => {
         // delete axios.headers.common["Authorization"]
         setPlaceImage(res.data.url);
-        console.log("이미지 올라가는 중", res.data);
       })
       .catch((err) => console.log(err));
 
@@ -45,7 +44,6 @@ const UploadImg = () => {
     }
     const reader = new FileReader();
     setFile(ref.current.files[0]);
-    console.log(ref.current.files[0].size);
     setIsLoading(true);
     reader.readAsDataURL(ref.current.files[0]);
     reader.onloadend = () => {

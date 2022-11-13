@@ -81,11 +81,8 @@ const DetailUpdate = ({ setIsOpen, isOpen, data }) => {
   };
 
   const onUpdate = () => {
-    console.log("updateConfig", config);
-
     const updatePlace = useUpdataPlace(config, id);
     updatePlace()
-      .then((res) => console.log(res.data))
       .then(
         () => setLocationTags([]),
         setSizeTags([]),

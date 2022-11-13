@@ -59,8 +59,6 @@ const Signup = () => {
       setPasswordCheckMsg("비밀번호 일치");
       setIsPasswordCheck(true);
     }
-    console.log(password);
-    console.log(e.target.value);
   };
 
   const onRegister = () => {
@@ -73,16 +71,13 @@ const Signup = () => {
           name: name,
         })
         .then((res) => res.data)
-        .then((data) => console.log(data))
         .catch((err) => {
           console.log(err.data);
         });
       toast("회원가입에 성공하셨습니다!", { icon: "🏡", ...ToastInfo });
       navigate(`/login`);
     } else {
-      console.log("안됨");
     }
-    console.log(userId, password, name);
   };
 
   useEffect(() => {

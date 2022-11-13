@@ -50,7 +50,6 @@ const Search = ({ data }) => {
   };
 
   const handleSearch = () => {
-    console.log("here");
     setSearchWord(text);
   };
 

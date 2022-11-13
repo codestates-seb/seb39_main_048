@@ -13,6 +13,7 @@ import useMamber from "../../store/MemberStore";
 import { useGetMyInfo } from "../../hooks/useAPI";
 import Loading from "../ui/Loading";
 import jwt_decode from "jwt-decode";
+import { useSWRConfig } from "swr";
 
 const Review = ({ reply }) => {
   const { id } = useParams();
@@ -21,8 +22,6 @@ const Review = ({ reply }) => {
   const [editScore, setEditScore] = useState(reply.score);
   const { setReplyId, setContext, setScore, setPlaceId } = usePostReview();
   const { user, setUser } = useMamber();
-
-  console.log("user", user)
 
   useEffect(() => {
     return () => {
@@ -34,13 +33,16 @@ const Review = ({ reply }) => {
   }, []);
 
   useEffect(() => {
-      const decoded = jwt_decode(localStorage.getItem("access_Token"));
-      setUser(decoded.userId);
+    const decoded = jwt_decode(localStorage.getItem("access_Token"));
+    setUser(decoded.userId);
   }, []);
 
+  const { mutate } = useSWRConfig();
   const { data, isLoading, isError } = useGetMyInfo();
   if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
+
+
 
   const config = {
     replyId: reply.replyId,
@@ -49,18 +51,21 @@ const Review = ({ reply }) => {
   };
 
   const onUpdate = () => {
-    console.log("updateConfig", config);
     if (!editScore) {
       toast("평점을 선택해 주세요!", { icon: "📝", ...ToastInfo });
       return;
     }
     const updateReply = useUpdataReply(config, id, reply.replyId);
     updateReply()
-      .then((res) => console.log(res))
       .then(() => setContext(""), setScore(""));
     setIsEdit(false);
     // window.location.reload();
+
+    const options = { optimisticData: config, rollbackOnError: true };
+    mutate(`/api/v1/place/${id}/reply`, updateFn(config, id, reply.replyId), options);
   };
+
+
 
   const handleCancel = () => {
     setIsEdit(false);
@@ -74,7 +79,6 @@ const Review = ({ reply }) => {
   const onDelete = () => {
     if (window.confirm("삭제하시겠습니까?")) {
       useDeleteReply(reply.replyId);
-      console.log(reply.replyId);
     }
   };
 

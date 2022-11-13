@@ -32,7 +32,6 @@ const Detailpage = () => {
   const { user, setUser } = useMamber();
   const { isLogin } = useLogin();
 
-  console.log("user", user);
   useEffect(() => {
     if (isLogin) {
       const decoded = jwt_decode(localStorage.getItem("access_Token"));
@@ -42,7 +41,6 @@ const Detailpage = () => {
 
   useEffect(() => {
     if (data) {
-      console.log("useEffect", data);
       switch (data.data.category) {
         case "restaurant":
           setCategory("식당");

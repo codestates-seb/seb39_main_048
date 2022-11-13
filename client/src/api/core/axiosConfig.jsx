@@ -14,8 +14,6 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const Token = localStorage.getItem("access_Token");
     config.headers["Authorization"] = `Bearer ${Token}`;
-    console.log("토큰", Token);
-    console.log(config)
 
     return config;
   },
@@ -27,7 +25,6 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use((response) => {
   localStorage.setItem("access_Token", response.headers["authorization"].split(' ')[1]);
-  console.log("response", response.headers["authorization"].split(' ')[1]);
   return response;
 });
 

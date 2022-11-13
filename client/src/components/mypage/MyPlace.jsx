@@ -9,7 +9,7 @@ const MyPlace = ({data}) => {
   return (
     <Place>
       <Title>내가 등록한 장소</Title>
-      <PlaceCards grid={data.data.length < 3 ? "repeat(3, 1fr)" : ""}>
+      <PlaceCards grid={!data.data.length ? "auto" : ""}>
         {data.data.length ? data.data.map((data, idx) => (
           <PlaceCard1 data={data} key={idx} />
         )) : <EmptyData width={"100%"} text={"아직 등록한 장소가 없어요"}/>}
@@ -43,7 +43,7 @@ const PlaceCards = styled.div`
   width: 100%;
   gap: 24px;
   display: grid;
-  grid-template-columns: ${(props) => props.grid || "repeat(auto-fit, minmax(250px, 1fr))"}
+  grid-template-columns: ${(props) => props.grid || "repeat(3, 1fr)"}; 
 `;
 
 export default MyPlace;

@@ -85,7 +85,6 @@ const PlaceRegistration = () => {
       description,
     ];
     const valid = data.filter((data) => data.length === 0);
-    console.log("valid", valid.length);
     if (valid.length !== 0) {
       toast("필수 항목을 모두 작성해주세요!", { icon: "🥲", ...ToastInfo });
       window.scrollTo(0, 0);
@@ -98,7 +97,6 @@ const PlaceRegistration = () => {
         navigate("/place");
       });
 
-      console.log("configData", configData)
     }
   };
 

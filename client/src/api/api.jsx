@@ -4,7 +4,6 @@ import useSWR from "swr";
 export const useGetPlace = (url) => {
   const fetcher = async (innerURL) => {
     const res = await instance({ url: `${innerURL}`, method: "get" });
-    console.log("useGetPlace");
     return res.data;
   };
   const { data, error } = useSWR(`${url}`, fetcher);
@@ -28,7 +27,6 @@ export const usePostPlace = (config) => {
     } catch (err) {
       console.log(err);
     }
-    console.log("usePostPlace");
     return res.data;
   };
 

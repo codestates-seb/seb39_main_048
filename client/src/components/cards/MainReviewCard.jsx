@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import User1 from "../../assets/people/User1.png";
-import User2 from "../../assets/people/User2.png";
-import User3 from "../../assets/people/User3.png";
+import User1 from "./../../assets/people/User1.png";
+import User2 from "./../../assets/people/User2.png";
+import User3 from "./../../assets/people/User3.png";
 import Score from "../ui/Score";
 import { BREAK_POINT_TABLET_MINI } from "../../constant";
 import { BREAK_POINT_TABLET } from "../../constant";

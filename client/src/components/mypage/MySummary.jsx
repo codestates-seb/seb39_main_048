@@ -20,7 +20,6 @@ const MySummary = ({ place }) => {
       <Myplace>
         <Info>
           <h2>최근 내가 등록한 장소</h2>
-          {/* <span onClick={() => setMenu("내가 등록한 장소")}>더보기</span> */}
         </Info>
         <MyplaceCards grid={!place.data.length ? "auto" : ""}>
           {place.data.length ? place.data
@@ -33,8 +32,6 @@ const MySummary = ({ place }) => {
       <MyReview>
         <Info>
           <h2>내가 작성한 후기</h2>
-
-          {/* <span onClick={() => setMenu("내가 작성한 후기")}>더보기</span> */}
         </Info>
         <MyReviewCards >
           {data.data.length ? data.data

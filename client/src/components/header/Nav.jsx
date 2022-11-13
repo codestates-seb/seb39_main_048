@@ -16,7 +16,6 @@ const Nav = () => {
   const { isLogin, setIsLogin } = useLogin();
 
   const handleLogout = () => {
-    console.log("here");
     if (window.confirm("로그아웃 하시겠습니까?")) {
       localStorage.removeItem("access_Token");
       setIsLogin(false);
@@ -102,7 +101,7 @@ const NavBar = styled.div`
   width: 100%;
   height: 70px;
   background: #ffffff;
-  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #d7e2eb;
   z-index: 300;
   position: fixed;
   transition: all 0.3s;

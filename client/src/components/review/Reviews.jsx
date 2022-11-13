@@ -15,14 +15,13 @@ const notify = () => toast.success(" 후기가 등록되었습니다 🦮");
 
 const Reviews = ({ scoreAvg }) => {
   const { id } = useParams();
-  const { data, isLoading, isError } = useGetReply(id);
+  const { data, isLoading, isError, mutate } = useGetReply(id);
   const { setReplyLength } = usePostReview();
 
   const {
     replyId,
     context,
     score,
-    placeId,
     setReplyId,
     setContext,
     setScore,
@@ -59,9 +58,10 @@ const Reviews = ({ scoreAvg }) => {
     if (!score) {
       return toast("평점을 선택해 주세요!", { icon: "⭐️", ...ToastInfo });
     }
-    console.log("config", config);
     const postReply = usePostReply(config, id);
-    postReply().then((res) => console.log(res));
+    // mutate(config)
+    postReply();
+
     // window.location.reload();
   };
 
@@ -72,7 +72,7 @@ const Reviews = ({ scoreAvg }) => {
     <ReviewGroup>
       <TopSection>
         <div className="review_score">
-          <Title>후기 {data.data.length}</Title>
+          <Title>후기 {data.data &&data.data.length}</Title>
           <Score>
             <Star />
             <ScoreText>{scoreAvg}</ScoreText>
@@ -119,7 +119,11 @@ const Reviews = ({ scoreAvg }) => {
             <Review key={reply.replyId} reply={reply} />
           ))}
 
-          {data.data.length === 0 ? <EmptyData text={"아직 등록된 후기가 없어요."}/> : ""}
+        {data.data.length === 0 ? (
+          <EmptyData text={"아직 등록된 후기가 없어요."} />
+        ) : (
+          ""
+        )}
       </Reply>
     </ReviewGroup>
   );
@@ -157,8 +161,8 @@ const TopSection = styled.div`
       font-size: 14px;
       gap: 10px;
 
-      span { 
-        width : 25px;
+      span {
+        width: 25px;
       }
     }
 

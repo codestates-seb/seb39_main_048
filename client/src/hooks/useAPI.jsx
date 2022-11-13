@@ -9,8 +9,6 @@ const BASE_URL = `${import.meta.env.VITE_BASE_URL}`;
 export const useGetPlace = (url) => {
   const fetcher = async (innerURL) => {
     const res = await axios.get(`${BASE_URL}${innerURL}`);
-    console.log("url", url);
-    console.log("useGetPlace");
     return res.data;
   };
   const { data, error } = useSWR(`${url}`, fetcher);
@@ -52,7 +50,6 @@ export const useUpdataPlace = (config, id) => {
     } catch (err) {
       console.log(err);
     }
-    console.log("useUpdataPlace");
     return res.data;
   };
 
@@ -63,7 +60,6 @@ export const useUpdataPlace = (config, id) => {
 export const useGetDetailPlace = (id) => {
   const fetcher = async (innerURL) => {
     const res = await axios.get(`${BASE_URL}${innerURL}`);
-    console.log("useGetDetailPlace");
     return res.data;
   };
   const { data, error } = useSWR(`/api/v1/place/${id}`, fetcher);
@@ -78,7 +74,6 @@ export const useGetDetailPlace = (id) => {
 export const useDeleteDetailPlace = async (id) => {
   try {
     const { data } = await axios.delete(`${BASE_URL}/api/v1/place/${id}`);
-    console.log("useDeleteDetailPlace");
     return data;
   } catch (error) {
     return error.response.data;
@@ -92,11 +87,9 @@ export const useGetMyInfo = () => {
     const access_Token = localStorage.getItem("access_Token") || "없음"
     axios.defaults.headers.common["Authorization"] = `Bearer ${access_Token}`;
     const res = await axios.get(`${BASE_URL}/api/v1/mypage`);
-    console.log("useGetMyInfo : ", res);
     return res.data;
   };
   const { data, error } = useSWR(`/api/v1/mypage`, fetcher);
-  console.log("/api/v1/mypage", data);
   return {
     data: data,
     isLoading: !error && !data,
@@ -114,12 +107,10 @@ export const useUpdataMyInfo = (config) => {
         `${BASE_URL}/api/v1/mypage`,
         config
       );
-      console.log("useUpdataMyInfo : ", data);
       return data;
     } catch (err) {
       console.log(err);
     }
-    console.log("useUpdataMyInfo");
     return useUpdataMyInfo;
   };
 
@@ -131,8 +122,6 @@ export const useGetMypageData = (url) => {
     const access_Token = localStorage.getItem("access_Token") || "없음"
     axios.defaults.headers.common["Authorization"] = `Bearer ${access_Token}`;
     const res = await axios.get(`${BASE_URL}${innerURL}`);
-    console.log("url", url);
-    console.log("useGetMypageData");
     return res.data;
   };
   const { data, error } = useSWR(`${url}`, fetcher);
@@ -150,7 +139,6 @@ export const useDeleteMyPlace = async (id) => {
     const { data } = await axiosInstance.delete(
       `${BASE_URL}/api/v1/place/${id}`
     );
-    console.log("useDeleteMyPlace");
     return data;
   } catch (error) {
     return error.response.data;
@@ -161,7 +149,6 @@ export const useDeleteMyPlace = async (id) => {
 export const useGetRecommend = (url) => {
   const fetcher = async (innerURL) => {
     const res = await axios.get(`${BASE_URL}${innerURL}`);
-    console.log("useGetRecommand");
     return res.data;
   };
   const { data, error } = useSWR(`${url}`, fetcher);
@@ -178,15 +165,15 @@ export const useGetRecommend = (url) => {
 export const useGetReply = (id) => {
   const fetcher = async () => {
     const res = await instance.get(`${BASE_URL}/api/v1/place/${id}/reply`);
-    console.log("useGetReply");
     return res.data;
   };
-  const { data, error } = useSWR(`/api/v1/place/${id}/reply`, fetcher);
+  const { data, error, mutate } = useSWR(`/api/v1/place/${id}/reply`, fetcher);
 
   return {
     data: data,
     isLoading: !error && !data,
     isError: error,
+    mutate
   };
 };
 
@@ -200,9 +187,7 @@ export const usePostReply = (config, id) => {
       );
       return data;
     } catch (err) {
-      console.log(err);
     }
-    console.log("usePostReply");
     // return res.data;
   };
 
@@ -221,7 +206,6 @@ export const useUpdataReply = (config, id, replyId) => {
     } catch (err) {
       console.log(err);
     }
-    console.log("useUpdataReply");
     return res.data;
   };
 
@@ -234,7 +218,6 @@ export const useDeleteReply = async (id) => {
     const { data } = await axiosInstance.delete(
       `${BASE_URL}/api/v1/reply/${id}`
     );
-    console.log("useDeleteReply");
     return data;
   } catch (err) {
     return err;
@@ -245,7 +228,6 @@ export const useDeleteReply = async (id) => {
 export const useGetMap = () => {
   const fetcher = async () => {
     const res = await axios.get(`${BASE_URL}/map`);
-    console.log("useGetMap");
     return res.data;
   };
   const { data, error } = useSWR(`/map`, fetcher);

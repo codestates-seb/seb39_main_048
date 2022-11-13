@@ -32,7 +32,6 @@ const Sidbar = () => {
   if (isLoading) return <Loading />;
   if (isError) return <div>ERR...</div>;
 
-  console.log(data);
 
   const onChangeImage = async () => {
     // 클라우디너리에 올리기
@@ -46,7 +45,6 @@ const Sidbar = () => {
       .post(import.meta.env.VITE_CLOUD_API_URL, formData)
       .then((res) => {
         setUserImg(res.data.url);
-        console.log("이미지 올라가는 중", res.data);
       })
       .catch((err) => console.log(err));
 
@@ -57,7 +55,6 @@ const Sidbar = () => {
     }
     const reader = new FileReader();
     setFile(ref.current.files[0]);
-    console.log(ref.current.files[0].size);
 
     reader.readAsDataURL(ref.current.files[0]);
     reader.onloadend = () => {
@@ -80,7 +77,6 @@ const Sidbar = () => {
     const updateMyinfo = useUpdataMyInfo(config);
     updateMyinfo().then((data) => setUserName(data));
     setIsMyOpen(false);
-    console.log("config : ", userName);
   };
 
   const onImageUpload = (e) => {

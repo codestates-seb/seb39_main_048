@@ -34,9 +34,7 @@ const AddressPost = () => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    console.log(data);
-    console.log(fullAddress);
-    console.log(data.zonecode);
+
     setAddress(fullAddress);
 
   };
