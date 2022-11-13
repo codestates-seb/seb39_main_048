@@ -8,6 +8,15 @@
 <br/>
 <br/>
 
+<br/>
+
+## 🔩 Install
+```
+cd client
+npm install --force
+```
+
+
 
 <br/>
 
